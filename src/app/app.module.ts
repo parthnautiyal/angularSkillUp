@@ -13,9 +13,12 @@ import { CoursesComponent } from './courses/courses.component';
 import { CourseComponent } from './courses/course/course.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IndivigualCourseComponent } from './pages/indivigual-course/indivigual-course.component';
+import { CoursesBannerComponent } from './courses-banner/courses-banner.component';
+import { CourseAboutSectionComponent } from './course-about-section/course-about-section.component';
+import { ChapterComponent } from './chapter/chapter.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HeaderComponent, FooterComponent, DashboardHeaderComponent, PathsComponent, PathComponent, CoursesComponent, CourseComponent, DashboardComponent, IndivigualCourseComponent],
+  declarations: [AppComponent, LoginComponent, HeaderComponent, FooterComponent, DashboardHeaderComponent, PathsComponent, PathComponent, CoursesComponent, CourseComponent, DashboardComponent, IndivigualCourseComponent, CoursesBannerComponent, CourseAboutSectionComponent, ChapterComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
