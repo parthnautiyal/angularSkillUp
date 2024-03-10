@@ -1,3 +1,4 @@
+import { IndivigualCourseComponent } from './pages/indivigual-course/indivigual-course.component';
 import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -7,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'courses', component: IndivigualCourseComponent },
 ];
 
 @NgModule({
