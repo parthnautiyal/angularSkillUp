@@ -9,7 +9,7 @@ import { Paths } from '../types/Paths';
 export class PathsComponent implements OnInit {
   allPaths: Paths[] = [];
   constructor(private pathDataService: PathDataService) {
-    this.allPaths = this.pathDataService.getData();
+    this.allPaths = this.pathDataService.getData().slice(0, 10);
   }
   ngOnInit(): void {}
 }
