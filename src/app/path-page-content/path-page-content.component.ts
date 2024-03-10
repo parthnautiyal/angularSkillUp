@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-path-page-content',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./path-page-content.component.sass']
 })
 export class PathPageContentComponent implements OnInit {
-
+ @Input() courseData:any={};
   constructor() { }
 
   ngOnInit(): void {

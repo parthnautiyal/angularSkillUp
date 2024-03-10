@@ -4,6 +4,7 @@ import { Paths } from '../types/Paths';
   providedIn: 'root',
 })
 export class PathDataService {
+  
   allPaths: Paths[] = [
     {
       image:

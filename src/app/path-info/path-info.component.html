@@ -1,35 +1,24 @@
 <div class="path-details">
-<div class="path-info">
+    <div class="path-info">
 
-    <div class="path-info-overview">
-        <img class="path-image" [src]="courses.imageUrl">
+        <div class="path-info-overview">
+            <img class="path-image" [src]="courseData.imageUrl">
+            <div class="path-details-wrapper">
 
-        <div class="path-details-wrapper">
-
-            <div class="main-heading"> SDET(Software Development Engineer in Test) Fundamentals</div>
-            <div class="count">6 courses</div>
-            <div>Date of Creation : 23 May 2023</div>
-            <div>Created By : Varun K</div>
-        </div>
-    </div>
-    <div class="path-about">
-        <div class="sub-heading">About</div>
-        <div>
-            <div class="course-description-line">This path covers the fundamentals required for becoming a SDET.<br>
+                <div class="main-heading"> SDET(Software Development Engineer in Test) Fundamentals</div>
+                <div class="count">6 courses</div>
+                <div>Date of Creation : 23 May 2023</div>
+                <div>Created By : Varun K</div>
             </div>
-            <div class="course-description-line">A SDET is who performs manual testing and identify bugs in all
-                platforms &amp; also knows automation as well as CI/CD.<br></div>
+        </div>
+        <div class="path-about">
+            <div class="sub-heading">About</div>
+            <div>
+                <div class="course-description-line">
+                    {{courseData.about}}
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="content">
-    <div class="path-page-content">
-        <div class="path-courses">
-
-        </div>
-
-
-    </div>
-</div>
 </div>
