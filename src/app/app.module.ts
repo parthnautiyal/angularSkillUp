@@ -12,9 +12,28 @@ import { PathComponent } from './paths/path/path.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CourseComponent } from './courses/course/course.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AllSectionComponent } from './paths-all-section/all-section.component';
+import { CoursesAllSectionComponent } from './courses-all-section/courses-all-section.component';
+import { PathHeadingComponent } from './path-heading/path-heading.component';
+import { CourseHeadingComponent } from './course-heading/course-heading.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HeaderComponent, FooterComponent, DashboardHeaderComponent, PathsComponent, PathComponent, CoursesComponent, CourseComponent, DashboardComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HeaderComponent,
+    FooterComponent,
+    DashboardHeaderComponent,
+    PathsComponent,
+    PathComponent,
+    CoursesComponent,
+    CourseComponent,
+    DashboardComponent,
+    AllSectionComponent,
+    CoursesAllSectionComponent,
+    PathHeadingComponent,
+    CourseHeadingComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
