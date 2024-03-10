@@ -1,0 +1,12 @@
+<app-header></app-header>
+<div class="container">
+  <div class="page-header">
+    All Paths
+  </div>
+  <div class="paths-box">
+    <div *ngFor="let path of allPath">
+      <app-path [singlePath]="path"></app-path>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
