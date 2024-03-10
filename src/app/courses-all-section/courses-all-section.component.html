@@ -1,0 +1,10 @@
+<app-header></app-header>
+<div class="container">
+  <div class="page-header">All Courses</div>
+  <div class="courses-box">
+    <div *ngFor="let course of allCourse" class="courses-card-wrapper">
+      <app-course [singleCourse]="course"></app-course>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
