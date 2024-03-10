@@ -3,8 +3,12 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
-  title = 'traning-And-Upskilling';
+  title = 'Skill Up';
+  loggedIn: boolean = true;
+  handleEvent(event: boolean) {
+    this.loggedIn = event;
+  }
 }
