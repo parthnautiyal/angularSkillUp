@@ -12,9 +12,11 @@ import { PathComponent } from './paths/path/path.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CourseComponent } from './courses/course/course.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BannerStripComponent } from './dashboard/banner-strip/banner-strip.component';
+import { PathInfoComponent } from './path-info/path-info.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HeaderComponent, FooterComponent, DashboardHeaderComponent, PathsComponent, PathComponent, CoursesComponent, CourseComponent, DashboardComponent],
+  declarations: [AppComponent, LoginComponent, HeaderComponent, FooterComponent, DashboardHeaderComponent, PathsComponent, PathComponent, CoursesComponent, CourseComponent, DashboardComponent, BannerStripComponent, PathInfoComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
