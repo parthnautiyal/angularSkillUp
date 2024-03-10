@@ -1,3 +1,4 @@
+import { CourseDataService } from '../services/course-data.service';
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../types/Course';
 @Component({
@@ -6,49 +7,10 @@ import { Course } from '../types/Course';
   styleUrls: ['./courses.component.sass'],
 })
 export class CoursesComponent implements OnInit {
-  constructor() {}
-
+  allCourses:Course[] = [];
+  constructor(private courseDataService:CourseDataService) {
+    this.allCourses = this.courseDataService.getData();
+  }
+  
   ngOnInit(): void {}
-  allCourses: Course[] = [
-    {
-      image: './assets/course.webp',
-      title: 'Java Script Monthly forum',
-      author: 'Nyaz khan',
-    },
-    {
-      image: './assets/course.webp',
-      title: 'Java Script Monthly forum',
-      author: 'Nyaz khan',
-    },
-    {
-      image: './assets/course.webp',
-      title: 'Java Script Monthly forum',
-      author: 'Nyaz khan',
-    },
-    {
-      image: './assets/course.webp',
-      title: 'Java Script Monthly forum',
-      author: 'Nyaz khan',
-    },
-    {
-      image: './assets/course.webp',
-      title: 'Java Script Monthly forum',
-      author: 'Nyaz khan',
-    },
-    {
-      image: './assets/course.webp',
-      title: 'Java Script Monthly forum',
-      author: 'Nyaz khan',
-    },
-    {
-      image: './assets/course.webp',
-      title: 'Java Script Monthly forum',
-      author: 'Nyaz khan',
-    },
-    {
-      image: './assets/course.webp',
-      title: 'Java Script Monthly forum',
-      author: 'Nyaz khan',
-    },
-  ];
 }
