@@ -1,3 +1,4 @@
+import { IndivigualCourseComponent } from './pages/indivigual-course/indivigual-course.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -10,7 +11,7 @@ import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.co
 import { PathsComponent } from './paths/paths.component';
 import { PathComponent } from './path/path.component';
 import { CoursesComponent } from './courses/courses.component';
-import { CourseComponent } from './course/course.component';
+import { CourseComponent } from './course-card/course.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BannerStripComponent } from './banner-strip/banner-strip.component';
 import { PathInfoComponent } from './path-info/path-info.component';
@@ -18,6 +19,11 @@ import { AllSectionComponent } from './paths-all-section/all-section.component';
 import { CoursesAllSectionComponent } from './courses-all-section/courses-all-section.component';
 import { PathHeadingComponent } from './path-heading/path-heading.component';
 import { CourseHeadingComponent } from './course-heading/course-heading.component';
+import { CoursesBannerComponent } from './courses-banner/courses-banner.component';
+import { CourseAboutSectionComponent } from './course-about-section/course-about-section.component';
+import { ChapterComponent } from './chapter/chapter.component';
+import { ChapterContentContainerComponent } from './chapter-content-container/chapter-content-container.component';
+import { ChapterWrapperComponent } from './chapter-wrapper/chapter-wrapper.component';
 import { PathPageContentComponent } from './path-page-content/path-page-content.component';
 import { PathDashboardComponent } from './path-dashboard/path-dashboard.component';
 import { PathPageWrapperComponent } from './path-page-wrapper/path-page-wrapper.component';
@@ -38,6 +44,12 @@ import { PathPageWrapperComponent } from './path-page-wrapper/path-page-wrapper.
     CoursesAllSectionComponent,
     PathHeadingComponent,
     CourseHeadingComponent,
+    CoursesBannerComponent,
+    IndivigualCourseComponent,
+    CourseAboutSectionComponent,
+    ChapterComponent,
+    ChapterContentContainerComponent,
+    ChapterWrapperComponent,
     PathPageContentComponent,
     PathInfoComponent,
     BannerStripComponent,
