@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PathDataService } from '../services/path-data.service';
+import { CourseDataService } from '../services/course-data.service';
 
 @Component({
   selector: 'app-chapter',
@@ -8,7 +8,7 @@ import { PathDataService } from '../services/path-data.service';
 })
 export class ChapterComponent implements OnInit {
   allChapters: any = {};
-  constructor(private allChapterServices: PathDataService) {
+  constructor(private allChapterServices: CourseDataService) {
     this.allChapters = this.allChapterServices.getChapterData();
     console.log('allChapters', this.allChapters);
   }
