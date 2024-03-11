@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CourseInfoDataServiceService {
   courseInfo: any = {
@@ -147,8 +147,8 @@ export class CourseInfoDataServiceService {
     ],
     progress: 0,
   };
-  getData(){
+  getData() {
     return this.courseInfo;
   }
-  constructor() { }
+  constructor() {}
 }
