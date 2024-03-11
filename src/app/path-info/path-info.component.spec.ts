@@ -8,9 +8,8 @@ describe('PathInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PathInfoComponent ]
-    })
-    .compileComponents();
+      declarations: [PathInfoComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PathInfoComponent);
     component = fixture.componentInstance;

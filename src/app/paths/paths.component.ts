@@ -7,7 +7,7 @@ import { Paths } from '../types/Paths';
   styleUrls: ['./paths.component.sass'],
 })
 export class PathsComponent implements OnInit {
-  allPaths: Paths[] = [];
+  allPaths: any[] = [];
   constructor(private pathDataService: PathDataService) {
     this.allPaths = this.pathDataService.getData().slice(0, 10);
   }

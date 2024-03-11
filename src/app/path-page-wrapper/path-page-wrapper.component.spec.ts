@@ -8,9 +8,8 @@ describe('PathPageWrapperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PathPageWrapperComponent ]
-    })
-    .compileComponents();
+      declarations: [PathPageWrapperComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PathPageWrapperComponent);
     component = fixture.componentInstance;

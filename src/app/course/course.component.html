@@ -1,10 +1,12 @@
 <div class="card">
-  <img [src]="singleCourse.image" alt="" class="image" />
-  <div class="course-name">{{ singleCourse.title }}</div>
-  <div class="author">{{ singleCourse.author }}</div>
-  <div class="fav-icon">
-    <button>
-      <i class="fa-solid fa-heart"></i>
-    </button>
+  <img [src]="singleCourse.imageUrl" alt="" class="image" />
+  <div class="content-div">
+    <div class="course-name">{{ singleCourse.name }}</div>
+    <div class="author">By {{ singleCourse.createdBy.name }}</div>
+    <div class="fav-icon">
+      <button>
+        <i class="fa-solid fa-heart"></i>
+      </button>
+    </div>
   </div>
 </div>

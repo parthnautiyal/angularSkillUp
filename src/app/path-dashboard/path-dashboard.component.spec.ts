@@ -8,9 +8,8 @@ describe('PathDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PathDashboardComponent ]
-    })
-    .compileComponents();
+      declarations: [PathDashboardComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PathDashboardComponent);
     component = fixture.componentInstance;

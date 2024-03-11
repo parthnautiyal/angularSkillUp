@@ -8,9 +8,8 @@ describe('PathsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PathsComponent ]
-    })
-    .compileComponents();
+      declarations: [PathsComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PathsComponent);
     component = fixture.componentInstance;

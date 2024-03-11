@@ -5,14 +5,12 @@ import { Paths } from '../types/Paths';
 @Component({
   selector: 'app-all-section',
   templateUrl: './all-section.component.html',
-  styleUrls: ['./all-section.component.sass']
+  styleUrls: ['./all-section.component.sass'],
 })
 export class AllSectionComponent implements OnInit {
-  allPath:Paths[] = [];
-  constructor(private pathDataService: PathDataService) { 
-      this.allPath = this.pathDataService.getData();
+  allPath: Paths[] = [];
+  constructor(private pathDataService: PathDataService) {
+    this.allPath = this.pathDataService.getData();
   }
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
