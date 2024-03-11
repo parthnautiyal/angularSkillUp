@@ -2,9 +2,11 @@
   <app-header></app-header>
   <div class="mainContainer">
     <app-dashboard-header></app-dashboard-header>
-    <app-path-heading></app-path-heading>
+    <app-heading [heading]="headings[0]"></app-heading>
+    <app-batch-card-wrapper></app-batch-card-wrapper>
+    <app-heading [heading]="headings[1]"></app-heading>
     <app-paths></app-paths>
-    <app-course-heading></app-course-heading>
+    <app-heading [heading]="headings[2]"></app-heading>
     <app-courses></app-courses>
   </div>
   <app-footer></app-footer>
