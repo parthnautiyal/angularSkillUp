@@ -10,7 +10,9 @@
         </div>
         <div class="row author-details">
           By {{ CourseDetails.createdBy.name
-          }}<span class="created-at"> {{ CourseDetails.createdAt }}</span>
+          }}<span class="created-at">
+            {{ CourseDetails.createdAt | date : "dd MMM yyyy" }}</span
+          >
         </div>
         <div class="row level">Level : {{ CourseDetails.level }}</div>
         <div class="row meta-data">
@@ -19,11 +21,11 @@
           >
         </div>
         <div class="row last-updated">
-          Last Updated - {{ CourseDetails.updatedAt }}
+          Last Updated - {{ CourseDetails.updatedAt | date : "dd MMM yyyy" }}
         </div>
       </div>
     </div>
-    <div class="progress-wrapper">
+    <!-- <div class="progress-wrapper">
       <div class="top-container">
         <div class="like-icon-wrapper">
           <div class="FavouriteButton">
@@ -63,6 +65,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
