@@ -7,10 +7,10 @@ import { Course } from '../types/Course';
   styleUrls: ['./courses.component.sass'],
 })
 export class CoursesComponent implements OnInit {
-  allCourses:Course[] = [];
-  constructor(private courseDataService:CourseDataService) {
+  allCourses: any[] = [];
+  constructor(private courseDataService: CourseDataService) {
     this.allCourses = this.courseDataService.getData();
   }
-  
+
   ngOnInit(): void {}
 }
