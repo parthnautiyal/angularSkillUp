@@ -1,4 +1,4 @@
-import { PathDataService } from '../services/path-data.service';
+import { CourseInfoDataService } from '../services/course-info-data-service'
 import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-path-page-wrapper',
@@ -8,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class PathPageWrapperComponent implements OnInit {
   courseData: any[] = [];
   constructor(
-    private pathDataService: PathDataService
+    private courseInfoDataService: CourseInfoDataService
   ) {
-    this.courseData = this.pathDataService.getCoursesData().courses;
+    this.courseData = this.courseInfoDataService.getData().courses;
   }
 
   ngOnInit(): void {}

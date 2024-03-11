@@ -17,8 +17,6 @@ import { BannerStripComponent } from './banner-strip/banner-strip.component';
 import { PathInfoComponent } from './path-info/path-info.component';
 import { AllSectionComponent } from './paths-all-section/all-section.component';
 import { CoursesAllSectionComponent } from './courses-all-section/courses-all-section.component';
-import { PathHeadingComponent } from './path-heading/path-heading.component';
-import { CourseHeadingComponent } from './course-heading/course-heading.component';
 import { CoursesBannerComponent } from './courses-banner/courses-banner.component';
 import { CourseAboutSectionComponent } from './course-about-section/course-about-section.component';
 import { ChapterComponent } from './chapter/chapter.component';
@@ -27,6 +25,10 @@ import { ChapterWrapperComponent } from './chapter-wrapper/chapter-wrapper.compo
 import { PathPageContentComponent } from './path-page-content/path-page-content.component';
 import { PathDashboardComponent } from './path-dashboard/path-dashboard.component';
 import { PathPageWrapperComponent } from './path-page-wrapper/path-page-wrapper.component';
+import { BatchCardComponent } from './batch-card/batch-card.component';
+import { BatchHeadingComponent } from './heading/heading.component';
+import { BatchCardWrapperComponent } from './batch-card-wrapper/batch-card-wrapper.component';
+import { BatchesAllSectionComponent } from './batches-all-section/batches-all-section.component';
 
 @NgModule({
   declarations: [
@@ -42,8 +44,6 @@ import { PathPageWrapperComponent } from './path-page-wrapper/path-page-wrapper.
     DashboardComponent,
     AllSectionComponent,
     CoursesAllSectionComponent,
-    PathHeadingComponent,
-    CourseHeadingComponent,
     CoursesBannerComponent,
     IndivigualCourseComponent,
     CourseAboutSectionComponent,
@@ -55,6 +55,10 @@ import { PathPageWrapperComponent } from './path-page-wrapper/path-page-wrapper.
     BannerStripComponent,
     PathDashboardComponent,
     PathPageWrapperComponent,
+    BatchCardComponent,
+    BatchHeadingComponent,
+    BatchCardWrapperComponent,
+    BatchesAllSectionComponent,
   ],
 
   imports: [BrowserModule, AppRoutingModule],

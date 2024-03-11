@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PathHeadingComponent } from './path-heading.component';
+import { BatchHeadingComponent } from './heading.component';
 
-describe('PathHeadingComponent', () => {
-  let component: PathHeadingComponent;
-  let fixture: ComponentFixture<PathHeadingComponent>;
+describe('BatchHeadingComponent', () => {
+  let component: BatchHeadingComponent;
+  let fixture: ComponentFixture<BatchHeadingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PathHeadingComponent],
+      declarations: [BatchHeadingComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PathHeadingComponent);
+    fixture = TestBed.createComponent(BatchHeadingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

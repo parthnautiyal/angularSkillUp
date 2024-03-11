@@ -8,6 +8,9 @@ import { BannerStripComponent } from './banner-strip/banner-strip.component';
 import { AllSectionComponent } from './paths-all-section/all-section.component';
 import { CoursesAllSectionComponent } from './courses-all-section/courses-all-section.component';
 import { PathDashboardComponent } from './path-dashboard/path-dashboard.component';
+import { BatchHeadingComponent } from './heading/heading.component';
+import { BatchCardWrapperComponent } from './batch-card-wrapper/batch-card-wrapper.component';
+import { BatchesAllSectionComponent } from './batches-all-section/batches-all-section.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,7 +18,8 @@ const routes: Routes = [
   { path: 'courses', component: IndivigualCourseComponent },
   { path: 'pathdashboard', component: PathDashboardComponent },
   { path: 'paths/all', component: AllSectionComponent },
-  { path: 'course/all', component: CoursesAllSectionComponent },
+  { path: 'courses/all', component: CoursesAllSectionComponent },
+  { path: 'batches/all', component: BatchesAllSectionComponent },
 ];
 
 @NgModule({

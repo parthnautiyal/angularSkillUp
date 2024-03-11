@@ -1,4 +1,4 @@
-import { PathDataService } from '../services/path-data.service';
+import { CourseInfoDataService } from '../services/course-info-data-service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class PathInfoComponent implements OnInit {
   courseData: any = {};
   constructor(
-    private pathDataService: PathDataService
+    private courseInfoDataService: CourseInfoDataService
   ) {
-    this.courseData = this.pathDataService.getCoursesData();
+    this.courseData = this.courseInfoDataService.getData();
   }
 
   ngOnInit(): void {}
