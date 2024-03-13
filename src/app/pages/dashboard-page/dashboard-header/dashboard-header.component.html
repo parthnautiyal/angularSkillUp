@@ -3,11 +3,15 @@
     <span>Hello Zopsmart !</span>
     <p>It's good to see you here</p>
   </div>
-  <div class="enrolled-path">
-    <span>9</span>
-    Enrolled Paths
-  </div>
-  <div class="enrolled-courses"><span>69</span> Enrolled Courses</div>
+  <a [routerLink]="['/', 'paths', 'ongoing']">
+    <div class="enrolled-path">
+      <span>9</span>
+      Enrolled Paths
+    </div>
+  </a>
+  <a [routerLink]="['/', 'courses', 'ongoing']">
+    <div class="enrolled-courses"><span>69</span> Enrolled Courses</div>
+  </a>
   <div class="recent-course">
     <div class="recent-course-text">
       <span>Testing the application</span>

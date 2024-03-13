@@ -6,17 +6,17 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./profile-page.component.sass'],
 })
 export class ProfilePageComponent implements OnInit, OnDestroy {
-  @HostListener('window:beforeunload')
-  ngOnDestroy(): void {
-    localStorage.setItem('profile', 'false');
-    console.log('destroyed');
-  }
+  heading: string = 'Profile';
+  constructor() {}
 
   ngOnInit(): void {
     localStorage.setItem('profile', 'true');
     console.log('init');
   }
-
-  constructor() {}
+  @HostListener('window:beforeunload')
+  ngOnDestroy(): void {
+    localStorage.setItem('profile', 'false');
+    console.log('destroyed');
+  }
   headingsTitle: string[] = ['batches', 'paths', 'courses'];
 }

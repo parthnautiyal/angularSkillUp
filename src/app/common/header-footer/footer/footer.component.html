@@ -3,7 +3,8 @@
     <img src="./assets/skill up logo new.png" alt="logo" />
   </div>
   <div class="links">
-    <a href="/paths/all">All Paths</a> <a href="/coursesd/all">All Courses</a>
+    <a [routerLink]="['/', 'paths', 'all']"> All Paths</a>
+    <a [routerLink]="['/', 'courses', 'all']">All Courses</a>
   </div>
 </footer>
 <div class="rights">© 2024 All Rights Reserved</div>
