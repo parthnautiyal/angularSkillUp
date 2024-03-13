@@ -3,11 +3,11 @@ import { PathDataService } from "../../../services/path-data.service";
 import { Component, Input, OnInit } from "@angular/core";
 import { BatchDataService } from "../../../services/batch-data.service";
 @Component({
-  selector: "app-dashboard-container",
-  templateUrl: "./dashboard-container.component.html",
-  styleUrls: ["./dashboard-container.component.sass"],
+  selector: 'app-card-container',
+  templateUrl: './card-container.component.html',
+  styleUrls: ['./card-container.component.sass'],
 })
-export class BatchHeadingComponent implements OnInit {
+export class CardContainerComponent implements OnInit {
   @Input() title: string = "";
 
   // path: string = '';
