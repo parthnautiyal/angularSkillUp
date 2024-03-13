@@ -1,6 +1,8 @@
 <div class="heading">
   <div class="topic">{{ prefixWord }} {{ title | titlecase }}</div>
-  <a class="view-all" *ngIf="isActive" [routerLink]="['/', title, 'all']">View all {{ title }}</a>
+  <a class="view-all" *ngIf="isActive" [routerLink]="['/', title, 'all']"
+    >View all {{ title }}</a
+  >
 </div>
 <div class="card-wrapper">
   <ng-container *ngIf="title == 'batches'">
