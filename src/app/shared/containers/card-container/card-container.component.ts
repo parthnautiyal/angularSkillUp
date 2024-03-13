@@ -9,6 +9,9 @@ import { BatchDataService } from '../../../services/batch-data.service';
   styleUrls: ['./card-container.component.sass'],
 })
 export class CardContainerComponent implements OnInit {
+  batchData : any
+  coursesData : any
+  pathData : any
   heading: string = '';
   isActive = false;
 
@@ -21,15 +24,34 @@ export class CardContainerComponent implements OnInit {
     private courseDataService: CourseDataService
   ) {}
   getBatchesData() {
-    return this.batchDataService.getData();
+    // return this.batchDataService.getData();
+    this.batchDataService.getAll().subscribe(
+    (response) => {
+      this.batchData = response
+    },
+    (error) => {console.log(error)})
   }
+
   getCoursesData() {
-    return this.courseDataService.getData();
+    // return this.courseDataService.getData();
+    this.courseDataService.getCourseData().subscribe(
+    (response) => {
+      this.coursesData = response
+    },
+    (error) => {console.log(error)})
   }
+
   getPathsData() {
-    return this.pathDataService.getData();
+    this.pathDataService.getDataV2().subscribe(
+    (response) => {
+      this.pathData = response
+    },
+    (error) => {console.log(error)})
   }
   ngOnInit(): void {
+    this.getBatchesData()
+    this.getCoursesData()
+    this.getPathsData()
     this.activatedRoute.url.subscribe((urlSegments) => {
       console.log(urlSegments);
 

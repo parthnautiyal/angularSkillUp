@@ -44,20 +44,20 @@
       </div>
     </div>
 
-    <div class="user-wrapper">
+    <div *ngIf="userData" class="user-wrapper">
       <img
-        [src]="profileUrl"
+        src={{userData.data[0].createdBy.imageUrl}}
         class="profile-image"
         (click)="toggleDropdown()"
       />
       <div class="dropdown" *ngIf="isDropdownOpen">
         <div class="profile-section">
           <div class="left-wrapper">
-            <img [src]="profileUrl" class="user-image" />
+            <img *ngIf="userData" src={{userData.data[0].createdBy.imageUrl}} class="user-image" />
           </div>
-          <div class="right-wrapper">
-            <div class="user-name">{{ user.name }}</div>
-            <div class="user-email">{{ user.email }}</div>
+          <div *ngIf="userData" class="right-wrapper">
+            <div class="user-name">{{userData.data[0].createdBy.name}}</div>
+            <div class="user-email">{{userData.data[0].createdBy.email}}</div>
           </div>
         </div>
         <div class="bottom-section">

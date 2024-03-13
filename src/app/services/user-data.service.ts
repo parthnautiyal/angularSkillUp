@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -13,9 +14,12 @@ export class UserDataService {
         'https://lh3.googleusercontent.com/a/ACg8ocJ-UYULwlUTJq_wSGyLl4JHwkUW3xdpUynNTbejdnca=s96-c',
     },
   ];
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getData() {
     return this.userDataArray[0];
+  }
+  getDataV2() {
+    return this.http.get('https://api.training.zopsmart.com/student/batches/all')
   }
 }

@@ -5,12 +5,12 @@
   </div>
   <a [routerLink]="['/', 'paths', 'ongoing']">
     <div class="enrolled-path">
-      <span>9</span>
+      <span *ngIf="noOfEnrolledPaths"> {{noOfEnrolledPaths.data}} </span>
       Enrolled Paths
     </div>
   </a>
   <a [routerLink]="['/', 'courses', 'ongoing']">
-    <div class="enrolled-courses"><span>69</span> Enrolled Courses</div>
+    <div class="enrolled-courses"><span *ngIf="noOfEnrolledCourses"> {{noOfEnrolledCourses.data}} </span> Enrolled Courses</div>
   </a>
   <div class="recent-course">
     <div class="recent-course-text">

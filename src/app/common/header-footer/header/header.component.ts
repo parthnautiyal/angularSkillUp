@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-header',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent implements OnInit {
+  userData : any
   isDropdownOpen=false;
   isOrgDropdownOpen=false;
   user={
@@ -15,7 +17,7 @@ export class HeaderComponent implements OnInit {
   profileUrl="https://lh3.googleusercontent.com/a/ACg8ocKgtfnOsRdE9C-aj022TPXRRe6OJ4Dnc5Bj4DkCc6K4Rg=s96-c"
 
 
-  constructor() { }
+  constructor(private userDataService : UserDataService) { }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
     this.isOrgDropdownOpen = false;
@@ -29,5 +31,16 @@ export class HeaderComponent implements OnInit {
   }
   
 
-  ngOnInit(): void {}
+  getUserData() {
+    // return this.batchDataService.getData();
+   this.userDataService.getDataV2().subscribe(
+    (response) => {
+      this.userData = response
+    },
+    (error) => {console.log(error)})
+  }
+
+  ngOnInit(): void {
+    this.getUserData()
+  }
 }

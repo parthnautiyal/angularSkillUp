@@ -7,10 +7,19 @@ import { UserDataService } from '../../../services/user-data.service';
   styleUrls: ['./profile-header.component.sass'],
 })
 export class ProfileHeaderComponent implements OnInit {
-  userData: any = {};
+  userData: any;
   constructor(private userDataService: UserDataService) {
-    this.userData = this.userDataService.getData();
+  }
+  getUserData() {
+    // return this.batchDataService.getData();
+   this.userDataService.getDataV2().subscribe(
+    (response) => {
+      this.userData = response
+    },
+    (error) => {console.log(error)})
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUserData()
+  }
 }

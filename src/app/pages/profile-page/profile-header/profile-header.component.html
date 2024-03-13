@@ -1,13 +1,13 @@
 <div class="profile-header-container">
 
     <div class="user-details">
-        <div class="left-wrapper">
-            <img [src]="userData.imageUrl">
+        <div *ngIf="userData" class="left-wrapper">
+            <img  src={{userData.data[0].createdBy.imageUrl}}>
         </div>
 
         <div class="right-wrapper">
-            <p class="user-name">{{userData.name}}</p>
-            <p class="user-email">{{userData.email}}</p>
+            <p *ngIf="userData" class="user-name">{{userData.data[0].createdBy.name}}</p>
+            <p *ngIf="userData" class="user-email">{{userData.data[0].createdBy.email}}</p>
         </div>
 
     </div>
