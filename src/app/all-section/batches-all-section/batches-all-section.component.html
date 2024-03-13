@@ -1,0 +1,11 @@
+
+<div class="all-section-container">
+  <div class="content-container">
+    <div class="page-header">All Paths</div>
+    <div class="paths-box">
+      <div *ngFor="let item of batchCardArray" class="paths-card-wrapper">
+        <app-batch-card [batchData]="item"></app-batch-card>
+      </div>
+    </div>
+  </div>
+</div>

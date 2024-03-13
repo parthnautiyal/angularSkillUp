@@ -1,0 +1,23 @@
+<div class="heading">
+  <div class="topic">{{ title | titlecase }}</div>
+  <a class="view-all" [href]="'/' + title + '/all'">View all {{ title }}</a>
+</div>
+<div class="card-wrapper">
+  <ng-container *ngIf="title == 'batches'">
+    <ng-container *ngFor="let item of getBatchesData()">
+      <app-batch-card [batchData]="item"></app-batch-card>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="title == 'paths'">
+    <ng-container *ngFor="let item of getPathsData()">
+      <a href="/pathdashboard"
+        ><app-path-card [singlePath]="item"></app-path-card
+      ></a>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="title == 'courses'">
+    <ng-container *ngFor="let item of getCoursesData()">
+      <app-course-card [singleCourse]="item"></app-course-card>
+    </ng-container>
+  </ng-container>
+</div>
