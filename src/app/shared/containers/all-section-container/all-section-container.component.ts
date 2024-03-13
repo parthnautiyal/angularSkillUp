@@ -12,7 +12,12 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AllSectionContainerComponent implements OnInit {
   prefix: string = '';
   heading: string = '';
-  constructor(private pathDataService: PathDataService,private activatedRoute: ActivatedRoute,private courseDataService:CourseDataService,private batchDataService:BatchDataService) {}
+  constructor(
+    private pathDataService: PathDataService,
+    private activatedRoute: ActivatedRoute,
+    private courseDataService: CourseDataService,
+    private batchDataService: BatchDataService
+  ) {}
 
   getPathsData() {
     return this.pathDataService.getData();
@@ -20,24 +25,26 @@ export class AllSectionContainerComponent implements OnInit {
   getOngoingPathsData() {
     return this.pathDataService.getOngoingPathsData();
   }
-  getCoursesData(){
+  getCoursesData() {
     return this.courseDataService.getData();
   }
-  getOngoingCoursesData(){
+  getOngoingCoursesData() {
     return this.courseDataService.getOngoingCourses();
   }
-  getBatchesData(){
+  getBatchesData() {
     return this.batchDataService.getData();
   }
 
   ngOnInit(): void {
-    this.activatedRoute.url.subscribe(urlSegments => {
+    this.activatedRoute.url.subscribe((urlSegments) => {
+      console.log(urlSegments);
+
       if (urlSegments.length >= 1) {
-        this.heading = urlSegments[0].path; 
+        this.heading = urlSegments[0].path;
       }
       if (urlSegments.length >= 2) {
         this.prefix = urlSegments[1].path;
-        if (this.prefix == 'ongoing'){
+        if (this.prefix == 'ongoing') {
           this.prefix = 'my';
         }
       }
