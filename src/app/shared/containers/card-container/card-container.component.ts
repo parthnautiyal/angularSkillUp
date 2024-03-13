@@ -8,12 +8,12 @@ import { BatchDataService } from '../../../services/batch-data.service';
   styleUrls: ['./card-container.component.sass'],
 })
 export class CardContainerComponent implements OnInit {
-  @Input() title: string = '';
   batchData: any;
   coursesData: any;
   pathData: any;
-  // path: string = '';
 
+  @Input() title: string = '';
+  @Input() prefixWord: string = '';
   constructor(
     private batchDataService: BatchDataService,
     private pathDataService: PathDataService,

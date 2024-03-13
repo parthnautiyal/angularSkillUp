@@ -103,7 +103,36 @@ export class PathDataService {
       noOfCourses: 6,
     },
   ];
-
+  ongoingPaths: any = {
+    data: {
+      averageProgress: 75,
+      count: 2,
+      enrolledPaths: [
+        {
+          pathId: 6,
+          pathName: 'Angular for Beginners  ',
+          imageUrl:
+            'https://storage.googleapis.com/zopping-uploads/originals/20221212/undertow1311464728280820252upload-20221212-065612',
+          noOfCourses: 3,
+          enrolledAt: '2024-02-28T11:59:50.453+00:00',
+          completedAt: null,
+          isAccessible: true,
+          progress: 55,
+        },
+        {
+          pathId: 4,
+          pathName: 'Java SDE 1',
+          imageUrl:
+            'https://storage.googleapis.com/zopping-uploads/originals/20221125/undertow3155367536785396246upload-20221125-120057',
+          noOfCourses: 11,
+          enrolledAt: '2024-01-10T08:41:38.292+00:00',
+          completedAt: null,
+          isAccessible: true,
+          progress: 95,
+        },
+      ],
+    },
+  };
   courseInfo: any = {
     id: 25,
     name: 'SDET(Software Development Engineer in Test) Fundamentals',
@@ -265,5 +294,8 @@ export class PathDataService {
 
   getData() {
     return this.allPaths;
+  }
+  getOngoingPathsData() {
+    return this.ongoingPaths.data.enrolledPaths;
   }
 }
