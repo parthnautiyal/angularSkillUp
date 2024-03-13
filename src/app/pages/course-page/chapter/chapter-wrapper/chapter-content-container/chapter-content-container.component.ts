@@ -12,7 +12,8 @@ export class ChapterContentContainerComponent implements OnInit {
     this.close = false;
   }
 
-  openPopup() {
+  openPopup(i: number) {
+    this.allChapters[i].isVisited = true;
     this.close = true;
   }
 
@@ -24,6 +25,12 @@ export class ChapterContentContainerComponent implements OnInit {
 
   @Input() allChapters: any = {};
   constructor() {}
+
+  markBtn(i: number) {
+    console.log('clicked');
+    this.allChapters[i].isCompleted = !this.allChapters[i].isCompleted;
+    console.log(i);
+  }
 
   ngOnInit(): void {}
 }
