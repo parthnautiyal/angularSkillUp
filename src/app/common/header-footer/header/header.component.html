@@ -1,5 +1,7 @@
 <header class="navbar">
-  <img class="skill-up-logo" src="./assets/skill up logo new.png" />
+  <a [routerLink]="['/', 'dashboard']">
+    <img class="skill-up-logo" src="./assets/skill up logo new.png" />
+  </a>
   <div class="header-links">
     <button class="favourite-button">
       <i class="fa-solid fa-heart"></i>
@@ -15,21 +17,26 @@
 
     <div class="org-wrapper">
       <div class="logo-wrapper" (click)="toggleOrgDropdown()">
-        <img class="org-image"
-          src="https://storage.googleapis.com/zopping-uploads/originals%2F20230404%2Fzopsmart-20230404-055540.png"
-          alt="">
         <img
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAVklEQVR4nGNgGAWjYBQMGIhhYGD4wcDA8J9IDFIbRYoF8SQY/h+K40j1RTkJhteTajgpltSTazgxltRTajg+S6hmODZLqG44DCQxMDAkwnmjYBQMDwAAptU8wdV6fT0AAAAASUVORK5CYII=">
-
+          class="org-image"
+          src="https://storage.googleapis.com/zopping-uploads/originals%2F20230404%2Fzopsmart-20230404-055540.png"
+          alt=""
+        />
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAVklEQVR4nGNgGAWjYBQMGIhhYGD4wcDA8J9IDFIbRYoF8SQY/h+K40j1RTkJhteTajgpltSTazgxltRTajg+S6hmODZLqG44DCQxMDAkwnmjYBQMDwAAptU8wdV6fT0AAAAASUVORK5CYII="
+        />
       </div>
       <div class="dropdown user-organization" *ngIf="isOrgDropdownOpen">
         <div class="demo-wrapper">
           <div class="section current-org">
             <div class="section-head">Current Organization</div>
             <div class="organization-card">
-              <img class="organization-image"
+              <img
+                class="organization-image"
                 src="https://storage.googleapis.com/zopping-uploads/originals%2F20230404%2Fzopsmart-20230404-055540.png"
-                alt="org-logo" referrerpolicy="no-referrer">
+                alt="org-logo"
+                referrerpolicy="no-referrer"
+              />
               <div class="organization-name limit-text-to-1-line">Zopsmart</div>
             </div>
           </div>
@@ -37,32 +44,66 @@
       </div>
     </div>
 
-
     <div class="user-wrapper">
-      <img [src]="profileUrl" class="profile-image" (click)="toggleDropdown()" />
+      <img
+        [src]="profileUrl"
+        class="profile-image"
+        (click)="toggleDropdown()"
+      />
       <div class="dropdown" *ngIf="isDropdownOpen">
         <div class="profile-section">
           <div class="left-wrapper">
             <img [src]="profileUrl" class="user-image" />
           </div>
           <div class="right-wrapper">
-            <div class="user-name">{{user.name}}</div>
-            <div class="user-email">{{user.email}}</div>
-
+            <div class="user-name">{{ user.name }}</div>
+            <div class="user-email">{{ user.email }}</div>
           </div>
         </div>
         <div class="bottom-section">
-          <a class="dropdown-actions" href="/user/327">My Profile</a>
-          <a class="dropdown-actions" href="/batches/all"> My Batches</a>
-          <a class="dropdown-actions" href="/paths/ongoing">Ongoing Paths</a>
-          <a class="dropdown-actions" href="/courses/ongoing">Ongoing Courses</a>
-          <a class="dropdown-actions" href="/courses/favorite">Favorite Courses</a>
+          <a
+            class="dropdown-actions"
+            [routerLink]="['/', 'user']"
+            (click)="toggleDropdown()"
+            >My Profile</a
+          >
+          <a
+            class="dropdown-actions"
+            [routerLink]="['/', 'batches', 'all']"
+            (click)="toggleDropdown()"
+          >
+            My Batches</a
+          >
+          <a
+            class="dropdown-actions"
+            [routerLink]="['/', 'paths', 'ongoing']"
+            (click)="toggleDropdown()"
+            >Ongoing Paths</a
+          >
+          <a
+            class="dropdown-actions"
+            [routerLink]="['/', 'courses', 'ongoing']"
+            (click)="toggleDropdown()"
+            >Ongoing Courses</a
+          >
+          <a
+            class="dropdown-actions"
+            [routerLink]="['/', 'courses', 'ongoing']"
+            (click)="toggleDropdown()"
+            >Favorite Courses</a
+          >
           <div class="dropdown-actions theme-mode">Dark Mode</div>
           <a class="dropdown-actions" href="/invitations">Invitations</a>
-          <div class="dropdown-actions logout">Logout</div>
+          <div class="dropdown-actions logout">
+            <a
+              class="logout"
+              [routerLink]="['/', 'login']"
+              (click)="toggleDropdown()"
+              >Logout</a
+            >
+          </div>
         </div>
       </div>
     </div>
-
   </div>
 </header>

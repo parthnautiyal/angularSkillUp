@@ -18,12 +18,14 @@ export class HeaderComponent implements OnInit {
   constructor() { }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
+    this.isOrgDropdownOpen = false;
   }
   toggleOrgDropdown() {
     this.isOrgDropdownOpen = !this.isOrgDropdownOpen;
+    this.isDropdownOpen = false;
   }
   closeOrgOutside(){
-    this.isOrgDropdownOpen =false
+    this.isOrgDropdownOpen =false;
   }
   
 
