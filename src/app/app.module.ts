@@ -20,9 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardPageModule,
     CoursePageModule,
     PathPageModule,
+    BrowserAnimationsModule
   ],
-
-  imports: [BrowserModule, LayoutModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

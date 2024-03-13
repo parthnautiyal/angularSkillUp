@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import {OverlayContainer} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +16,7 @@ export class HeaderComponent implements OnInit {
   }
   profileUrl="https://lh3.googleusercontent.com/a/ACg8ocKgtfnOsRdE9C-aj022TPXRRe6OJ4Dnc5Bj4DkCc6K4Rg=s96-c"
 
-
-  constructor() { }
+  constructor(private overLay: OverlayContainer) { }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
@@ -25,7 +26,21 @@ export class HeaderComponent implements OnInit {
   closeOrgOutside(){
     this.isOrgDropdownOpen =false
   }
-  
 
-  ngOnInit(): void {}
+  toggleControl = new FormControl(false);
+  @HostBinding('class') className = ''
+  darkClassName = 'theme-dark';
+  lightClassName = "theme-light";
+
+  ngOnInit(){
+    this.toggleControl.valueChanges.subscribe((darkMode) => {
+      this.className = darkMode? this.darkClassName : this.lightClassName;
+      if(darkMode){
+        this.overLay.getContainerElement().classList.add(this.darkClassName);
+      }
+      else{
+        this.overLay.getContainerElement().classList.remove(this.darkClassName);
+      }
+    })
+  }
 }
