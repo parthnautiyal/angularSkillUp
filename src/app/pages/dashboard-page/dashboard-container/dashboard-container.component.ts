@@ -31,7 +31,6 @@ export class BatchHeadingComponent implements OnInit {
     // return this.batchDataService.getData();
    this.batchDataService.getAll().subscribe(
     (response) => {
-      console.log(response)
       this.batchData = response
     },
     (error) => {console.log(error)})
@@ -41,7 +40,6 @@ export class BatchHeadingComponent implements OnInit {
     // return this.courseDataService.getData();
    this.courseDataService.getCourseData().subscribe(
     (response) => {
-      console.log(response)
       this.coursesData = response
     },
     (error) => {console.log(error)})
@@ -50,7 +48,6 @@ export class BatchHeadingComponent implements OnInit {
   getPathsData() {
     this.pathDataService.getDataV2().subscribe(
     (response) => {
-      console.log(response)
       this.pathData = response
     },
     (error) => {console.log(error)})

@@ -7,10 +7,21 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./batches-all-section.component.sass"],
 })
 export class BatchesAllSectionComponent implements OnInit {
-  batchCardArray: any[] = [];
+  batchCardData: any
   constructor(private batchDataService: BatchDataService) {
-    this.batchCardArray = this.batchDataService.getData();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getBatchesData()
+  }
+
+  getBatchesData() {
+    // return this.batchDataService.getData();
+   this.batchDataService.getAll().subscribe(
+    (response) => {
+      this.batchCardData = response
+    },
+    (error) => {console.log(error)})
+  }
 }
+

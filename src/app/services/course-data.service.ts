@@ -646,7 +646,7 @@ export class CourseDataService {
   private url = 'https://api.training.zopsmart.com/students'
   
   getCourseData() {
-    return this.http.get(this.url + '/courses/?pageSize=12&pageNo=1')
+    return this.http.get(this.url + '/courses?pageSize=12&pageNo=1')
   }
 
   getNoOfEnrolledCourses() {

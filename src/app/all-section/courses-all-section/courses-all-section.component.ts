@@ -7,10 +7,19 @@ import { Course } from "../../models/Course";
   styleUrls: ["./courses-all-section.component.sass"],
 })
 export class CoursesAllSectionComponent implements OnInit {
-  allCourse: Course[] = [];
+  allCourse: any
   constructor(private courseDataService: CourseDataService) {
-    this.allCourse = this.courseDataService.getData();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCoursesData()
+  }
+  
+  getCoursesData() {
+   this.courseDataService.getCourseData().subscribe(
+    (response) => {
+      this.allCourse = response
+    },
+    (error) => {console.log(error)})
+  }
 }

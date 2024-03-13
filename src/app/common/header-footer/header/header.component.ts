@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BatchDataService } from 'src/app/services/batch-data.service';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  batchData : any
+  constructor(
+    private batchService : BatchDataService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getBatchesData()
+  }
+
+  getBatchesData() {
+    // return this.batchDataService.getData();
+   this.batchService.getAll().subscribe(
+    (response) => {
+      this.batchData = response
+    },
+    (error) => {console.log(error)})
+  }
 }

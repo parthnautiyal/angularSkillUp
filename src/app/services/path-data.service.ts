@@ -248,7 +248,7 @@ export class PathDataService {
     progress: 0,
   };
 
-  private url = 'https://api.training.zopsmart.com/students/paths';
+  private url = 'https://api.training.zopsmart.com/students';
 
   constructor(private http : HttpClient) {}
   getCoursesData() {
@@ -256,7 +256,11 @@ export class PathDataService {
   }
   
   getDataV2() {
-    return this.http.get(this.url + '?pageSize=10&pageNo=1')
+    return this.http.get(this.url + '/paths?pageSize=10&pageNo=1')
+  }
+
+  getNoOfEnrolledPaths() {
+    return this.http.get(this.url + '/no-of-enrolled-paths')
   }
 
   getData() {

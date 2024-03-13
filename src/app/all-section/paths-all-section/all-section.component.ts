@@ -8,9 +8,18 @@ import { Paths } from "../../models/Paths";
   styleUrls: ["./all-section.component.sass"],
 })
 export class AllSectionComponent implements OnInit {
-  allPath: Paths[] = [];
+  allPath: any
   constructor(private pathDataService: PathDataService) {
-    this.allPath = this.pathDataService.getData();
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getPathsData()
+  }
+
+  getPathsData() {
+    this.pathDataService.getDataV2().subscribe(
+    (response) => {
+      this.allPath = response
+    },
+    (error) => {console.log(error)})
+  }
 }

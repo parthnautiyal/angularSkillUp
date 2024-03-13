@@ -17,6 +17,6 @@
       <option value="Zopsmart">Zopsmart</option>
       <option value="Kroger">Kroger</option>
     </select>
-    <img src="./assets/Profile Image.png" class="profile-image" />
+    <img *ngIf="batchData" src={{batchData.data[0].createdBy.imageUrl}} class="profile-image" />
   </div>
 </header>
