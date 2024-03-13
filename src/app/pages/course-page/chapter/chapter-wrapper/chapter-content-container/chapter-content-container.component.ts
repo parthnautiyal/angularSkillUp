@@ -6,6 +6,22 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./chapter-content-container.component.sass'],
 })
 export class ChapterContentContainerComponent implements OnInit {
+  close: boolean = false;
+
+  closeButton() {
+    this.close = false;
+  }
+
+  openPopup() {
+    this.close = true;
+  }
+
+  iframeSrc = 'https://www.youtube.com/'; // Set your iframe source URL
+
+  openInNewTab() {
+    window.open(this.iframeSrc, '_blank');
+  }
+
   @Input() allChapters: any = {};
   constructor() {}
 
