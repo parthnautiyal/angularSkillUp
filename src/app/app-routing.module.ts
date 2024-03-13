@@ -8,6 +8,7 @@ import { CoursesAllSectionComponent } from './all-section/courses-all-section/co
 import { PathPageComponent } from './pages/path-page/path-page.component';
 import { BatchesAllSectionComponent } from './all-section/batches-all-section/batches-all-section.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { BatchPageComponent } from './pages/batch-page/batch-page.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'courses/all', component: CoursesAllSectionComponent },
   { path: 'batches/all', component: BatchesAllSectionComponent },
   { path: 'user', component: ProfilePageComponent},
+  { path:'batchpage',component:BatchPageComponent}
 ];
 
 @NgModule({

@@ -11,7 +11,7 @@ import { ProfilePageModule } from './pages/profile-page/profile-page.module';
 import { DashboardPageModule } from './pages/dashboard-page/dashboard-page.module';
 import { CoursePageModule } from './pages/course-page/course-page.module';
 import { PathPageModule } from './pages/path-page/path-page.module';
-
+import { BatchPageModule } from './pages/batch-page/batch-page.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +28,8 @@ import { PathPageModule } from './pages/path-page/path-page.module';
     ProfilePageModule,
     DashboardPageModule,
     CoursePageModule,
-    PathPageModule
+    PathPageModule,
+    BatchPageModule
   ],
   providers: [],
   bootstrap: [AppComponent],
