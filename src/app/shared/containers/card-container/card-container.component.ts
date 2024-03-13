@@ -9,9 +9,7 @@ import { BatchDataService } from "../../../services/batch-data.service";
 })
 export class CardContainerComponent implements OnInit {
   @Input() title: string = "";
-
-  // path: string = '';
-
+  @Input() prefixWord:string = "";
   constructor(
     private batchDataService: BatchDataService,
     private pathDataService: PathDataService,
@@ -27,4 +25,6 @@ export class CardContainerComponent implements OnInit {
     return this.pathDataService.getData();
   }
   ngOnInit(): void {}
+  
+  
 }

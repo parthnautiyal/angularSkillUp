@@ -1,5 +1,6 @@
 <div class="page-container">
-    <app-card-container [title]="headingsTitle[0]"></app-card-container>
-    <app-card-container [title]="headingsTitle[1]"></app-card-container>
-    <app-card-container [title]="headingsTitle[2]"></app-card-container>
+  <app-component-header [heading]="'Student Profile'"></app-component-header>
+  <app-card-container [title]="headingsTitle[0]"  [prefixWord]="'Enrolled'"></app-card-container>
+  <app-card-container [title]="headingsTitle[1]" [prefixWord]="'Enrolled'"></app-card-container>
+  <app-card-container [title]="headingsTitle[2]" [prefixWord]="'Enrolled'"></app-card-container>
 </div>
