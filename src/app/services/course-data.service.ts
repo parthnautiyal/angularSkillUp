@@ -293,31 +293,31 @@ export class CourseDataService {
           id: 347,
           resourceName: 'Datatypes',
           resourceLink: 'https://www.geeksforgeeks.org/data-types-in-java/',
-          isCompleted: false,
-          isVisited: false,
+          isCompleted: true,
+          isVisited: true,
         },
         {
           id: 376,
           resourceName: 'Input Operation in Java',
           resourceLink:
             'https://www.geeksforgeeks.org/how-to-take-input-from-user-in-java/',
-          isCompleted: false,
-          isVisited: false,
+          isCompleted: true,
+          isVisited: true,
         },
         {
           id: 378,
           resourceName: 'Conditional Statements and Loops',
           resourceLink:
             'https://dev.java/learn/language-basics/controlling-flow/',
-          isCompleted: false,
+          isCompleted: true,
           isVisited: true,
         },
         {
           id: 379,
           resourceName: 'Introduction to Arrays',
           resourceLink: 'https://dev.java/learn/language-basics/arrays/',
-          isCompleted: false,
-          isVisited: false,
+          isCompleted: true,
+          isVisited: true,
         },
         {
           id: 382,
@@ -640,6 +640,279 @@ export class CourseDataService {
       progress: 100,
     },
   ];
+  ongoingCourse: any = [
+    {
+      courseId: 51,
+      courseName: 'Angular ',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals/20221212/undertow252983219079039197upload-20221212-065735',
+      createdBy: {
+        id: 42,
+        name: 'Nyaz Khan',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/ACg8ocLrbhR9XtQkSguvDBFiK8RDHz3ePbcMrjruU2QG84kOOg=s96-c',
+        email: 'nyaz.khan@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-02-29T07:59:58.045+00:00',
+      completedAt: null,
+      isAccessible: true,
+      progress: 0,
+    },
+    {
+      courseId: 111,
+      courseName: 'SQL (Structured Query Language)',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals%2F20230529%2FAWSSQLServerPricingAWSSQLServerMeaning1024x774-20230529-061222.png',
+      createdBy: {
+        id: 202,
+        name: 'Varun K',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/ACg8ocLDFqdEaZI5FqUJ1r27gAVR7gqI6bbbbY3pF3KUqRW5qg=s96-c',
+        email: 'varun.k@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-03-10T12:58:49.635+00:00',
+      completedAt: null,
+      isAccessible: true,
+      progress: 0,
+    },
+    {
+      courseId: 44,
+      courseName:
+        'How to understand what is going on while an application is running',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals/20221125/undertow9438611154114105184upload-20221125-122301',
+      createdBy: {
+        id: 25,
+        name: 'Ujjawal Misra',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/ACg8ocJkwPuYKqDGIt1l98-5Dz7gs-_qW7Beb5-kWq_uJ8nVYNQ=s96-c',
+        email: 'ujjawal.misra@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-01-28T15:32:03.675+00:00',
+      completedAt: null,
+      isAccessible: true,
+      progress: 66,
+    },
+    {
+      courseId: 45,
+      courseName: 'Testing the Application',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals/20221206/undertow6930786489534491427upload-20221206-073318',
+      createdBy: {
+        id: 32,
+        name: 'Prashanth Kolakani',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/AGNmyxZW_zeZd8v4QwqL6-Yu4HnAtqRTiWDjhccR-fE3=s96-c',
+        email: 'prashanth.kolakani@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-02-02T11:16:08.232+00:00',
+      completedAt: null,
+      isAccessible: true,
+      progress: 92,
+    },
+    {
+      courseId: 41,
+      courseName: 'JavaScript For Beginners ',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals/20221016/undertow621704271190208131upload-20221016-192524',
+      createdBy: {
+        id: 42,
+        name: 'Nyaz Khan',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/ACg8ocLrbhR9XtQkSguvDBFiK8RDHz3ePbcMrjruU2QG84kOOg=s96-c',
+        email: 'nyaz.khan@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-02-28T12:00:43.129+00:00',
+      completedAt: null,
+      isAccessible: true,
+      progress: 69,
+    },
+    {
+      courseId: 50,
+      courseName: 'HTML CSS',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals/20221212/undertow6972714991236417219upload-20221212-063225',
+      createdBy: {
+        id: 42,
+        name: 'Nyaz Khan',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/ACg8ocLrbhR9XtQkSguvDBFiK8RDHz3ePbcMrjruU2QG84kOOg=s96-c',
+        email: 'nyaz.khan@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-02-28T12:00:04.560+00:00',
+      completedAt: null,
+      isAccessible: true,
+      progress: 97,
+    },
+    {
+      courseId: 53,
+      courseName: 'Cassandra Tutorial',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals/20221214/undertow18122309931659273157upload-20221214-063251',
+      createdBy: {
+        id: 62,
+        name: 'Anvita Shrivastava',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/ACg8ocL1pWDQcneMyjtND_UxAJML_4zcBju-7II5c3g1pSe8=s96-c',
+        email: 'anvita.shrivastava@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-01-10T13:29:35.447+00:00',
+      completedAt: null,
+      isAccessible: true,
+      progress: 95,
+    },
+    {
+      courseId: 72,
+      courseName: 'Git ',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals%2F20230216%2Fgitlogo-20230216-060442.png',
+      createdBy: {
+        id: 32,
+        name: 'Prashanth Kolakani',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/AGNmyxZW_zeZd8v4QwqL6-Yu4HnAtqRTiWDjhccR-fE3=s96-c',
+        email: 'prashanth.kolakani@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-01-10T08:41:49.038+00:00',
+      completedAt: '2024-01-12T16:47:48.002+00:00',
+      isAccessible: true,
+      progress: 100,
+    },
+    {
+      courseId: 21,
+      courseName: 'Spring Boot',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals/20221011/undertow9938004490337506287upload-20221011-120334',
+      createdBy: {
+        id: 32,
+        name: 'Prashanth Kolakani',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/AGNmyxZW_zeZd8v4QwqL6-Yu4HnAtqRTiWDjhccR-fE3=s96-c',
+        email: 'prashanth.kolakani@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-01-12T16:58:10.288+00:00',
+      completedAt: '2024-02-07T04:05:40.680+00:00',
+      isAccessible: true,
+      progress: 100,
+    },
+    {
+      courseId: 20,
+      courseName: 'Spring',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals/20221014/undertow7592949801295228878upload-20221014-071143',
+      createdBy: {
+        id: 32,
+        name: 'Prashanth Kolakani',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/AGNmyxZW_zeZd8v4QwqL6-Yu4HnAtqRTiWDjhccR-fE3=s96-c',
+        email: 'prashanth.kolakani@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-01-12T16:57:42.899+00:00',
+      completedAt: '2024-02-07T03:51:55.758+00:00',
+      isAccessible: true,
+      progress: 100,
+    },
+    {
+      courseId: 78,
+      courseName: 'Docker',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals%2F20230228%2Fc83c4886b2154cf0a97364b8f65e7003-20230228-093745.png',
+      createdBy: {
+        id: 17,
+        name: 'Prakhyat Saini',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/ACg8ocLbkJ3Gp4diIhr6sRRRrPpyNtVEgsUV-zpDHbDWxRbh=s96-c',
+        email: 'prakhyat.saini@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-02-02T11:36:20.195+00:00',
+      completedAt: '2024-02-02T12:10:48.725+00:00',
+      isAccessible: true,
+      progress: 100,
+    },
+    {
+      courseId: 77,
+      courseName: 'Java JDBC',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals%2F20230228%2Fdownload-20230228-064013.jpeg',
+      createdBy: {
+        id: 32,
+        name: 'Prashanth Kolakani',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/AGNmyxZW_zeZd8v4QwqL6-Yu4HnAtqRTiWDjhccR-fE3=s96-c',
+        email: 'prashanth.kolakani@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-02-02T11:23:03.203+00:00',
+      completedAt: '2024-02-14T10:47:53.773+00:00',
+      isAccessible: true,
+      progress: 100,
+    },
+    {
+      courseId: 73,
+      courseName: 'Java: Basic',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals%2F20230216%2Fdownload-20230216-075808.png',
+      createdBy: {
+        id: 143,
+        name: 'Shaurya Agarwal',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/ACg8ocIYDKWjnZP5IPtzA5nnlgWIblDwAaY6YPsOlb6vJEZY=s96-c',
+        email: 'shaurya.agarwal@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-01-10T08:42:25.900+00:00',
+      completedAt: '2024-02-02T12:19:46.338+00:00',
+      isAccessible: true,
+      progress: 100,
+    },
+    {
+      courseId: 52,
+      courseName: 'Redis',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals/20221213/undertow1896520197779811884upload-20221213-033152',
+      createdBy: {
+        id: 17,
+        name: 'Prakhyat Saini',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/ACg8ocLbkJ3Gp4diIhr6sRRRrPpyNtVEgsUV-zpDHbDWxRbh=s96-c',
+        email: 'prakhyat.saini@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-02-07T03:53:03.469+00:00',
+      completedAt: '2024-02-14T10:49:19.706+00:00',
+      isAccessible: true,
+      progress: 100,
+    },
+    {
+      courseId: 54,
+      courseName: 'Kafka',
+      imageUrl:
+        'https://storage.googleapis.com/zopping-uploads/originals/20221214/undertow14025742655045417734upload-20221214-074420',
+      createdBy: {
+        id: 5,
+        name: 'Bhavya Gupta',
+        imageUrl:
+          'https://lh3.googleusercontent.com/a/AAcHTteH2swYGdG9ijp_TvGitg7Y7CQA1zcu2soeq-EuUH3e=s96-c',
+        email: 'bhavya.gupta@zopsmart.com',
+      },
+      isFavourite: false,
+      enrolledAt: '2024-02-07T03:53:19.185+00:00',
+      completedAt: '2024-02-07T03:54:14.982+00:00',
+      isAccessible: true,
+      progress: 100,
+    },
+  ];
   constructor() {}
   getData() {
     return this.allCourses;
@@ -649,5 +922,8 @@ export class CourseDataService {
   }
   getChapterData() {
     return this.allChapters;
+  }
+  getOngoingCourses() {
+    return this.ongoingCourse;
   }
 }
