@@ -1,5 +1,5 @@
 import { CoursePageComponent } from './pages/course-page/course-page.component';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
