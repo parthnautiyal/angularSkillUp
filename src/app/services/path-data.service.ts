@@ -132,7 +132,7 @@ export class PathDataService {
       ],
     },
   };
-  courseInfo: any = {
+  pathInfo: any = {
     id: 25,
     name: 'SDET(Software Development Engineer in Test) Fundamentals',
     imageUrl:
@@ -277,8 +277,8 @@ export class PathDataService {
   };
 
   constructor() {}
-  getCoursesData() {
-    return this.courseInfo;
+  getPathData() {
+    return this.pathInfo;
   }
   getData() {
     return this.allPaths;

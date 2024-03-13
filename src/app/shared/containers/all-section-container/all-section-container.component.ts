@@ -2,7 +2,8 @@ import { BatchDataService } from './../../../services/batch-data.service';
 import { CourseDataService } from './../../../services/course-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { PathDataService } from './../../../services/path-data.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-section-container',
@@ -16,9 +17,9 @@ export class AllSectionContainerComponent implements OnInit {
     private pathDataService: PathDataService,
     private activatedRoute: ActivatedRoute,
     private courseDataService: CourseDataService,
-    private batchDataService: BatchDataService
+    private batchDataService: BatchDataService,
+    private router: Router
   ) {}
-
   getPathsData() {
     return this.pathDataService.getData();
   }
@@ -34,7 +35,9 @@ export class AllSectionContainerComponent implements OnInit {
   getBatchesData() {
     return this.batchDataService.getData();
   }
-
+  getFavouritesCoursesData() {
+    return this.courseDataService.getData();
+  }
   ngOnInit(): void {
     this.activatedRoute.url.subscribe((urlSegments) => {
       console.log(urlSegments);

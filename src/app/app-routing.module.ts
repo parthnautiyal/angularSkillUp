@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'batches/all', component: AllSectionContainerComponent },
   { path: 'paths/ongoing', component: AllSectionContainerComponent },
   { path: 'courses/ongoing', component: AllSectionContainerComponent },
+  { path: 'courses/favourites', component: AllSectionContainerComponent },
   { path: 'user', component: ProfilePageComponent },
 ];
 
