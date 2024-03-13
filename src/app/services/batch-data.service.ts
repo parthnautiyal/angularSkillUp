@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -43,9 +44,15 @@ export class BatchDataService {
     },
   ];
 
+  private url = 'https://api.training.zopsmart.com/student/batches'
+
+  constructor(private http: HttpClient) {}
+
   getData() {
     return this.batchCardArray;
   }
 
-  constructor() {}
+  getAll() {
+    return this.http.get(this.url + '/all')
+  }
 }

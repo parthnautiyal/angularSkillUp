@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Course } from "../models/Course";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: "root",
@@ -640,7 +641,18 @@ export class CourseDataService {
       progress: 100,
     },
   ];
-  constructor() {}
+  constructor(private http : HttpClient) {}
+  
+  private url = 'https://api.training.zopsmart.com/students'
+  
+  getCourseData() {
+    return this.http.get(this.url + '/courses/?pageSize=12&pageNo=1')
+  }
+
+  getNoOfEnrolledCourses() {
+    return this.http.get(this.url + '/no-of-enrolled-courses')
+  }
+
   getData() {
     return this.allCourses;
   }

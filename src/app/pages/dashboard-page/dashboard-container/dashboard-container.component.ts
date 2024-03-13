@@ -9,7 +9,9 @@ import { BatchDataService } from "../../../services/batch-data.service";
 })
 export class BatchHeadingComponent implements OnInit {
   @Input() title: string = "";
-
+  batchData : any
+  coursesData : any
+  pathData : any
   // path: string = '';
 
   constructor(
@@ -17,14 +19,40 @@ export class BatchHeadingComponent implements OnInit {
     private pathDataService: PathDataService,
     private courseDataService: CourseDataService
   ) {}
+  
+  ngOnInit() :void {
+    this.getBatchesData()
+    this.getCoursesData()
+    this.getPathsData()
+  }
+  
+  
   getBatchesData() {
-    return this.batchDataService.getData();
+    // return this.batchDataService.getData();
+   this.batchDataService.getAll().subscribe(
+    (response) => {
+      console.log(response)
+      this.batchData = response
+    },
+    (error) => {console.log(error)})
   }
+
   getCoursesData() {
-    return this.courseDataService.getData();
+    // return this.courseDataService.getData();
+   this.courseDataService.getCourseData().subscribe(
+    (response) => {
+      console.log(response)
+      this.coursesData = response
+    },
+    (error) => {console.log(error)})
   }
+
   getPathsData() {
-    return this.pathDataService.getData();
+    this.pathDataService.getDataV2().subscribe(
+    (response) => {
+      console.log(response)
+      this.pathData = response
+    },
+    (error) => {console.log(error)})
   }
-  ngOnInit(): void {}
 }

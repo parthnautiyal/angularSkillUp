@@ -22,6 +22,8 @@ import { BatchCardComponent } from "./shared/cards/batch-card/batch-card.compone
 import { BatchHeadingComponent } from "./pages/dashboard-page/dashboard-container/dashboard-container.component";
 import { BatchesAllSectionComponent } from "./all-section/batches-all-section/batches-all-section.component";
 import { LayoutModule } from "./layout/layout.module";
+import { HTTP_INTERCEPTORS, HttpClientModule } from  '@angular/common/http';
+import { AuthInterceptor } from "./auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -48,8 +50,14 @@ import { LayoutModule } from "./layout/layout.module";
     BatchesAllSectionComponent,
   ],
 
-  imports: [BrowserModule, LayoutModule],
-  providers: [],
+  imports: [BrowserModule, LayoutModule, HttpClientModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

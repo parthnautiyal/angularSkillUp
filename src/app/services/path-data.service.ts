@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Paths } from "../models/Paths";
+import { HttpClient } from "@angular/common/http";
 @Injectable({
   providedIn: "root",
 })
@@ -247,9 +248,15 @@ export class PathDataService {
     progress: 0,
   };
 
-  constructor() {}
+  private url = 'https://api.training.zopsmart.com/students/paths';
+
+  constructor(private http : HttpClient) {}
   getCoursesData() {
     return this.courseInfo;
+  }
+  
+  getDataV2() {
+    return this.http.get(this.url + '?pageSize=10&pageNo=1')
   }
 
   getData() {
