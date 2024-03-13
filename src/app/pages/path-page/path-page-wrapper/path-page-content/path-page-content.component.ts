@@ -7,7 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PathPageContentComponent implements OnInit {
   @Input() courseData: any = {};
-  constructor() {}
+  constructor() {
+    console.log(this.courseData);
+  }
 
   ngOnInit(): void {}
 }
