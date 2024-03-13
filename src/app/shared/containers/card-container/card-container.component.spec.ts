@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { BatchHeadingComponent } from "./dashboard-container.component";
+import { CardContainerComponent } from "./card-container.component";
 
-describe("BatchHeadingComponent", () => {
-  let component: BatchHeadingComponent;
-  let fixture: ComponentFixture<BatchHeadingComponent>;
+describe("CardContainerComponent", () => {
+  let component: CardContainerComponent;
+  let fixture: ComponentFixture<CardContainerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BatchHeadingComponent],
+      declarations: [CardContainerComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(BatchHeadingComponent);
+    fixture = TestBed.createComponent(CardContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
