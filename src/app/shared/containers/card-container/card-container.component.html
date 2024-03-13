@@ -1,6 +1,8 @@
 <div class="heading">
   <div class="topic">{{ title | titlecase }}</div>
-  <a class="view-all" [href]="'/' + title + '/all'">View all {{ title }}</a>
+  <a *ngIf="!isProfile" class="view-all" [href]="'/' + title + '/all'"
+    >View all {{ title }}</a
+  >
 </div>
 <div class="card-wrapper">
   <ng-container *ngIf="title == 'batches'">
