@@ -1,6 +1,6 @@
 <div class="heading">
-  <div class="topic">{{ title | titlecase }}</div>
-  <a *ngIf="!isProfile" class="view-all" [href]="'/' + title + '/all'"
+  <div class="topic">{{ prefixWord }} {{ title | titlecase }}</div>
+  <a class="view-all" *ngIf="isActive" [href]="'/' + title + '/all'"
     >View all {{ title }}</a
   >
 </div>

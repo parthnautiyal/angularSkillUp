@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { CourseDataService } from '../../../services/course-data.service';
 import { PathDataService } from '../../../services/path-data.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -8,15 +9,14 @@ import { BatchDataService } from '../../../services/batch-data.service';
   styleUrls: ['./card-container.component.sass'],
 })
 export class CardContainerComponent implements OnInit {
-  isProfile: boolean =
-    localStorage.getItem('profile') === 'true' ? true : false;
+  heading: string = '';
+  isActive = false;
 
   @Input() title: string = '';
-
-  // path: string = '';
-
+  @Input() prefixWord: string = '';
   constructor(
     private batchDataService: BatchDataService,
+    private activatedRoute: ActivatedRoute,
     private pathDataService: PathDataService,
     private courseDataService: CourseDataService
   ) {}
@@ -29,5 +29,15 @@ export class CardContainerComponent implements OnInit {
   getPathsData() {
     return this.pathDataService.getData();
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activatedRoute.url.subscribe((urlSegments) => {
+      console.log(urlSegments);
+
+      if (urlSegments.length >= 1) {
+        this.heading = urlSegments[0].path;
+        if (this.heading == 'user') this.isActive = false;
+        else this.isActive = true;
+      }
+    });
+  }
 }
