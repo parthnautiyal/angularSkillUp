@@ -1,7 +1,7 @@
 <div class="contentWrapper">
   <div class="contents row">Content</div>
 </div>
-<ng-container *ngFor="let chapters of allChapters">
+<ng-container *ngFor="let chapters of allChapters; index as i">
   <div class="contentWrapper">
     <div class="leftBar">
       <div class="icon">
@@ -40,11 +40,11 @@
           </g>
         </svg>
       </div>
-      <div class="contents row" (click)="openPopup()">
+      <div class="contents row" (click)="openPopup(i)">
         {{ chapters.resourceName }}
       </div>
     </div>
-    <div class="rightBar">
+    <div (click)="markBtn(i)" class="rightBar">
       <ng-container *ngIf="chapters.isVisited">
         <div *ngIf="!chapters.isCompleted" class="completeBtn">
           Mark as Completed
