@@ -1,9 +1,20 @@
 <div class="card">
   <img [src]="singleCourse.imageUrl" alt="" class="image" />
   <div class="content-div">
-    <div class="course-name">{{ singleCourse.name }}</div>
-    <div class="author">By {{ singleCourse.createdBy.name }}</div>
-    <div class="fav-icon">
+    <div class="header">
+      <div class="course-name">{{ singleCourse.name }}</div>
+      <div *ngIf="isProfile" class="progressCircle">
+        <i class="fa-regular fa-circle"></i>
+      </div>
+    </div>
+    <div *ngIf="isProfile" class="footer">
+      <div class="course-state-date">Start Date: 29 Feb 2024</div>
+      <div class="course-state-date">End Date: 29 Feb 2025</div>
+    </div>
+    <div *ngIf="!isProfile" class="author">
+      By {{ singleCourse.createdBy.name }}
+    </div>
+    <div *ngIf="!isProfile" class="fav-icon">
       <button>
         <i class="fa-solid fa-heart"></i>
       </button>

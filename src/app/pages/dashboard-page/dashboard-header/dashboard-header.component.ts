@@ -8,31 +8,39 @@ import { PathDataService } from 'src/app/services/path-data.service';
   styleUrls: ['./dashboard-header.component.sass'],
 })
 export class DashboardHeaderComponent implements OnInit {
-  constructor(private coursesService : CourseDataService,
-    private pathService : PathDataService) {}
-  noOfEnrolledCourses : any
-  noOfEnrolledPaths : any
+  constructor(
+    private coursesService: CourseDataService,
+    private pathService: PathDataService,
+  ) {}
+  noOfEnrolledCourses: any;
+  noOfEnrolledPaths: any;
 
   ngOnInit(): void {
-    this.getNoOfEnrolledCourses()
-    this.getNoOfPaths()
+    this.getNoOfEnrolledCourses();
+    this.getNoOfPaths();
   }
-  
+
   getNoOfEnrolledCourses() {
     // return this.batchDataService.getData();
-   this.coursesService.getNoOfEnrolledCourses().subscribe(
-    (response) => {
-      this.noOfEnrolledCourses = response
-    },
-    (error) => {console.log(error)})
+    this.coursesService.getNoOfEnrolledCourses().subscribe(
+      (response) => {
+        this.noOfEnrolledCourses = response;
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
   }
 
   getNoOfPaths() {
     // return this.batchDataService.getData();
-   this.pathService.getNoOfEnrolledPaths().subscribe(
-    (response) => {
-      this.noOfEnrolledPaths = response
-    },
-    (error) => {console.log(error)})
+    this.pathService.getNoOfEnrolledPaths().subscribe(
+      (response) => {
+        this.noOfEnrolledPaths = response;
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
   }
 }

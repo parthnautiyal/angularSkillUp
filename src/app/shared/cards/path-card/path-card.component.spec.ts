@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { PathCardComponent } from "./path-card.component";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PathCardComponent } from './path-card.component';
 
-describe("PathComponent", () => {
+describe('PathComponent', () => {
   let component: PathCardComponent;
   let fixture: ComponentFixture<PathCardComponent>;
 
@@ -15,7 +15,7 @@ describe("PathComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

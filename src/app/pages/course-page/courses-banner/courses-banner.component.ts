@@ -1,10 +1,10 @@
-import { CourseDataService } from "../../../services/course-data.service";
-import { Component, OnInit } from "@angular/core";
+import { CourseDataService } from '../../../services/course-data.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-courses-banner",
-  templateUrl: "./courses-banner.component.html",
-  styleUrls: ["./courses-banner.component.sass"],
+  selector: 'app-courses-banner',
+  templateUrl: './courses-banner.component.html',
+  styleUrls: ['./courses-banner.component.sass'],
 })
 export class CoursesBannerComponent implements OnInit {
   constructor(courseDataService: CourseDataService) {

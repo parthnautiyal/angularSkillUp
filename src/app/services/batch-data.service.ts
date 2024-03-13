@@ -44,7 +44,7 @@ export class BatchDataService {
     },
   ];
 
-  private url = 'https://api.training.zopsmart.com/student/batches'
+  private url = 'https://api.training.zopsmart.com/student/batches';
 
   constructor(private http: HttpClient) {}
 
@@ -53,6 +53,6 @@ export class BatchDataService {
   }
 
   getAll() {
-    return this.http.get(this.url + '/all')
+    return this.http.get(this.url + '/all');
   }
 }

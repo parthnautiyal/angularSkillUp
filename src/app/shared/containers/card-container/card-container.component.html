@@ -7,15 +7,15 @@
     <ng-container *ngFor="let item of batchData.data">
       <app-batch-card [batchData]="item"></app-batch-card>
     </ng-container>
-  </ng-container >
-  <ng-container  *ngIf="title == 'paths'">
+  </ng-container>
+  <ng-container *ngIf="title == 'paths'">
     <ng-container *ngFor="let item of pathData.data">
       <a href="/pathdashboard"
         ><app-path-card [singlePath]="item"></app-path-card
       ></a>
     </ng-container>
   </ng-container>
-  <ng-container  *ngIf="title == 'courses'">
+  <ng-container *ngIf="title == 'courses'">
     <ng-container *ngFor="let item of coursesData.data">
       <app-course-card [singleCourse]="item"></app-course-card>
     </ng-container>

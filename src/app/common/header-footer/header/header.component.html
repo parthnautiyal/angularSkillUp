@@ -13,10 +13,66 @@
       <i class="fa-solid fa-circle-half-stroke"></i>
     </button>
 
-    <select name="Organization" id="organization">
-      <option value="Zopsmart">Zopsmart</option>
-      <option value="Kroger">Kroger</option>
-    </select>
-    <img *ngIf="batchData" src={{batchData.data[0].createdBy.imageUrl}} class="profile-image" />
+    <div class="org-wrapper">
+      <div class="logo-wrapper" (click)="toggleOrgDropdown()">
+        <img
+          class="org-image"
+          src="https://storage.googleapis.com/zopping-uploads/originals%2F20230404%2Fzopsmart-20230404-055540.png"
+          alt=""
+        />
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAVklEQVR4nGNgGAWjYBQMGIhhYGD4wcDA8J9IDFIbRYoF8SQY/h+K40j1RTkJhteTajgpltSTazgxltRTajg+S6hmODZLqG44DCQxMDAkwnmjYBQMDwAAptU8wdV6fT0AAAAASUVORK5CYII="
+        />
+      </div>
+      <div class="dropdown user-organization" *ngIf="isOrgDropdownOpen">
+        <div class="demo-wrapper">
+          <div class="section current-org">
+            <div class="section-head">Current Organization</div>
+            <div class="organization-card">
+              <img
+                class="organization-image"
+                src="https://storage.googleapis.com/zopping-uploads/originals%2F20230404%2Fzopsmart-20230404-055540.png"
+                alt="org-logo"
+                referrerpolicy="no-referrer"
+              />
+              <div class="organization-name limit-text-to-1-line">Zopsmart</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="user-wrapper">
+      <img
+        [src]="profileUrl"
+        class="profile-image"
+        (click)="toggleDropdown()"
+      />
+      <div class="dropdown" *ngIf="isDropdownOpen">
+        <div class="profile-section">
+          <div class="left-wrapper">
+            <img [src]="profileUrl" class="user-image" />
+          </div>
+          <div class="right-wrapper">
+            <div class="user-name">{{ user.name }}</div>
+            <div class="user-email">{{ user.email }}</div>
+          </div>
+        </div>
+        <div class="bottom-section">
+          <a class="dropdown-actions" href="/user/327">My Profile</a>
+          <a class="dropdown-actions" href="/batches/all"> My Batches</a>
+          <a class="dropdown-actions" href="/paths/ongoing">Ongoing Paths</a>
+          <a class="dropdown-actions" href="/courses/ongoing"
+            >Ongoing Courses</a
+          >
+          <a class="dropdown-actions" href="/courses/favorite"
+            >Favorite Courses</a
+          >
+          <div class="dropdown-actions theme-mode">Dark Mode</div>
+          <a class="dropdown-actions" href="/invitations">Invitations</a>
+          <div class="dropdown-actions logout">Logout</div>
+        </div>
+      </div>
+    </div>
   </div>
 </header>

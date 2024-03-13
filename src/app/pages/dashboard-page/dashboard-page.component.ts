@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardPageComponent implements OnInit {
   constructor() {}
-  headingsTitle:string[]=["batches","paths","courses"];
+  headingsTitle: string[] = ['batches', 'paths', 'courses'];
 
   ngOnInit(): void {}
 }
