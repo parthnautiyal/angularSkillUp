@@ -44,7 +44,16 @@
         {{ chapters.resourceName }}
       </div>
     </div>
-    <div class="rightBar"></div>
+    <div class="rightBar">
+      <ng-container *ngIf="chapters.isVisited">
+        <div *ngIf="!chapters.isCompleted" class="completeBtn">
+          Mark as Completed
+        </div>
+        <div *ngIf="chapters.isCompleted" class="completeBtn">
+          <i class="fa-solid fa-circle-check"></i> Completed
+        </div>
+      </ng-container>
+    </div>
   </div>
 </ng-container>
 
