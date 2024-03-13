@@ -8,7 +8,7 @@ import { Component, OnInit } from "@angular/core";
 export class PathPageWrapperComponent implements OnInit {
   courseData: any[] = [];
   constructor(private pathDataService: PathDataService) {
-    this.courseData = this.pathDataService.getCoursesData().courses;
+    this.courseData = this.pathDataService.getPathData().courses;
     console.log(this.courseData);
   }
 

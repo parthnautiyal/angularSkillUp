@@ -1,6 +1,8 @@
 <div class="heading">
   <div class="topic">{{ prefixWord }} {{ title | titlecase }}</div>
-  <a class="view-all" *ngIf="isActive" [routerLink]="['/', title, 'all']">View all {{ title }}</a>
+  <a class="view-all" *ngIf="isActive" [routerLink]="['/', title, 'all']"
+    >View all {{ title }}</a
+  >
 </div>
 <div class="card-wrapper">
   <ng-container *ngIf="title == 'batches'">
@@ -10,14 +12,16 @@
   </ng-container>
   <ng-container *ngIf="title == 'paths'">
     <ng-container *ngFor="let item of getPathsData()">
-      <a href="/pathdashboard"
+      <a [routerLink]="['/', 'pathdashboard']"
         ><app-path-card [singlePath]="item"></app-path-card
       ></a>
     </ng-container>
   </ng-container>
   <ng-container *ngIf="title == 'courses'">
     <ng-container *ngFor="let item of getCoursesData()">
-      <app-course-card [singleCourse]="item"></app-course-card>
+      <a [routerLink]="['/', 'pathdashboard']">
+        <app-course-card [singleCourse]="item"></app-course-card>
+      </a>
     </ng-container>
   </ng-container>
 </div>
