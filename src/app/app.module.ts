@@ -10,10 +10,10 @@ import { CoursePageModule } from './pages/course-page/course-page.module';
 import { PathPageModule } from './pages/path-page/path-page.module';
 import { BatchPageModule } from './pages/batch-page/batch-page.module';
 import { FormsModule } from '@angular/forms';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PageNotFoundComponent],
+  declarations: [AppComponent, LoginComponent],
 
   imports: [
     BrowserModule,
@@ -24,7 +24,8 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     CoursePageModule,
     PathPageModule,
     BatchPageModule,
-    FormsModule
+    FormsModule,
+    PageNotFoundModule
   ],
   
   providers: [],
