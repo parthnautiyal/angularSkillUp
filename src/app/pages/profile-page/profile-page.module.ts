@@ -5,15 +5,8 @@ import { ContainersModule } from 'src/app/shared/containers/containers.module';
 import { CardsModule } from 'src/app/shared/cards/cards.module';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 
-
-
 @NgModule({
-  declarations: [
-    ProfilePageComponent,
-    ProfileHeaderComponent
-  ],
-  imports: [
-    CommonModule,ContainersModule,CardsModule
-  ]
+  declarations: [ProfilePageComponent, ProfileHeaderComponent],
+  imports: [CommonModule, ContainersModule, CardsModule],
 })
-export class ProfilePageModule { }
+export class ProfilePageModule {}

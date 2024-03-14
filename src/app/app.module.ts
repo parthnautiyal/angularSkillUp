@@ -9,6 +9,7 @@ import { DashboardPageModule } from './pages/dashboard-page/dashboard-page.modul
 import { CoursePageModule } from './pages/course-page/course-page.module';
 import { PathPageModule } from './pages/path-page/path-page.module';
 import { BatchPageModule } from './pages/batch-page/batch-page.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -21,7 +22,8 @@ import { BatchPageModule } from './pages/batch-page/batch-page.module';
     DashboardPageModule,
     CoursePageModule,
     PathPageModule,
-    BatchPageModule
+    BatchPageModule,
+    FormsModule
   ],
   
   providers: [],
