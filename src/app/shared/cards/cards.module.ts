@@ -4,6 +4,8 @@ import { BatchCardComponent } from './batch-card/batch-card.component';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { PathCardComponent } from './path-card/path-card.component';
 import { ComponentHeaderComponent } from './component-header/component-header.component';
+import { FormsComponent } from './forms/forms.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,12 +13,14 @@ import { ComponentHeaderComponent } from './component-header/component-header.co
     CourseCardComponent,
     PathCardComponent,
     ComponentHeaderComponent,
+    FormsComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   exports: [
     BatchCardComponent,
     CourseCardComponent,
     PathCardComponent,
+    FormsComponent,
     ComponentHeaderComponent,
   ],
 })

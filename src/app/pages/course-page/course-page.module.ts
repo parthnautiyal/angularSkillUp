@@ -9,6 +9,7 @@ import { CoursePageComponent } from './course-page.component';
 import { CourseReviewsComponent } from './course-reviews/course-reviews.component';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import { CardsModule } from 'src/app/shared/cards/cards.module';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     ChapterWrapperComponent,
     ChapterContentContainerComponent,
     CoursePageComponent,
-    CourseReviewsComponent
+    CourseReviewsComponent,
   ],
-  imports: [CommonModule, MatIconModule, HttpClientModule]
+  imports: [CommonModule, MatIconModule, HttpClientModule, CardsModule],
 })
 export class CoursePageModule {}
