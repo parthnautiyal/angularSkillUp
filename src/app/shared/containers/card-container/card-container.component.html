@@ -7,7 +7,9 @@
 <div class="card-wrapper">
   <ng-container *ngIf="title == 'batches'">
     <ng-container *ngFor="let item of getBatchesData()">
-      <app-batch-card [batchData]="item"></app-batch-card>
+      <a [routerLink]="['/', 'batchpage']">
+        <app-batch-card [batchData]="item"></app-batch-card>
+      </a>
     </ng-container>
   </ng-container>
   <ng-container *ngIf="title == 'paths'">
@@ -19,7 +21,7 @@
   </ng-container>
   <ng-container *ngIf="title == 'courses'">
     <ng-container *ngFor="let item of getCoursesData()">
-      <a [routerLink]="['/', 'pathdashboard']">
+      <a [routerLink]="['/', 'courses']">
         <app-course-card [singleCourse]="item"></app-course-card>
       </a>
     </ng-container>
