@@ -1,0 +1,26 @@
+<form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm.value)">
+  <div class="query-container">
+    <div class="add-query-wrapper">
+      <input
+        type="text"
+        required
+        placeholder="Title"
+        #name="ngModel"
+        name="name"
+        ngModel
+        class="add-title"
+      />
+      <textarea
+        name="desc"
+        class="addd-description"
+        rows="10"
+        placeholder="Description"
+        #password="ngModel"
+        name="password"
+        ngModel
+      ></textarea>
+    </div>
+    <div class="buttons"></div>
+  </div>
+  <button>Login</button>
+</form>

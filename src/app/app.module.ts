@@ -8,6 +8,7 @@ import { ProfilePageModule } from './pages/profile-page/profile-page.module';
 import { DashboardPageModule } from './pages/dashboard-page/dashboard-page.module';
 import { CoursePageModule } from './pages/course-page/course-page.module';
 import { PathPageModule } from './pages/path-page/path-page.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -20,6 +21,7 @@ import { PathPageModule } from './pages/path-page/path-page.module';
     DashboardPageModule,
     CoursePageModule,
     PathPageModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
