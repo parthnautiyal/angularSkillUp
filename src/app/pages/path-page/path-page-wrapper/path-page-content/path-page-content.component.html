@@ -10,7 +10,10 @@
       [ngStyle]="{ height: courseData.progress + '%' }"
       class="progress-line"
     ></div>
-    <div class="insideLine"></div>
+    <div
+      [ngStyle]="{ height: 100 - courseData.progress + '%' }"
+      class="insideLine"
+    ></div>
   </div>
   <div class="content">
     <div class="path-page-content">

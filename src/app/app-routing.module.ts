@@ -5,6 +5,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { PathPageComponent } from './pages/path-page/path-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { BatchPageComponent } from './pages/batch-page/batch-page.component';
 import { AllSectionContainerComponent } from './shared/containers/all-section-container/all-section-container.component';
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'paths/ongoing', component: AllSectionContainerComponent },
   { path: 'courses/ongoing', component: AllSectionContainerComponent },
   { path: 'courses/favourites', component: AllSectionContainerComponent },
+  { path:'batchpage',component:BatchPageComponent},
   { path: 'user', component: ProfilePageComponent },
 ];
 

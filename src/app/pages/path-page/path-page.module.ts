@@ -14,5 +14,6 @@ import { PathPageComponent } from './path-page.component';
     PathPageWrapperComponent,
   ],
   imports: [CommonModule, CardsModule],
+  exports : [PathPageContentComponent]
 })
 export class PathPageModule {}
