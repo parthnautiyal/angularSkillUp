@@ -255,8 +255,8 @@ export class CourseDataService {
           id: 375,
           resourceName: 'Evolution of Java',
           resourceLink: 'https://dev.java/evolution/',
-          isCompleted: true,
-          isVisited: true,
+          isCompleted: false,
+          isVisited: false,
         },
       ],
       quizResponses: [
@@ -278,7 +278,7 @@ export class CourseDataService {
           id: 345,
           resourceName: 'Basic Java Syntax',
           resourceLink: 'https://www.geeksforgeeks.org/java-basic-syntax/',
-          isCompleted: true,
+          isCompleted: false,
           isVisited: false,
         },
         {
@@ -286,8 +286,8 @@ export class CourseDataService {
           resourceName: 'The Hello World Program',
           resourceLink:
             'https://www.geeksforgeeks.org/java-hello-world-program/',
-          isCompleted: true,
-          isVisited: true,
+          isCompleted: false,
+          isVisited: false,
         },
         {
           id: 347,
