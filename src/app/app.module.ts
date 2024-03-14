@@ -23,6 +23,7 @@ import { BatchPageModule } from './pages/batch-page/batch-page.module';
     PathPageModule,
     BatchPageModule
   ],
+  
   providers: [],
   bootstrap: [AppComponent],
 })

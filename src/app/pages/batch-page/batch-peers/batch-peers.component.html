@@ -1,13 +1,12 @@
 <div class="batch-trainers">
-    <div class="batch-trainers-top">
-        <div>Peers <span class="count">(2)</span></div>
-    </div>
-    <div class="trainers-wrapper">
-        <div class="trainer-card-wrapper">
-            <app-info-cards></app-info-cards>
-        </div>
-        <div class="trainer-card-wrapper">
-            <app-info-cards></app-info-cards>
-        </div>
-    </div>
+  <div class="batch-trainers-top">
+    <div>Peers <span class="count">({{studentData.length}})</span></div>
+  </div>
+  <div class="trainers-wrapper">
+    <ng-container *ngFor="let item of studentData">
+      <div class="trainer-card-wrapper">
+        <app-info-cards [singleStudent]="item"></app-info-cards>
+      </div>
+    </ng-container>
+  </div>
 </div>

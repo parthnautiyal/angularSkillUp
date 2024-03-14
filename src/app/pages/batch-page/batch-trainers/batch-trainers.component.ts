@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-batch-trainers',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./batch-trainers.component.sass']
 })
 export class BatchTrainersComponent implements OnInit {
-
+@Input() trainerData:any = [];
   constructor() { }
 
   ngOnInit(): void {

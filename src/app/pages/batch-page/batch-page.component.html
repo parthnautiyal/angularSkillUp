@@ -1,14 +1,11 @@
 <app-component-header [heading]="'Batch'"></app-component-header>
-<div class="batch-page-wrapper">
-
-
-
-<app-batch-details></app-batch-details>
-<!-- Path Card Component -->
-<app-path-card></app-path-card>
-<!-- TRainers list -->
-<app-batch-trainers></app-batch-trainers>
-<app-batch-peers></app-batch-peers>
-<!-- Peers List -->
-
+<div class="batch-component-container">
+  <app-batch-details [batchData]="batchDetails"></app-batch-details>
+  <!-- Path Card Component -->
+  <div class="batch-path">
+    <app-path-page-content [courseData]="paths[0]"></app-path-page-content>
+  </div>
+  <app-batch-trainers [trainerData]="trainerData"></app-batch-trainers>
+  <app-batch-peers [studentData]="studentData"></app-batch-peers>
+  <!-- Peers List -->
 </div>
