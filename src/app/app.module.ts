@@ -11,6 +11,7 @@ import { ProfilePageModule } from './pages/profile-page/profile-page.module';
 import { DashboardPageModule } from './pages/dashboard-page/dashboard-page.module';
 import { CoursePageModule } from './pages/course-page/course-page.module';
 import { PathPageModule } from './pages/path-page/path-page.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PathPageModule } from './pages/path-page/path-page.module';
     ProfilePageModule,
     DashboardPageModule,
     CoursePageModule,
-    PathPageModule
+    PathPageModule,
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
