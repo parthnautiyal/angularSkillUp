@@ -7,9 +7,11 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./path-info.component.sass"],
 })
 export class PathInfoComponent implements OnInit {
-  courseData: any = {};
+  pathData: any = {};
+  about:string[] = [];
   constructor(private pathDataService: PathDataService) {
-    this.courseData = this.pathDataService.getCoursesData();
+    this.pathData = this.pathDataService.getPathData();
+    this.about = this.pathData.about.split('\n');
   }
 
   ngOnInit(): void {}
