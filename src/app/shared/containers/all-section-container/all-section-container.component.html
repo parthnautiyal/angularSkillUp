@@ -1,0 +1,48 @@
+<div class="all-section-container">
+  <div class="content-container">
+    <div class="page-header">
+      {{ prefix | titlecase }} {{ heading | titlecase }}
+    </div>
+    <div class="paths-box">
+      <ng-container *ngIf="heading == 'paths' && prefix == 'all'">
+        <div *ngFor="let item of getPathsData()" class="paths-card-wrapper">
+          <app-path-card [singlePath]="item"></app-path-card>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="heading == 'courses' && prefix == 'all'">
+        <div *ngFor="let item of getCoursesData()" class="paths-card-wrapper">
+          <app-course-card [singleCourse]="item"></app-course-card>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="heading == 'batches' && prefix == 'all'">
+        <div *ngFor="let item of getBatchesData()" class="paths-card-wrapper">
+          <app-batch-card [batchData]="item"></app-batch-card>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="heading == 'paths' && prefix == 'my'">
+        <div
+          *ngFor="let item of getOngoingPathsData()"
+          class="paths-card-wrapper"
+        >
+          <app-path-card [singlePath]="item"></app-path-card>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="heading == 'courses' && prefix == 'my'">
+        <div
+          *ngFor="let item of getOngoingCoursesData()"
+          class="paths-card-wrapper"
+        >
+          <app-course-card [singleCourse]="item"></app-course-card>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="heading == 'courses' && prefix == 'favourites'">
+        <div
+          *ngFor="let item of getFavouritesCoursesData()"
+          class="paths-card-wrapper"
+        >
+          <app-course-card [singleCourse]="item"></app-course-card>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
