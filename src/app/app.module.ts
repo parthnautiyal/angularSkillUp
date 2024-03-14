@@ -9,6 +9,7 @@ import { DashboardPageModule } from './pages/dashboard-page/dashboard-page.modul
 import { CoursePageModule } from './pages/course-page/course-page.module';
 import { PathPageModule } from './pages/path-page/path-page.module';
 import { FormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],

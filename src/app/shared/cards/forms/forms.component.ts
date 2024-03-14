@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-forms',
@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forms.component.sass'],
 })
 export class FormsComponent implements OnInit {
-  binding: any = {
-    title: String,
-    description: String,
-  };
+  isForm: boolean = false;
+  handleAddReview() {
+    this.isForm = true;
+  }
+  handleReviewClose() {
+    this.isForm = false;
+  }
 
   title = 'Angular Template Driven Form';
   loginUser(item: any) {

@@ -6,6 +6,10 @@ import { ChapterComponent } from './chapter/chapter.component';
 import { ChapterWrapperComponent } from './chapter/chapter-wrapper/chapter-wrapper.component';
 import { ChapterContentContainerComponent } from './chapter/chapter-wrapper/chapter-content-container/chapter-content-container.component';
 import { CoursePageComponent } from './course-page.component';
+import { CourseReviewsComponent } from './course-reviews/course-reviews.component';
+import { MatIconModule } from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
+import { CardsModule } from 'src/app/shared/cards/cards.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,8 @@ import { CoursePageComponent } from './course-page.component';
     ChapterWrapperComponent,
     ChapterContentContainerComponent,
     CoursePageComponent,
+    CourseReviewsComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule, HttpClientModule, CardsModule],
 })
 export class CoursePageModule {}
