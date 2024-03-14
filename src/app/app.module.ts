@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
+import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -29,9 +29,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BatchPageModule,
     FormsModule,
     ProgressBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PageNotFoundModule,
   ],
-  
+
   providers: [],
   bootstrap: [AppComponent],
 })
