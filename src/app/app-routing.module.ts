@@ -7,6 +7,8 @@ import { PathPageComponent } from './pages/path-page/path-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { BatchPageComponent } from './pages/batch-page/batch-page.component';
 import { AllSectionContainerComponent } from './shared/containers/all-section-container/all-section-container.component';
+import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,8 +21,9 @@ const routes: Routes = [
   { path: 'paths/ongoing', component: AllSectionContainerComponent },
   { path: 'courses/ongoing', component: AllSectionContainerComponent },
   { path: 'courses/favourites', component: AllSectionContainerComponent },
-  { path:'batchpage',component:BatchPageComponent},
+  { path: 'batchpage', component: BatchPageComponent },
   { path: 'user', component: ProfilePageComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
