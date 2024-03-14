@@ -10,6 +10,10 @@ import { CoursePageModule } from './pages/course-page/course-page.module';
 import { PathPageModule } from './pages/path-page/path-page.module';
 import { BatchPageModule } from './pages/batch-page/batch-page.module';
 import { FormsModule } from '@angular/forms';
+import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -23,7 +27,9 @@ import { FormsModule } from '@angular/forms';
     CoursePageModule,
     PathPageModule,
     BatchPageModule,
-    FormsModule
+    FormsModule,
+    ProgressBarModule,
+    BrowserAnimationsModule
   ],
   
   providers: [],
