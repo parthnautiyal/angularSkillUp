@@ -5,14 +5,15 @@ import { CardsModule } from '../cards/cards.module';
 import { AllSectionContainerComponent } from './all-section-container/all-section-container.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { BatchInfoCardContainerComponent } from './batch-info-card-container/batch-info-card-container.component';
 
 
 
 @NgModule({
-  declarations: [CardContainerComponent, AllSectionContainerComponent],
+  declarations: [CardContainerComponent, AllSectionContainerComponent,BatchInfoCardContainerComponent],
   imports: [
     CommonModule,CardsModule,RouterModule,AppRoutingModule
   ],
-  exports :[CardContainerComponent]
+  exports :[CardContainerComponent,BatchInfoCardContainerComponent]
 })
 export class ContainersModule { }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BatchPeersComponent } from './batch-peers.component';
+import { NameInfoCardComponent } from '../info-card/info-card.component';
 
-describe('BatchPeersComponent', () => {
-  let component: BatchPeersComponent;
-  let fixture: ComponentFixture<BatchPeersComponent>;
+describe('NameInfoCardComponent', () => {
+  let component: NameInfoCardComponent;
+  let fixture: ComponentFixture<NameInfoCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BatchPeersComponent ]
+      declarations: [ NameInfoCardComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BatchPeersComponent);
+    fixture = TestBed.createComponent(NameInfoCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
