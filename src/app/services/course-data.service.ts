@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Course } from '../models/Course';
 
@@ -913,7 +914,8 @@ export class CourseDataService {
       progress: 100,
     },
   ];
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
   getData() {
     return this.allCourses;
   }
@@ -925,5 +927,22 @@ export class CourseDataService {
   }
   getOngoingCourses() {
     return this.ongoingCourse;
+  }
+
+  private url = 'https://api.training.zopsmart.com/students';
+  getCourseData() {
+    return this.http.get(this.url + '/courses?pageSize=12&pageNo=1');
+  }
+  getNoOfEnrolledCourses() {
+    return this.http.get(this.url + '/no-of-enrolled-courses');
+  }
+  getAboutInfoV2(id: string) {
+    return this.http.get(this.url + '/courses/' + id);
+  }
+  getChapterDataV2(id: string) {
+    return this.http.get(this.url + '/courses/' + id + '/chapters');
+  }
+  getOngoingCoursesV2() {
+    return this.http.get(this.url + '/enrolled');
   }
 }
