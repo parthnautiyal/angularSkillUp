@@ -889,10 +889,6 @@ export class CourseDataService {
   ];
   constructor(private http: HttpClient) {}
 
-  getData() {
-    return this.allCourses;
-  }
-
   getChapterData() {
     return this.allChapters;
   }

@@ -165,7 +165,9 @@ export class PathDataService {
     );
   }
   getData() {
-    return this.allPaths;
+    return this.http.get(
+      'https://api.training.zopsmart.com/students/paths?pageSize=12&pageNo=1'
+    );
   }
   getOngoingPathsData() {
     return this.ongoingPaths.data.enrolledPaths;
