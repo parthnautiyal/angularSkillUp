@@ -6,11 +6,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.sass'],
 })
 export class LayoutComponent implements OnInit {
-  isLogin: boolean = true;
-
-  constructor() {
-    this.isLogin = localStorage.getItem('login') == 'true' ? true : false;
-  }
-
   ngOnInit(): void {}
 }
