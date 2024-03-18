@@ -1,6 +1,7 @@
 <header class="navbar">
   <a [routerLink]="['/', 'dashboard']">
-    <img class="skill-up-logo" src="./assets/skill up logo new.png" />
+    <span class="skill">Skill</span>
+    <span class="up">Up</span>
   </a>
   <div class="header-links">
     <button class="favourite-button">
@@ -11,9 +12,7 @@
       <i class="fa-solid fa-magnifying-glass search-icon"></i>
     </div>
 
-    <button class="favourite-button">
-      <i class="fa-solid fa-circle-half-stroke"></i>
-    </button>
+    <app-theme-toggle></app-theme-toggle>
 
     <div class="org-wrapper">
       <div class="logo-wrapper" (click)="toggleOrgDropdown()">

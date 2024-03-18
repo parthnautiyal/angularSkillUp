@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'courses/favourites', component: AllSectionContainerComponent },
   { path: 'batchpage', component: BatchPageComponent },
   { path: 'user', component: ProfilePageComponent },
+  { path: '', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

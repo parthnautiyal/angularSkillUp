@@ -7,7 +7,7 @@ import { AppRoutingModule } from "../app-routing.module";
 @NgModule({
   declarations: [
     LayoutComponent,
-    UserComponent,  
+    UserComponent,
   ],
   imports: [CommonModule,AppRoutingModule,HeaderFooterModule],
   exports: [LayoutComponent]
