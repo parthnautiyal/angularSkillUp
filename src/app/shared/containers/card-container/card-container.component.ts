@@ -13,6 +13,7 @@ export class CardContainerComponent implements OnInit {
   isActive = false;
   allPaths: any = [];
   allCourses: any = [];
+  allBatches: any = [];
 
   @Input() title: string = '';
   @Input() prefixWord: string = '';
@@ -32,10 +33,11 @@ export class CardContainerComponent implements OnInit {
       this.allCourses = this.allCourses.data;
       console.log(this.allCourses);
     });
-  }
-
-  getBatchesData() {
-    return this.batchDataService.getData();
+    this.batchDataService.getBatchDetails().subscribe((data) => {
+      this.allBatches = data.valueOf();
+      this.allBatches = this.allBatches.data;
+      console.log(this.allBatches);
+    });
   }
 
   ngOnInit(): void {
