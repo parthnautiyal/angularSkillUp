@@ -14,6 +14,8 @@ import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ZopsmartApiInterceptorService } from './services/zopsmart-api-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -33,7 +35,13 @@ import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module
     PageNotFoundModule,
   ],
 
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ZopsmartApiInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

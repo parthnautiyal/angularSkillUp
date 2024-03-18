@@ -1,9 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Paths } from '../models/Paths';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
 export class PathDataService {
+  user: any = {
+    token:
+      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMDczODgyNSwiaWF0IjoxNzEwNzM4NTI1LCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIiwidXNlcklkIjozMzJ9.UVTqkLw_u4cohaTj6UPHdByj2mJFWZ58k2QkI9t-DecDGHb98UnAM4UYTRRk5ZsK45OblsFezfBad7mloeBr3m-C1g_znC5gA5fMyFiHP8psgwu29FZUmGefcLZgjSwO7c9FPm_kERnxSAqgiQkzY1s8HfJ9RdxGwOi3CunBuej6Xv387bcqOeHYAV2ozw4-8hK-5vnr5zRwFzp0lTZoSk5_bP3lxQ8z25z5wDRTyTgBvzc54-Y8a_uGcwL-mVjp8cuKucX9u0cIexV_ZYzLPv-kdXzpjhQS9XvQZJre6Rkx7q5mWj_OlaBgMq6IdIxKs7BGuy1GZsyjA_BCWApJiw',
+    refreshToken:
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMDgyNDkyNSwiaWF0IjoxNzEwNzM4NTI1LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIn0.L4falt7LlJHQbKntGuieKh4WBbVMGcvxKIFnTdFiLoAXR6g7TfwtOyJ6XIax8oQEd3b-k9ikyN0zfVibIswl7hUzBO0ytBRd1-RIK80jFgX2Wcxm5ZDeKsXMVzqoAn-EmiqlKXTBaTgNFmv6xmMnUJoRT2XYivk9GM5cFLeUDd9jFzg5BbBfTSZUAfejNQVDOD-R_F7OfzeGsopnjJWRkMFlnO0ZB1ND2WKFjdi2XTuXLUCKfILTmgZjFRS8cWFa2q_pKQunfPQ1pEsWgk-LjgtzqIqCM512I0VY_5YRgbFEenycTWkLa2Kp0FtDURYBg-LelJfa8bPtA1WBgrkCPA',
+  };
+
+  refreshHeader = new HttpHeaders({
+    'Content-Type': 'application/json',
+    refreshtoken: this.user.refreshToken,
+
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+  });
+
   allPaths: any[] = [
     {
       id: 25,
@@ -276,7 +291,21 @@ export class PathDataService {
     progress: 0,
   };
 
-  constructor() {}
+  constructor(private http: HttpClient) {
+    setInterval(() => {
+      this.getRefreshToken().subscribe((res: any) => {
+        localStorage.setItem('token', res.data.accessToken);
+        console.log('token refreshed');
+      });
+    }, 60000);
+  }
+
+  getPaths() {
+    return this.http.get(
+      'https://api.training.zopsmart.com/students/paths?pageSize=10&pageNo=1'
+    );
+  }
+
   getPathData() {
     return this.pathInfo;
   }
@@ -285,5 +314,17 @@ export class PathDataService {
   }
   getOngoingPathsData() {
     return this.ongoingPaths.data.enrolledPaths;
+  }
+  getRefreshToken() {
+    return this.http.post(
+      'https://api.training.zopsmart.com/login/refresh',
+      {
+        organizationId: 2,
+        currentRole: 'student',
+      },
+      {
+        headers: this.refreshHeader,
+      }
+    );
   }
 }
