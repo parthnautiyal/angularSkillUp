@@ -8,10 +8,9 @@ import { PathDataService } from 'src/app/services/path-data.service';
 })
 export class DashboardPageComponent implements OnInit {
   constructor(private apiService: PathDataService) {
-    this.apiService.getPaths().subscribe((data) => {
-      console.log(data);
-    });
+    this.apiService.getPaths();
   }
+  loading: boolean = false;
   headingsTitle: string[] = ['batches', 'paths', 'courses'];
 
   ngOnInit(): void {}

@@ -300,7 +300,7 @@ export class PathDataService {
       });
     }, 60000);
   }
-
+  
   getPaths() {
     return this.http.get(
       'https://api.training.zopsmart.com/students/paths?pageSize=10&pageNo=1'

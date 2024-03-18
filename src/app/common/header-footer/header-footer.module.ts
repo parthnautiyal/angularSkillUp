@@ -6,6 +6,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { RouterModule } from '@angular/router';
 import { ThemeToggleComponent } from './header/theme-toggle/theme-toggle.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { ThemeToggleTextComponent } from './header/theme-toggle-text/theme-toggle-text.component';
 
 
 
@@ -13,7 +14,8 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    ThemeToggleTextComponent
   ],
   imports: [
     CommonModule,AppRoutingModule,RouterModule, MatIconModule
