@@ -8,6 +8,8 @@ import { FormsComponent } from './forms/forms.component';
 import { FormsModule } from '@angular/forms';
 import { CircularProgressBarComponent } from './circular-progress-bar/circular-progress-bar.component';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
+import { PathCourseCardComponent } from './path-course-card/path-course-card.component';
+import { NameInfoCardComponent } from './name-info-card/name-info-card.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
     ComponentHeaderComponent,
     FormsComponent,
     CircularProgressBarComponent,
+    PathCourseCardComponent,
+    NameInfoCardComponent,
   ],
   imports: [CommonModule, FormsModule, ProgressBarModule],
   exports: [
@@ -26,6 +30,8 @@ import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
     FormsComponent,
     ComponentHeaderComponent,
     CircularProgressBarComponent,
+    PathCourseCardComponent,
+    NameInfoCardComponent,
   ],
 })
 export class CardsModule {}
