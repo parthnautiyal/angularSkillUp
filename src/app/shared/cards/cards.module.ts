@@ -35,6 +35,7 @@ import { ProgressBarComponent, ProgressBarModule } from '@progress/kendo-angular
     CircularProgressBarComponent,
     PathCourseCardComponent,
     NameInfoCardComponent,
+    LoadingCardComponent
   ],
 })
 export class CardsModule {}
