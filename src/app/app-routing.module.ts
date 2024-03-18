@@ -12,8 +12,8 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardPageComponent },
-  { path: 'courses', component: CoursePageComponent },
-  { path: 'pathdashboard', component: PathPageComponent },
+  { path: 'course/:id', component: CoursePageComponent },
+  { path: 'pathdashboard/:id', component: PathPageComponent },
   { path: 'paths/all', component: AllSectionContainerComponent },
   { path: 'courses/all', component: AllSectionContainerComponent },
   { path: 'batches/all', component: AllSectionContainerComponent },

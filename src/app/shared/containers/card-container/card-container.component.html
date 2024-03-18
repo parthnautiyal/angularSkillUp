@@ -14,14 +14,14 @@
   </ng-container>
   <ng-container *ngIf="title == 'paths'">
     <ng-container *ngFor="let item of getPathsData()">
-      <a [routerLink]="['/', 'pathdashboard']"
+      <a [routerLink]="['/', 'pathdashboard', item.id]"
         ><app-path-card [singlePath]="item"></app-path-card
       ></a>
     </ng-container>
   </ng-container>
   <ng-container *ngIf="title == 'courses'">
     <ng-container *ngFor="let item of getCoursesData()">
-      <a [routerLink]="['/', 'courses']">
+      <a [routerLink]="['/', 'course', item.id]">
         <app-course-card [singleCourse]="item"></app-course-card>
       </a>
     </ng-container>
