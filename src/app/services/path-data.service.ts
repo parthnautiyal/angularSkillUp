@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Paths } from '../models/Paths';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
@@ -291,7 +292,7 @@ export class PathDataService {
     progress: 0,
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
     setInterval(() => {
       this.getRefreshToken().subscribe((res: any) => {
         localStorage.setItem('token', res.data.accessToken);
@@ -306,8 +307,12 @@ export class PathDataService {
     );
   }
 
-  getPathData() {
-    return this.pathInfo;
+  getPathData(id: string) {
+    return this.http.get(
+      'https://api.training.zopsmart.com/students/paths/' +
+        id +
+        '?projection=course'
+    );
   }
   getData() {
     return this.allPaths;
