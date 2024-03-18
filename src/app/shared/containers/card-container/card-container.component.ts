@@ -21,7 +21,7 @@ export class CardContainerComponent implements OnInit {
     private batchDataService: BatchDataService,
     private activatedRoute: ActivatedRoute,
     private pathDataService: PathDataService,
-    private courseDataService: CourseDataService
+    private courseDataService: CourseDataService,
   ) {
     this.pathDataService.getPaths().subscribe((data) => {
       this.allPaths = data.valueOf();

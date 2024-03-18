@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NameInfoCardComponent implements OnInit {
   @Input() singleCardInfo: any = {};
-  @Input() heading:string = "";
+  @Input() heading: string = '';
   constructor() {}
 
   ngOnInit(): void {}

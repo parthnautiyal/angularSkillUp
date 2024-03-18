@@ -217,7 +217,7 @@ export class BatchDataService {
           Referer: 'https://training.zopsmart.com/',
           'Referrer-Policy': 'strict-origin-when-cross-origin',
         },
-      }
+      },
     );
   }
 

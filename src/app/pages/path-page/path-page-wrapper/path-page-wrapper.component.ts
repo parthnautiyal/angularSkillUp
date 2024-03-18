@@ -12,7 +12,7 @@ export class PathPageWrapperComponent implements OnInit {
   courseData: any[] = [];
   constructor(
     private pathDataService: PathDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.id = this.route.snapshot.params['id'];
     this.Course = this.pathDataService
