@@ -18,7 +18,7 @@ export class AllSectionContainerComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private courseDataService: CourseDataService,
     private batchDataService: BatchDataService,
-    private router: Router
+    private router: Router,
   ) {}
   getPathsData() {
     return this.pathDataService.getData();

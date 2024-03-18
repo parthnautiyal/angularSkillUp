@@ -13,6 +13,6 @@ import { PathPageComponent } from './path-page.component';
     PathPageWrapperComponent,
   ],
   imports: [CommonModule, CardsModule],
-  exports : [PathCourseCardComponent]
+  exports: [PathCourseCardComponent],
 })
 export class PathPageModule {}

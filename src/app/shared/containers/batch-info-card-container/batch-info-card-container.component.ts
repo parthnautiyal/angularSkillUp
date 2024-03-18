@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BatchInfoCardContainerComponent implements OnInit {
   @Input() cardsData: any = [];
-  @Input() heading:string = "";
+  @Input() heading: string = '';
   constructor() {}
 
   ngOnInit(): void {}

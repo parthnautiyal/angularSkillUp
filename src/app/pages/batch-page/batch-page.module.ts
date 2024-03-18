@@ -7,10 +7,7 @@ import { PathPageModule } from '../path-page/path-page.module';
 import { ContainersModule } from 'src/app/shared/containers/containers.module';
 
 @NgModule({
-  declarations: [
-    BatchPageComponent,
-    BatchDetailsComponent,
-  ],
-  imports: [CommonModule, CardsModule, PathPageModule,ContainersModule],
+  declarations: [BatchPageComponent, BatchDetailsComponent],
+  imports: [CommonModule, CardsModule, PathPageModule, ContainersModule],
 })
 export class BatchPageModule {}

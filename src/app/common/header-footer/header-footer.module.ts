@@ -8,18 +8,14 @@ import { ThemeToggleComponent } from './header/theme-toggle/theme-toggle.compone
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { ThemeToggleTextComponent } from './header/theme-toggle-text/theme-toggle-text.component';
 
-
-
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
     ThemeToggleComponent,
-    ThemeToggleTextComponent
+    ThemeToggleTextComponent,
   ],
-  imports: [
-    CommonModule,AppRoutingModule,RouterModule, MatIconModule
-  ],
-  exports:[HeaderComponent, FooterComponent]
+  imports: [CommonModule, AppRoutingModule, RouterModule, MatIconModule],
+  exports: [HeaderComponent, FooterComponent],
 })
-export class HeaderFooterModule { }
+export class HeaderFooterModule {}

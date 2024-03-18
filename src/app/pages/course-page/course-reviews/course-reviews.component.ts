@@ -5,18 +5,20 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-course-reviews',
   templateUrl: './course-reviews.component.html',
-  styleUrls: ['./course-reviews.component.css']
+  styleUrls: ['./course-reviews.component.css'],
 })
 export class CourseReviewsComponent implements OnInit {
-
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+  ) {
     this.matIconRegistry.addSvgIcon(
-      "star", 
-      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/review-star.svg')
-    );    
-   }
-
-  ngOnInit(): void {
+      'star',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/review-star.svg',
+      ),
+    );
   }
 
+  ngOnInit(): void {}
 }

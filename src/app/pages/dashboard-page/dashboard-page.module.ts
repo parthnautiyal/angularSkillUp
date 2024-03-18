@@ -9,6 +9,12 @@ import { CardsModule } from 'src/app/shared/cards/cards.module';
 
 @NgModule({
   declarations: [DashboardPageComponent, DashboardHeaderComponent],
-  imports: [CommonModule, ContainersModule, AppRoutingModule, RouterModule,CardsModule],
+  imports: [
+    CommonModule,
+    ContainersModule,
+    AppRoutingModule,
+    RouterModule,
+    CardsModule,
+  ],
 })
 export class DashboardPageModule {}

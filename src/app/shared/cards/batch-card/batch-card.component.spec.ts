@@ -8,9 +8,8 @@ describe('BatchCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BatchCardComponent ]
-    })
-    .compileComponents();
+      declarations: [BatchCardComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BatchCardComponent);
     component = fixture.componentInstance;

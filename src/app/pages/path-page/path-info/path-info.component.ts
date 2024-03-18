@@ -13,7 +13,7 @@ export class PathInfoComponent implements OnInit {
   about: string[] = [];
   constructor(
     private pathDataService: PathDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.id = this.route.snapshot.params['id'];
     this.pathData = this.pathDataService

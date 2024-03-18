@@ -8,9 +8,8 @@ describe('ThemeToggleTextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ThemeToggleTextComponent ]
-    })
-    .compileComponents();
+      declarations: [ThemeToggleTextComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ThemeToggleTextComponent);
     component = fixture.componentInstance;
