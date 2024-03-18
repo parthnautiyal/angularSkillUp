@@ -21,7 +21,7 @@
   </ng-container>
   <ng-container *ngIf="title == 'courses'">
     <ng-container *ngFor="let item of allCourses">
-      <a [routerLink]="['/', 'courses', item.id]">
+      <a [routerLink]="['/', 'course', item.id]">
         <app-course-card [singleCourse]="item"></app-course-card>
       </a>
     </ng-container>

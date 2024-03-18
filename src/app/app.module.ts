@@ -11,10 +11,10 @@ import { PathPageModule } from './pages/path-page/path-page.module';
 import { BatchPageModule } from './pages/batch-page/batch-page.module';
 import { FormsModule } from '@angular/forms';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ZopsmartApiInterceptorService } from './services/zopsmart-api-interceptor.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [AppComponent, LoginComponent],
 
