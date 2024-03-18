@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -196,11 +197,27 @@ export class BatchDataService {
     return this.batchCardArray;
   }
 
-  getBatchData(){
-    return [this.batchDetails,this.studentArray,this.trainersArray,this.paths];
+  getBatchData() {
+    return [
+      this.batchDetails,
+      this.studentArray,
+      this.trainersArray,
+      this.paths,
+    ];
   }
 
+  constructor(private https: HttpClient) {}
 
-
-  constructor() {}
+  getBatchDetails() {
+    return this.https.get(
+      'https://api.training.zopsmart.com/student/batches/all',
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          Referer: 'https://training.zopsmart.com/',
+          'Referrer-Policy': 'strict-origin-when-cross-origin',
+        },
+      }
+    );
+  }
 }

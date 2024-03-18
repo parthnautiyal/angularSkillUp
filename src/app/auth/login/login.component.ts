@@ -1,4 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Output,
+  HostListener,
+} from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +14,16 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class LoginComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  @HostListener('window:beforeunload')
+  ngOnDestroy(): void {
+    localStorage.setItem('login', 'false');
+    console.log('destroyed');
+  }
+
+  ngOnInit(): void {
+    localStorage.setItem('login', 'true');
+    console.log('init');
+  }
   @Output() eventEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   handelButtonClick() {
     this.eventEmitter.emit(true);

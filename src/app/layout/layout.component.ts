@@ -3,13 +3,14 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.sass']
+  styleUrls: ['./layout.component.sass'],
 })
 export class LayoutComponent implements OnInit {
+  isLogin: boolean = true;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
+    this.isLogin = localStorage.getItem('login') == 'true' ? true : false;
   }
 
+  ngOnInit(): void {}
 }
