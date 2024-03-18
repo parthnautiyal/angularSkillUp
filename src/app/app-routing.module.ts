@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'paths/ongoing', component: AllSectionContainerComponent },
   { path: 'courses/ongoing', component: AllSectionContainerComponent },
   { path: 'courses/favourites', component: AllSectionContainerComponent },
-  { path: 'batchpage', component: BatchPageComponent },
+  { path: 'batchpage/:id', component: BatchPageComponent },
   { path: 'user', component: ProfilePageComponent },
   { path: '', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent },

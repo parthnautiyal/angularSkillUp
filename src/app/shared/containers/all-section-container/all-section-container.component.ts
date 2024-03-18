@@ -13,31 +13,38 @@ import { Router } from '@angular/router';
 export class AllSectionContainerComponent implements OnInit {
   prefix: string = '';
   heading: string = '';
+  allPathsData: any[] = [];
+  allCoursesData: any[] = [];
+  allBatchesData: any[] = [];
   constructor(
     private pathDataService: PathDataService,
     private activatedRoute: ActivatedRoute,
     private courseDataService: CourseDataService,
     private batchDataService: BatchDataService,
-    private router: Router,
-  ) {}
-  getPathsData() {
-    return this.pathDataService.getData();
+    private router: Router
+  ) {
+    this.pathDataService.getData().subscribe((data: any) => {
+      this.allPathsData = data.data;
+      console.log(this.allPathsData);
+    });
+    this.courseDataService.getCourseData().subscribe((data: any) => {
+      this.allCoursesData = data.data;
+      console.log(this.allCoursesData);
+    });
+    this.batchDataService.getBatchDetails().subscribe((data: any) => {
+      this.allBatchesData = data.data;
+      console.log(this.allBatchesData);
+    });
   }
+
   getOngoingPathsData() {
     return this.pathDataService.getOngoingPathsData();
   }
-  getCoursesData() {
-    return this.courseDataService.getData();
-  }
+
   getOngoingCoursesData() {
     return this.courseDataService.getOngoingCourses();
   }
-  getBatchesData() {
-    return this.batchDataService.getData();
-  }
-  getFavouritesCoursesData() {
-    return this.courseDataService.getData();
-  }
+
   ngOnInit(): void {
     this.activatedRoute.url.subscribe((urlSegments) => {
       console.log(urlSegments);

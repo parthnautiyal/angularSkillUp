@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { CourseDataService } from '../../../services/course-data.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./courses-banner.component.sass'],
 })
 export class CoursesBannerComponent implements OnInit {
-  constructor(courseDataService: CourseDataService) {
-    this.CourseDetails = courseDataService.getAboutInfo();
+  id: string = '';
+
+  CourseDetails: any = {};
+  constructor(
+    private courseDataService: CourseDataService,
+    private router: ActivatedRoute
+  ) {
+    this.id = router.snapshot.params['id'];
+    this.courseDataService.getCourseAboutInfoV2(this.id).subscribe((data) => {
+      this.CourseDetails = data.valueOf();
+      this.CourseDetails = this.CourseDetails.data;
+      console.log(this.CourseDetails);
+    });
   }
 
   ngOnInit(): void {}
-  CourseDetails: any = {};
 }

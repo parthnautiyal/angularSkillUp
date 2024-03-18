@@ -220,4 +220,26 @@ export class BatchDataService {
       },
     );
   }
+
+  getBatchById(id: string) {
+    return this.https.get(
+      'https://api.training.zopsmart.com/student/batches/18'
+    );
+  }
+
+  getPathById(id: string) {
+    return this.https.get(
+      'https://api.training.zopsmart.com/student/batches/18/paths'
+    );
+  }
+  getTrainersById(id: string) {
+    return this.https.get(
+      'https://api.training.zopsmart.com/student/batches/18/trainers'
+    );
+  }
+  getStudentsById(id: string) {
+    return this.https.get(
+      'https://api.training.zopsmart.com/student/batches/18/students'
+    );
+  }
 }
