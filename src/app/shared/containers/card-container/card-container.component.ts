@@ -20,6 +20,7 @@ export class CardContainerComponent implements OnInit {
     private pathDataService: PathDataService,
     private courseDataService: CourseDataService
   ) {}
+
   getBatchesData() {
     return this.batchDataService.getData();
   }
@@ -27,6 +28,8 @@ export class CardContainerComponent implements OnInit {
     return this.courseDataService.getData();
   }
   getPathsData() {
+    console.log(this.pathDataService.getData());
+
     return this.pathDataService.getData();
   }
   ngOnInit(): void {

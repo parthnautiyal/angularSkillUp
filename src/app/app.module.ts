@@ -10,7 +10,12 @@ import { CoursePageModule } from './pages/course-page/course-page.module';
 import { PathPageModule } from './pages/path-page/path-page.module';
 import { BatchPageModule } from './pages/batch-page/batch-page.module';
 import { FormsModule } from '@angular/forms';
+import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ZopsmartApiInterceptorService } from './services/zopsmart-api-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -25,10 +30,18 @@ import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module
     PathPageModule,
     BatchPageModule,
     FormsModule,
-    PageNotFoundModule
+    ProgressBarModule,
+    BrowserAnimationsModule,
+    PageNotFoundModule,
   ],
-  
-  providers: [],
+
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ZopsmartApiInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

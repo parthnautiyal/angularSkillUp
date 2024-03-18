@@ -6,6 +6,8 @@ import { PathCardComponent } from './path-card/path-card.component';
 import { ComponentHeaderComponent } from './component-header/component-header.component';
 import { FormsComponent } from './forms/forms.component';
 import { FormsModule } from '@angular/forms';
+import { CircularProgressBarComponent } from './circular-progress-bar/circular-progress-bar.component';
+import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { PathCourseCardComponent } from './path-course-card/path-course-card.component';
 import { NameInfoCardComponent } from './name-info-card/name-info-card.component';
 
@@ -16,18 +18,20 @@ import { NameInfoCardComponent } from './name-info-card/name-info-card.component
     PathCardComponent,
     ComponentHeaderComponent,
     FormsComponent,
+    CircularProgressBarComponent,
     PathCourseCardComponent,
-    NameInfoCardComponent
+    NameInfoCardComponent,
   ],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ProgressBarModule],
   exports: [
     BatchCardComponent,
     CourseCardComponent,
     PathCardComponent,
     FormsComponent,
     ComponentHeaderComponent,
+    CircularProgressBarComponent,
     PathCourseCardComponent,
-    NameInfoCardComponent
+    NameInfoCardComponent,
   ],
 })
 export class CardsModule {}
