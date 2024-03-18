@@ -7,11 +7,13 @@ import { ThemeService } from '../../../../services/theme.service';
   styleUrls: ['./theme-toggle.component.sass']
 })
 export class ThemeToggleComponent implements OnInit {
-  isDarkMode: boolean;
+  isDarkMode: boolean = false;
 
-  constructor(private themeService:ThemeService) { 
+  constructor(private themeService:ThemeService) {
     document.body.classList.add('light-theme');
-    this.isDarkMode=this.themeService.isDarkMode();
+    this.themeService.darkMode$.subscribe(value => {
+      this.isDarkMode = value;
+    });
   }
 
   toggleTheme(){
