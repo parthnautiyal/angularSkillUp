@@ -2,14 +2,13 @@
   display: flex
   flex-direction: column
   width: 75vw
-  height: 170px
 
 .sub-heading p
   font-size: 1.2rem
   margin-bottom: 10px
 
 .course-box
-  border: 1px solid #5624D0
+  border: 1px solid var(--primary-font-link-color)
   border-radius: 10px
   padding: 15px
 
@@ -30,6 +29,12 @@
 
 .course-content
   font-size: 1rem
+  display: -webkit-box
+  -webkit-line-clamp: 3
+  -webkit-box-orient: vertical
+  overflow: hidden
+  box-sizing: border-box  
+  color: var(--primary-font-color)
 
 .course-image
   aspect-ratio: 4/2.5
