@@ -38,7 +38,6 @@ export class PathDataService {
       this.allPathDataSubject.next(this.cache);
     } else {
       this.http.get(this.url + '?pageSize=10&pageNo=1').subscribe((data) => {
-        console.log(data);
         this.cache = data;
         this.allPathDataSubject.next(this.cache);
       });
