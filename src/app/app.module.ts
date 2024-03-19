@@ -21,6 +21,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { CourseEffects } from './state/effects/course.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { BatchEffects } from './state/effects/batch.effect';
+import { batchReducer } from './state/reducer/batch.reducer';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -38,8 +40,8 @@ import { environment } from '../environments/environment';
     ProgressBarModule,
     BrowserAnimationsModule,
     PageNotFoundModule,
-    StoreModule.forRoot({ courses: courseReducer }),
-    EffectsModule.forRoot([CourseEffects]),
+    StoreModule.forRoot({ courses: courseReducer, batch: batchReducer }),
+    EffectsModule.forRoot([CourseEffects, BatchEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode

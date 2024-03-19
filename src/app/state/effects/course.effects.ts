@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { CourseDataService } from '../../services/course-data.service';
 import * as CourseActions from '../action/course.action';
 import { Store } from '@ngrx/store';
 import { coursesLoaded } from '../action/course.action';
@@ -19,40 +18,14 @@ export class CourseEffects {
       ofType(CourseActions.loadCourses),
       switchMap(() =>
         this.http
-          .get<APIResponse<Course[]>>(this.url + '/courses?pageSize=12&pageNo=1')
-          .pipe(
-            map((courses) =>
-              this.store.dispatch(coursesLoaded({ courses: courses.data }))
-            ),
-            catchError((error) => {
-              if (error.status == '401') {
-                // this.store.dispatch(refreshToken())
-                // this
-                console.log('Token refresh');
-              }
-              return of(CourseActions.loadCoursesFailure({ error }));
-            })
+          .get<APIResponse<Course[]>>(
+            this.url + '/courses?pageSize=12&pageNo=1'
           )
-      )
-    )
-  );
-
-  loadCoursesByID$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(CourseActions.loadCourses),
-      switchMap((payload) =>
-        this.http
-          .get<APIResponse<Course[]>>(this.url + '/courses?id=')
           .pipe(
             map((courses) =>
               this.store.dispatch(coursesLoaded({ courses: courses.data }))
             ),
             catchError((error) => {
-              if (error.status == '401') {
-                // this.store.dispatch(refreshToken())
-                // this
-                console.log('Token refresh');
-              }
               return of(CourseActions.loadCoursesFailure({ error }));
             })
           )
