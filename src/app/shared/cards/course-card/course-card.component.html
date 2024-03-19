@@ -6,7 +6,7 @@
         {{ singleCourse.name }}{{ singleCourse.courseName }}
       </div>
       <div *ngIf="isProfile" class="progressCircle">
-        <i class="fa-regular fa-circle"></i>
+       <app-circular-progress-bar [progress]="progress"></app-circular-progress-bar>>
       </div>
     </div>
     <div *ngIf="isProfile" class="footer">

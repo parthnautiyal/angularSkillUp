@@ -43,7 +43,7 @@
   bottom: 20px
   display: flex
   background: transparent
-  border: none 
+  border: none
   outline: none
   font-size: 30px
   color: blue
@@ -60,3 +60,11 @@
   font-size: 0.7rem
 
 .progressCircle
+  display: flex
+  align-items: center
+  ::ng-deep .progress
+    width: 40px !important
+    height: 40px !important
+
+  ::ng-deep #progress-value
+    font-size: 12px !important

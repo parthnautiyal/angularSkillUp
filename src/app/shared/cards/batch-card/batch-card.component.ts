@@ -9,6 +9,7 @@ import { Batch } from 'src/app/models/Batch';
 export class BatchCardComponent implements OnInit {
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
+  progress: number = 69;
 
   @Input() batchData: Batch = {
     id: 0,
@@ -17,7 +18,7 @@ export class BatchCardComponent implements OnInit {
       id: 0,
       name: '',
       imageUrl: '',
-      email: ''
+      email: '',
     },
     createdAt: '',
     endDate: '',
@@ -25,7 +26,7 @@ export class BatchCardComponent implements OnInit {
     noOfTrainers: 0,
     noOfStudents: 0,
     noOfPaths: 0,
-    isAccessible: false
+    isAccessible: false,
   };
 
   constructor() {}

@@ -8,8 +8,9 @@ describe('CircularProgressBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CircularProgressBarComponent],
-    }).compileComponents();
+      declarations: [ CircularProgressBarComponent ]
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(CircularProgressBarComponent);
     component = fixture.componentInstance;

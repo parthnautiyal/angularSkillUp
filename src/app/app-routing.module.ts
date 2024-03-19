@@ -8,7 +8,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { BatchPageComponent } from './pages/batch-page/batch-page.component';
 import { AllSectionContainerComponent } from './shared/containers/all-section-container/all-section-container.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { CircularProgressBarComponent } from './shared/circular-progress-bar/circular-progress-bar.component';
+import { CircularProgressBarComponent } from './shared/cards/circular-progress-bar/circular-progress-bar.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

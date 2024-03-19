@@ -22,9 +22,8 @@ import { CourseEffects } from './state/effects/course.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
-import { CircularProgressBarComponent } from './shared/circular-progress-bar/circular-progress-bar.component';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, CircularProgressBarComponent],
+  declarations: [AppComponent, LoginComponent],
 
   imports: [
     BrowserModule,

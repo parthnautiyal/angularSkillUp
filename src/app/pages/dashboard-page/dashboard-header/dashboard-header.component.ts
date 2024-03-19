@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-header.component.sass'],
 })
 export class DashboardHeaderComponent implements OnInit {
+  progress: number = 69;
   constructor() {}
 
   ngOnInit(): void {}
