@@ -1,13 +1,13 @@
 <div class="mainContainer">
   <app-dashboard-header></app-dashboard-header>
   <ng-container *ngIf="loading">
-  <p>
-    <app-loading-card></app-loading-card>
-  </p>
+    <div class="loading-container">
+      <app-loading-card></app-loading-card>
+    </div>
   </ng-container>
   <ng-container *ngIf="!loading">
     <ng-container *ngFor="let item of headingsTitle">
       <app-card-container [title]="item"></app-card-container>
     </ng-container>
-    </ng-container>
+  </ng-container>
 </div>
