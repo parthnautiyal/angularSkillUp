@@ -1,36 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { BatchDataService } from 'src/app/services/batch-data.service';
+import { Router } from '@angular/router';
 import { PathDataService } from 'src/app/services/path-data.service';
 
+declare var handleSignOut: any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent implements OnInit {
+  userProfile: any;
   isDropdownOpen = false;
   isOrgDropdownOpen = false;
 
-  user = {
-    name: '',
-    email: '',
-  };
-  profileUrl = '';
-
   constructor(
     private pathDataService: PathDataService,
-    private batchService: BatchDataService
+    private router: Router
   ) {
-    this.batchService.getAllBatches().subscribe((data: any) => {
-      console.log(data);
-
-      this.user.name = data.data[0].createdBy.name;
-      this.user.email = data.data[0].createdBy.email;
-      this.profileUrl = data.data[0].createdBy.imageUrl;
-      console.log(this.user);
-      console.log(this.profileUrl);
-    });
-
+    // this.pathDataService.getRefreshToken().subscribe(() => {
     setInterval(() => {
       this.pathDataService.getRefreshToken().subscribe((res: any) => {
         localStorage.setItem('token', res.data.accessToken);
@@ -50,5 +37,18 @@ export class HeaderComponent implements OnInit {
     this.isOrgDropdownOpen = false;
   }
 
-  ngOnInit(): void {}
+  handleSignout() {
+    handleSignOut();
+    sessionStorage.removeItem('loggedInUser');
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
+    console.log('signout');
+
+    this.toggleDropdown();
+  }
+
+  ngOnInit(): void {
+    this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
+  }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Paths } from '../models/Paths';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,17 +20,33 @@ export class PathDataService {
 
     'Referrer-Policy': 'strict-origin-when-cross-origin',
   });
-
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
-
   url: string = 'https://api.training.zopsmart.com/students/paths';
 
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+    setInterval(() => {
+      this.getRefreshToken().subscribe((res: any) => {
+        localStorage.setItem('token', res.data.accessToken);
+        console.log('token refreshed');
+      });
+    }, 60000);
+  }
+  private cache: any = null;
+  private allPathDataSubject = new BehaviorSubject<any>({});
+  allPathsData$ = this.allPathDataSubject.asObservable();
   getPaths() {
-    return this.http.get(this.url + '?pageSize=10&pageNo=1');
+    if (this.cache != null) {
+      this.allPathDataSubject.next(this.cache);
+    } else {
+      this.http.get(this.url + '?pageSize=10&pageNo=1').subscribe((data) => {
+        console.log(data);
+        this.cache = data;
+        this.allPathDataSubject.next(this.cache);
+      });
+    }
   }
 
   getPathData(id: string) {
-    return this.http.get(this.url + id + '?projection=course');
+    return this.http.get(this.url + '/' + id + '?projection=course');
   }
   getAllPaths() {
     return this.http.get((this.url = '?pageSize=12&pageNo=1'));

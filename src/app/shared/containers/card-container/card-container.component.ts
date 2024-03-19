@@ -25,14 +25,29 @@ export class CardContainerComponent implements OnInit {
   ) {
     this.activatedRoute.url.subscribe((urlSegments) => {
       console.log(urlSegments);
+    });
+  }
 
+  ngOnInit(): void {
+    this.pathDataService.getPaths();
+    this.pathDataService.allPathsData$.subscribe((data: any) => {
+      console.log(data);
+      this.allPaths = data.data;
+    });
+    this.courseDataService.getCoursesData();
+    this.courseDataService.allCourses$.subscribe((data) => {
+      this.allCourses = data.data;
+      console.log(this.allCourses);
+    });
+    this.batchDataService.getBatchesDetails();
+    this.batchDataService.allBatches$.subscribe((data) => {
+      this.allBatches = data.data;
+    });
+    this.activatedRoute.url.subscribe((urlSegments) => {
       if (urlSegments.length >= 1) {
         this.heading = urlSegments[0].path;
-        if (this.heading == 'user') {
-          console.log('inside user if');
-
-          this.isActive = false;
-        } else this.isActive = true;
+        if (this.heading == 'user') this.isActive = false;
+        else this.isActive = true;
       }
     });
     console.log(this.isActive);
@@ -68,6 +83,4 @@ export class CardContainerComponent implements OnInit {
       console.log(this.allBatches);
     });
   }
-
-  ngOnInit(): void {}
 }
