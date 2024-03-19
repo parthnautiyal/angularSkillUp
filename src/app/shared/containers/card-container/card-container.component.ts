@@ -21,53 +21,30 @@ export class CardContainerComponent implements OnInit {
     private batchDataService: BatchDataService,
     private activatedRoute: ActivatedRoute,
     private pathDataService: PathDataService,
-    private courseDataService: CourseDataService,
-  ) {
-    this.activatedRoute.url.subscribe((urlSegments) => {
-      console.log(urlSegments);
+    private courseDataService: CourseDataService
+  ) {}
 
+  ngOnInit(): void {
+    this.pathDataService.getPaths();
+    this.pathDataService.allPathsData$.subscribe((data: any) => {
+      console.log(data);
+      this.allPaths = data.data;
+    });
+    this.courseDataService.getCoursesData();
+    this.courseDataService.allCourses$.subscribe((data) => {
+      this.allCourses = data.data;
+      console.log(this.allCourses);
+    });
+    this.batchDataService.getBatchesDetails();
+    this.batchDataService.allBatches$.subscribe((data) => {
+      this.allBatches = data.data;
+    });
+    this.activatedRoute.url.subscribe((urlSegments) => {
       if (urlSegments.length >= 1) {
         this.heading = urlSegments[0].path;
-        if (this.heading == 'user') {
-          console.log('inside user if');
-
-          this.isActive = false;
-        } else this.isActive = true;
+        if (this.heading == 'user') this.isActive = false;
+        else this.isActive = true;
       }
     });
-    console.log(this.isActive);
-
-    if (!this.isActive) {
-      this.pathDataService.getOngoingPathsData().subscribe((data: any) => {
-        this.allPaths = data.data.enrolledPaths;
-        console.log('inside if -> ' + this.allPaths);
-      });
-    } else {
-      this.pathDataService.getData().subscribe((data) => {
-        this.allPaths = data.valueOf();
-        this.allPaths = this.allPaths.data;
-        console.log('inside else - > ' + this.allPaths);
-      });
-    }
-
-    if (!this.isActive) {
-      this.courseDataService.getOngoingCoursesV2().subscribe((data: any) => {
-        this.allCourses = data.data.enrolledCourses;
-        console.log(this.allCourses);
-      });
-    } else {
-      this.courseDataService.getCourseData().subscribe((data) => {
-        this.allCourses = data.valueOf();
-        this.allCourses = this.allCourses.data;
-        console.log(this.allCourses);
-      });
-    }
-    this.batchDataService.getBatchDetails().subscribe((data) => {
-      this.allBatches = data.valueOf();
-      this.allBatches = this.allBatches.data;
-      console.log(this.allBatches);
-    });
   }
-
-  ngOnInit(): void {}
 }
