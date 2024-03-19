@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -240,5 +241,28 @@ export class BatchDataService {
     return this.https.get(
       'https://api.training.zopsmart.com/student/batches/18/students'
     );
+  }
+  private cache:any;
+  private allBatchesSubject = new BehaviorSubject<any>({});
+  allBatches$ = this.allBatchesSubject.asObservable();
+  getBatchesDetails() {
+    if (this.cache){
+      this.allBatchesSubject.next(this.cache);
+    }else {
+      this.https.get(
+        'https://api.training.zopsmart.com/student/batches/all',
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            Referer: 'https://training.zopsmart.com/',
+            'Referrer-Policy': 'strict-origin-when-cross-origin',
+          },
+        }
+      ).subscribe((data)=>{
+        this.cache = data;
+        this.allBatchesSubject.next(this.cache);
+      });
+    }
+    
   }
 }
