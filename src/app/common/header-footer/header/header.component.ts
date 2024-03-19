@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PathDataService } from 'src/app/services/path-data.service';
 
@@ -12,12 +12,6 @@ export class HeaderComponent implements OnInit {
   userProfile: any;
   isDropdownOpen = false;
   isOrgDropdownOpen = false;
-  user = {
-    name: 'Naman Gupta',
-    email: 'naman.gupta@zopsmart.com',
-  };
-  profileUrl =
-    'https://lh3.googleusercontent.com/a/ACg8ocKgtfnOsRdE9C-aj022TPXRRe6OJ4Dnc5Bj4DkCc6K4Rg=s96-c';
 
   constructor(
     private pathDataService: PathDataService,
@@ -30,11 +24,6 @@ export class HeaderComponent implements OnInit {
         console.log('token refreshed');
       });
     }, 60000);
-    // });
-    // this.pathDataService.getRefreshToken().subscribe((res: any) => {
-    //   localStorage.setItem('token', res.data.accessToken);
-    //   console.log('token refreshed');
-    // });
   }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
