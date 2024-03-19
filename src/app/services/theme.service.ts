@@ -12,15 +12,14 @@ export class ThemeService {
     return this.darkMode$;
   }
 
-  setDarkMode(isDarkMode:boolean){
+  setDarkMode(isDarkMode: boolean) {
     // this.darkMode=isDarkMode;
     this.darkModeSubject.next(isDarkMode);
 
-    if(isDarkMode){
+    if (isDarkMode) {
       document.body.classList.add('dark-theme');
       document.body.classList.remove('light-theme');
-    }
-    else{
+    } else {
       document.body.classList.remove('dark-theme');
       document.body.classList.add('light-theme');
     }

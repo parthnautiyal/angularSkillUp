@@ -153,7 +153,7 @@ export class PathDataService {
 
   getPaths() {
     return this.http.get(
-      'https://api.training.zopsmart.com/students/paths?pageSize=10&pageNo=1'
+      'https://api.training.zopsmart.com/students/paths?pageSize=10&pageNo=1',
     );
   }
 
@@ -161,7 +161,7 @@ export class PathDataService {
     return this.http.get(
       'https://api.training.zopsmart.com/students/paths/' +
         id +
-        '?projection=course'
+        '?projection=course',
     );
   }
   getData() {
@@ -183,7 +183,7 @@ export class PathDataService {
       },
       {
         headers: this.refreshHeader,
-      }
+      },
     );
   }
 }

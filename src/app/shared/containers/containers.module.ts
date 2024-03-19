@@ -7,13 +7,13 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { BatchInfoCardContainerComponent } from './batch-info-card-container/batch-info-card-container.component';
 
-
-
 @NgModule({
-  declarations: [CardContainerComponent, AllSectionContainerComponent,BatchInfoCardContainerComponent],
-  imports: [
-    CommonModule,CardsModule,RouterModule,AppRoutingModule
+  declarations: [
+    CardContainerComponent,
+    AllSectionContainerComponent,
+    BatchInfoCardContainerComponent,
   ],
-  exports :[CardContainerComponent,BatchInfoCardContainerComponent]
+  imports: [CommonModule, CardsModule, RouterModule, AppRoutingModule],
+  exports: [CardContainerComponent, BatchInfoCardContainerComponent],
 })
-export class ContainersModule { }
+export class ContainersModule {}

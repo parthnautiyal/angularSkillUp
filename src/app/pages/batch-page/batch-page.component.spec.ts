@@ -8,9 +8,8 @@ describe('BatchPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BatchPageComponent ]
-    })
-    .compileComponents();
+      declarations: [BatchPageComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BatchPageComponent);
     component = fixture.componentInstance;

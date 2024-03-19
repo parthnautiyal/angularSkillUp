@@ -4,6 +4,12 @@
   <div class="batch-path">
     <app-path-course-card [courseData]="paths[0]"></app-path-course-card>
   </div>
-  <app-batch-info-card-container [cardsData]="trainerData" [heading] = "'Trainers'" ></app-batch-info-card-container>
-  <app-batch-info-card-container [cardsData]="studentData" [heading] = "'Peers'"></app-batch-info-card-container>
+  <app-batch-info-card-container
+    [cardsData]="trainerData"
+    [heading]="'Trainers'"
+  ></app-batch-info-card-container>
+  <app-batch-info-card-container
+    [cardsData]="studentData"
+    [heading]="'Peers'"
+  ></app-batch-info-card-container>
 </div>

@@ -216,7 +216,7 @@ export class BatchDataService {
           'Access-Control-Allow-Origin': '*',
           'Referrer-Policy': 'strict-origin-when-cross-origin',
         },
-      }
+      },
     );
   }
 

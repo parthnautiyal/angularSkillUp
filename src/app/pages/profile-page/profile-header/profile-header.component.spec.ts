@@ -8,9 +8,8 @@ describe('ProfileHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfileHeaderComponent ]
-    })
-    .compileComponents();
+      declarations: [ProfileHeaderComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ProfileHeaderComponent);
     component = fixture.componentInstance;
