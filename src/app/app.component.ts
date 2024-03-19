@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

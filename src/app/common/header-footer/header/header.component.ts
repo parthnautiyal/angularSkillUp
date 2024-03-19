@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
     private pathDataService: PathDataService,
     private batchService: BatchDataService
   ) {
-    this.batchService.getBatchDetails().subscribe((data: any) => {
+    this.batchService.getAllBatches().subscribe((data: any) => {
       console.log(data);
 
       this.user.name = data.data[0].createdBy.name;
