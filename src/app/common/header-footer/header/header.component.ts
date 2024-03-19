@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BatchDataService } from 'src/app/services/batch-data.service';
 import { PathDataService } from 'src/app/services/path-data.service';
 
 @Component({
@@ -9,26 +10,33 @@ import { PathDataService } from 'src/app/services/path-data.service';
 export class HeaderComponent implements OnInit {
   isDropdownOpen = false;
   isOrgDropdownOpen = false;
-  user = {
-    name: 'Naman Gupta',
-    email: 'naman.gupta@zopsmart.com',
-  };
-  profileUrl =
-    'https://lh3.googleusercontent.com/a/ACg8ocKgtfnOsRdE9C-aj022TPXRRe6OJ4Dnc5Bj4DkCc6K4Rg=s96-c';
 
-  constructor(private pathDataService: PathDataService) {
-    // this.pathDataService.getRefreshToken().subscribe(() => {
+  user = {
+    name: '',
+    email: '',
+  };
+  profileUrl = '';
+
+  constructor(
+    private pathDataService: PathDataService,
+    private batchService: BatchDataService
+  ) {
+    this.batchService.getBatchDetails().subscribe((data: any) => {
+      console.log(data);
+
+      this.user.name = data.data[0].createdBy.name;
+      this.user.email = data.data[0].createdBy.email;
+      this.profileUrl = data.data[0].createdBy.imageUrl;
+      console.log(this.user);
+      console.log(this.profileUrl);
+    });
+
     setInterval(() => {
       this.pathDataService.getRefreshToken().subscribe((res: any) => {
         localStorage.setItem('token', res.data.accessToken);
         console.log('token refreshed');
       });
     }, 60000);
-    // });
-    // this.pathDataService.getRefreshToken().subscribe((res: any) => {
-    //   localStorage.setItem('token', res.data.accessToken);
-    //   console.log('token refreshed');
-    // });
   }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;

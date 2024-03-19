@@ -912,6 +912,8 @@ export class CourseDataService {
   }
 
   getOngoingCoursesV2() {
-    return this.http.get(this.url + '/enrolled');
+    return this.http.get(
+      'https://api.training.zopsmart.com/students/enrolled-courses'
+    );
   }
 }
