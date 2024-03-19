@@ -29,4 +29,9 @@ export class CourseCardComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  isButtonRed: boolean = false;
+
+  toggleColor() {
+    this.isButtonRed = !this.isButtonRed;
+  }
 }
