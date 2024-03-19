@@ -1,11 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-<<<<<<< Updated upstream
 import { BehaviorSubject } from 'rxjs';
-=======
 import { Observable } from 'rxjs';
 import { BatchList } from '../models/Batch';
->>>>>>> Stashed changes
 
 @Injectable({
   providedIn: 'root',
@@ -14,21 +11,8 @@ export class BatchDataService {
   constructor(private https: HttpClient) {}
   url: string = 'https://api.training.zopsmart.com/student/batches/';
 
-<<<<<<< Updated upstream
-  getAllBatches() {
-    return this.https.get(this.url + '/all');
-=======
-  getBatchDetails() : Observable<BatchList> {
-    return this.https.get<BatchList>(
-      'https://api.training.zopsmart.com/student/batches/all',
-      {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Referrer-Policy': 'strict-origin-when-cross-origin',
-        },
-      },
-    );
->>>>>>> Stashed changes
+  getAllBatches(): Observable<BatchList> {
+    return this.https.get<BatchList>(this.url + '/all');
   }
 
   getBatchById(id: string) {
