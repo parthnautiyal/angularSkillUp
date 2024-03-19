@@ -15,8 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ZopsmartApiInterceptorService } from './services/zopsmart-api-interceptor.service';
+import { AuthModule } from './auth/auth.module';
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent],
 
   imports: [
     BrowserModule,
@@ -31,6 +32,7 @@ import { ZopsmartApiInterceptorService } from './services/zopsmart-api-intercept
     ProgressBarModule,
     BrowserAnimationsModule,
     PageNotFoundModule,
+    AuthModule,
   ],
 
   providers: [

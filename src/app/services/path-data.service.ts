@@ -55,6 +55,13 @@ export class PathDataService {
       'https://api.training.zopsmart.com/students/enrolled-paths'
     );
   }
+
+  getNoOfEnrolledPaths() {
+    return this.http.get(
+      'https://api.training.zopsmart.com/students/no-of-enrolled-paths'
+    );
+  }
+
   getRefreshToken() {
     return this.http.post(
       'https://api.training.zopsmart.com/login/refresh',
