@@ -214,7 +214,6 @@ export class BatchDataService {
       {
         headers: {
           'Access-Control-Allow-Origin': '*',
-          Referer: 'https://training.zopsmart.com/',
           'Referrer-Policy': 'strict-origin-when-cross-origin',
         },
       },

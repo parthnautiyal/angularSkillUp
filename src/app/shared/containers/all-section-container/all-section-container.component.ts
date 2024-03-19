@@ -16,6 +16,8 @@ export class AllSectionContainerComponent implements OnInit {
   allPathsData: any[] = [];
   allCoursesData: any[] = [];
   allBatchesData: any[] = [];
+  onGoingPathsData: any[] = [];
+  onGoingCoursesData: any[] = [];
   constructor(
     private pathDataService: PathDataService,
     private activatedRoute: ActivatedRoute,
@@ -35,14 +37,14 @@ export class AllSectionContainerComponent implements OnInit {
       this.allBatchesData = data.data;
       console.log(this.allBatchesData);
     });
-  }
-
-  getOngoingPathsData() {
-    return this.pathDataService.getOngoingPathsData();
-  }
-
-  getOngoingCoursesData() {
-    return this.courseDataService.getOngoingCourses();
+    this.pathDataService.getOngoingPathsData().subscribe((data: any) => {
+      this.onGoingPathsData = data.data.enrolledPaths;
+      console.log(this.onGoingPathsData);
+    });
+    this.courseDataService.getOngoingCoursesV2().subscribe((data: any) => {
+      this.onGoingCoursesData = data.data.enrolledCourses;
+      console.log(this.onGoingCoursesData);
+    });
   }
 
   ngOnInit(): void {
