@@ -10,7 +10,7 @@ export const selectCourses = createSelector(
 
 export const selectCoursesLoading = createSelector(
   selectCourseState,
-  (state) => state.loading
+  (state) => state.loadingData
 );
 
 export const selectCoursesError = createSelector(
