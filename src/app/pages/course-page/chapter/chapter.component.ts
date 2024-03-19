@@ -15,7 +15,7 @@ export class ChapterComponent implements OnInit {
     private router: ActivatedRoute
   ) {
     this.id = this.router.snapshot.params['id'];
-    this.allChapterServices.getChapterDataV2(this.id).subscribe((data) => {
+    this.allChapterServices.getChapterData(this.id).subscribe((data) => {
       this.allChapters = data.valueOf();
       this.allChapters = this.allChapters.data;
       console.log(this.allChapters);

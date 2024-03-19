@@ -25,23 +25,23 @@ export class AllSectionContainerComponent implements OnInit {
     private batchDataService: BatchDataService,
     private router: Router
   ) {
-    this.pathDataService.getData().subscribe((data: any) => {
+    this.pathDataService.getAllPaths().subscribe((data: any) => {
       this.allPathsData = data.data;
       console.log(this.allPathsData);
     });
-    this.courseDataService.getCourseData().subscribe((data: any) => {
+    this.courseDataService.getAllCourses().subscribe((data: any) => {
       this.allCoursesData = data.data;
       console.log(this.allCoursesData);
     });
-    this.batchDataService.getBatchDetails().subscribe((data: any) => {
+    this.batchDataService.getAllBatches().subscribe((data: any) => {
       this.allBatchesData = data.data;
       console.log(this.allBatchesData);
     });
-    this.pathDataService.getOngoingPathsData().subscribe((data: any) => {
+    this.pathDataService.getEnrolledPaths().subscribe((data: any) => {
       this.onGoingPathsData = data.data.enrolledPaths;
       console.log(this.onGoingPathsData);
     });
-    this.courseDataService.getOngoingCoursesV2().subscribe((data: any) => {
+    this.courseDataService.getEnrolledCourses().subscribe((data: any) => {
       this.onGoingCoursesData = data.data.enrolledCourses;
       console.log(this.onGoingCoursesData);
     });
