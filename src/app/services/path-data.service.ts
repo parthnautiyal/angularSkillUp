@@ -20,6 +20,7 @@ export class PathDataService {
 
     'Referrer-Policy': 'strict-origin-when-cross-origin',
   });
+  url: string = 'https://api.training.zopsmart.com/students/paths';
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     setInterval(() => {
@@ -36,31 +37,21 @@ export class PathDataService {
     if (this.cache != null) {
       this.allPathDataSubject.next(this.cache);
     } else {
-      this.http
-        .get(
-          'https://api.training.zopsmart.com/students/paths?pageSize=10&pageNo=1'
-        )
-        .subscribe((data) => {
-          console.log(data);
-          this.cache = data;
-          this.allPathDataSubject.next(this.cache);
-        });
+      this.http.get(this.url + '?pageSize=10&pageNo=1').subscribe((data) => {
+        console.log(data);
+        this.cache = data;
+        this.allPathDataSubject.next(this.cache);
+      });
     }
   }
 
   getPathData(id: string) {
-    return this.http.get(
-      'https://api.training.zopsmart.com/students/paths/' +
-        id +
-        '?projection=course'
-    );
+    return this.http.get(this.url + '/' + id + '?projection=course');
   }
-  getData() {
-    return this.http.get(
-      'https://api.training.zopsmart.com/students/paths?pageSize=12&pageNo=1'
-    );
+  getAllPaths() {
+    return this.http.get((this.url = '?pageSize=12&pageNo=1'));
   }
-  getOngoingPathsData() {
+  getEnrolledPaths() {
     return this.http.get(
       'https://api.training.zopsmart.com/students/enrolled-paths'
     );

@@ -18,7 +18,7 @@ export class CourseAboutSectionComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.courseDataService.getCourseAboutInfoV2(this.id).subscribe((data) => {
+    this.courseDataService.getCourseAboutInfo(this.id).subscribe((data) => {
       this.aboutObject = data.valueOf();
       this.about = this.aboutObject.data.about;
       this.aboutArray = this.about.split('\n');
