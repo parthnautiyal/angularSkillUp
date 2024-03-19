@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { BatchList } from '../models/Batch';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +11,8 @@ export class BatchDataService {
   constructor(private https: HttpClient) {}
   url: string = 'https://api.training.zopsmart.com/student/batches/';
 
-  getAllBatches() {
-    return this.https.get(this.url + '/all');
+  getAllBatches(): Observable<BatchList> {
+    return this.https.get<BatchList>(this.url + '/all');
   }
 
   getBatchById(id: string) {

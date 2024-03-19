@@ -6,21 +6,21 @@
 </div>
 <div class="card-wrapper">
   <ng-container *ngIf="title == 'batches'">
-    <ng-container *ngFor="let item of allBatches">
+    <ng-container *ngFor="let item of allBatches.data">
       <a [routerLink]="['/', 'batchpage', item.id]">
         <app-batch-card [batchData]="item"></app-batch-card>
       </a>
     </ng-container>
   </ng-container>
   <ng-container *ngIf="title == 'paths'">
-    <ng-container *ngFor="let item of allPaths">
+    <ng-container *ngFor="let item of allPaths.data">
       <a [routerLink]="['/', 'pathdashboard', item.id]"
         ><app-path-card [singlePath]="item"></app-path-card
       ></a>
     </ng-container>
   </ng-container>
   <ng-container *ngIf="title == 'courses'">
-    <ng-container *ngFor="let item of allCourses">
+    <ng-container *ngFor="let item of allCourses.data">
       <a [routerLink]="['/', 'course', item.id]">
         <app-course-card [singleCourse]="item"></app-course-card>
       </a>

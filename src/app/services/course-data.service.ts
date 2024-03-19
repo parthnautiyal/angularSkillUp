@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Course, CourseList } from '../models/Course';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +11,8 @@ export class CourseDataService {
 
   private url = 'https://api.training.zopsmart.com/students';
 
-  getAllCourses() {
-    return this.http.get(this.url + '/courses?pageSize=12&pageNo=1');
+  getAllCourses(): Observable<CourseList>{
+    return this.http.get<CourseList>(this.url + '/courses?pageSize=12&pageNo=1');
   }
   private cache: any;
   private allCoursesSubject = new BehaviorSubject<any>({});
@@ -39,8 +40,8 @@ export class CourseDataService {
     return this.http.get(this.url + '/courses/' + id + '/chapters');
   }
 
-  getEnrolledCourses() {
-    return this.http.get(
+  getEnrolledCourses() : Observable<CourseList> {
+    return this.http.get<CourseList>(
       'https://api.training.zopsmart.com/students/enrolled-courses'
     );
   }
