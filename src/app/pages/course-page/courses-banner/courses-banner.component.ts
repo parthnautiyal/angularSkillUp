@@ -16,7 +16,7 @@ export class CoursesBannerComponent implements OnInit {
     private router: ActivatedRoute
   ) {
     this.id = router.snapshot.params['id'];
-    this.courseDataService.getCourseAboutInfoV2(this.id).subscribe((data) => {
+    this.courseDataService.getCourseAboutInfo(this.id).subscribe((data) => {
       this.CourseDetails = data.valueOf();
       this.CourseDetails = this.CourseDetails.data;
       console.log(this.CourseDetails);
