@@ -6,6 +6,7 @@ import {
   HostListener,
 } from '@angular/core';
 
+declare var google: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

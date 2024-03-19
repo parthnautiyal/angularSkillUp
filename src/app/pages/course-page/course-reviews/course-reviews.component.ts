@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-course-reviews',
   templateUrl: './course-reviews.component.html',
-  styleUrls: ['./course-reviews.component.css'],
+  styleUrls: ['./course-reviews.component.sass'],
 })
 export class CourseReviewsComponent implements OnInit {
   constructor(
