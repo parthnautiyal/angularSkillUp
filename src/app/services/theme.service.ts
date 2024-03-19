@@ -25,19 +25,5 @@ export class ThemeService {
     }
   }
 
-  /**
-   * Function that toggles the current mode
-   * Exposed publicly
-   */
-  // toggleMode() {
-  //   document.body.classList.toggle(Mode.LIGHT);
-  //   document.body.classList.toggle(Mode.DARK);
-  //   if (this.currentMode === Mode.LIGHT) {
-  //     this.updateCurrentMode(Mode.DARK);
-  //   } else {
-  //     this.updateCurrentMode(Mode.LIGHT);
-  //   }
-  // }
-
   constructor() {}
 }
