@@ -31,9 +31,10 @@
         <ng-container *ngIf="loading">
           {{ getAllBatches() }}
           <app-loading-card class="loading"></app-loading-card
-        ></ng-container>
+        >
+      </ng-container>
         <ng-container *ngIf="!loading">
-          <div *ngFor="let item of allBatchesData" class="paths-card-wrapper">
+          <div *ngFor="let item of batch$ | async" class="paths-card-wrapper">
             <app-batch-card [batchData]="item"></app-batch-card>
           </div>
         </ng-container>
