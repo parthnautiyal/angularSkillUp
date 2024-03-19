@@ -1,20 +1,18 @@
+import { User } from './User';
+
 export interface Batch {
-    id: number;
-    name: string;
-    createdBy: {
-        id: number;
-        name: string;
-        imageUrl: string;
-        email: string;
-    };
-    createdAt: string;
-    endDate: string;
-    streamName: string;
-    noOfTrainers: number;
-    noOfStudents: number;
-    noOfPaths: number;
-    isAccessible: boolean;
+  createdAt: string;
+  createdBy: User;
+  endDate: string;
+  id: number;
+  isAccessible: boolean;
+  name: string;
+  noOfPaths: number;
+  noOfStudents: number;
+  noOfTrainers: number;
+  streamName: string;
 }
+
 
 export interface BatchList {
     data: Batch[];

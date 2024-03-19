@@ -78,6 +78,7 @@ export class CardContainerComponent implements OnInit {
         console.log(this.allCourses);
       });
     } else {
+      
       this.courseDataService.getAllCourses().subscribe((data) => {
         this.allCourses = data;
         console.log(this.allCourses);

@@ -6,6 +6,18 @@ import { PathDataService } from './../../../services/path-data.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { loadCourses } from 'src/app/state/action/course.action';
+import {
+  selectCourses,
+  selectCoursesError,
+  selectCoursesLoading,
+} from 'src/app/state/selector/course.selector';
+import { Observable } from 'rxjs';
+import { Course } from 'src/app/models/Course';
+import { loadBatch } from 'src/app/state/action/batch.action';
+import { Batch } from 'src/app/models/Batch';
+import { selectBatchs } from 'src/app/state/selector/batch.selector';
 
 @Component({
   selector: 'app-all-section-container',
@@ -21,7 +33,12 @@ export class AllSectionContainerComponent implements OnInit {
   onGoingPathsData: any[] = [];
   onGoingCoursesData: any[] = [];
   loading: boolean = true;
+  courses$!: Observable<Course[]>;
+  batch$!: Observable<Batch[]>;
+  loadingData$!: Observable<boolean>;
+  error$!: Observable<any>;
   constructor(
+    private store: Store,
     private pathDataService: PathDataService,
     private activatedRoute: ActivatedRoute,
     private courseDataService: CourseDataService,
@@ -50,36 +67,28 @@ export class AllSectionContainerComponent implements OnInit {
     this.pathDataService.getPaths();
   }
   getAllCourses() {
-    this.courseDataService.getCoursesData();
-    combineLatest([this.courseDataService.allCourses$]).subscribe(
-      ([courseData]) => {
-        if (
-          typeof courseData === 'object' &&
-          Object.keys(courseData).length > 0
-        ) {
-          this.loading = false;
-          this.allCoursesData = courseData.data;
-          console.log(this.allCoursesData);
-        }
-      }
-    );
+    this.store.dispatch(loadCourses());
+    this.courses$ = this.store.select(selectCourses);
+    // this.loading$ = this.store.pipe(select(selectCoursesLoading));
+    this.error$ = this.store.pipe(select(selectCoursesError));
+    if (Object.keys(this.courses$).length > 0) {
+      this.loading = false;
+    }
   }
   getAllBatches() {
-    this.batchDataService.getBatchesDetails();
-    combineLatest([this.batchDataService.allBatches$]).subscribe(
-      ([batchData]) => {
-        if (
-          typeof batchData === 'object' &&
-          Object.keys(batchData).length > 0
-        ) {
-          this.loading = false;
-          this.allBatchesData = batchData.data;
-          console.log(this.allBatchesData);
-        }
-      }
-    );
+    this.store.dispatch(loadBatch());
+    this.batch$ = this.store.select(selectBatchs);
+    console.log(this.batch$);
+    if (Object.keys(this.batch$).length > 0) {
+      this.loading = false;
+    }
   }
   ngOnInit(): void {
+    // this.store.dispatch(loadCourses());
+    // this.courses$ = this.store.select(selectCourses);
+    // this.loadingData$ = this.store.pipe(select(selectCoursesLoading));
+    // this.error$ = this.store.pipe(select(selectCoursesError));
+
     this.activatedRoute.url.subscribe((urlSegments) => {
       console.log(urlSegments);
       if (urlSegments.length >= 1) {

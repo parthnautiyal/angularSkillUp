@@ -7,7 +7,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { AuthModule } from '../auth/auth.module';
 @NgModule({
   declarations: [LayoutComponent, UserComponent],
-  imports: [CommonModule, AppRoutingModule, HeaderFooterModule, AuthModule],
+  imports: [CommonModule, AppRoutingModule, HeaderFooterModule],
   exports: [LayoutComponent],
 })
 export class LayoutModule {}
