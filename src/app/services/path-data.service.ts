@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Paths } from '../models/Paths';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+<<<<<<< Updated upstream
 import { BehaviorSubject } from 'rxjs';
+=======
+import { Observable } from 'rxjs';
+import { PathList } from '../models/Path';
+>>>>>>> Stashed changes
 @Injectable({
   providedIn: 'root',
 })
 export class PathDataService {
   user: any = {
     token:
-      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMDgyNTQwOCwiaWF0IjoxNzEwODI1MTA4LCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIiwidXNlcklkIjozMzJ9.NlAnvnZjYx_7JFUMsc_DWmYdgSTmA2PAn9mHhfFfT01KJ_UL6WcARLBj73qPrGD_xLeD5PV19KoGaLrz7902K8i04_4PzSygfJ2_-a_uyS81fN6Q0xB1h3X3P5kIbPA9zF4oMx79UDhZUILTYm1Djz1ToIAJqOfmvNUCjecjcmWEvLo9gorPOeJXQmM0-MBOwj1ciypE8xP2Dbzo03obFzgOxR5J9_Wf4r6tM0TM3KzGKO9-9pgmxLsRbIP9FSZfHf2iY1DtvvuIru7fI3eklLaWfzfWwp_vZCf3YtdWwiasOYP5clc2kIn8IqmvMBhAQj8V-X9XJltD4mKZGl-y3g',
+      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMDgzMzA2NSwiaWF0IjoxNzEwODMyNzY1LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJhZGl0eWEuc0B6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMzNH0.DtjlMAD1t1OdarkUJD74oBaQWricfq3VI3XJwv1PsaFN3RIZDFT9OgfZGbMKEw5-magpb1rNR9JhVre3LIzBwZnoMmXLCv8SWlevIiSlS5Rw8hEkvqUuaXbkKyXNr-2DJWF-NtYiDUHUT8OrwG3cv3E9awlnDVB2PhZ1fEymqi9PyrLFvy5VnzS8D9aCcMRFvfCfS8UiXtdAesmQ_Ay10IYUnKfbNHW0xjLikNnQ-5EFOVri31oXyU1UOVSD_yEbp7lLuxdOFy6y2Uz0K0anctn50d3GL53ElAXf_b6tjvc16DKPqDGx5J7c4l1TeCTDESs8KEMw1JvAtefyVDy5zw',
     refreshToken:
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMDkxMTUwNywiaWF0IjoxNzEwODI1MTA3LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIn0.Ls0YkNH8aox3_TyvbBABVF-__W_k2q0Q7rFAPM2cgDkZTTAIIQWv0FG93vZTsCRjLREXZTsJKHS9iA3fxjp1uLY2YJfQ9uAS9sLKANJZ8UBwZJCh8-2uq6HfWcKRSk86oqh3UjlFLeqtpB-Nx2V9m-Fq_45dPcAHYGUPn1F7GzA9X-KZ_cieOQaJnxFPbA7stqnX29iruWPcogOsmDNNhRJnZn68WXfj3cLzaaftWPx4ODR-ccyzIB12ruvITrgKdrGWfTzuxL_ZJuv89nVyVMFlHY2OqQKalu5rIgjIxr-SqqhPsuTM0ucqMrCDDV_oxdbkyD9_1bQriEbhL6LKtw',
+    'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMDg0MDU3NywiaWF0IjoxNzEwNzU0MTc3LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJhZGl0eWEuc0B6b3BzbWFydC5jb20ifQ.Dv1ct-UTBS1lyeKCGxQCJeS34Ke_wzwif4_wRef3V-o7dMlCMGQe_dTSupiT5HMZjFvgAFFejUQZJyxG1_WKASBeLKBSs4TTLVa6UNPQAwQ_a25NXM1DQh3rh8aakOUp-BH5yr6TboH3GnqlE75_mMRK8yfg__EFa7iKYHpH_XIWqYvbpFZ-PLfcesvBuFAMuDMT49tla13vRPrvE91sAMnpLvmLOwAsnvpN79DtryPEcT7LXmKjqIeLj3dxkn4nSC4_J2_bgyXx0jLOzs2qLqiT_J-njzcZmKDU_1ZplHFIXXORsqP3HUvhn2GaOfUZpJzmiyH_YoqjIz_12gnzmw',
   };
 
   refreshHeader = new HttpHeaders({
@@ -47,11 +51,21 @@ export class PathDataService {
   getPathData(id: string) {
     return this.http.get(this.url + '/' + id + '?projection=course');
   }
+<<<<<<< Updated upstream
   getAllPaths() {
     return this.http.get((this.url = '?pageSize=12&pageNo=1'));
   }
   getEnrolledPaths() {
     return this.http.get(
+=======
+  getData() : Observable<PathList> {
+    return this.http.get<PathList>(
+      'https://api.training.zopsmart.com/students/paths?pageSize=12&pageNo=1'
+    );
+  }
+  getOngoingPathsData() : Observable<PathList> {
+    return this.http.get<PathList>(
+>>>>>>> Stashed changes
       'https://api.training.zopsmart.com/students/enrolled-paths'
     );
   }

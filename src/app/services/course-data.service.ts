@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+<<<<<<< Updated upstream
 import { BehaviorSubject } from 'rxjs';
+=======
+import { Observable } from 'rxjs';
+import { Course, CourseList } from '../models/Course';
+>>>>>>> Stashed changes
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +15,13 @@ export class CourseDataService {
 
   private url = 'https://api.training.zopsmart.com/students';
 
+<<<<<<< Updated upstream
   getAllCourses() {
     return this.http.get(this.url + '/courses?pageSize=12&pageNo=1');
+=======
+  getCourseData() : Observable<CourseList> {
+    return this.http.get<CourseList>(this.url + '/courses?pageSize=12&pageNo=1');
+>>>>>>> Stashed changes
   }
   private cache:any;
   private allCoursesSubject = new BehaviorSubject<any>({});
@@ -37,8 +47,13 @@ export class CourseDataService {
     return this.http.get(this.url + '/courses/' + id + '/chapters');
   }
 
+<<<<<<< Updated upstream
   getEnrolledCourses() {
     return this.http.get(
+=======
+  getOngoingCoursesV2() : Observable<CourseList> {
+    return this.http.get<CourseList>(
+>>>>>>> Stashed changes
       'https://api.training.zopsmart.com/students/enrolled-courses'
     );
   }

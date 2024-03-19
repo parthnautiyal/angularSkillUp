@@ -3,6 +3,9 @@ import { CourseDataService } from '../../../services/course-data.service';
 import { PathDataService } from '../../../services/path-data.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { BatchDataService } from '../../../services/batch-data.service';
+import { Course, CourseList } from 'src/app/models/Course';
+import { PathList } from 'src/app/models/Path';
+import { BatchList } from 'src/app/models/Batch';
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
@@ -11,9 +14,15 @@ import { BatchDataService } from '../../../services/batch-data.service';
 export class CardContainerComponent implements OnInit {
   heading: string = '';
   isActive = true;
-  allPaths: any = [];
-  allCourses: any = [];
-  allBatches: any = [];
+  allPaths: PathList = {
+    data: []
+  };
+  allCourses: CourseList = {
+    data: []
+  };
+  allBatches: BatchList = {
+    data: []
+  };
 
   @Input() title: string = '';
   @Input() prefixWord: string = '';
@@ -53,6 +62,7 @@ export class CardContainerComponent implements OnInit {
     console.log(this.isActive);
 
     if (!this.isActive) {
+<<<<<<< Updated upstream
       this.pathDataService.getEnrolledPaths().subscribe((data: any) => {
         this.allPaths = data.data.enrolledPaths;
         console.log('inside if -> ' + this.allPaths);
@@ -61,11 +71,21 @@ export class CardContainerComponent implements OnInit {
       this.pathDataService.getAllPaths().subscribe((data) => {
         this.allPaths = data.valueOf();
         this.allPaths = this.allPaths.data;
+=======
+      this.pathDataService.getOngoingPathsData().subscribe((data: PathList) => {
+        this.allPaths = data;
+        console.log('inside if -> ' + this.allPaths);
+      });
+    } else {
+      this.pathDataService.getData().subscribe((data: PathList) => {
+        this.allPaths = data;
+>>>>>>> Stashed changes
         console.log('inside else - > ' + this.allPaths);
       });
     }
 
     if (!this.isActive) {
+<<<<<<< Updated upstream
       this.courseDataService.getEnrolledCourses().subscribe((data: any) => {
         this.allCourses = data.data.enrolledCourses;
         console.log(this.allCourses);
@@ -80,6 +100,20 @@ export class CardContainerComponent implements OnInit {
     this.batchDataService.getAllBatches().subscribe((data) => {
       this.allBatches = data.valueOf();
       this.allBatches = this.allBatches.data;
+=======
+      this.courseDataService.getOngoingCoursesV2().subscribe((data: CourseList) => {
+        this.allCourses = data;
+        console.log(this.allCourses);
+      });
+    } else {
+      this.courseDataService.getCourseData().subscribe((data: CourseList) => {
+        this.allCourses = data;
+        console.log(this.allCourses);
+      });
+    }
+    this.batchDataService.getBatchDetails().subscribe((data : BatchList) => {
+      this.allBatches = data;
+>>>>>>> Stashed changes
       console.log(this.allBatches);
     });
   }
