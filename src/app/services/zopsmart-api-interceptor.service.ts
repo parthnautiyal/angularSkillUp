@@ -16,7 +16,6 @@ export class ZopsmartApiInterceptorService implements HttpInterceptor {
       headers: req.headers.append('Authorization', 'Bearer ' + token),
     });
     console.log('intercepted');
-
     return next.handle(modifiedReq);
   }
 

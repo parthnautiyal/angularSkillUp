@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -15,6 +15,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ZopsmartApiInterceptorService } from './services/zopsmart-api-interceptor.service';
+import { StoreModule } from '@ngrx/store';
+import { courseReducer } from './state/reducer/course.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CourseEffects } from './state/effects/course.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [AppComponent, LoginComponent],
 
@@ -31,6 +38,13 @@ import { ZopsmartApiInterceptorService } from './services/zopsmart-api-intercept
     ProgressBarModule,
     BrowserAnimationsModule,
     PageNotFoundModule,
+    StoreModule.forRoot({ courses: courseReducer }),
+    EffectsModule.forRoot([CourseEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    }),
   ],
 
   providers: [
