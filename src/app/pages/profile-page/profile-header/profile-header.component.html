@@ -1,12 +1,12 @@
 <div class="profile-header-container">
   <div class="user-details">
     <div class="left-wrapper">
-      <img [src]="userData.imageUrl" />
+      <img [src]="userProfile.picture" />
     </div>
 
     <div class="right-wrapper">
-      <p class="user-name">{{ userData.name }}</p>
-      <p class="user-email">{{ userData.email }}</p>
+      <p class="user-name">{{ userProfile.given_name }} {{ userProfile.family_name }}</p>
+      <p class="user-email">{{ userProfile.email }}</p>
     </div>
   </div>
   <div class="completion-rate">
