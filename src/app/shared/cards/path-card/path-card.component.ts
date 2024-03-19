@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Path } from 'src/app/models/Path';
 @Component({
   selector: 'app-path-card',
   templateUrl: './path-card.component.html',
@@ -8,7 +9,14 @@ export class PathCardComponent implements OnInit {
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
 
-  @Input() singlePath: any = {};
+  @Input() singlePath: Path = {
+    id: 0,
+    name: '',
+    pathName: '',
+    imageUrl: '',
+    isAccessible: false,
+    noOfCourses: 0
+  };
   constructor() {}
 
   ngOnInit(): void {}
