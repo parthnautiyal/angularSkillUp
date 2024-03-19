@@ -24,9 +24,8 @@ import { environment } from '../environments/environment';
 import { BatchEffects } from './state/effects/batch.effect';
 import { batchReducer } from './state/reducer/batch.reducer';
 
-import { CircularProgressBarComponent } from './shared/circular-progress-bar/circular-progress-bar.component';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, CircularProgressBarComponent],
+  declarations: [AppComponent, LoginComponent],
 
   imports: [
     BrowserModule,

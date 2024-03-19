@@ -49,10 +49,10 @@
 .recent-course
     position: relative
     display: flex
-    flex-direction: column
+    flex-direction: row
     align-items: center
     text-align: center
-    justify-content: center
+    justify-content: space-evenly
     border-radius: 10px
     background-color: var(--page-content-background-color)
     height: 100%
@@ -79,3 +79,11 @@ span
     padding: 10px 14px 10px 14px
     border-radius: 7px
     box-sizing: border-box
+
+.circle
+::ng-deep .progress
+    width: 45px !important
+    height: 45px !important
+
+::ng-deep #progress-value
+    font-size: 14px !important

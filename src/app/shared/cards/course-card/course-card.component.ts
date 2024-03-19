@@ -7,6 +7,7 @@ import { Course } from 'src/app/models/Course';
   styleUrls: ['./course-card.component.sass'],
 })
 export class CourseCardComponent implements OnInit {
+  progress: number = 69;
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
   @Input() singleCourse: Course = {

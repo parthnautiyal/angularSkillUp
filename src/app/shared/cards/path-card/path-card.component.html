@@ -6,6 +6,6 @@
     <div *ngIf="isProfile" class="courseStateDate">Start Date: 29 Feb 2024</div>
   </div>
   <div *ngIf="isProfile" class="progressCircle">
-    <i class="fa-regular fa-circle"></i>
+    <app-circular-progress-bar class="circle" [progress]="progress"></app-circular-progress-bar>
   </div>
 </div>
