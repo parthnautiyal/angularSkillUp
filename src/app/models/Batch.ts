@@ -12,3 +12,8 @@ export interface Batch {
   noOfTrainers: number;
   streamName: string;
 }
+
+
+export interface BatchList {
+    data: Batch[];
+}
