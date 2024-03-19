@@ -12,4 +12,9 @@ export class CourseCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+  isButtonRed: boolean = false;
+
+  toggleColor() {
+    this.isButtonRed = !this.isButtonRed;
+  }
 }

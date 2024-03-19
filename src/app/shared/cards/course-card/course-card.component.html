@@ -17,9 +17,11 @@
       By {{ singleCourse.createdBy.name }}
     </div>
     <div *ngIf="!isProfile" class="fav-icon">
-      <button>
-        <i class="fa-solid fa-heart"></i>
-      </button>
+      <button id="btn1">
+          <i class="btn" [style.color]="isButtonRed ? 'red' : 'blue'" 
+          (click)="toggleColor()" class="fa fa-heart"></i>
+          
+        </button>
     </div>
   </div>
 </div>
