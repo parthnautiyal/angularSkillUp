@@ -14,17 +14,19 @@ export class CourseDataService {
   getAllCourses(): Observable<CourseList>{
     return this.http.get<CourseList>(this.url + '/courses?pageSize=12&pageNo=1');
   }
-  private cache:any;
+  private cache: any;
   private allCoursesSubject = new BehaviorSubject<any>({});
   allCourses$ = this.allCoursesSubject.asObservable();
   getCoursesData() {
-    if (this.cache){
+    if (this.cache) {
       this.allCoursesSubject.next(this.cache);
-    }else{
-      this.http.get(this.url + '/courses?pageSize=12&pageNo=1').subscribe((data)=>{
-        this.cache = data;
-        this.allCoursesSubject.next(this.cache);
-      });
+    } else {
+      this.http
+        .get(this.url + '/courses?pageSize=12&pageNo=1')
+        .subscribe((data) => {
+          this.cache = data;
+          this.allCoursesSubject.next(this.cache);
+        });
     }
   }
 

@@ -6,6 +6,15 @@ import { PathDataService } from './../../../services/path-data.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { loadCourses } from 'src/app/state/action/course.action';
+import {
+  selectCourses,
+  selectCoursesError,
+  selectCoursesLoading,
+} from 'src/app/state/selector/course.selector';
+import { Observable } from 'rxjs';
+import { Course } from 'src/app/models/Course';
 
 @Component({
   selector: 'app-all-section-container',
@@ -21,13 +30,29 @@ export class AllSectionContainerComponent implements OnInit {
   onGoingPathsData: any[] = [];
   onGoingCoursesData: any[] = [];
   loading: boolean = true;
+  courses$!: Observable<Course[]>;
+  loading$!: Observable<boolean>;
+  error$!: Observable<any>;
   constructor(
+    private store: Store,
     private pathDataService: PathDataService,
     private activatedRoute: ActivatedRoute,
     private courseDataService: CourseDataService,
     private batchDataService: BatchDataService,
     private router: Router
   ) {
+    this.pathDataService.getAllPaths().subscribe((data: any) => {
+      this.allPathsData = data.data;
+      console.log(this.allPathsData);
+    });
+    // this.courseDataService.getAllCourses().subscribe((data: any) => {
+    //   this.allCoursesData = data.data;
+    //   console.log(this.allCoursesData);
+    // });
+    this.batchDataService.getAllBatches().subscribe((data: any) => {
+      this.allBatchesData = data.data;
+      console.log(this.allBatchesData);
+    });
     this.pathDataService.getEnrolledPaths().subscribe((data: any) => {
       this.onGoingPathsData = data.data.enrolledPaths;
     });
@@ -80,6 +105,11 @@ export class AllSectionContainerComponent implements OnInit {
     );
   }
   ngOnInit(): void {
+    this.store.dispatch(loadCourses());
+    this.courses$ = this.store.pipe(select(selectCourses));
+    this.loading$ = this.store.pipe(select(selectCoursesLoading));
+    this.error$ = this.store.pipe(select(selectCoursesError));
+
     this.activatedRoute.url.subscribe((urlSegments) => {
       console.log(urlSegments);
       if (urlSegments.length >= 1) {
