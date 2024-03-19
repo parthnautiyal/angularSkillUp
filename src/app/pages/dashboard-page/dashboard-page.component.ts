@@ -17,7 +17,7 @@ export class DashboardPageComponent implements OnInit {
     private courseDataService: CourseDataService,
     private store$: Store
   ) {}
-  loading: boolean = true;
+  loading: boolean = false;
   headingsTitle: string[] = ['batches', 'paths', 'courses'];
 
   ngOnInit(): void {
