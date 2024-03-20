@@ -21,6 +21,7 @@ export class BatchEffects {
             this.store.dispatch(BatchActions.batchLoaded({ batch: batch.data }))
           ),
           catchError((error) => {
+            this.store.dispatch(BatchActions.batchLoadFailed({ error }));
             return of(BatchActions.loadBatchsFailure({ error }));
           })
         )
