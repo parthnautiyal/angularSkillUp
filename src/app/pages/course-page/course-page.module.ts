@@ -10,6 +10,7 @@ import { CourseReviewsComponent } from './course-reviews/course-reviews.componen
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { CardsModule } from 'src/app/shared/cards/cards.module';
+import { CoursePageRoutingModule } from './course-page-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,6 @@ import { CardsModule } from 'src/app/shared/cards/cards.module';
     CoursePageComponent,
     CourseReviewsComponent,
   ],
-  imports: [CommonModule, MatIconModule, HttpClientModule, CardsModule],
+  imports: [CommonModule, MatIconModule, HttpClientModule, CardsModule,CoursePageRoutingModule],
 })
 export class CoursePageModule {}
