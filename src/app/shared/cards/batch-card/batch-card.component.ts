@@ -9,7 +9,7 @@ import { Batch } from 'src/app/models/Batch';
 export class BatchCardComponent implements OnInit {
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
-  progress: number = 69;
+  progress: number = 75;
 
   @Input() batchData: Batch = {
     id: 0,
