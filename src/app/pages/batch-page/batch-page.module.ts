@@ -5,9 +5,10 @@ import { CardsModule } from 'src/app/shared/cards/cards.module';
 import { BatchDetailsComponent } from './batch-details/batch-details.component';
 import { PathPageModule } from '../path-page/path-page.module';
 import { ContainersModule } from 'src/app/shared/containers/containers.module';
+import { BatchPageRoutingModule } from './batch-page-routing.module';
 
 @NgModule({
   declarations: [BatchPageComponent, BatchDetailsComponent],
-  imports: [CommonModule, CardsModule, PathPageModule, ContainersModule],
+  imports: [CommonModule, CardsModule, PathPageModule, ContainersModule,BatchPageRoutingModule],
 })
 export class BatchPageModule {}

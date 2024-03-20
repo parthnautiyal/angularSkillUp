@@ -33,7 +33,7 @@ export class AllSectionContainerComponent implements OnInit {
   onGoingPathsData: any[] = [];
   onGoingCoursesData: any[] = [];
   loading: boolean = true;
-  courses$!: Observable<Course[]>;
+  courses: Course[] = [];
   batch$!: Observable<Batch[]>;
   loadingData$!: Observable<boolean>;
   error$!: Observable<any>;
@@ -65,15 +65,21 @@ export class AllSectionContainerComponent implements OnInit {
       }
     );
     this.pathDataService.getPaths();
+    console.log('nyaz');
   }
   getAllCourses() {
     this.store.dispatch(loadCourses());
-    this.courses$ = this.store.select(selectCourses);
+    this.store.select(selectCourses).subscribe((res) => {
+      this.loading = false;
+      this.courses = res;
+      console.log('nyaz 3');
+    });
     // this.loading$ = this.store.pipe(select(selectCoursesLoading));
     this.error$ = this.store.pipe(select(selectCoursesError));
-    if (Object.keys(this.courses$).length > 0) {
-      this.loading = false;
-    }
+    // if (Object.keys(this.courses$).length > 0) {
+    //   this.loading = false;
+    // }
+    console.log('nyaz 3');
   }
   getAllBatches() {
     this.store.dispatch(loadBatch());
@@ -82,6 +88,7 @@ export class AllSectionContainerComponent implements OnInit {
     if (Object.keys(this.batch$).length > 0) {
       this.loading = false;
     }
+    console.log('nyaz 2');
   }
   ngOnInit(): void {
     // this.store.dispatch(loadCourses());

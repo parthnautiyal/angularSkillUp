@@ -19,7 +19,7 @@
           {{ getAllCourses() }}
           <app-loading-card class="loading"></app-loading-card></ng-container>
         <ng-container *ngIf="!loading">
-          <div *ngFor="let item of courses$ | async" class="paths-card-wrapper">
+          <div *ngFor="let item of courses" class="paths-card-wrapper">
             <app-course-card [singleCourse]="item"></app-course-card>
           </div>
         </ng-container>
@@ -50,7 +50,7 @@
       </ng-container>
 
       <ng-container *ngIf="heading == 'courses' && prefix == 'favourites'">
-        <div *ngFor="let item of courses$ | async" class="paths-card-wrapper">
+        <div *ngFor="let item of courses" class="paths-card-wrapper">
           <app-course-card [singleCourse]="item"></app-course-card>
         </div>
       </ng-container>
