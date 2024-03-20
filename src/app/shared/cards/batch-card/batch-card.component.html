@@ -1,8 +1,8 @@
 <div *ngIf="!isProfile" class="batch-card-parent-div">
-  <div class="batch-card-container">
+  <div class="batch-card-container" [appRandomColor]="index" >
     <div class="batch-card-content">
       <div class="batch-title">{{ batchData.name }}</div>
-      <div class="stream">Stream:{{ batchData.streamName }}</div>
+      <div class="stream">Stream: {{ batchData.streamName }}</div>
 
       <div class="no-of-students">
         <i class="fa-solid fa-graduation-cap"></i>
@@ -24,7 +24,7 @@
       <div class="batch-type">{{ batchData.streamName }}</div>
     </div>
     <div class="progressCircle">
-      <app-circular-progress-bar [progress]="progress" [ngStyle]="{}" ></app-circular-progress-bar>
+      <app-circular-progress-bar [progress]="progress"></app-circular-progress-bar>
     </div>
   </div>
 </div>

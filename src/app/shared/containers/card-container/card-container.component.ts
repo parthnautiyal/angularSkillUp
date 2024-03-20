@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { CourseDataService } from '../../../services/course-data.service';
 import { PathDataService } from '../../../services/path-data.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { BatchDataService } from '../../../services/batch-data.service';
 import { Course, CourseList } from 'src/app/models/Course';
 import { PathList } from 'src/app/models/Path';
@@ -10,10 +10,13 @@ import { Store } from '@ngrx/store';
 import { selectCourses } from 'src/app/state/selector/course.selector';
 import { Observable } from 'rxjs';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
+import { RandomColorDirective } from './random-color.directive';
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
   styleUrls: ['./card-container.component.sass'],
+ 
+
 })
 export class CardContainerComponent implements OnInit {
   heading: string = '';
@@ -73,5 +76,7 @@ export class CardContainerComponent implements OnInit {
         console.log(this.allCourses);
       });
     }
+
+
   }
 }
