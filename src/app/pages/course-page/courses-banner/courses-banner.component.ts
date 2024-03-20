@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesBannerComponent implements OnInit {
   id: string = '';
-  progress: number = 69;
+  progress: number = 75;
 
   CourseDetails: any = {};
   constructor(
