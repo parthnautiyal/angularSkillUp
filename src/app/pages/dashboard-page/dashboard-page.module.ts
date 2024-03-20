@@ -6,6 +6,7 @@ import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.co
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { RouterModule } from '@angular/router';
 import { CardsModule } from 'src/app/shared/cards/cards.module';
+import { DashboarPageRoutingModule } from './dashboard-page-routing.module';
 
 @NgModule({
   declarations: [DashboardPageComponent, DashboardHeaderComponent],
@@ -15,6 +16,7 @@ import { CardsModule } from 'src/app/shared/cards/cards.module';
     AppRoutingModule,
     RouterModule,
     CardsModule,
+    DashboarPageRoutingModule,
   ],
 })
 export class DashboardPageModule {}

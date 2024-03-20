@@ -9,6 +9,7 @@ export class PathCardComponent implements OnInit {
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
 
+    progress: number = 69;
   @Input() singlePath: Path = {
     id: 0,
     name: '',

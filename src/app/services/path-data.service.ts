@@ -24,12 +24,12 @@ export class PathDataService {
   url: string = 'https://api.training.zopsmart.com/students/paths';
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
-    setInterval(() => {
-      this.getRefreshToken().subscribe((res: any) => {
-        localStorage.setItem('token', res.data.accessToken);
-        console.log('token refreshed');
-      });
-    }, 60000);
+    // setInterval(() => {
+    //   this.getRefreshToken().subscribe((res: any) => {
+    //     localStorage.setItem('token', res.data.accessToken);
+    //     console.log('token refreshed');
+    //   });
+    // }, 60000);
   }
   private cache: any = null;
   private allPathDataSubject = new BehaviorSubject<any>({});
