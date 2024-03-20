@@ -28,14 +28,14 @@ import { BatchEffects } from './state/effects/batch.effect';
 import { batchReducer } from './state/reducer/batch.reducer';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent],
 
   imports: [
     BrowserModule,
     LayoutModule,
     CardsModule,
     ProfilePageModule,
-    DashboardPageModule,
+    // DashboardPageModule,
     CoursePageModule,
     PathPageModule,
     BatchPageModule,

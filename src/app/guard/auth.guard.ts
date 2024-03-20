@@ -22,12 +22,13 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     const isAuthenticated: boolean =
-      sessionStorage.getItem('loggedInUser') !== undefined;
+      sessionStorage.getItem('loggedInUser') != undefined;
+
     if (isAuthenticated) {
-      this.router.navigate(['/dashboard']);
-      return false;
-    } else {
       return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
     }
   }
 }

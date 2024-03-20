@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ContainersModule } from 'src/app/shared/containers/containers.module';
-import { DashboardPageComponent } from './dashboard-page.component';
+
+import { DashboardPageRoutingModule } from './dashboard-page-routing.module';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+import { ContainersModule } from 'src/app/shared/containers/containers.module';
 import { RouterModule } from '@angular/router';
 import { CardsModule } from 'src/app/shared/cards/cards.module';
-import { DashboarPageRoutingModule } from './dashboard-page-routing.module';
+import { DashboardPageComponent } from './dashboard-page.component';
 
 @NgModule({
-  declarations: [DashboardPageComponent, DashboardHeaderComponent],
+  declarations: [DashboardHeaderComponent, DashboardPageComponent],
   imports: [
     CommonModule,
     ContainersModule,
-    AppRoutingModule,
+    DashboardPageRoutingModule,
     RouterModule,
     CardsModule,
-    DashboarPageRoutingModule,
   ],
 })
 export class DashboardPageModule {}

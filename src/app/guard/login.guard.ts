@@ -22,7 +22,7 @@ export class LoginGuard implements CanActivate {
     | boolean
     | UrlTree {
     const isAuthenticated =
-      sessionStorage.getItem('loggedInUser') !== undefined; // check if the user is authenticated
+      sessionStorage.getItem('loggedInUser') !== undefined;
     if (isAuthenticated) {
       this.router.navigate(['/dashboard']);
       return false;
