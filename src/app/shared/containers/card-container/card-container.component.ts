@@ -5,7 +5,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BatchDataService } from '../../../services/batch-data.service';
 import { Course, CourseList } from 'src/app/models/Course';
 import { PathList } from 'src/app/models/Path';
-import { BatchList } from 'src/app/models/Batch';
+import { Batch, BatchList } from 'src/app/models/Batch';
+import { Store } from '@ngrx/store';
+import { selectCourses } from 'src/app/state/selector/course.selector';
+import { Observable } from 'rxjs';
+import { selectBatchs } from 'src/app/state/selector/batch.selector';
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
@@ -15,22 +19,24 @@ export class CardContainerComponent implements OnInit {
   heading: string = '';
   isActive = true;
   allPaths: PathList = {
-    data: []
+    data: [],
   };
   allCourses: CourseList = {
-    data: []
+    data: [],
   };
   allBatches: BatchList = {
-    data: []
+    data: [],
   };
-
+  courses$!: Observable<Course[]>;
+  batch$!: Observable<Batch[]>;
   @Input() title: string = '';
   @Input() prefixWord: string = '';
   constructor(
     private batchDataService: BatchDataService,
     private activatedRoute: ActivatedRoute,
     private pathDataService: PathDataService,
-    private courseDataService: CourseDataService
+    private courseDataService: CourseDataService,
+    private store: Store
   ) {
     this.activatedRoute.url.subscribe((urlSegments) => {
       console.log(urlSegments);
@@ -43,15 +49,9 @@ export class CardContainerComponent implements OnInit {
       console.log(data);
       this.allPaths = data;
     });
-    this.courseDataService.getCoursesData();
-    this.courseDataService.allCourses$.subscribe((data: CourseList) => {
-      this.allCourses = data;
-      console.log(this.allCourses);
-    });
-    this.batchDataService.getBatchesDetails();
-    this.batchDataService.allBatches$.subscribe((data: BatchList) => {
-      this.allBatches = data;
-    });
+
+    this.courses$ = this.store.select(selectCourses);
+    this.batch$ = this.store.select(selectBatchs);
     this.activatedRoute.url.subscribe((urlSegments) => {
       if (urlSegments.length >= 1) {
         this.heading = urlSegments[0].path;
@@ -65,11 +65,6 @@ export class CardContainerComponent implements OnInit {
         this.allPaths = data.data.enrolledPaths;
         console.log('inside if -> ' + this.allPaths);
       });
-    } else {
-      this.pathDataService.getAllPaths().subscribe((data) => {
-        this.allPaths = data;
-        console.log('inside else - > ' + this.allPaths);
-      });
     }
 
     if (!this.isActive) {
@@ -77,16 +72,6 @@ export class CardContainerComponent implements OnInit {
         this.allCourses = data;
         console.log(this.allCourses);
       });
-    } else {
-      
-      this.courseDataService.getAllCourses().subscribe((data) => {
-        this.allCourses = data;
-        console.log(this.allCourses);
-      });
     }
-    this.batchDataService.getAllBatches().subscribe((data) => {
-      this.allBatches = data;
-      console.log(this.allBatches);
-    });
   }
 }
