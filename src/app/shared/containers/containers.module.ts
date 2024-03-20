@@ -6,14 +6,16 @@ import { AllSectionContainerComponent } from './all-section-container/all-sectio
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { BatchInfoCardContainerComponent } from './batch-info-card-container/batch-info-card-container.component';
+import { RandomColorDirective } from './card-container/random-color.directive';
 
 @NgModule({
   declarations: [
     CardContainerComponent,
     AllSectionContainerComponent,
     BatchInfoCardContainerComponent,
+   
   ],
-  imports: [CommonModule, CardsModule, RouterModule, AppRoutingModule],
+  imports: [CommonModule, CardsModule, RouterModule, AppRoutingModule,RandomColorDirective],
   exports: [CardContainerComponent, BatchInfoCardContainerComponent],
 })
 export class ContainersModule {}

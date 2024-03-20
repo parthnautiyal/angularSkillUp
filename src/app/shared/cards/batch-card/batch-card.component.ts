@@ -11,6 +11,7 @@ export class BatchCardComponent implements OnInit {
     localStorage.getItem('profile') === 'true' ? true : false;
   progress: number = 75;
 
+  @Input() index: number = 0;
   @Input() batchData: Batch = {
     id: 0,
     name: '',
