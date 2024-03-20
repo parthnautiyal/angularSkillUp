@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout.component';
 import { UserComponent } from './user/user.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { AuthModule } from '../auth/auth.module';
 @NgModule({
   declarations: [LayoutComponent, UserComponent],
   imports: [CommonModule, AppRoutingModule, HeaderFooterModule],

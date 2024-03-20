@@ -10,7 +10,10 @@ import { CoursePageModule } from './pages/course-page/course-page.module';
 import { PathPageModule } from './pages/path-page/path-page.module';
 import { BatchPageModule } from './pages/batch-page/batch-page.module';
 import { FormsModule } from '@angular/forms';
-import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
+import {
+  CircularProgressBarComponent,
+  ProgressBarModule,
+} from '@progress/kendo-angular-progressbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -25,14 +28,14 @@ import { BatchEffects } from './state/effects/batch.effect';
 import { batchReducer } from './state/reducer/batch.reducer';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent],
 
   imports: [
     BrowserModule,
     LayoutModule,
     CardsModule,
     ProfilePageModule,
-    DashboardPageModule,
+    // DashboardPageModule,
     CoursePageModule,
     PathPageModule,
     BatchPageModule,
