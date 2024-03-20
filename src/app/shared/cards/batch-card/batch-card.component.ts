@@ -30,7 +30,8 @@ export class BatchCardComponent implements OnInit {
     isAccessible: false,
   };
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {}
 }
