@@ -9,6 +9,7 @@ import { PathDataService } from 'src/app/services/path-data.service';
   styleUrls: ['./dashboard-header.component.sass'],
 })
 export class DashboardHeaderComponent implements OnInit {
+  userProfile: any;
   enrolledPathsNumber: number = 0;
   enrolledCoursesNumber: number = 0;
   constructor(
@@ -23,5 +24,7 @@ export class DashboardHeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
+  }
 }
