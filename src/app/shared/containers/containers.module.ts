@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
     CardContainerComponent,
     AllSectionContainerComponent,
     BatchInfoCardContainerComponent,
-   
   ],
   imports: [CommonModule, CardsModule,RouterModule],
   exports: [CardContainerComponent, BatchInfoCardContainerComponent],
