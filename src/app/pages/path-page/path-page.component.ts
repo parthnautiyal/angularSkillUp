@@ -1,4 +1,7 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { loadPathById } from 'src/app/state/action/path.action';
 
 @Component({
   selector: 'app-path-page',
@@ -7,8 +10,11 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 })
 export class PathPageComponent implements OnInit {
   //When the page is navigated back then implement this method
+  id: string = '';
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
+    this.store.dispatch(loadPathById({ id: this.id }));
+  }
 }
