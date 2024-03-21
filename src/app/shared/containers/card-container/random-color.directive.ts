@@ -21,6 +21,6 @@ export class RandomColorDirective implements OnInit {
       'linear-gradient(30deg, rgb(75, 0, 130), rgb(173, 216, 230))',
       'linear-gradient(30deg, rgb(255, 105, 180), rgb(255, 140, 0))',
     ];
-    return colors[index];
+    return colors[index % 5];
   }
 }

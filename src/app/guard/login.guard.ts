@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  RouterStateSnapshot,
-  UrlTree,
-  Router,
-} from '@angular/router';
+import { CanActivate, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,20 +7,18 @@ import { Observable } from 'rxjs';
 })
 export class LoginGuard implements CanActivate {
   constructor(private router: Router) {}
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
+  canActivate():
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
     const isAuthenticated =
-      sessionStorage.getItem('loggedInUser') !== undefined;
+      sessionStorage.getItem('loggedInUser') != undefined;
     if (isAuthenticated) {
       this.router.navigate(['/dashboard']);
       return false;
     } else {
+      this.router.navigate(["login"]);
       return true;
     }
   }

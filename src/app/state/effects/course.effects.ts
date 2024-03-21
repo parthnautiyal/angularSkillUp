@@ -9,10 +9,11 @@ import { coursesLoaded } from '../action/course.action';
 import { HttpClient } from '@angular/common/http';
 import { Course } from 'src/app/models/Course';
 import { APIResponse } from 'src/app/models/ApiResponse';
+import { API } from 'src/app/constants/enums/API';
 
 @Injectable()
 export class CourseEffects {
-  private url = 'https://api.training.zopsmart.com/students';
+  // private url = 'https://api.training.zopsmart.com/students';
 
   loadCourses$ = createEffect(() =>
     this.actions$.pipe(
@@ -20,7 +21,7 @@ export class CourseEffects {
       switchMap(() =>
         this.http
           .get<APIResponse<Course[]>>(
-            this.url + '/courses?pageSize=12&pageNo=1'
+            API.BASE_URL + API.STUDENTS + API.COURSES_ALL
           )
           .pipe(
             map((courses) =>

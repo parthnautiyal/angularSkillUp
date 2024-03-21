@@ -12,7 +12,6 @@ import { NameInfoCardComponent } from './name-info-card/name-info-card.component
 import { LoadingCardComponent } from './loading-card/loading-card.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
-  ProgressBarComponent,
   ProgressBarModule,
 } from '@progress/kendo-angular-progressbar';
 import { RandomColorDirective } from '../containers/card-container/random-color.directive';

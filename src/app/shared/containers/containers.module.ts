@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import { CardContainerComponent } from './card-container/card-container.component';
 import { CardsModule } from '../cards/cards.module';
 import { AllSectionContainerComponent } from './all-section-container/all-section-container.component';
-import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import { BatchInfoCardContainerComponent } from './batch-info-card-container/batch-info-card-container.component';
-import { RandomColorDirective } from './card-container/random-color.directive';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,7 +13,7 @@ import { RandomColorDirective } from './card-container/random-color.directive';
     BatchInfoCardContainerComponent,
    
   ],
-  imports: [CommonModule, CardsModule, RouterModule, AppRoutingModule,RandomColorDirective],
+  imports: [CommonModule, CardsModule,RouterModule],
   exports: [CardContainerComponent, BatchInfoCardContainerComponent],
 })
 export class ContainersModule {}

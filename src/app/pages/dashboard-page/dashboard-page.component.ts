@@ -13,6 +13,7 @@ import {
 import { Course } from 'src/app/models/Course';
 import { Batch } from 'src/app/models/Batch';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
+import { HEADINGS_TITLE } from 'src/app/constants/headingsTitle';
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
@@ -29,7 +30,7 @@ export class DashboardPageComponent implements OnInit {
     private store$: Store
   ) {}
   loading: boolean = true;
-  headingsTitle: string[] = ['batches', 'paths', 'courses'];
+  headingsTitle=HEADINGS_TITLE;
 
   ngOnInit(): void {
     this.store$.dispatch(loadCourses());
