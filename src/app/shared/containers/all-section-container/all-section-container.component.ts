@@ -1,29 +1,23 @@
-import { CourseDataService } from "./../../../services/course-data.service";
-import { ActivatedRoute } from "@angular/router";
-import { PathDataService } from "./../../../services/path-data.service";
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { combineLatest } from "rxjs";
-import { Store, select } from "@ngrx/store";
-import { loadCourses } from "src/app/state/action/course.action";
-import {
-  selectCourses,
-  selectCoursesError,
-} from "src/app/state/selector/course.selector";
-import { Observable } from "rxjs";
-import { Course } from "src/app/models/Course";
-import { loadBatch } from "src/app/state/action/batch.action";
-import { Batch } from "src/app/models/Batch";
-import { selectBatchs } from "src/app/state/selector/batch.selector";
+import { CourseDataService } from './../../../services/course-data.service';
+import { ActivatedRoute } from '@angular/router';
+import { PathDataService } from './../../../services/path-data.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { loadCourses } from 'src/app/state/action/course.action';
+import { selectCourses } from 'src/app/state/selector/course.selector';
+import { loadBatch } from 'src/app/state/action/batch.action';
+import { selectBatchs } from 'src/app/state/selector/batch.selector';
 
 @Component({
-  selector: "app-all-section-container",
-  templateUrl: "./all-section-container.component.html",
-  styleUrls: ["./all-section-container.component.sass"],
+  selector: 'app-all-section-container',
+  templateUrl: './all-section-container.component.html',
+  styleUrls: ['./all-section-container.component.sass'],
 })
 export class AllSectionContainerComponent implements OnInit {
-  prefix: string = "";
-  heading: string = "";
+  prefix: string = '';
+  heading: string = '';
   allPathsData: any[] = [];
   allCoursesData: any[] = [];
   allBatchesData: any[] = [];
@@ -43,7 +37,7 @@ export class AllSectionContainerComponent implements OnInit {
     combineLatest([this.pathDataService.allPathsData$]).subscribe(
       ([pathsdata]) => {
         if (
-          typeof pathsdata === "object" &&
+          typeof pathsdata === 'object' &&
           Object.keys(pathsdata).length > 0
         ) {
           // this.loading = false;
@@ -89,27 +83,27 @@ export class AllSectionContainerComponent implements OnInit {
       }
       if (urlSegments.length >= 2) {
         this.prefix = urlSegments[1].path;
-        if (this.prefix == "ongoing") {
-          this.prefix = "my";
+        if (this.prefix == 'ongoing') {
+          this.prefix = 'my';
         }
       }
     });
-    if (this.heading === "paths") {
-      if (this.prefix === "all") {
+    if (this.heading === 'paths') {
+      if (this.prefix === 'all') {
         this.getAllPaths();
       }
-      if (this.prefix === "my") {
+      if (this.prefix === 'my') {
         this.getEnrolledPaths();
       }
-    } else if (this.heading === "courses") {
-      if (this.prefix === "all") {
+    } else if (this.heading === 'courses') {
+      if (this.prefix === 'all') {
         this.getAllCourses();
       }
-      if (this.prefix === "my") {
+      if (this.prefix === 'my') {
         this.getEnrolledCourses();
       }
-    } else if (this.heading === "batches") {
-      if (this.prefix === "all") {
+    } else if (this.heading === 'batches') {
+      if (this.prefix === 'all') {
         this.getAllBatches();
       }
     }
