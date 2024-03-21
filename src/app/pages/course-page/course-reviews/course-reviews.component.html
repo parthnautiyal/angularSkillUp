@@ -5,11 +5,16 @@
       <div class="rating" style="font-size: 2rem">2.5</div>
       <div class="average-rating-star-container">
         <div class="stars-container">
-          <mat-icon svgIcon="star"></mat-icon>
-          <mat-icon svgIcon="star"></mat-icon>
-        </div>
-        <div class="hidden-star" style="width: 10px; overflow: hidden">
-          <mat-icon svgIcon="star"></mat-icon>
+          <ng-container *ngFor="let item of avgRatingArray">
+            <mat-icon *ngIf="item" svgIcon="star"></mat-icon>
+            <div
+              *ngIf="!item"
+              class="hidden-star"
+              style="width: 10px; overflow: hidden"
+            >
+              <mat-icon svgIcon="star"></mat-icon>
+            </div>
+          </ng-container>
         </div>
       </div>
       <div class="sub-text">Rating</div>

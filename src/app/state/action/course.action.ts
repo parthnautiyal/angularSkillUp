@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Course } from '../../models/Course';
 import { CourseInfo } from 'src/app/models/CouseInfo';
+import { enrolledCourses } from 'src/app/models/EnrolledCourses';
 
 export const loadAllCourses = createAction('[Course] Load All Courses');
 
@@ -19,7 +20,7 @@ export const loadEnrolledCourses = createAction(
 
 export const loadEnrolledCoursesSuccess = createAction(
   '[Course] Load Enrolled Courses Success',
-  props<{ courses: Course[] }>()
+  props<{ enrolledCourses: Course[] }>()
 );
 
 export const loadEnrolledCoursesFailed = createAction(
@@ -69,6 +70,7 @@ export const loadNoOfEnrolledCoursesFailed = createAction(
 );
 export function loadCoursesFailure(arg0: { error: any }): any {
   console.log('inside loadCoursesFailure function -> ' + arg0.error);
+  loadAllCoursesFailed({ error: arg0.error });
   //return arg0.error;
   throw new Error('inside loadCoursesFailure function -> ');
 }

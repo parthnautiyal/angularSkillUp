@@ -17,3 +17,13 @@ export const selectPathsError = createSelector(
   selectPathState,
   (state) => state.error
 );
+
+export const selectEnrolledPaths = createSelector(
+  selectPathState,
+  (state) => state.enrolledPaths
+);
+
+export const selectNoOfEnrolledPaths = createSelector(
+  selectPathState,
+  (state) => state.numberOfEnrolledPaths
+);

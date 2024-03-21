@@ -4,7 +4,10 @@ import { Observable, combineLatest } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { loadAllCourses } from 'src/app/state/action/course.action';
 import { loadAllBatches } from 'src/app/state/action/batch.action';
-import { selectCourses } from 'src/app/state/selector/course.selector';
+import {
+  selectCourses,
+  selectCoursesError,
+} from 'src/app/state/selector/course.selector';
 import { Course } from 'src/app/models/Course';
 import { Batch } from 'src/app/models/Batch';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
@@ -22,10 +25,7 @@ export class DashboardPageComponent implements OnInit {
   paths$!: Observable<Path[]>;
   batch$!: Observable<Batch[]>;
   error$!: Observable<any>;
-  constructor(
-    private pathDataService: PathDataService,
-    private store$: Store
-  ) {}
+  constructor(private store$: Store) {}
   loading: boolean = true;
   headingsTitle = HEADINGS_TITLE;
 
@@ -36,6 +36,10 @@ export class DashboardPageComponent implements OnInit {
     this.courses$ = this.store$.select(selectCourses);
     this.batch$ = this.store$.select(selectBatchs);
     this.paths$ = this.store$.select(selectPaths);
+    this.error$ = this.store$.select(selectCoursesError);
+    this.error$.subscribe((data) => {
+      console.log('Error -> ' + data);
+    });
 
     combineLatest([this.paths$, this.courses$, this.batch$]).subscribe(
       ([pathsdata, batch, course]) => {

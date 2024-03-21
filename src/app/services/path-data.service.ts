@@ -10,7 +10,7 @@ import { Path } from '../models/Path';
 export class PathDataService {
   user: any = {
     token:
-      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTAwNjI3OCwiaWF0IjoxNzExMDA1OTc4LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.d7NV-P0gwUkCxlqOjmE2eEJBL4_SMoahELXaPdlY9hE0C5DW1BSEOuy_BtSaeLlsrbnE-VoabUcGdo_CUgWrQ9JbIm1vzmw4GUKBQz-SrpIJHbsMCRpkRnUn1DhHKisAVhdKUfUFDHiKu0O1QeJ8u-BYIvtDZzULSHAORsennPGip4qB3ww3TIfPKcMHkAlMMp4xim4niz8pJcot8GX7mQWiXRUPg3xVjkQZDnklUNcfn8wyp6fzdYoPPjU-I5dVFOQHvWI_Rt_bEFgd4xE761XDGGdDbTQlfynhhTIH3SIZAIw72KXD_3edYN72ZOmb_IIPhCxAdnIvGYIRgsplOg',
+      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTA0NjIzNCwiaWF0IjoxNzExMDQ1OTM0LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.Qs8p2LqVCi4C0jFyoyLvVJB8vGzsgIuGVGz4Kyjoo89DuBa0jBiSv3b-N2XrtZ0FO8B_Qx7I0l5VRZI-GuQppuCW-fn04uTFZ_eX9aBRBYgcEfGkESbH1WoQwBu_H4OSIGv8trBLBbJeQ1yErGn-LYpdbmZL_ONXWCAaJtoa9j6m09NCFGVOobvY4Ix2Jfuy5z5ezwouYKUDg8Ufr_zyPW6WP7hRWz0cMSJrg3Y3U4GKJx6WRn1kN0Yi2peZE_RS8cPIy8NKh_4V9Iz5ZesaQ_5BsVwPhwuzb7qqPJB-4Po-mG95pTp9FE5qN4tpNEzIzIyCkonCn4mZ0kjIR1_DAg',
     refreshToken:
       'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTA4NTEzMiwiaWF0IjoxNzEwOTk4NzMyLCJpc3MiOiJHT09HTEUiLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIn0.QItRVbYpmvlDwN6UpR_y4mdSdd2BHcdMa6dmIf5DMVJ6H93OsgqXx8pdR_zwIGDJbS8myL18MJG20zHuZZIz-TkSPiCVFCfw_JWbiZsyp8jLKXsOpqfesDDl2b2ObuzC411-jNwpm7OMYjBqIXnSFB2nVfYpqbj5ABy8svjgLnyYCi5QAiKcYvlFPdSJV7NzoWpSyGPuqJK8I1E1pu_1kKsfjHYwSGNy7uXFQjGfbfs4URsRxGin7oKVY4qA4_1hr-kLyDyoh1MBzGeR6QT4sxPHbBVGCpe9NfAAvo5qgjY59Q4RloMGaJ8n_lEKs1L50gCimr1Z_xcc1UBMhqnXvQ',
   };
@@ -36,20 +36,20 @@ export class PathDataService {
   getPathData(id: string) {
     return this.http.get(this.url + '/' + id + '?projection=course');
   }
-  getAllPaths(): Observable<Path[]> {
-    return this.http.get<Path[]>(this.url + '?pageSize=12&pageNo=1');
-  }
-  getEnrolledPaths() {
-    return this.http.get(
-      'https://api.training.zopsmart.com/students/enrolled-paths'
-    );
-  }
+  // getAllPaths(): Observable<Path[]> {
+  //   return this.http.get<Path[]>(this.url + '?pageSize=12&pageNo=1');
+  // }
+  // getEnrolledPaths() {
+  //   return this.http.get(
+  //     'https://api.training.zopsmart.com/students/enrolled-paths'
+  //   );
+  // }
 
-  getNoOfEnrolledPaths() {
-    return this.http.get(
-      'https://api.training.zopsmart.com/students/no-of-enrolled-paths'
-    );
-  }
+  // getNoOfEnrolledPaths() {
+  //   return this.http.get(
+  //     'https://api.training.zopsmart.com/students/no-of-enrolled-paths'
+  //   );
+  // }
 
   getRefreshToken() {
     return this.http.post(

@@ -20,6 +20,8 @@ export class CourseReviewsComponent implements OnInit {
     oneStars: 0,
   };
   ratingPercentage: number[] = [];
+  avgRatingArray: boolean[] = [];
+  avgRating: number = 2.5;
 
   totalRating: number = 0;
 
@@ -30,6 +32,7 @@ export class CourseReviewsComponent implements OnInit {
     this.totalRating = Object.values(this.rating).reduce((a, b) => a + b, 0);
     console.log('Rating Total -> ' + this.totalRating);
     this.updateRating(this.rating);
+    this.createAvgRatingArray();
 
     this.matIconRegistry.addSvgIcon(
       'star',
@@ -67,6 +70,16 @@ export class CourseReviewsComponent implements OnInit {
     this.ratingPercentage[3] = Math.floor(rating.twoStars);
     this.ratingPercentage[4] = Math.floor(rating.oneStars);
     console.log(this.ratingPercentage);
+  }
+  createAvgRatingArray() {
+    for (let i = 0; i < Math.floor(this.avgRating); i++) {
+      this.avgRatingArray.push(true);
+    }
+    if (this.avgRating % 1 != 0) {
+      this.avgRatingArray.push(false);
+    }
+
+    console.log('Avg rating array _> ' + this.avgRatingArray);
   }
 
   ngOnInit(): void {}

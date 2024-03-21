@@ -1,12 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 import * as PathActions from '../action/path.action';
 import { Path } from '../../models/Path';
+import { EnrolledPath } from 'src/app/models/EnrolledPath';
 
 export interface PathState {
   allPaths: Path[];
   pathById: Path | null;
   enrolledPaths: Path[];
-  numberOfEnrolledPaths: number | null;
+  numberOfEnrolledPaths: number;
   error: any | null;
   isLoading: boolean;
 }
@@ -15,7 +16,7 @@ export const initialPathState: PathState = {
   allPaths: [],
   pathById: null,
   enrolledPaths: [],
-  numberOfEnrolledPaths: null,
+  numberOfEnrolledPaths: 0,
   error: null,
   isLoading: false,
 };
@@ -75,7 +76,7 @@ export const pathReducer = createReducer(
 
   on(PathActions.loadNumberOfEnrolledPathsFailed, (state, { error }) => ({
     ...state,
-    numberOfEnrolledPaths: null,
+    numberOfEnrolledPaths: 0,
     error,
   }))
 );

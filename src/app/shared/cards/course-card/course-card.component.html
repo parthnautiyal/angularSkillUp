@@ -6,7 +6,10 @@
         {{ singleCourse.name }}{{ singleCourse.courseName }}
       </div>
       <div *ngIf="isProfile" class="progressCircle">
-       <app-circular-progress-bar [progress]="progress"></app-circular-progress-bar>>
+        <app-circular-progress-bar
+          [progress]="singleCourse.progress"
+        ></app-circular-progress-bar
+        >>
       </div>
     </div>
     <div *ngIf="isProfile" class="footer">
@@ -18,10 +21,13 @@
     </div>
     <div *ngIf="!isProfile" class="fav-icon">
       <button id="btn1">
-          <i class="btn" [style.color]="isButtonRed ? 'red' : 'blue'" 
-          (click)="toggleColor()" class="fa fa-heart"></i>
-          
-        </button>
+        <i
+          class="btn"
+          [style.color]="isButtonRed ? 'red' : 'blue'"
+          (click)="toggleColor()"
+          class="fa fa-heart"
+        ></i>
+      </button>
     </div>
   </div>
 </div>

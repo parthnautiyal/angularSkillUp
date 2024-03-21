@@ -13,4 +13,5 @@ export interface Course {
   };
   createdAt: string;
   isFavourite: boolean;
+  progress: number;
 }
