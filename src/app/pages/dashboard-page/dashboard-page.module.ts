@@ -6,6 +6,7 @@ import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.co
 import { ContainersModule } from 'src/app/shared/containers/containers.module';
 import { CardsModule } from 'src/app/shared/cards/cards.module';
 import { DashboardPageComponent } from './dashboard-page.component';
+import { ShimmerModule } from 'src/app/shimmer/shimmer.module';
 
 @NgModule({
   declarations: [DashboardHeaderComponent, DashboardPageComponent],
@@ -14,6 +15,8 @@ import { DashboardPageComponent } from './dashboard-page.component';
     ContainersModule,
     DashboardPageRoutingModule,
     CardsModule,
+    ShimmerModule
+    
   ],
 })
 export class DashboardPageModule {}
