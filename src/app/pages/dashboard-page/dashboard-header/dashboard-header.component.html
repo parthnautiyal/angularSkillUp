@@ -1,6 +1,6 @@
 <div class="dashboard-header">
   <div class="greeting-box">
-    <span>Hello Zopsmart !</span>
+    <span>Hello {{userProfile.given_name}} !</span>
     <p>It's good to see you here</p>
   </div>
   <a [routerLink]="['/', 'paths', 'ongoing']">
@@ -18,6 +18,9 @@
     <div class="recent-course-text">
       <span>Project SkillUp</span>
       <p>By Ujjwal Misra</p>
+    </div>
+    <div>
+      <app-circular-progress-bar [progress]="60"></app-circular-progress-bar>
     </div>
 
     <i class="fa-solid fa-play play-button"></i>
