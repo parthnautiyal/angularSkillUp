@@ -5,19 +5,19 @@
 <div class="card-wrapper">
   <ng-container *ngIf="title == Title.BATCHES">
     <ng-container *ngFor="let item of batch$ | async; let i = index">
-      <a [routerLink]="['/', RouterLinks.BATCHES]">
+      <a [routerLink]="['/', RouterLinks.BATCHES,item.id]">
         <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
       </a>
     </ng-container>
   </ng-container>
   <ng-container *ngIf="title == Title.PATHS">
     <ng-container *ngFor="let item of allPaths.data">
-      <a [routerLink]="['/', RouterLinks.PATHS]"><app-path-card [singlePath]="item"></app-path-card></a>
+      <a [routerLink]="['/', RouterLinks.PATHS,item.id]"><app-path-card [singlePath]="item"></app-path-card></a>
     </ng-container>
   </ng-container>
   <ng-container *ngIf="title == Title.COURSES">
     <ng-container *ngFor="let item of courses$ | async">
-      <a [routerLink]="['/',RouterLinks.COURSES]">
+      <a [routerLink]="['/',RouterLinks.COURSES,item.id]">
         <app-course-card [singleCourse]="item"></app-course-card>
       </a>
     </ng-container>
