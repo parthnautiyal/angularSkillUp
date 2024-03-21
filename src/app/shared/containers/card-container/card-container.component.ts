@@ -11,6 +11,8 @@ import { selectCourses } from 'src/app/state/selector/course.selector';
 import { Observable } from 'rxjs';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
 import { RandomColorDirective } from './random-color.directive';
+import { Title } from 'src/app/constants/enums/title';
+import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
@@ -21,6 +23,9 @@ import { RandomColorDirective } from './random-color.directive';
 export class CardContainerComponent implements OnInit {
   heading: string = '';
   isActive = true;
+  Title=Title;
+  RouterLinks=RouterLinks;
+
   allPaths: PathList = {
     data: [],
   };
