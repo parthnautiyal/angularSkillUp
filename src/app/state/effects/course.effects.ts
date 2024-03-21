@@ -1,3 +1,4 @@
+import { coursesLoadFailed } from './../action/course.action';
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
@@ -26,6 +27,7 @@ export class CourseEffects {
               this.store.dispatch(coursesLoaded({ courses: courses.data }))
             ),
             catchError((error) => {
+              this.store.dispatch(coursesLoadFailed({ error }));
               return of(CourseActions.loadCoursesFailure({ error }));
             })
           )

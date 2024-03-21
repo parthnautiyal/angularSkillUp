@@ -11,5 +11,7 @@ export const coursesLoadFailed = createAction(
   props<{ error: any }>()
 );
 export function loadCoursesFailure(arg0: { error: any }): any {
-  throw new Error('Function not implemented.');
+  console.log('inside loadCoursesFailure function -> ' + arg0.error);
+  //return arg0.error;
+  throw new Error('inside loadCoursesFailure function -> ');
 }
