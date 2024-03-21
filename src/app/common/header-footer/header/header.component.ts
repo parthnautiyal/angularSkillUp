@@ -50,5 +50,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
+    console.log('Profile Picture ' + this.userProfile.picture);
   }
 }

@@ -49,6 +49,9 @@ export class DashboardPageComponent implements OnInit {
         Object.keys(course).length > 0
       ) {
         // Handle the combined results here
+        console.log('All data loaded');
+        console.log(pathsdata);
+
         this.loading = false;
       }
     });

@@ -9,8 +9,9 @@ import { Batch } from 'src/app/models/Batch';
 export class BatchCardComponent implements OnInit {
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
-  progress: number = 69;
+  progress: number = 75;
 
+  @Input() index: number = 0;
   @Input() batchData: Batch = {
     id: 0,
     name: '',
@@ -29,7 +30,8 @@ export class BatchCardComponent implements OnInit {
     isAccessible: false,
   };
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {}
 }

@@ -14,6 +14,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
   ProgressBarModule,
 } from '@progress/kendo-angular-progressbar';
+import { RandomColorDirective } from '../containers/card-container/random-color.directive';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {
     FormsModule,
     ProgressBarModule,
     ProgressSpinnerModule,
+    RandomColorDirective
   ],
   exports: [
     BatchCardComponent,
