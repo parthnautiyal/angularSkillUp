@@ -5,4 +5,6 @@ export interface Path {
   imageUrl: string;
   isAccessible: boolean;
   noOfCourses: number;
+  progress: number;
+  completedAt: null;
 }

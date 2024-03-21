@@ -11,10 +11,6 @@ export class BatchDataService {
   constructor(private https: HttpClient) {}
   url: string = 'https://api.training.zopsmart.com/student/batches/';
 
-  // getAllBatches(): Observable<Batch[]> {
-  //   return this.https.get<Batch[]>(this.url + '/all');
-  // }
-
   getBatchById(id: string) {
     return this.https.get(this.url + id);
   }

@@ -6,12 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import * as PathActions from '../action/path.action';
 import { APIResponse } from 'src/app/models/ApiResponse';
 import { Path } from 'src/app/models/Path';
+import { EnrolledPathsData } from 'src/app/models/EnrolledPath';
 
 @Injectable()
 export class PathEffects {
   constructor(private actions$: Actions, private http: HttpClient) {}
   private url = 'https://api.training.zopsmart.com/students/paths';
-  loadAllCourses$ = createEffect(() =>
+  loadAllPaths$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PathActions.loadAllPaths),
       mergeMap(() =>
@@ -22,6 +23,50 @@ export class PathEffects {
               PathActions.loadAllPathsSuccess({ paths: paths.data })
             ),
             catchError((error) => of(PathActions.loadAllPathsFailed({ error })))
+          )
+      )
+    )
+  );
+
+  loadEnrolledPaths$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PathActions.loadEnrolledPaths),
+      mergeMap(() =>
+        this.http
+          .get<APIResponse<EnrolledPathsData>>(
+            'https://api.training.zopsmart.com/students/enrolled-paths'
+          )
+          .pipe(
+            map((enrolledPaths) =>
+              PathActions.loadEnrolledPathsSuccess({
+                enrolledPaths: enrolledPaths.data.enrolledPaths,
+              })
+            ),
+            catchError((error) =>
+              of(PathActions.loadEnrolledPathsFailed({ error }))
+            )
+          )
+      )
+    )
+  );
+
+  loadNoOfEnrolledPaths$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PathActions.loadNumberOfEnrolledPaths),
+      mergeMap(() =>
+        this.http
+          .get<APIResponse<number>>(
+            'https://api.training.zopsmart.com/students/no-of-enrolled-paths'
+          )
+          .pipe(
+            map((count) =>
+              PathActions.loadNumberOfEnrolledPathsSuccess({
+                numberOfEnrolledPaths: count.data,
+              })
+            ),
+            catchError((error) =>
+              of(PathActions.loadNumberOfEnrolledPathsFailed({ error }))
+            )
           )
       )
     )

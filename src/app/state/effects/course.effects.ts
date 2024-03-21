@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 import { Course } from 'src/app/models/Course';
 import { APIResponse } from 'src/app/models/ApiResponse';
+import { enrolledCourses } from 'src/app/models/EnrolledCourses';
 
 @Injectable()
 export class CourseEffects {
@@ -31,10 +32,67 @@ export class CourseEffects {
       )
     )
   );
+  loadNoOfEnrolledCourses$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CourseActions.loadNoOfEnrolledCourses),
+      switchMap(() =>
+        this.http
+          .get<APIResponse<number>>(this.url + '/no-of-enrolled-courses')
+          .pipe(
+            map((count) =>
+              CourseActions.loadNoOfEnrolledCoursesSuccess({
+                count: count.data,
+              })
+            ),
+            catchError((error) =>
+              of(CourseActions.loadAllCoursesFailed({ error }))
+            )
+          )
+      )
+    )
+  );
+  loadCourseAboutInfo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CourseActions.loadCourseAboutInfo),
+      switchMap(({ courseId }) =>
+        this.http
+          .get<APIResponse<Course>>(
+            this.url + '/courses/' + courseId + '/chapters'
+          )
+          .pipe(
+            map((course) =>
+              CourseActions.loadCourseAboutInfoSuccess({
+                course: course,
+              })
+            ),
+            catchError((error) =>
+              of(CourseActions.loadCourseAboutInfoFailed({ error }))
+            )
+          )
+      )
+    )
+  );
+  loadEnrolledCourses$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CourseActions.loadEnrolledCourses),
+      switchMap(() =>
+        this.http
+          .get<APIResponse<enrolledCourses>>(
+            'https://api.training.zopsmart.com/students/enrolled-courses'
+          )
+          .pipe(
+            map((course) =>
+              CourseActions.loadEnrolledCoursesSuccess({
+                enrolledCourses: course.data.enrolledCourses,
+              })
+            ),
+            catchError((error) =>
+              of(CourseActions.loadEnrolledCoursesFailed({ error }))
+            )
+          )
+      )
+    )
+  );
 
-  constructor(
-    private actions$: Actions,
-    private store: Store,
-    private http: HttpClient
-  ) {}
+  constructor(private actions$: Actions, private http: HttpClient) {}
 }
