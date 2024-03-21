@@ -10,9 +10,9 @@ import { Path } from '../models/Path';
 export class PathDataService {
   user: any = {
     token:
-      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTAwNjI3OCwiaWF0IjoxNzExMDA1OTc4LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.d7NV-P0gwUkCxlqOjmE2eEJBL4_SMoahELXaPdlY9hE0C5DW1BSEOuy_BtSaeLlsrbnE-VoabUcGdo_CUgWrQ9JbIm1vzmw4GUKBQz-SrpIJHbsMCRpkRnUn1DhHKisAVhdKUfUFDHiKu0O1QeJ8u-BYIvtDZzULSHAORsennPGip4qB3ww3TIfPKcMHkAlMMp4xim4niz8pJcot8GX7mQWiXRUPg3xVjkQZDnklUNcfn8wyp6fzdYoPPjU-I5dVFOQHvWI_Rt_bEFgd4xE761XDGGdDbTQlfynhhTIH3SIZAIw72KXD_3edYN72ZOmb_IIPhCxAdnIvGYIRgsplOg',
+      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTA0NjIzNCwiaWF0IjoxNzExMDQ1OTM0LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.Qs8p2LqVCi4C0jFyoyLvVJB8vGzsgIuGVGz4Kyjoo89DuBa0jBiSv3b-N2XrtZ0FO8B_Qx7I0l5VRZI-GuQppuCW-fn04uTFZ_eX9aBRBYgcEfGkESbH1WoQwBu_H4OSIGv8trBLBbJeQ1yErGn-LYpdbmZL_ONXWCAaJtoa9j6m09NCFGVOobvY4Ix2Jfuy5z5ezwouYKUDg8Ufr_zyPW6WP7hRWz0cMSJrg3Y3U4GKJx6WRn1kN0Yi2peZE_RS8cPIy8NKh_4V9Iz5ZesaQ_5BsVwPhwuzb7qqPJB-4Po-mG95pTp9FE5qN4tpNEzIzIyCkonCn4mZ0kjIR1_DAg',
     refreshToken:
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTA0NDY4MywiaWF0IjoxNzEwOTU4MjgzLCJpc3MiOiJHT09HTEUiLCJzdWIiOiJwYXJ0aC5uYXV0aXlhbEB6b3BzbWFydC5jb20ifQ.Uf3XLt-iSzViBFeO32Z1639Fl2p4ngOaEDArgbkrpnkXp8qrJEoxC_h_izfNABps-v8bgD0LPIGUNtKuIafiqrBsY4z0wDCfkWjzkfJwD48U-w6wm__UX6K0m4Iivhe-RQXQoBUEKzuudhMAvaW75fbDC34n_iT-oFUAqDkr_qwq5LzzolUAL5azBbb_KvTO4lfipdOyXUi3GzuwqD6ufnqERy4PA-BJ2_gOdw0KnBpuJ1F0JXG0Os4_Xkq1S4SFKrIw1wvjc1lKNRSRIIge7aYY7wxc383HLjmrrh26OHu-BirpQi-V4SbghsuFzO3GSmUrGP35FUQAqPbYxGEucg',
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTA4Nzk3OCwiaWF0IjoxNzExMDAxNTc4LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20ifQ.PbDGZVHgXHjBf81j03_9IC5XGewySReYtIViZc-GDksNCbKrnqX2-aSX-GboxevRL8xdK7kinQFmXun4WSNgoE-NpBJA64NlRkqpHJBY2r-Qf9iU7gXFn8jIjvramLiF0CD_16pEWEf5HqHcLOta6azHkr3reoKtxz0HmG9Ph94OPl_2CJ_TfyqFjJwl5N5m48pessDh5SvJA63L01gom2AQBuXOP2DCPfl5_DFMorbYTMKEqMeCpvGypeDW8UBCfLSNVm4cosB09ZcNYlnZ8UrcpVn2easNyNgVU_bhAmpGfrYlRIoUj7aCFl1Yzbgecz2IRpU-Rpj5WadFrKOxAQ',
   };
 
   refreshHeader = new HttpHeaders({
@@ -36,20 +36,20 @@ export class PathDataService {
   getPathData(id: string) {
     return this.http.get(this.url + '/' + id + '?projection=course');
   }
-  getAllPaths(): Observable<Path[]> {
-    return this.http.get<Path[]>(this.url + '?pageSize=12&pageNo=1');
-  }
-  getEnrolledPaths() {
-    return this.http.get(
-      'https://api.training.zopsmart.com/students/enrolled-paths'
-    );
-  }
+  // getAllPaths(): Observable<Path[]> {
+  //   return this.http.get<Path[]>(this.url + '?pageSize=12&pageNo=1');
+  // }
+  // getEnrolledPaths() {
+  //   return this.http.get(
+  //     'https://api.training.zopsmart.com/students/enrolled-paths'
+  //   );
+  // }
 
-  getNoOfEnrolledPaths() {
-    return this.http.get(
-      'https://api.training.zopsmart.com/students/no-of-enrolled-paths'
-    );
-  }
+  // getNoOfEnrolledPaths() {
+  //   return this.http.get(
+  //     'https://api.training.zopsmart.com/students/no-of-enrolled-paths'
+  //   );
+  // }
 
   getRefreshToken() {
     return this.http.post(

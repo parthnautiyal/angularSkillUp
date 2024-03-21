@@ -21,8 +21,15 @@ import { Prefix } from 'src/app/constants/enums/prefix';
 import { Path } from 'src/app/models/Path';
 import { Course } from 'src/app/models/Course';
 import { Batch } from 'src/app/models/Batch';
-import { loadAllPaths } from 'src/app/state/action/path.action';
-import { selectPaths } from 'src/app/state/selector/path.selector';
+import {
+  loadAllPaths,
+  loadEnrolledPaths,
+} from 'src/app/state/action/path.action';
+import {
+  selectEnrolledPaths,
+  selectPaths,
+} from 'src/app/state/selector/path.selector';
+import { EnrolledPath } from 'src/app/models/EnrolledPath';
 
 @Component({
   selector: 'app-all-section-container',
@@ -48,7 +55,6 @@ export class AllSectionContainerComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private pathDataService: PathDataService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
@@ -64,11 +70,6 @@ export class AllSectionContainerComponent implements OnInit {
       // this.loading = false;
       if (res.length > 0) this.allCoursesData = res;
     });
-    // this.loading$ = this.store.pipe(select(selectCoursesLoading));
-    // this.error$ = this.store.pipe(select(selectCoursesError));
-    // if (Object.keys(this.courses$).length > 0) {
-    //   this.loading = false;
-    // }
   }
   getAllBatches() {
     this.store.dispatch(loadAllBatches());
@@ -78,15 +79,17 @@ export class AllSectionContainerComponent implements OnInit {
     });
   }
   getEnrolledPaths() {
-    this.pathDataService.getEnrolledPaths().subscribe((data: any) => {
-      this.allPathsData = data.data.enrolledPaths;
+    this.store.dispatch(loadEnrolledPaths());
+    this.store.select(selectEnrolledPaths).subscribe((res) => {
+      // this.loading = false;
+      if (res.length > 0) this.allPathsData = res;
     });
   }
   getEnrolledCourses() {
     this.store.dispatch(loadEnrolledCourses());
     this.store.select(selectEnrolledCourses).subscribe((res) => {
       // this.loading = false;
-      this.enrolledCourses = res;
+      this.allCoursesData = res;
     });
 
     // this.courseDataService.getEnrolledCourses().subscribe((data: any) => {

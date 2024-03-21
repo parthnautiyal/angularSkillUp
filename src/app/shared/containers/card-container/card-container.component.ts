@@ -1,8 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { CourseDataService } from '../../../services/course-data.service';
-import { PathDataService } from '../../../services/path-data.service';
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { BatchDataService } from '../../../services/batch-data.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { Course } from 'src/app/models/Course';
 import { Path } from 'src/app/models/Path';
 import { Batch } from 'src/app/models/Batch';
@@ -16,11 +13,20 @@ import { selectBatchs } from 'src/app/state/selector/batch.selector';
 import { RandomColorDirective } from './random-color.directive';
 import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
-import { selectPaths } from 'src/app/state/selector/path.selector';
-import { loadEnrolledCourses } from 'src/app/state/action/course.action';
-import { enrolledCourses } from 'src/app/models/EnrolledCourses';
+import {
+  selectEnrolledPaths,
+  selectPaths,
+} from 'src/app/state/selector/path.selector';
+import {
+  loadAllCourses,
+  loadEnrolledCourses,
+} from 'src/app/state/action/course.action';
 import { loadAllBatches } from 'src/app/state/action/batch.action';
-import { loadAllPaths } from 'src/app/state/action/path.action';
+import {
+  loadAllPaths,
+  loadEnrolledPaths,
+} from 'src/app/state/action/path.action';
+import { EnrolledPath } from 'src/app/models/EnrolledPath';
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
@@ -40,12 +46,7 @@ export class CardContainerComponent implements OnInit {
   @Input() title: string = '';
   @Input() prefixWord: string = '';
   enrolledCourses: Course[] = [];
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private pathDataService: PathDataService,
-    private courseDataService: CourseDataService,
-    private store: Store
-  ) {
+  constructor(private activatedRoute: ActivatedRoute, private store: Store) {
     this.activatedRoute.url.subscribe((urlSegments) => {
       console.log(urlSegments);
     });
@@ -54,6 +55,7 @@ export class CardContainerComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadAllBatches());
     this.store.dispatch(loadAllPaths());
+    this.store.dispatch(loadAllCourses());
     this.path$ = this.store.select(selectPaths);
     this.courses$ = this.store.select(selectCourses);
     this.batch$ = this.store.select(selectBatchs);
@@ -65,11 +67,11 @@ export class CardContainerComponent implements OnInit {
     //     else this.isActive = true;
     //   }
     // });
-
-    this.pathDataService.getEnrolledPaths().subscribe((data: any) => {
-      this.allPaths = data.data.enrolledPaths;
-      console.log('inside if -> ' + this.allPaths);
+    this.store.dispatch(loadEnrolledPaths());
+    this.store.select(selectEnrolledPaths).subscribe((data) => {
+      this.allPaths = data;
     });
+
     this.store.dispatch(loadEnrolledCourses());
     this.store.select(selectEnrolledCourses).subscribe((res) => {
       // this.loading = false;

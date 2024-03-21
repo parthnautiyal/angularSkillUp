@@ -117,7 +117,3 @@ export const courseReducer = createReducer(
 export function reducer(state: CourseState | undefined, action: Action) {
   return courseReducer(state, action);
 }
-
-// export const getCourses = (state: CourseState) => state.allCourses;
-// export const getCoursesLoading = (state: CourseState) => state.isLoading;
-// export const getCoursesError = (state: CourseState) => state.error;
