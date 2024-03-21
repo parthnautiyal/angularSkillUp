@@ -9,6 +9,9 @@ import { loadCourses } from 'src/app/state/action/course.action';
 import { selectCourses } from 'src/app/state/selector/course.selector';
 import { loadBatch } from 'src/app/state/action/batch.action';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
+import { Title } from 'src/app/constants/enums/title';
+import { RouterLinks } from 'src/app/constants/enums/routerLinks';
+import { Prefix } from 'src/app/constants/enums/prefix';
 
 @Component({
   selector: 'app-all-section-container',
@@ -25,6 +28,12 @@ export class AllSectionContainerComponent implements OnInit {
   // batch$!: Observable<Batch[]>;
   // loadingData$!: Observable<boolean>;
   // error$!: Observable<any>;
+
+  //enums
+  Title = Title;
+  RouterLinks = RouterLinks;
+  Prefix = Prefix;
+
   constructor(
     private store: Store,
     private pathDataService: PathDataService,
@@ -83,27 +92,27 @@ export class AllSectionContainerComponent implements OnInit {
       }
       if (urlSegments.length >= 2) {
         this.prefix = urlSegments[1].path;
-        if (this.prefix == 'ongoing') {
-          this.prefix = 'my';
+        if (this.prefix == Prefix.ONGOING) {
+          this.prefix = Prefix.MY;
         }
       }
     });
-    if (this.heading === 'paths') {
-      if (this.prefix === 'all') {
+    if (this.heading === Title.PATHS) {
+      if (this.prefix === Prefix.ALL) {
         this.getAllPaths();
       }
-      if (this.prefix === 'my') {
+      if (this.prefix === Prefix.MY) {
         this.getEnrolledPaths();
       }
-    } else if (this.heading === 'courses') {
-      if (this.prefix === 'all') {
+    } else if (this.heading === Title.COURSES) {
+      if (this.prefix === Prefix.ALL) {
         this.getAllCourses();
       }
-      if (this.prefix === 'my') {
+      if (this.prefix === Prefix.MY) {
         this.getEnrolledCourses();
       }
-    } else if (this.heading === 'batches') {
-      if (this.prefix === 'all') {
+    } else if (this.heading === Title.BATCHES) {
+      if (this.prefix === Prefix.ALL) {
         this.getAllBatches();
       }
     }
