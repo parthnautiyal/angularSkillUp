@@ -15,6 +15,7 @@ import {
   ProgressBarModule,
 } from '@progress/kendo-angular-progressbar';
 import { RandomColorDirective } from '../containers/card-container/random-color.directive';
+import { ShimmerLoadingComponent } from './shimmer-loading/shimmer-loading.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,8 @@ import { RandomColorDirective } from '../containers/card-container/random-color.
     PathCourseCardComponent,
     NameInfoCardComponent,
     LoadingCardComponent,
+    ShimmerLoadingComponent
+    
   ],
   imports: [
     CommonModule,
@@ -45,6 +48,7 @@ import { RandomColorDirective } from '../containers/card-container/random-color.
     PathCourseCardComponent,
     NameInfoCardComponent,
     LoadingCardComponent,
+    ShimmerLoadingComponent
   ],
 })
 export class CardsModule {}
