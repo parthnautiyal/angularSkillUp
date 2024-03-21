@@ -11,26 +11,33 @@ import { API } from 'src/app/constants/enums/API';
 
 @Injectable()
 export class BatchEffects {
-  // private url = 'https://api.training.zopsmart.com/student';
-
-  loadBatch$ = createEffect(() =>
+  private url = 'https://api.training.zopsmart.com/student/batches/';
+  loadAllBatches$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(BatchActions.loadBatch),
+      ofType(BatchActions.loadAllBatches),
       switchMap(() =>
-      this.http
-      .get<APIResponse<Batch[]>>(
-        API.BASE_URL + API.STUDENT + API.BATCHES_ALL
-      )
-      .pipe(
-        map((batch) =>
-          this.store.dispatch(
-            BatchActions.batchLoaded({ batch: batch.data })
+        this.http
+          .get<APIResponse<Batch[]>>(
+            API.BASE_URL + API.STUDENT + API.BATCHES_ALL
           )
-        ),
-        catchError((error) => {
-          this.store.dispatch(BatchActions.batchLoadFailed({ error }));
-          return of(BatchActions.loadBatchsFailure({ error }));
-          })
+          .pipe(
+            map((batch) =>
+              BatchActions.loadAllBatchesSuccess({ batches: batch.data })
+            ),
+            catchError((error) =>
+              of(BatchActions.loadAllBatchesFailed({ error }))
+            )
+          )
+      )
+    )
+  );
+  loadBatchById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BatchActions.loadBatchById),
+      switchMap(({ id }) =>
+        this.http.get<any>(this.url + id).pipe(
+          map((batch) => BatchActions.loadBatchByIdSuccess({ batch })),
+          catchError((error) => of(BatchActions.loadBatchByIdFailed({ error })))
         )
       )
     )

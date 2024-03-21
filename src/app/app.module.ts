@@ -15,7 +15,8 @@ import { BatchEffects } from './state/effects/batch.effect';
 import { batchReducer } from './state/reducer/batch.reducer';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-
+import { PathEffects } from './state/effects/path.effect';
+import { pathReducer } from './state/reducer/path.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,12 +27,16 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     PageNotFoundModule,
     AppRoutingModule,
-    StoreModule.forRoot({ courses: courseReducer, batch: batchReducer }),
-    EffectsModule.forRoot([CourseEffects, BatchEffects]),
+    StoreModule.forRoot({
+      courses: courseReducer,
+      batch: batchReducer,
+      path: pathReducer,
+    }),
+    EffectsModule.forRoot([CourseEffects, BatchEffects, PathEffects]),
     StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+      maxAge: 25,
+      logOnly: environment.production,
+      autoPause: true,
     }),
   ],
 

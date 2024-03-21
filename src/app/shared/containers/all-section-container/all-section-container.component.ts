@@ -5,13 +5,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { loadCourses } from 'src/app/state/action/course.action';
+import { loadAllCourses } from 'src/app/state/action/course.action';
 import { selectCourses } from 'src/app/state/selector/course.selector';
-import { loadBatch } from 'src/app/state/action/batch.action';
+import { loadAllBatches } from 'src/app/state/action/batch.action';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
 import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 import { Prefix } from 'src/app/constants/enums/prefix';
+import { Path } from 'src/app/models/Path';
+import { Course } from 'src/app/models/Course';
+import { Batch } from 'src/app/models/Batch';
+import { loadAllPaths } from 'src/app/state/action/path.action';
+import { selectPaths } from 'src/app/state/selector/path.selector';
 
 @Component({
   selector: 'app-all-section-container',
@@ -21,9 +26,9 @@ import { Prefix } from 'src/app/constants/enums/prefix';
 export class AllSectionContainerComponent implements OnInit {
   prefix: string = '';
   heading: string = '';
-  allPathsData: any[] = [];
-  allCoursesData: any[] = [];
-  allBatchesData: any[] = [];
+  allPathsData: Path[] = [];
+  allCoursesData: Course[] = [];
+  allBatchesData: Batch[] = [];
   // loading: boolean = true;
   // batch$!: Observable<Batch[]>;
   // loadingData$!: Observable<boolean>;
@@ -42,21 +47,13 @@ export class AllSectionContainerComponent implements OnInit {
     private router: Router
   ) {}
   getAllPaths() {
-    this.pathDataService.getPaths();
-    combineLatest([this.pathDataService.allPathsData$]).subscribe(
-      ([pathsdata]) => {
-        if (
-          typeof pathsdata === 'object' &&
-          Object.keys(pathsdata).length > 0
-        ) {
-          // this.loading = false;
-          this.allPathsData = pathsdata.data;
-        }
-      }
-    );
+    this.store.dispatch(loadAllPaths());
+    this.store.select(selectPaths).subscribe((res) => {
+      if (res.length > 0) this.allPathsData = res;
+    });
   }
   getAllCourses() {
-    this.store.dispatch(loadCourses());
+    this.store.dispatch(loadAllCourses());
     this.store.select(selectCourses).subscribe((res) => {
       // this.loading = false;
       if (res.length > 0) this.allCoursesData = res;
@@ -68,7 +65,7 @@ export class AllSectionContainerComponent implements OnInit {
     // }
   }
   getAllBatches() {
-    this.store.dispatch(loadBatch());
+    this.store.dispatch(loadAllBatches());
     this.store.select(selectBatchs).subscribe((res) => {
       // this.loading = false;
       if (res.length > 0) this.allBatchesData = res;
