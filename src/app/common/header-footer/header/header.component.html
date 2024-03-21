@@ -15,7 +15,7 @@
     <app-theme-toggle></app-theme-toggle>
 
     <div class="org-wrapper">
-      <div class="logo-wrapper" (click)="toggleOrgDropdown()">
+      <div class="logo-wrapper">
         <img
           class="org-image"
           src="https://storage.googleapis.com/zopping-uploads/originals%2F20230404%2Fzopsmart-20230404-055540.png"
@@ -25,7 +25,7 @@
           <i class="fa-solid fa-caret-down"></i>
         </div>
       </div>
-      <div class="dropdown user-organization" *ngIf="isOrgDropdownOpen">
+      <div class="user-organization dropdown" *ngIf="isOrgDropdownOpen">
         <div class="demo-wrapper">
           <div class="section current-org">
             <div class="section-head">Current Organization</div>
@@ -47,7 +47,6 @@
       <img
         [src]="userProfile.picture"
         class="profile-image"
-        (click)="toggleDropdown()"
         alt="User Image"
       />
       <div class="dropdown" *ngIf="isDropdownOpen">
@@ -66,32 +65,32 @@
           <a
             class="dropdown-actions"
             [routerLink]="['/', 'user']"
-            (click)="toggleDropdown()"
+            (click) = closeDropdown()
             >My Profile</a
           >
           <a
             class="dropdown-actions"
             [routerLink]="['/', 'batches', 'all']"
-            (click)="toggleDropdown()"
+            (click) = closeDropdown()
           >
             My Batches</a
           >
           <a
             class="dropdown-actions"
             [routerLink]="['/', 'paths', 'ongoing']"
-            (click)="toggleDropdown()"
+            (click) = closeDropdown()
             >Ongoing Paths</a
           >
           <a
             class="dropdown-actions"
             [routerLink]="['/', 'courses', 'ongoing']"
-            (click)="toggleDropdown()"
+            (click) = closeDropdown()
             >Ongoing Courses</a
           >
           <a
             class="dropdown-actions"
             [routerLink]="['/', 'courses', 'ongoing']"
-            (click)="toggleDropdown()"
+            (click) = closeDropdown()
             >Favorite Courses</a
           >
           <div class="dropdown-actions theme-mode">

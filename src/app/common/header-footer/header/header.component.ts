@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PathDataService } from 'src/app/services/path-data.service';
 
@@ -15,7 +15,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private pathDataService: PathDataService,
-    private router: Router
+    private router: Router,
+    private eref: ElementRef
   ) {
     // this.pathDataService.getRefreshToken().subscribe(() => {
     // setInterval(() => {
@@ -25,16 +26,25 @@ export class HeaderComponent implements OnInit {
     //   });
     // }, 60000);
   }
-  toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
-    this.isOrgDropdownOpen = false;
+  @HostListener('document:click', ['$event'])
+  clickout(event: MouseEvent) {
+    const clickedElement = event.target as Node;
+    if (this.isDropdownOpen && !document.querySelector('.dropdown')?.contains(clickedElement)){
+      this.isDropdownOpen = false;
+    }
+    else if (document.querySelector('.profile-image')?.contains(clickedElement) && !this.isDropdownOpen) {
+      this.isDropdownOpen = true;
+    }
+    if (this.isOrgDropdownOpen && !document.querySelector('.user-organization')?.contains(clickedElement)){
+      this.isOrgDropdownOpen = false;
+    }else if (document.querySelector('.org-image')?.contains(clickedElement) && !this.isDropdownOpen){
+      this.isOrgDropdownOpen = true;
+    }
   }
-  toggleOrgDropdown() {
-    this.isOrgDropdownOpen = !this.isOrgDropdownOpen;
+  
+  closeDropdown() {
+    this.isOrgDropdownOpen = false;
     this.isDropdownOpen = false;
-  }
-  closeOrgOutside() {
-    this.isOrgDropdownOpen = false;
   }
 
   handleSignout() {
@@ -44,8 +54,7 @@ export class HeaderComponent implements OnInit {
       window.location.reload();
     });
     console.log('signout');
-
-    this.toggleDropdown();
+    this.closeDropdown();
   }
 
   ngOnInit(): void {
