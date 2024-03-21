@@ -20,8 +20,8 @@
       </ng-container>
 
       <ng-container *ngIf="heading == 'batches'">
-        <div *ngFor="let item of allBatchesData" class="paths-card-wrapper">
-          <app-batch-card [batchData]="item"></app-batch-card>
+        <div *ngFor="let item of allBatchesData;let i = index" class="paths-card-wrapper">
+          <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
         </div>
       </ng-container>
     </div>
