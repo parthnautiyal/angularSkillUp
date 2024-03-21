@@ -23,7 +23,6 @@ export class DashboardPageComponent implements OnInit {
   batch$!: Observable<Batch[]>;
 
   constructor(
-    private pathDataService: PathDataService,
     private store$: Store
   ) {}
   loading: boolean = true;

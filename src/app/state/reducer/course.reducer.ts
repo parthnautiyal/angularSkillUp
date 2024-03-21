@@ -2,13 +2,14 @@ import { Action, createReducer, on } from '@ngrx/store';
 import * as CourseActions from '../action/course.action';
 import { Course } from '../../models/Course';
 import { CourseInfo } from 'src/app/models/CouseInfo';
+import { enrolledCourses } from 'src/app/models/EnrolledCourses';
 
 export interface CourseState {
   allCourses: Course[];
   enrolledCourses: Course[];
-  courseAboutInfo: any[] | null;
-  chapterData: any[] | null;
-  noOfEnrolledCourses: number | null;
+  courseAboutInfo: any[];
+  chapterData: any[];
+  noOfEnrolledCourses: number;
   isLoading: boolean;
   error: any;
 }
@@ -16,9 +17,9 @@ export interface CourseState {
 const initialState: CourseState = {
   allCourses: [],
   enrolledCourses: [],
-  courseAboutInfo: null,
-  chapterData: null,
-  noOfEnrolledCourses: null,
+  courseAboutInfo: [],
+  chapterData: [],
+  noOfEnrolledCourses: 0,
   isLoading: false,
   error: null,
 };
@@ -48,11 +49,14 @@ export const courseReducer = createReducer(
     isLoading: true,
     error: null,
   })),
-  on(CourseActions.loadEnrolledCoursesSuccess, (state, { courses }) => ({
-    ...state,
-    enrolledCourses: courses,
-    isLoading: false,
-  })),
+  on(
+    CourseActions.loadEnrolledCoursesSuccess,
+    (state, { enrolledCourses }) => ({
+      ...state,
+      enrolledCourses: enrolledCourses,
+      isLoading: false,
+    })
+  ),
   on(CourseActions.loadEnrolledCoursesFailed, (state, { error }) => ({
     ...state,
     isLoading: false,
@@ -66,7 +70,6 @@ export const courseReducer = createReducer(
     error: null,
   })),
   on(CourseActions.loadCourseAboutInfoSuccess, (state, { course }) => ({
-
     ...state,
     courseAboutInfo: course,
     isLoading: false,

@@ -5,8 +5,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { loadAllCourses } from 'src/app/state/action/course.action';
-import { selectCourses } from 'src/app/state/selector/course.selector';
+import {
+  loadAllCourses,
+  loadEnrolledCourses,
+} from 'src/app/state/action/course.action';
+import {
+  selectCourses,
+  selectEnrolledCourses,
+} from 'src/app/state/selector/course.selector';
 import { loadAllBatches } from 'src/app/state/action/batch.action';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
 import { Title } from 'src/app/constants/enums/title';
@@ -29,6 +35,7 @@ export class AllSectionContainerComponent implements OnInit {
   allPathsData: Path[] = [];
   allCoursesData: Course[] = [];
   allBatchesData: Batch[] = [];
+  enrolledCourses: Course[] = [];
   // loading: boolean = true;
   // batch$!: Observable<Batch[]>;
   // loadingData$!: Observable<boolean>;
@@ -77,9 +84,15 @@ export class AllSectionContainerComponent implements OnInit {
     });
   }
   getEnrolledCourses() {
-    this.courseDataService.getEnrolledCourses().subscribe((data: any) => {
-      this.allCoursesData = data.data.enrolledCourses;
+    this.store.dispatch(loadEnrolledCourses());
+    this.store.select(selectEnrolledCourses).subscribe((res) => {
+      // this.loading = false;
+      this.enrolledCourses = res;
     });
+
+    // this.courseDataService.getEnrolledCourses().subscribe((data: any) => {
+    //   this.allCoursesData = data.data.enrolledCourses;
+    // });
   }
   ngOnInit(): void {
     this.activatedRoute.url.subscribe((urlSegments) => {

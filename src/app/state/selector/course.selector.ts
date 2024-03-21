@@ -17,3 +17,20 @@ export const selectCoursesError = createSelector(
   selectCourseState,
   (state) => state.error
 );
+export const selectNoOfCourses = createSelector(
+  selectCourseState,
+  (state) => state.noOfEnrolledCourses
+);
+
+export const selectEnrolledCourses = createSelector(
+  selectCourseState,
+  (state) => state.enrolledCourses
+);
+export const selectChapterData = createSelector(
+  selectCourseState,
+  (state) => state.chapterData
+);
+export const CourseAboutInfo = createSelector(
+  selectCourseState,
+  (state) => state.courseAboutInfo
+);

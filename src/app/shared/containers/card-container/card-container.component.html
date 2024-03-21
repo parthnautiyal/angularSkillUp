@@ -20,7 +20,7 @@
     </ng-container>
   </ng-container>
   <ng-container *ngIf="title == Title.COURSES">
-    <ng-container *ngFor="let item of courses$ | async">
+    <ng-container *ngFor="let item of enrolledCourses">
       <a [routerLink]="['/', RouterLinks.COURSES, item.id]">
         <app-course-card [singleCourse]="item"></app-course-card>
       </a>

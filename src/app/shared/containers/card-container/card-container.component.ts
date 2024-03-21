@@ -7,13 +7,20 @@ import { Course } from 'src/app/models/Course';
 import { Path } from 'src/app/models/Path';
 import { Batch } from 'src/app/models/Batch';
 import { Store } from '@ngrx/store';
-import { selectCourses } from 'src/app/state/selector/course.selector';
+import {
+  selectCourses,
+  selectEnrolledCourses,
+} from 'src/app/state/selector/course.selector';
 import { Observable } from 'rxjs';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
 import { RandomColorDirective } from './random-color.directive';
 import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 import { selectPaths } from 'src/app/state/selector/path.selector';
+import { loadEnrolledCourses } from 'src/app/state/action/course.action';
+import { enrolledCourses } from 'src/app/models/EnrolledCourses';
+import { loadAllBatches } from 'src/app/state/action/batch.action';
+import { loadAllPaths } from 'src/app/state/action/path.action';
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
@@ -32,6 +39,7 @@ export class CardContainerComponent implements OnInit {
   path$!: Observable<Path[]>;
   @Input() title: string = '';
   @Input() prefixWord: string = '';
+  enrolledCourses: Course[] = [];
   constructor(
     private activatedRoute: ActivatedRoute,
     private pathDataService: PathDataService,
@@ -44,31 +52,28 @@ export class CardContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(loadAllBatches());
+    this.store.dispatch(loadAllPaths());
     this.path$ = this.store.select(selectPaths);
     this.courses$ = this.store.select(selectCourses);
     this.batch$ = this.store.select(selectBatchs);
-    this.activatedRoute.url.subscribe((urlSegments) => {
-      if (urlSegments.length >= 1) {
-        this.heading = urlSegments[0].path;
-        if (this.heading == 'user') this.isActive = false;
-        else this.isActive = true;
-      }
-    });
-    console.log(this.isActive);
-    if (!this.isActive) {
-      this.pathDataService.getEnrolledPaths().subscribe((data: any) => {
-        this.allPaths = data.data.enrolledPaths;
-        console.log('inside if -> ' + this.allPaths);
-      });
-    }
 
-    if (!this.isActive) {
-      this.courseDataService
-        .getEnrolledCourses()
-        .subscribe((data: Course[]) => {
-          this.allCourses = data;
-          console.log(this.allCourses);
-        });
-    }
+    // this.activatedRoute.url.subscribe((urlSegments) => {
+    //   if (urlSegments.length >= 1) {
+    //     this.heading = urlSegments[0].path;
+    //     if (this.heading == 'user') this.isActive = true;
+    //     else this.isActive = true;
+    //   }
+    // });
+
+    this.pathDataService.getEnrolledPaths().subscribe((data: any) => {
+      this.allPaths = data.data.enrolledPaths;
+      console.log('inside if -> ' + this.allPaths);
+    });
+    this.store.dispatch(loadEnrolledCourses());
+    this.store.select(selectEnrolledCourses).subscribe((res) => {
+      // this.loading = false;
+      this.enrolledCourses = res;
+    });
   }
 }
