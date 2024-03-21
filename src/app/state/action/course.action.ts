@@ -68,3 +68,9 @@ export const loadNoOfEnrolledCoursesFailed = createAction(
   '[Course] Load Number of Enrolled Courses Failed',
   props<{ error: any }>()
 );
+export function loadCoursesFailure(arg0: { error: any }): any {
+  console.log('inside loadCoursesFailure function -> ' + arg0.error);
+  loadAllCoursesFailed({ error: arg0.error });
+  //return arg0.error;
+  throw new Error('inside loadCoursesFailure function -> ');
+}

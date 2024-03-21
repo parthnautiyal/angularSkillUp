@@ -25,8 +25,19 @@ export class CourseEffects {
             map((courses) =>
               CourseActions.loadAllCoursesSuccess({ courses: courses.data })
             ),
-            catchError((error) =>
-              of(CourseActions.loadAllCoursesFailed({ error }))
+            catchError(
+              (error) => {
+                console.log('Error -> ' + error);
+                //of(CourseActions.loadAllCoursesFailed({ error }));
+                return of(CourseActions.loadCoursesFailure({ error }));
+              }
+              // this.store.dispatch(
+              //   CourseActions.loadAllCoursesFailed({ error })
+              // );
+              // console.log('Error -> ' + error);
+              //of(CourseActions.loadCoursesFailure({ error }))
+
+              // of(CourseActions.loadAllCoursesFailed({ error }))
             )
           )
       )

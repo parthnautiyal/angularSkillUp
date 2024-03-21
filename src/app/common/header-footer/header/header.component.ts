@@ -19,12 +19,12 @@ export class HeaderComponent implements OnInit {
     private eref: ElementRef
   ) {
     // this.pathDataService.getRefreshToken().subscribe(() => {
-    setInterval(() => {
-      this.pathDataService.getRefreshToken().subscribe((res: any) => {
-        localStorage.setItem('token', res.data.accessToken);
-        console.log('token refreshed');
-      });
-    }, 60000);
+    // setInterval(() => {
+    //   this.pathDataService.getRefreshToken().subscribe((res: any) => {
+    //     localStorage.setItem('token', res.data.accessToken);
+    //     console.log('token refreshed');
+    //   });
+    // }, 60000);
   }
   @HostListener('document:click', ['$event'])
   clickout(event: MouseEvent) {
