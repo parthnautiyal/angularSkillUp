@@ -6,7 +6,3 @@ export interface Path {
   isAccessible: boolean;
   noOfCourses: number;
 }
-
-export interface PathList {
-  data: Path[];
-}
