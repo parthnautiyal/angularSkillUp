@@ -50,7 +50,6 @@ export class AllSectionContainerComponent implements OnInit {
     private store: Store,
     private pathDataService: PathDataService,
     private activatedRoute: ActivatedRoute,
-    private courseDataService: CourseDataService,
     private router: Router
   ) {}
   getAllPaths() {

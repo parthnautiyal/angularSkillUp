@@ -74,6 +74,7 @@ export class CardContainerComponent implements OnInit {
     this.store.select(selectEnrolledCourses).subscribe((res) => {
       // this.loading = false;
       this.enrolledCourses = res;
+      console.log('enrolled courses', res);
     });
   }
 }
