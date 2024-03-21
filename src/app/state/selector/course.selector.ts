@@ -5,12 +5,12 @@ export const selectCourseState = createFeatureSelector<CourseState>('courses');
 
 export const selectCourses = createSelector(
   selectCourseState,
-  (state) => state.courses
+  (state) => state.allCourses
 );
 
 export const selectCoursesLoading = createSelector(
   selectCourseState,
-  (state) => state.loadingData
+  (state) => state.isLoading
 );
 
 export const selectCoursesError = createSelector(

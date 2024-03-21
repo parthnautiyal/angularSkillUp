@@ -17,14 +17,14 @@ const routes: Routes = [
         path: "dashboard",
         loadChildren: () =>
           import("../pages/dashboard-page/dashboard-page.module").then(
-            (m) => m.DashboardPageModule
+            (e) => e.DashboardPageModule
           ),
       },
       {
         path: "pathdashboard/:id",
         loadChildren: () =>
           import("../pages/path-page/path-page.module").then(
-            (m) => m.PathPageModule
+            (e) => e.PathPageModule
           ),
       },
       {

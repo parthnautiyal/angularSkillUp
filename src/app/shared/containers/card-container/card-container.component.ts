@@ -3,9 +3,9 @@ import { CourseDataService } from '../../../services/course-data.service';
 import { PathDataService } from '../../../services/path-data.service';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { BatchDataService } from '../../../services/batch-data.service';
-import { Course, CourseList } from 'src/app/models/Course';
-import { PathList } from 'src/app/models/Path';
-import { Batch, BatchList } from 'src/app/models/Batch';
+import { Course } from 'src/app/models/Course';
+import { Path } from 'src/app/models/Path';
+import { Batch } from 'src/app/models/Batch';
 import { Store } from '@ngrx/store';
 import { selectCourses } from 'src/app/state/selector/course.selector';
 import { Observable } from 'rxjs';
@@ -13,34 +13,26 @@ import { selectBatchs } from 'src/app/state/selector/batch.selector';
 import { RandomColorDirective } from './random-color.directive';
 import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
+import { selectPaths } from 'src/app/state/selector/path.selector';
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
   styleUrls: ['./card-container.component.sass'],
- 
-
 })
 export class CardContainerComponent implements OnInit {
   heading: string = '';
   isActive = true;
-  Title=Title;
-  RouterLinks=RouterLinks;
-
-  allPaths: PathList = {
-    data: [],
-  };
-  allCourses: CourseList = {
-    data: [],
-  };
-  allBatches: BatchList = {
-    data: [],
-  };
+  Title = Title;
+  RouterLinks = RouterLinks;
+  allPaths: Path[] = [];
+  allCourses: Course[] = [];
+  allBatches: Batch[] = [];
   courses$!: Observable<Course[]>;
   batch$!: Observable<Batch[]>;
+  path$!: Observable<Path[]>;
   @Input() title: string = '';
   @Input() prefixWord: string = '';
   constructor(
-    private batchDataService: BatchDataService,
     private activatedRoute: ActivatedRoute,
     private pathDataService: PathDataService,
     private courseDataService: CourseDataService,
@@ -52,12 +44,7 @@ export class CardContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pathDataService.getPaths();
-    this.pathDataService.allPathsData$.subscribe((data: PathList) => {
-      console.log(data);
-      this.allPaths = data;
-    });
-
+    this.path$ = this.store.select(selectPaths);
     this.courses$ = this.store.select(selectCourses);
     this.batch$ = this.store.select(selectBatchs);
     this.activatedRoute.url.subscribe((urlSegments) => {
@@ -76,12 +63,12 @@ export class CardContainerComponent implements OnInit {
     }
 
     if (!this.isActive) {
-      this.courseDataService.getEnrolledCourses().subscribe((data: any) => {
-        this.allCourses = data;
-        console.log(this.allCourses);
-      });
+      this.courseDataService
+        .getEnrolledCourses()
+        .subscribe((data: Course[]) => {
+          this.allCourses = data;
+          console.log(this.allCourses);
+        });
     }
-
-
   }
 }
