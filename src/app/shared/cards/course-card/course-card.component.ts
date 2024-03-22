@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 import { Course } from 'src/app/models/Course';
 
 @Component({
@@ -7,6 +8,7 @@ import { Course } from 'src/app/models/Course';
   styleUrls: ['./course-card.component.sass'],
 })
 export class CourseCardComponent implements OnInit {
+  RouterLinks = RouterLinks;
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
   @Input() singleCourse: Course = {

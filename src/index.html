@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <title>TrainingAndUpskilling</title>
@@ -30,7 +29,7 @@
       const responsePayload = decodeJWTToken(response.credential);
       sessionStorage.setItem("loggedInUser", JSON.stringify(responsePayload));
       window.location.href = "/dashboard";
-      
+
     }
 
     function handleSignOut() {

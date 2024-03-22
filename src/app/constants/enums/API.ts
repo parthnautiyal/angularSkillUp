@@ -2,7 +2,7 @@ export enum API {
   BASE_URL = 'https://api.training.zopsmart.com',
   STUDENTS = '/students',
   STUDENT = '/student',
-  BATCHES = '/batches',
+  BATCHES = '/batches/',
   BATCHES_ALL = '/batches/all',
   COURSES = '/courses',
   COURSES_ALL = '/courses?pageSize=12&pageNo=1',

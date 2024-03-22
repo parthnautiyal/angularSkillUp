@@ -4,6 +4,7 @@ import { Course } from '../../models/Course';
 import { CourseInfo } from 'src/app/models/CouseInfo';
 import { enrolledCourses } from 'src/app/models/EnrolledCourses';
 import { Chapter } from 'src/app/models/Chapter';
+import { Error } from 'src/app/models/Error';
 
 export interface CourseState {
   allCourses: Course[];
