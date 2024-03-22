@@ -5,6 +5,7 @@ export interface Course {
   imageUrl: string;
   isAccessible: boolean;
   description: string;
+  about: string;
   createdBy: {
     id: number;
     name: string;
@@ -14,4 +15,6 @@ export interface Course {
   createdAt: string;
   isFavourite: boolean;
   progress: number;
+  enrolledAt: string;
+  completedAt: string | null;
 }

@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Batch } from '../../models/Batch';
-import { Path } from 'src/app/models/Path';
+import { Path, PathData } from 'src/app/models/Path';
 
 // Action for loading all batches
 export const loadAllBatches = createAction('[Batch] Load All Batches');
@@ -25,27 +25,31 @@ export const loadBatchByIdSuccess = createAction(
   '[Batch] Load Batch By ID Success',
   props<{ batch: Batch }>()
 );
-
 export const loadBatchByIdFailed = createAction(
-  '[Batch] Load Batch By ID Failed',
-  props<{ error: any }>()
-);
-
-// Action for loading path by ID
-export const loadPathById = createAction(
-  '[Batch] Load Path By ID',
-  props<{ id: string }>()
-);
-
-export const loadPathByIdSuccess = createAction(
-  '[Batch] Load Path By ID Success',
-  props<{ path: Path }>()
-);
-
-export const loadPathByIdFailed = createAction(
   '[Batch] Load Path By ID Failed',
   props<{ error: any }>()
 );
+
+// export const loadBatchByIdFailed = createAction(
+//   '[Batch] Load Batch By ID Failed',
+//   props<{ error: any }>()
+// );
+
+// // Action for loading path by ID
+// export const loadPathById = createAction(
+//   '[Path] Load Path By ID',
+//   props<{ id: string }>()
+// );
+
+// export const loadPathByIdSuccess = createAction(
+//   '[Path] Load Path By ID Success',
+//   props<{ pathById: PathData }>()
+// );
+
+// export const loadPathByIdFailed = createAction(
+//   '[Path] Load Path By ID Failed',
+//   props<{ error: any }>()
+// );
 
 // Action for loading trainers by ID
 export const loadTrainersById = createAction(

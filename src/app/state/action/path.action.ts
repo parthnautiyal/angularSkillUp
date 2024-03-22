@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Path } from '../../models/Path';
+import { Path, PathData } from '../../models/Path';
 import { EnrolledPath } from 'src/app/models/EnrolledPath';
 
 // Action for loading all paths
@@ -23,7 +23,7 @@ export const loadPathById = createAction(
 
 export const loadPathByIdSuccess = createAction(
   '[Path] Load Path By ID Success',
-  props<{ path: Path }>()
+  props<{ pathById: PathData }>()
 );
 
 export const loadPathByIdFailed = createAction(

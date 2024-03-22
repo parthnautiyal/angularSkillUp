@@ -5,7 +5,7 @@ import { map, mergeMap, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import * as PathActions from '../action/path.action';
 import { APIResponse } from 'src/app/models/ApiResponse';
-import { Path } from 'src/app/models/Path';
+import { Path, PathData } from 'src/app/models/Path';
 import { EnrolledPathsData } from 'src/app/models/EnrolledPath';
 
 @Injectable()
@@ -67,6 +67,25 @@ export class PathEffects {
             catchError((error) =>
               of(PathActions.loadNumberOfEnrolledPathsFailed({ error }))
             )
+          )
+      )
+    )
+  );
+  loadPathData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PathActions.loadPathById),
+      mergeMap(({ id }) =>
+        this.http
+          .get<APIResponse<PathData>>(
+            'https://api.training.zopsmart.com/students/paths/' +
+              id +
+              '?projection=course'
+          )
+          .pipe(
+            map((path) =>
+              PathActions.loadPathByIdSuccess({ pathById: path.data })
+            ),
+            catchError((error) => of(PathActions.loadAllPathsFailed({ error })))
           )
       )
     )

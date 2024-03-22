@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { Course } from 'src/app/models/Course';
 import { APIResponse } from 'src/app/models/ApiResponse';
 import { enrolledCourses } from 'src/app/models/EnrolledCourses';
+import { Chapter } from 'src/app/models/Chapter';
 
 @Injectable()
 export class CourseEffects {
@@ -99,6 +100,27 @@ export class CourseEffects {
             ),
             catchError((error) =>
               of(CourseActions.loadEnrolledCoursesFailed({ error }))
+            )
+          )
+      )
+    )
+  );
+  loadChapterData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CourseActions.loadChapterData),
+      switchMap(({ courseId }) =>
+        this.http
+          .get<APIResponse<Chapter[]>>(
+            this.url + '/courses/' + courseId + '/chapters'
+          )
+          .pipe(
+            map((chapterData) =>
+              CourseActions.loadChapterDataSuccess({
+                chapterData: chapterData.data,
+              })
+            ),
+            catchError((error) =>
+              of(CourseActions.loadChapterDataFailed({ error }))
             )
           )
       )

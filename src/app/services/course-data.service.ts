@@ -13,7 +13,4 @@ export class CourseDataService {
   getCourseAboutInfo(id: string) {
     return this.http.get(this.url + '/courses/' + id);
   }
-  getChapterData(id: string) {
-    return this.http.get(this.url + '/courses/' + id + '/chapters');
-  }
 }
