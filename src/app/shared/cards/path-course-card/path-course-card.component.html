@@ -22,7 +22,21 @@
           <div class="courses-list">
             <div class="course-box">
               <div class="course-card">
-                <img class="course-image" [src]="courseData.imageUrl" />
+                <!-- <a [routerLink]="['/', RouterLinks.PATHS, courseData.id]"> -->
+
+                <img
+                  *ngIf="!flag"
+                  [routerLink]="['/', RouterLinks.COURSES, courseData.id]"
+                  class="course-image"
+                  [src]="courseData.imageUrl"
+                />
+                <img
+                  *ngIf="flag"
+                  [routerLink]="['/', RouterLinks.PATHS, courseData.id]"
+                  class="course-image"
+                  [src]="courseData.imageUrl"
+                />
+                <!-- </a> -->
                 <div class="course-details">
                   <div class="course-heading">
                     {{ courseData.name }}

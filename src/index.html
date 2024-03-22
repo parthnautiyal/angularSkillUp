@@ -5,7 +5,7 @@
     <title>TrainingAndUpskilling</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.svg" />
+    <img rel="icon" href="favicon.svg" />
     <script
       src="https://kit.fontawesome.com/03c6f1f4cb.js"
       crossorigin="anonymous"
@@ -36,8 +36,10 @@
       }
 
       function handleCredentialResponse(response) {
+        //runTest(1);
         const responsePayload = decodeJWTToken(response.credential);
         sessionStorage.setItem("loggedInUser", JSON.stringify(responsePayload));
+        localStorage.setItem("logginFlag", true);
         window.location.href = "/dashboard";
       }
 

@@ -11,7 +11,6 @@ import { API } from 'src/app/constants/enums/API';
 
 @Injectable()
 export class BatchEffects {
-  private url = 'https://api.training.zopsmart.com/student/batches/';
   loadAllBatches$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BatchActions.loadAllBatches),
@@ -35,7 +34,7 @@ export class BatchEffects {
     this.actions$.pipe(
       ofType(BatchActions.loadBatchById),
       switchMap(({ id }) =>
-        this.http.get<any>(this.url + id).pipe(
+        this.http.get<any>(API.BASE_URL + API.STUDENT + API.BATCHES + id).pipe(
           map((batch) => BatchActions.loadBatchByIdSuccess({ batch })),
           catchError((error) => of(BatchActions.loadBatchByIdFailed({ error })))
         )
