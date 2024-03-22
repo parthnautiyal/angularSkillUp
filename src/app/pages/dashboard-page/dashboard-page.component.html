@@ -4,7 +4,7 @@
   <!-- <app-error-card *ngIf="isError"></app-error-card> -->
   <ng-container *ngIf="loading">
     <div class="loading-container">
-      <app-dashboard-shimmer class="shimmer"></app-dashboard-shimmer>
+      <app-dashboard-shimmer class="shimmer" [shimmerCount]=3></app-dashboard-shimmer>
     </div>
   </ng-container>
   <ng-container *ngIf="!loading">

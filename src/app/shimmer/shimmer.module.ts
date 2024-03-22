@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ShimmerComponent } from './shimmer.component';
 import { ShimmerLoadingComponent } from '../shared/cards/shimmer-loading/shimmer-loading.component';
 import { CardsModule } from '../shared/cards/cards.module';
-import { BatchCardShimmerComponent } from './batch-card-shimmer/batch-card-shimmer.component';
+import { CardShimmerComponent } from './card-shimmer/card-shimmer.component';
 import { DashboardShimmerComponent } from './dashboard-shimmer/dashboard-shimmer.component';
 
 @NgModule({
   imports: [CommonModule, CardsModule],
-  declarations: [ShimmerComponent,BatchCardShimmerComponent,DashboardShimmerComponent],
-  exports: [ShimmerComponent,BatchCardShimmerComponent,DashboardShimmerComponent],
+  declarations: [ShimmerComponent,CardShimmerComponent,DashboardShimmerComponent],
+  exports: [ShimmerComponent,CardShimmerComponent,DashboardShimmerComponent],
 })
 export class ShimmerModule {}
