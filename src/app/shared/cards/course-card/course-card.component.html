@@ -1,5 +1,13 @@
 <div class="card">
-  <img [src]="singleCourse.imageUrl" alt="" class="image" />
+  <!-- <a [routerLink]="['/', RouterLinks.COURSES, singleCourse.id]"> -->
+  <img
+    [routerLink]="['/', RouterLinks.COURSES, singleCourse.id]"
+    [src]="singleCourse.imageUrl"
+    alt=""
+    class="image"
+  />
+  <!-- </a> -->
+
   <div class="content-div">
     <div class="header">
       <div class="course-name">

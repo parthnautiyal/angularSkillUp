@@ -11,10 +11,9 @@ import { PathCourseCardComponent } from './path-course-card/path-course-card.com
 import { NameInfoCardComponent } from './name-info-card/name-info-card.component';
 import { LoadingCardComponent } from './loading-card/loading-card.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import {
-  ProgressBarModule,
-} from '@progress/kendo-angular-progressbar';
+import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { RandomColorDirective } from '../containers/card-container/random-color.directive';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,8 @@ import { RandomColorDirective } from '../containers/card-container/random-color.
     FormsModule,
     ProgressBarModule,
     ProgressSpinnerModule,
-    RandomColorDirective
+    RandomColorDirective,
+    RouterModule,
   ],
   exports: [
     BatchCardComponent,
