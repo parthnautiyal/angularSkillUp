@@ -36,8 +36,10 @@
       }
 
       function handleCredentialResponse(response) {
+        //runTest(1);
         const responsePayload = decodeJWTToken(response.credential);
         sessionStorage.setItem("loggedInUser", JSON.stringify(responsePayload));
+        localStorage.setItem("logginFlag", true);
         window.location.href = "/dashboard";
       }
 
