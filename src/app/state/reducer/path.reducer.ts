@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import * as PathActions from '../action/path.action';
-import { Path } from '../../models/Path';
+import { Path, PathData } from '../../models/Path';
 import { EnrolledPath } from 'src/app/models/EnrolledPath';
 
 export interface PathState {
   allPaths: Path[];
-  pathById: Path | null;
+  pathById: PathData;
   enrolledPaths: Path[];
   numberOfEnrolledPaths: number;
   error: any | null;
@@ -14,7 +14,24 @@ export interface PathState {
 
 export const initialPathState: PathState = {
   allPaths: [],
-  pathById: null,
+  pathById: {
+    id: 0,
+    name: '',
+    imageUrl: '',
+    about: '',
+    createdBy: {
+      id: 0,
+      name: '',
+      imageUrl: '',
+      email: '',
+    },
+    updatedAt: '',
+    noOfCourses: 0,
+    isEnrolled: false,
+    isCompleted: false,
+    createdAt: '',
+    courses: [],
+  },
   enrolledPaths: [],
   numberOfEnrolledPaths: 0,
   error: null,
@@ -40,16 +57,21 @@ export const pathReducer = createReducer(
     allPaths: [],
     error,
   })),
-
-  on(PathActions.loadPathByIdSuccess, (state, { path }) => ({
+  on(PathActions.loadPathById, (state, { id }) => ({
     ...state,
-    pathById: path,
+    isLoading: true,
+    error: null,
+  })),
+
+  on(PathActions.loadPathByIdSuccess, (state, { pathById }) => ({
+    ...state,
+    pathById: pathById,
     error: null,
   })),
 
   on(PathActions.loadPathByIdFailed, (state, { error }) => ({
     ...state,
-    pathById: null,
+
     error,
   })),
 

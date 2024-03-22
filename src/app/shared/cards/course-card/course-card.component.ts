@@ -16,6 +16,7 @@ export class CourseCardComponent implements OnInit {
     imageUrl: '',
     isAccessible: false,
     description: '',
+    about: '',
     createdBy: {
       id: 0,
       name: '',
@@ -25,6 +26,8 @@ export class CourseCardComponent implements OnInit {
     createdAt: '',
     isFavourite: false,
     progress: 0,
+    enrolledAt: '',
+    completedAt: '',
   };
   constructor() {}
 

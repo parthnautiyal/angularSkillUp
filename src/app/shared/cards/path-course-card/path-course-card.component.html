@@ -3,7 +3,7 @@
     <div
       class="circle"
       [ngStyle]="
-        courseData.isAccessible && { 'background-color': 'rgb(86, 36, 208)' }
+        [courseData.isAccessible] && { 'background-color': 'rgb(86, 36, 208)' }
       "
     ></div>
     <div
@@ -30,7 +30,7 @@
                   <div class="course-author">
                     By {{ courseData.createdBy.name }} |
                     {{
-                      courseData.createdAt.slice(0, 10) | date: "dd MMM yyyy"
+                      courseData.createdAt.slice(0, 10) | date : "dd MMM yyyy"
                     }}
                   </div>
                   <div class="course-content">

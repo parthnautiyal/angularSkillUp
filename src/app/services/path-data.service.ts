@@ -32,25 +32,6 @@ export class PathDataService {
     // }, 60000);
   }
   private cache: any = null;
-
-  getPathData(id: string) {
-    return this.http.get(this.url + '/' + id + '?projection=course');
-  }
-  // getAllPaths(): Observable<Path[]> {
-  //   return this.http.get<Path[]>(this.url + '?pageSize=12&pageNo=1');
-  // }
-  // getEnrolledPaths() {
-  //   return this.http.get(
-  //     'https://api.training.zopsmart.com/students/enrolled-paths'
-  //   );
-  // }
-
-  // getNoOfEnrolledPaths() {
-  //   return this.http.get(
-  //     'https://api.training.zopsmart.com/students/no-of-enrolled-paths'
-  //   );
-  // }
-
   getRefreshToken() {
     return this.http.post(
       'https://api.training.zopsmart.com/login/refresh',
