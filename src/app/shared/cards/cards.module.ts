@@ -13,7 +13,8 @@ import { LoadingCardComponent } from './loading-card/loading-card.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { RandomColorDirective } from '../containers/card-container/random-color.directive';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { ShimmerLoadingComponent } from './shimmer-loading/shimmer-loading.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RouterLink, RouterModule } from '@angular/router';
     PathCourseCardComponent,
     NameInfoCardComponent,
     LoadingCardComponent,
+    ShimmerLoadingComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +47,7 @@ import { RouterLink, RouterModule } from '@angular/router';
     PathCourseCardComponent,
     NameInfoCardComponent,
     LoadingCardComponent,
+    ShimmerLoadingComponent,
   ],
 })
 export class CardsModule {}

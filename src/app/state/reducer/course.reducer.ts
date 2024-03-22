@@ -3,12 +3,13 @@ import * as CourseActions from '../action/course.action';
 import { Course } from '../../models/Course';
 import { CourseInfo } from 'src/app/models/CouseInfo';
 import { enrolledCourses } from 'src/app/models/EnrolledCourses';
+import { Chapter } from 'src/app/models/Chapter';
 
 export interface CourseState {
   allCourses: Course[];
   enrolledCourses: Course[];
   courseAboutInfo: any[];
-  chapterData: any[];
+  chapterData: Chapter[];
   noOfEnrolledCourses: number;
   isLoading: boolean;
   error: any;
@@ -86,9 +87,9 @@ export const courseReducer = createReducer(
     isLoading: true,
     error: null,
   })),
-  on(CourseActions.loadChapterDataSuccess, (state, { data }) => ({
+  on(CourseActions.loadChapterDataSuccess, (state, { chapterData }) => ({
     ...state,
-    chapterData: data,
+    chapterData: chapterData,
     isLoading: false,
   })),
   on(CourseActions.loadChapterDataFailed, (state, { error }) => ({

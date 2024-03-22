@@ -27,3 +27,8 @@ export const selectNoOfEnrolledPaths = createSelector(
   selectPathState,
   (state) => state.numberOfEnrolledPaths
 );
+
+export const selectPathById = createSelector(
+  selectPathState,
+  (state) => state.pathById
+);

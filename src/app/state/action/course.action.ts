@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Course } from '../../models/Course';
 import { CourseInfo } from 'src/app/models/CouseInfo';
 import { enrolledCourses } from 'src/app/models/EnrolledCourses';
+import { Chapter } from 'src/app/models/Chapter';
 
 export const loadAllCourses = createAction('[Course] Load All Courses');
 
@@ -48,7 +49,7 @@ export const loadChapterData = createAction(
 
 export const loadChapterDataSuccess = createAction(
   '[Course] Load Chapter Data Success',
-  props<{ data: any[] }>()
+  props<{ chapterData: Chapter[] }>()
 );
 
 export const loadChapterDataFailed = createAction(
