@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PathDataService } from 'src/app/services/path-data.service';
 import { Observable, combineLatest } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { loadAllCourses } from 'src/app/state/action/course.action';
@@ -15,21 +14,31 @@ import { HEADINGS_TITLE } from 'src/app/constants/headingsTitle';
 import { loadAllPaths } from 'src/app/state/action/path.action';
 import { selectPaths } from 'src/app/state/selector/path.selector';
 import { Path } from 'src/app/models/Path';
+import { MessageService } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.sass'],
+  providers: [MessageService],
 })
 export class DashboardPageComponent implements OnInit {
   courses$!: Observable<Course[]>;
   paths$!: Observable<Path[]>;
   batch$!: Observable<Batch[]>;
   error$!: Observable<any>;
-  constructor(private store$: Store) {}
+  constructor(
+    private store$: Store,
+    private messageService: MessageService,
+    private primengConfig: PrimeNGConfig
+  ) {
+    this.showSuccess();
+  }
   loading: boolean = true;
   headingsTitle = HEADINGS_TITLE;
 
   ngOnInit(): void {
+    this.primengConfig.ripple = true;
     this.store$.dispatch(loadAllCourses());
     this.store$.dispatch(loadAllBatches());
     this.store$.dispatch(loadAllPaths());
@@ -61,5 +70,13 @@ export class DashboardPageComponent implements OnInit {
         }
       }
     );
+  }
+
+  showSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Message Content',
+    });
   }
 }

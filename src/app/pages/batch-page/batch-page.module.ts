@@ -9,6 +9,6 @@ import { BatchPageRoutingModule } from './batch-page-routing.module';
 
 @NgModule({
   declarations: [BatchPageComponent, BatchDetailsComponent],
-  imports: [CommonModule, CardsModule, PathPageModule, ContainersModule,BatchPageRoutingModule],
+  imports: [CommonModule, CardsModule, ContainersModule,BatchPageRoutingModule],
 })
 export class BatchPageModule {}
