@@ -2,7 +2,7 @@
   <app-dashboard-header></app-dashboard-header>
   <ng-container *ngIf="loading">
     <div class="loading-container">
-      <app-dashboard-shimmer class="shimmer"></app-dashboard-shimmer>
+      <app-dashboard-shimmer class="shimmer" [shimmerCount]=3></app-dashboard-shimmer>
     </div>
   </ng-container>
   <ng-container *ngIf="!loading">

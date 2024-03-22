@@ -1,9 +1,5 @@
-<div
-  class="ngx-shimmer"
-  [ngStyle]="{
+<div class="ngx-shimmer " [ngStyle]="{
     width: width,
     height: shimmerHeight,
     borderRadius: shimmerBorderRadius
-  }"
-  [ngClass]="{ rtl: direction === 'rtl' }"
-></div>
+  }" [ngClass]="{ rtl: direction === 'ltr' }"></div>

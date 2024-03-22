@@ -13,7 +13,7 @@ export class ShimmerLoadingComponent implements OnInit {
   @Input() height = '12px';
   @Input() shape: 'circle' | 'square' | 'rect' = 'rect';
   @Input() borderRadius = '5px';
-  @Input() direction: 'ltr' | 'rtl' = 'ltr';
+  @Input() direction: 'ltr' | 'rtl' = 'rtl';
   constructor() {}
   ngOnInit() {}
   get shimmerHeight(): string {
