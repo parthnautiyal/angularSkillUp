@@ -11,7 +11,7 @@
         <div class="row author-details">
           By {{ CourseDetails.createdBy.name
           }}<span class="created-at">
-            {{ CourseDetails.createdAt | date: "dd MMM yyyy" }}</span
+            {{ CourseDetails.createdAt | date : "dd MMM yyyy" }}</span
           >
         </div>
         <div class="row level">Level : {{ CourseDetails.level }}</div>
@@ -21,16 +21,31 @@
           >
         </div>
         <div class="row last-updated">
-          Last Updated - {{ CourseDetails.updatedAt | date: "dd MMM yyyy" }}
+          Last Updated - {{ CourseDetails.updatedAt | date : "dd MMM yyyy" }}
         </div>
       </div>
-      <div class="buttons" >
-        <button id="btn1" class="btn" 
-                style="display: flex; background: transparent; border: none; outline: none; font-size: 35px; "
-                 >
-          <i style="margin-right: 30px;" [style.color]="isButtonRed ? 'red' : 'white'" 
-          (click)="toggleColor()" class="fa fa-heart"></i>
-         <app-circular-progress-bar class="circle" [progress]="progress"></app-circular-progress-bar>
+      <div class="buttons">
+        <button
+          id="btn1"
+          class="btn"
+          style="
+            display: flex;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 35px;
+          "
+        >
+          <i
+            style="margin-right: 30px"
+            [style.color]="isButtonRed ? 'red' : 'white'"
+            (click)="toggleColor()"
+            class="fa fa-heart"
+          ></i>
+          <app-circular-progress-bar
+            class="circle"
+            [progress]="CourseDetails.progress"
+          ></app-circular-progress-bar>
         </button>
       </div>
     </div>

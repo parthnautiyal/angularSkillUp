@@ -5,6 +5,7 @@ import { CardsModule } from '../cards/cards.module';
 import { AllSectionContainerComponent } from './all-section-container/all-section-container.component';
 import { BatchInfoCardContainerComponent } from './batch-info-card-container/batch-info-card-container.component';
 import { RouterModule } from '@angular/router';
+import { ShimmerModule } from 'src/app/shimmer/shimmer.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { RouterModule } from '@angular/router';
     BatchInfoCardContainerComponent,
    
   ],
-  imports: [CommonModule, CardsModule,RouterModule],
+  imports: [CommonModule, CardsModule,RouterModule,ShimmerModule],
   exports: [CardContainerComponent, BatchInfoCardContainerComponent],
 })
 export class ContainersModule {}

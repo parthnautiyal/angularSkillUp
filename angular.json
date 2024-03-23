@@ -25,10 +25,6 @@
             "inlineStyleLanguage": "sass",
             "assets": ["src/favicon.svg", "src/assets"],
             "styles": [
-              {
-                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
-              },
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.sass",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
@@ -97,10 +93,6 @@
             "inlineStyleLanguage": "sass",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              {
-                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
-              },
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.sass",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",

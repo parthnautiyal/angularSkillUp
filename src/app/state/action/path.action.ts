@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import { Path, PathData } from '../../models/Path';
-import { EnrolledPath } from 'src/app/models/EnrolledPath';
 
 // Action for loading all paths
 export const loadAllPaths = createAction('[Path] Load All Paths');

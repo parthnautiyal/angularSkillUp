@@ -28,7 +28,10 @@ export class PathCourseCardComponent implements OnInit {
     isFavourite: false,
     progress: 0,
     enrolledAt: '',
-    completedAt: null,
+    completedAt: '',
+    noOfChapters: 0,
+    updatedAt: '',
+    level: 0,
   };
   constructor() {
     console.log(this.courseData);

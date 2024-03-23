@@ -30,7 +30,11 @@ export const selectChapterData = createSelector(
   selectCourseState,
   (state) => state.chapterData
 );
-export const CourseAboutInfo = createSelector(
+export const selectCourseAboutInfo = createSelector(
   selectCourseState,
   (state) => state.courseAboutInfo
+);
+export const selectFavoritecourses = createSelector(
+  selectCourseState,
+  (state) => state.favoriteCourses
 );

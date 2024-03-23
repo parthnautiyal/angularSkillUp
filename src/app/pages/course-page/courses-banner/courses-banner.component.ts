@@ -1,6 +1,9 @@
 import { ActivatedRoute } from '@angular/router';
-import { CourseDataService } from '../../../services/course-data.service';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { loadCourseAboutInfo } from 'src/app/state/action/course.action';
+import { selectCourseAboutInfo } from 'src/app/state/selector/course.selector';
+import { Course } from 'src/app/models/Course';
 
 @Component({
   selector: 'app-courses-banner',
@@ -9,22 +12,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesBannerComponent implements OnInit {
   id: string = '';
-  progress: number = 75;
 
-  CourseDetails: any = {};
-  constructor(
-    private courseDataService: CourseDataService,
-    private router: ActivatedRoute
-  ) {
+  CourseDetails: Course = {
+    id: 0,
+    name: '',
+    courseName: '',
+    imageUrl: '',
+    isAccessible: false,
+    description: '',
+    about: '',
+    createdBy: {
+      id: 0,
+      name: '',
+      imageUrl: '',
+      email: '',
+    },
+    createdAt: '',
+    isFavourite: false,
+    progress: 0,
+    enrolledAt: '',
+    completedAt: '',
+    noOfChapters: 0,
+    updatedAt: '',
+    level: 0,
+  };
+  constructor(private store: Store, private router: ActivatedRoute) {
     this.id = router.snapshot.params['id'];
-    this.courseDataService.getCourseAboutInfo(this.id).subscribe((data) => {
-      this.CourseDetails = data.valueOf();
-      this.CourseDetails = this.CourseDetails.data;
-      console.log(this.CourseDetails);
-    });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.dispatch(loadCourseAboutInfo({ courseId: this.id }));
+    this.store.select(selectCourseAboutInfo).subscribe((courseData) => {
+      this.CourseDetails = courseData;
+    });
+  }
   isButtonRed: boolean = false;
 
   toggleColor() {

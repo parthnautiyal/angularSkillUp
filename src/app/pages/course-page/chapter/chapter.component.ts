@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseDataService } from '../../../services/course-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Chapter } from 'src/app/models/Chapter';
 import { loadChapterData } from 'src/app/state/action/course.action';

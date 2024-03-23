@@ -1,5 +1,5 @@
 <div *ngIf="!isProfile" class="batch-card-parent-div">
-  <div class="batch-card-container" [appRandomColor]="index" >
+  <div class="batch-card-container" [appRandomColor]="index">
     <div class="batch-card-content">
       <div class="batch-title">{{ batchData.name }}</div>
       <div class="stream">Stream: {{ batchData.streamName }}</div>
@@ -9,9 +9,9 @@
         {{ batchData.noOfStudents }} Students
       </div>
       <div class="date">
-        Start Date: {{ batchData.createdAt | date: "dd-MM-YYYY" }}
+        Start Date: {{ batchData.createdAt | date : "dd-MM-YYYY" }}
         <br />
-        End Date: {{ batchData.endDate | date: "dd-MM-YYYY" }}
+        End Date: {{ batchData.endDate | date : "dd-MM-YYYY" }}
       </div>
     </div>
   </div>
@@ -24,7 +24,9 @@
       <div class="batch-type">{{ batchData.streamName }}</div>
     </div>
     <div class="progressCircle">
-      <app-circular-progress-bar [progress]="progress"></app-circular-progress-bar>
+      <app-circular-progress-bar
+        [progress]="batchData.progress"
+      ></app-circular-progress-bar>
     </div>
   </div>
 </div>
