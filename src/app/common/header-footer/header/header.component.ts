@@ -29,19 +29,30 @@ export class HeaderComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   clickout(event: MouseEvent) {
     const clickedElement = event.target as Node;
-    if (this.isDropdownOpen && !document.querySelector('.dropdown')?.contains(clickedElement)){
+    if (
+      this.isDropdownOpen &&
+      !document.querySelector('.dropdown')?.contains(clickedElement)
+    ) {
       this.isDropdownOpen = false;
-    }
-    else if (document.querySelector('.profile-image')?.contains(clickedElement) && !this.isDropdownOpen) {
+    } else if (
+      document.querySelector('.profile-image')?.contains(clickedElement) &&
+      !this.isDropdownOpen
+    ) {
       this.isDropdownOpen = true;
     }
-    if (this.isOrgDropdownOpen && !document.querySelector('.user-organization')?.contains(clickedElement)){
+    if (
+      this.isOrgDropdownOpen &&
+      !document.querySelector('.user-organization')?.contains(clickedElement)
+    ) {
       this.isOrgDropdownOpen = false;
-    }else if (document.querySelector('.org-image')?.contains(clickedElement) && !this.isDropdownOpen){
+    } else if (
+      document.querySelector('.org-image')?.contains(clickedElement) &&
+      !this.isDropdownOpen
+    ) {
       this.isOrgDropdownOpen = true;
     }
   }
-  
+
   closeDropdown() {
     this.isOrgDropdownOpen = false;
     this.isDropdownOpen = false;
