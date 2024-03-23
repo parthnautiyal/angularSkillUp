@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 import { Batch } from 'src/app/models/Batch';
 import { APIResponse } from 'src/app/models/ApiResponse';
-import { API } from 'src/app/constants/enums/API';
+import { API } from 'src/app/Constants/enums/API';
 
 @Injectable()
 export class BatchEffects {

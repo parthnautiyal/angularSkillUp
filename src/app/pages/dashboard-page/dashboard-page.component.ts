@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { loadAllCourses } from 'src/app/state/action/course.action';
 import { loadAllBatches } from 'src/app/state/action/batch.action';
 import {
@@ -9,7 +9,7 @@ import {
 } from 'src/app/state/selector/course.selector';
 import { Course } from 'src/app/models/Course';
 import { Batch } from 'src/app/models/Batch';
-import { selectBatchs } from 'src/app/state/selector/batch.selector';
+import { selectBatchs, selectBatchsError } from 'src/app/state/selector/batch.selector';
 import { HEADINGS_TITLE } from 'src/app/constants/headingsTitle';
 import { loadAllPaths } from 'src/app/state/action/path.action';
 import { selectPaths } from 'src/app/state/selector/path.selector';
