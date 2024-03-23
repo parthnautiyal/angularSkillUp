@@ -1,75 +1,75 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { UserComponent } from "./user/user.component";
-import { AllSectionContainerComponent } from "../shared/containers/all-section-container/all-section-container.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { UserComponent } from './user/user.component';
+import { AllSectionContainerComponent } from '../shared/containers/all-section-container/all-section-container.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: UserComponent,
     children: [
       {
-        path: "",
-        redirectTo: "/login",
-        pathMatch: "full",
+        path: '',
+        redirectTo: '/login',
+        pathMatch: 'full',
       },
       {
-        path: "dashboard",
+        path: 'dashboard',
         loadChildren: () =>
-          import("../pages/dashboard-page/dashboard-page.module").then(
+          import('../pages/dashboard-page/dashboard-page.module').then(
             (e) => e.DashboardPageModule
           ),
       },
       {
-        path: "pathdashboard/:id",
+        path: 'pathdashboard/:id',
         loadChildren: () =>
-          import("../pages/path-page/path-page.module").then(
+          import('../pages/path-page/path-page.module').then(
             (e) => e.PathPageModule
           ),
       },
       {
-        path: "batchpage/:id",
+        path: 'batchpage/:id',
         loadChildren: () =>
-          import("../pages/batch-page/batch-page.module").then(
+          import('../pages/batch-page/batch-page.module').then(
             (m) => m.BatchPageModule
           ),
       },
       {
-        path: "course/:id",
+        path: 'course/:id',
         loadChildren: () =>
-          import("../pages/course-page/course-page.module").then(
+          import('../pages/course-page/course-page.module').then(
             (m) => m.CoursePageModule
           ),
       },
       {
-        path: "user",
+        path: 'user',
         loadChildren: () =>
-          import("../pages/profile-page/profile-page.module").then(
+          import('../pages/profile-page/profile-page.module').then(
             (m) => m.ProfilePageModule
           ),
       },
       {
-        path: "paths/all",
+        path: 'paths/all',
         component: AllSectionContainerComponent,
       },
       {
-        path: "courses/all",
+        path: 'courses/all',
         component: AllSectionContainerComponent,
       },
       {
-        path: "batches/all",
+        path: 'batches/all',
         component: AllSectionContainerComponent,
       },
       {
-        path: "paths/ongoing",
+        path: 'paths/ongoing',
         component: AllSectionContainerComponent,
       },
       {
-        path: "courses/ongoing",
+        path: 'courses/ongoing',
         component: AllSectionContainerComponent,
       },
       {
-        path: "courses/favourites",
+        path: 'courses/favourites',
         component: AllSectionContainerComponent,
       },
     ],

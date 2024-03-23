@@ -1,6 +1,6 @@
 <div class="pathCard">
   <img
-    [routerLink]="['/', RouterLinks.PATHS, singlePath.pathId]"
+    [routerLink]="['/', RouterLinks.PATHS, singlePath.id]"
     [src]="singlePath.imageUrl"
     [alt]="singlePath.name"
   />
@@ -12,7 +12,7 @@
   <div *ngIf="isProfile" class="progressCircle">
     <app-circular-progress-bar
       class="circle"
-      [progress]="86"
+      [progress]="singlePath.progress"
     ></app-circular-progress-bar>
   </div>
 </div>

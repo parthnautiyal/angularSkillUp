@@ -2,10 +2,7 @@
 <div class="batch-component-container">
   <app-batch-details [batchData]="batchDetails"></app-batch-details>
   <div class="batch-path">
-    <app-path-course-card
-      [flag]="true"
-      [courseData]="paths[0]"
-    ></app-path-course-card>
+    <app-path-course-card [courseData]="paths"></app-path-course-card>
   </div>
   <app-batch-info-card-container
     [cardsData]="trainerData"

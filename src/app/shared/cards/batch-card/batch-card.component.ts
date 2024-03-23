@@ -9,7 +9,6 @@ import { Batch } from 'src/app/models/Batch';
 export class BatchCardComponent implements OnInit {
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
-  progress: number = 75;
 
   @Input() index: number = 0;
   @Input() batchData: Batch = {
@@ -20,6 +19,7 @@ export class BatchCardComponent implements OnInit {
       name: '',
       imageUrl: '',
       email: '',
+      isActive: false,
     },
     createdAt: '',
     endDate: '',
@@ -28,10 +28,15 @@ export class BatchCardComponent implements OnInit {
     noOfStudents: 0,
     noOfPaths: 0,
     isAccessible: false,
+    startDate: '',
+    stream: {
+      streamId: 0,
+      streamName: '',
+    },
+    progress: 0,
   };
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }

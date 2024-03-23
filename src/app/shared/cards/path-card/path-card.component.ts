@@ -10,9 +10,7 @@ export class PathCardComponent implements OnInit {
   RouterLinks = RouterLinks;
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
-
-  progress: number = 69;
-  @Input() singlePath: any = {
+  @Input() singlePath: Path = {
     id: 0,
     name: '',
     pathName: '',

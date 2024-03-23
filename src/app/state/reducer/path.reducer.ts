@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as PathActions from '../action/path.action';
 import { Path, PathData } from '../../models/Path';
-import { EnrolledPath } from 'src/app/models/EnrolledPath';
 
 export interface PathState {
   allPaths: Path[];
