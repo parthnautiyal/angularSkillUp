@@ -1,16 +1,9 @@
 <p-toast></p-toast>
 <div class="mainContainer">
   <app-dashboard-header></app-dashboard-header>
-  <!-- <app-error-card *ngIf="isError"></app-error-card> -->
-  <ng-container *ngIf="loading">
-    <div class="loading-container">
-      <app-dashboard-shimmer class="shimmer" [shimmerCount]=6></app-dashboard-shimmer>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="!loading">
-    <ng-container *ngFor="let item of headingsTitle">
-      <app-card-container *ngIf="!isError" [title]="item"></app-card-container>
-      <app-error-card *ngIf="isError"></app-error-card>
-    </ng-container>
+
+  <ng-container *ngFor="let item of headingsTitle">
+    <app-card-container [title]="item"></app-card-container>
+    <!-- <app-error-card *ngIf="error[i]"></app-error-card> -->
   </ng-container>
 </div>
