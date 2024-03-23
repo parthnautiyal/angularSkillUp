@@ -4,6 +4,7 @@ export interface Batch {
   createdAt: string;
   createdBy: User;
   endDate: string;
+  startDate: string;
   id: number;
   isAccessible: boolean;
   name: string;
@@ -11,4 +12,9 @@ export interface Batch {
   noOfStudents: number;
   noOfTrainers: number;
   streamName: string;
+  stream: {
+    streamId: number;
+    streamName: string;
+  };
+  progress: number;
 }
