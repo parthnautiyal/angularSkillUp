@@ -32,7 +32,7 @@ export class CourseCardComponent implements OnInit {
     completedAt: '',
     noOfChapters: 0,
     updatedAt: '',
-    level: 0
+    level: 0,
   };
   constructor() {}
 
