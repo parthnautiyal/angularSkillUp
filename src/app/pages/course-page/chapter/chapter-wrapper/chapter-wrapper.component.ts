@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PathDataService } from '../../../../services/path-data.service';
+import { Course } from 'src/app/models/Course';
+import { Chapter } from 'src/app/models/Chapter';
 
 @Component({
   selector: 'app-chapter-wrapper',
@@ -9,7 +11,13 @@ import { PathDataService } from '../../../../services/path-data.service';
 export class ChapterWrapperComponent implements OnInit {
   isClicked = true;
 
-  @Input() courseTitles: any = {};
+  @Input() courseTitles: Chapter = {
+    id: 0,
+    name: '',
+    resourceResponses: [],
+    quizResponses: [],
+    progress: 0,
+  };
   @Input() index: number = 0;
 
   handleClick() {

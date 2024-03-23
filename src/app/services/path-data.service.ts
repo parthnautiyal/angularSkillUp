@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { Observable } from 'rxjs';
-import { Path } from '../models/Path';
 @Injectable({
   providedIn: 'root',
 })
 export class PathDataService {
   user: any = {
     token:
-      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTA0NjIzNCwiaWF0IjoxNzExMDQ1OTM0LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.Qs8p2LqVCi4C0jFyoyLvVJB8vGzsgIuGVGz4Kyjoo89DuBa0jBiSv3b-N2XrtZ0FO8B_Qx7I0l5VRZI-GuQppuCW-fn04uTFZ_eX9aBRBYgcEfGkESbH1WoQwBu_H4OSIGv8trBLBbJeQ1yErGn-LYpdbmZL_ONXWCAaJtoa9j6m09NCFGVOobvY4Ix2Jfuy5z5ezwouYKUDg8Ufr_zyPW6WP7hRWz0cMSJrg3Y3U4GKJx6WRn1kN0Yi2peZE_RS8cPIy8NKh_4V9Iz5ZesaQ_5BsVwPhwuzb7qqPJB-4Po-mG95pTp9FE5qN4tpNEzIzIyCkonCn4mZ0kjIR1_DAg',
+      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTE3MzkzNywiaWF0IjoxNzExMTczNjM3LCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.I7PeGHmCRWRz33_o5hu63u8oOjdJDZJG_w318QRhXGoUkBxWfLMWfnjwTO1Nl17FCFucZaBkEEtB2jlBmLYxyzQjnbcZ5jt2Eqc3BQyk5STgcWhmP1nTTUIA8AmGigaKDapkFX_XLbwd6jhT2PGcNkwadhg8EtqE3h5MwMwDnMz0-g5_Xg2sqy3Tcw038ApqBwA_f2LDqAA7kyOO4kJicBUDBSmP2y52ARawS-kUAP34AEVlkw8pZZKCiqs33GgYaSZEauWJtPHapQAnvVn3RezjnSt-Nr_O3plzdjpHKPCujXYpq-KjzN_-9JewwbVJlPcAOQ7iMcATHA-HaRCeNA',
     refreshToken:
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTE3MTgzMiwiaWF0IjoxNzExMDg1NDMyLCJpc3MiOiJHT09HTEUiLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIn0.TiWndyndMIOggHsCTdm-M-HWnm03jWVZYn8cyCf8qQ2v35WtBFhaVGtBitbFmt3PAC-StKQXdttAa8_gsTyliHyFItiRkFseyp84L_6RPXSh5PlngQ5oTbm7dRtisB34XuhEzQVzNq0TSi2uh6lL393WlIRVnmeChEIu29I7ZrNHv3l1C0SJ89ZNhRZm8cK0z6Nkn2py6MZI67AlBp674jELeLDW7yUdKo047ODoEJdNbzimuEYMJWkbMzNJBxSjb8pOi6BavNGmeLpMbxjH6VHHPlbr_T5_hHyAsDxiaXnGYbKyxqErtfB9GjcBBkH_mn64xNnvi5evPF-qFreiWA',
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTI2MDAzNywiaWF0IjoxNzExMTczNjM3LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20ifQ.Px9Q2G_LEWWvxW5fzn-8zJlauk5TT0Da2iOMOo1iNYuqDTPhvgGNIhGnSO13xshNccm2fm3MRyJIsoeIGE5GL8hFHquS01iXAEskf4zjx3bVb1tAuO0yX2z6Jo1nCflSHA1AlALL0qslGnQe3pA2P4N11J9IYFWdb65gxZtJJbQ3M_Kb9OXJtDU3VwI9gtr6lYfcoGMxOWEsj4fTAwnI6XWk0tB6MONYqD7azDD6tg9Ayg1u0eBLVleac6cb8GXrkYLi9rkpJfiRQRNcZPiaLjvAqkcVrJnRAZTeKFH55jiKT3KI9I8Ej1jlZnCtLALLpOLyeyu5E3kLUBO4ZN9UVQ',
   };
 
   refreshHeader = new HttpHeaders({
@@ -31,7 +28,6 @@ export class PathDataService {
     //   });
     // }, 60000);
   }
-  private cache: any = null;
   getRefreshToken() {
     return this.http.post(
       'https://api.training.zopsmart.com/login/refresh',

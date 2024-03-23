@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Batch } from '../../models/Batch';
-import { Path, PathData } from 'src/app/models/Path';
+import { User } from 'src/app/models/User';
+import { Course } from 'src/app/models/Course';
 
 // Action for loading all batches
 export const loadAllBatches = createAction('[Batch] Load All Batches');
@@ -23,33 +24,27 @@ export const loadBatchById = createAction(
 
 export const loadBatchByIdSuccess = createAction(
   '[Batch] Load Batch By ID Success',
-  props<{ batch: Batch }>()
+  props<{ batchDetails: Batch }>()
 );
 export const loadBatchByIdFailed = createAction(
   '[Batch] Load Path By ID Failed',
   props<{ error: any }>()
 );
-
-// export const loadBatchByIdFailed = createAction(
-//   '[Batch] Load Batch By ID Failed',
-//   props<{ error: any }>()
-// );
-
 // // Action for loading path by ID
-// export const loadPathById = createAction(
-//   '[Path] Load Path By ID',
-//   props<{ id: string }>()
-// );
+export const loadBatchPathById = createAction(
+  '[Path] Load Path By ID',
+  props<{ id: string }>()
+);
 
-// export const loadPathByIdSuccess = createAction(
-//   '[Path] Load Path By ID Success',
-//   props<{ pathById: PathData }>()
-// );
+export const loadBatchPathByIdSuccess = createAction(
+  '[Path] Load Path By ID Success',
+  props<{ pathById: Course }>()
+);
 
-// export const loadPathByIdFailed = createAction(
-//   '[Path] Load Path By ID Failed',
-//   props<{ error: any }>()
-// );
+export const loadBatchPathByIdFailed = createAction(
+  '[Path] Load Path By ID Failed',
+  props<{ error: any }>()
+);
 
 // Action for loading trainers by ID
 export const loadTrainersById = createAction(
@@ -59,7 +54,7 @@ export const loadTrainersById = createAction(
 
 export const loadTrainersByIdSuccess = createAction(
   '[Batch] Load Trainers By ID Success',
-  props<{ trainers: any[] }>()
+  props<{ trainers: User[] }>()
 );
 
 export const loadTrainersByIdFailed = createAction(
@@ -75,7 +70,7 @@ export const loadStudentsById = createAction(
 
 export const loadStudentsByIdSuccess = createAction(
   '[Batch] Load Students By ID Success',
-  props<{ students: any[] }>()
+  props<{ students: User[] }>()
 );
 
 export const loadStudentsByIdFailed = createAction(

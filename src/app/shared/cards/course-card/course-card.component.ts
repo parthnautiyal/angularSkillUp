@@ -30,6 +30,9 @@ export class CourseCardComponent implements OnInit {
     progress: 0,
     enrolledAt: '',
     completedAt: '',
+    noOfChapters: 0,
+    updatedAt: '',
+    level: 0
   };
   constructor() {}
 

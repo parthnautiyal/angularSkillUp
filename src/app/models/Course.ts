@@ -16,5 +16,8 @@ export interface Course {
   isFavourite: boolean;
   progress: number;
   enrolledAt: string;
-  completedAt: string | null;
+  completedAt: string;
+  noOfChapters: number;
+  updatedAt: string;
+  level: number;
 }
