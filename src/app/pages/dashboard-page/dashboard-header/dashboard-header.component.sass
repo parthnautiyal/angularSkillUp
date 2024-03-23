@@ -19,6 +19,7 @@
     border-radius: 10px
     box-sizing: border-box
     color: var(--primary-font-color)
+    overflow: hidden
 
 .enrolled-path
     display: flex
@@ -68,7 +69,12 @@ span
     font-size: 1.6rem
     margin-bottom: 10px
     box-sizing: border-box
-    overflow: scroll
+
+    &.greeting
+        display: -webkit-box
+        -webkit-line-clamp: 1
+        -webkit-box-orient: vertical
+        overflow: hidden
 
 .play-button
     position: absolute

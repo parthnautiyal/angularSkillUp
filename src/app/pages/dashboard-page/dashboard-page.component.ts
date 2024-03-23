@@ -6,6 +6,7 @@ import { ERROR, HEADINGS_TITLE } from 'src/app/constants/headingsTitle';
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.sass'],
+  providers: [MessageService],
 })
 export class DashboardPageComponent implements OnInit {
   constructor(
