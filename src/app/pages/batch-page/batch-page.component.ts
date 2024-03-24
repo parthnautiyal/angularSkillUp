@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import {
   loadBatchById,
-  loadBatchPathById,
+  loadBatchPathsById,
   loadStudentsById,
   loadTrainersById,
 } from 'src/app/state/action/batch.action';
@@ -21,8 +21,6 @@ import { User } from 'src/app/models/User';
 import { Batch } from 'src/app/models/Batch';
 import { Course } from 'src/app/models/Course';
 import { Observable, combineLatest } from 'rxjs';
-import { Path } from 'src/app/models/Path';
-import { ThemeService } from 'src/app/services/theme.service';
 import { selectPathsLoading } from 'src/app/state/selector/path.selector';
 
 @Component({
@@ -97,7 +95,7 @@ export class BatchPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadBatchById({ id: this.id }));
-    this.store.dispatch(loadBatchPathById({ id: this.id }));
+    this.store.dispatch(loadBatchPathsById({ id: this.id }));
     this.store.dispatch(loadStudentsById({ id: this.id }));
     this.store.dispatch(loadTrainersById({ id: this.id }));
     this.store.select(selectBatchById).subscribe((batch) => {

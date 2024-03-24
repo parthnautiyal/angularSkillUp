@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { Path } from '../models/Path';
+import { APIResponse } from '../models/ApiResponse';
 @Injectable({
   providedIn: 'root',
 })
@@ -54,6 +57,25 @@ export class MiscellaneousService {
       'https://api.training.zopsmart.com/student/favourites/' + courseId
     );
   }
-
+  private PathDataSubject = new BehaviorSubject<any>({});
+  private loading = new BehaviorSubject<boolean>(true);
+  pathsData$ = this.PathDataSubject.asObservable();
+  loading$ = this.loading.asObservable();
+  
+  
+  getPathData(id:number){
+     this.http.get(
+      'https://api.training.zopsmart.com/students/paths/' +
+                  id +
+                  '?projection=course'
+    ).subscribe((res:any)=>{
+      if (res!=null){
+        this.PathDataSubject.next(res.data);
+          this.loading.next(false);
+      }else{
+        this.loading.next(true);
+      }
+    });
+  }
   // body: JSON.stringify({ courseId: courseId }),
 }

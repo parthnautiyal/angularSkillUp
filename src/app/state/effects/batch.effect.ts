@@ -80,7 +80,7 @@ export class BatchEffects {
   );
   loadBatchPaths$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(BatchActions.loadBatchPathById),
+      ofType(BatchActions.loadBatchPathsById),
       switchMap(({ id }) =>
         this.http.get<APIResponse<Course[]>>(this.url + id + '/paths').pipe(
           map((pathData) =>
