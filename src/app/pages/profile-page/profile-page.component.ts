@@ -16,9 +16,9 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     localStorage.setItem('profile', 'true');
     console.log('init');
-    this.store.dispatch(loadEnrolledPaths());
-    this.store.dispatch(loadEnrolledCourses());
-    this.store.dispatch(loadAllBatches());
+    // this.store.dispatch(loadEnrolledPaths());
+    // this.store.dispatch(loadEnrolledCourses());
+    // this.store.dispatch(loadAllBatches());
   }
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {

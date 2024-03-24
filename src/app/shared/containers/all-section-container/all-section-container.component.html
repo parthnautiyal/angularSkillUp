@@ -3,12 +3,12 @@
     <div class="page-header">
       {{ prefix | titlecase }} {{ heading | titlecase }}
     </div>
-    <ng-container *ngIf="loading">
+    <div *ngIf="loading" class="paths-box">
       <app-dashboard-shimmer
-      class="shimmer"
-      [shimmerCount]="9"
-    ></app-dashboard-shimmer>
-    </ng-container>
+        class="shimmer"
+        [shimmerCount]="9"
+      ></app-dashboard-shimmer>
+    </div>
     <div *ngIf="!loading" class="paths-box">
       <ng-container *ngIf="heading == Title.PATHS">
         <div *ngFor="let item of allPathsData" class="paths-card-wrapper">
@@ -23,7 +23,10 @@
       </ng-container>
 
       <ng-container *ngIf="heading == Title.BATCHES">
-        <div *ngFor="let item of allBatchesData;let i = index" class="paths-card-wrapper">
+        <div
+          *ngFor="let item of allBatchesData; let i = index"
+          class="paths-card-wrapper"
+        >
           <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
         </div>
       </ng-container>

@@ -7,13 +7,14 @@ import { Store } from '@ngrx/store';
 import {
   selectCourses,
   selectCoursesError,
+  selectCoursesLoading,
   selectEnrolledCourses,
   selectEnrolledCoursesError,
 } from 'src/app/state/selector/course.selector';
-import { Observable, take } from 'rxjs';
 import {
   selectBatchs,
   selectBatchsError,
+  selectBatchsLoading,
 } from 'src/app/state/selector/batch.selector';
 import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
@@ -22,6 +23,7 @@ import {
   selectEnrolledPathsError,
   selectPaths,
   selectPathsError,
+  selectPathsLoading,
 } from 'src/app/state/selector/path.selector';
 import {
   loadAllCourses,
@@ -64,14 +66,6 @@ export class CardContainerComponent implements OnInit {
     message: '',
     code: 0,
   };
-  errorCourseEnrolled: Error = {
-    message: '',
-    code: 0,
-  };
-  errorPathEnrolled: Error = {
-    message: '',
-    code: 0,
-  };
 
   constructor(
     private store: Store,
@@ -85,7 +79,6 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectCourses).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allCourses = res;
-            this.loading = false;
             this.error = false;
           }
         });
@@ -94,8 +87,17 @@ export class CardContainerComponent implements OnInit {
             this.errorCourse.message = res.message.split('`').slice(1);
             this.errorCourse.code = res.message.split('`').slice(0, 1);
             console.log('Courses Error -> ' + this.errorCourse);
-            this.loading = false;
             this.error = true;
+          }
+        });
+        this.store.select(selectCoursesLoading).subscribe((res) => {
+          console.log('courses loading', res);
+          if (res == false) {
+            setTimeout(() => {
+              this.loading = res;
+            }, 500);
+          } else {
+            this.loading = res;
           }
         });
       }
@@ -104,7 +106,6 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectBatchs).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allBatches = res;
-            this.loading = false;
             this.error = false;
           }
         });
@@ -112,11 +113,18 @@ export class CardContainerComponent implements OnInit {
           if (res != null) {
             this.errorBatch.message = res.message.split('`').slice(1);
             this.errorBatch.code = res.message.split('`').slice(0, 1);
-            console.log('Batch Error -> ' + this.errorBatch.message);
-            console.log('Batch Error -> ' + this.errorBatch.code);
-
-            this.loading = false;
             this.error = true;
+            console.log('bTCHES ERROR' + res);
+          }
+        });
+        this.store.select(selectBatchsLoading).subscribe((res) => {
+          console.log('batches loading', res);
+          if (res == false) {
+            setTimeout(() => {
+              this.loading = res;
+            }, 500);
+          } else {
+            this.loading = res;
           }
         });
       }
@@ -125,7 +133,6 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectPaths).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allPaths = res;
-            this.loading = false;
             this.error = false;
           }
         });
@@ -136,8 +143,17 @@ export class CardContainerComponent implements OnInit {
             this.errorPath.message = res.message.split('`').slice(1);
             this.errorPath.code = res.message.split('`').slice(0, 1);
             console.log('Paths Error -> ' + this.errorPath.code);
-            this.loading = false;
             this.error = true;
+          }
+        });
+        this.store.select(selectPathsLoading).subscribe((res) => {
+          console.log('paths loading', res);
+          if (res == false) {
+            setTimeout(() => {
+              this.loading = res;
+            }, 500);
+          } else {
+            this.loading = res;
           }
         });
       }
@@ -154,14 +170,21 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectBatchs).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allBatches = res;
-            this.loading = false;
           }
         });
         this.store.select(selectBatchsError).subscribe((res) => {
           if (res != null) {
             console.log(res);
-            this.loading = false;
             this.error = true;
+          }
+        });
+        this.store.select(selectBatchsLoading).subscribe((res) => {
+          if (res == false) {
+            setTimeout(() => {
+              this.loading = res;
+            }, 500);
+          } else {
+            this.loading = res;
           }
         });
       }
@@ -171,16 +194,23 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectEnrolledCourses).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allCourses = res;
-            this.loading = false;
             this.errorEnrolled = false;
           }
         });
         this.store.select(selectEnrolledCoursesError).subscribe((res) => {
           if (res != null) {
-            this.errorCourseEnrolled.message = res.message.split('`').slice(1);
-            this.errorCourseEnrolled.code = res.message.split('`').slice(0, 1);
-            this.loading = false;
+            this.errorCourse.message = res.message.split('`').slice(1);
+            this.errorCourse.code = res.message.split('`').slice(0, 1);
             this.errorEnrolled = true;
+          }
+        });
+        this.store.select(selectCoursesLoading).subscribe((res) => {
+          if (res == false) {
+            setTimeout(() => {
+              this.loading = res;
+            }, 500);
+          } else {
+            this.loading = res;
           }
         });
       }
@@ -189,15 +219,23 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectEnrolledPaths).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allPaths = res;
-            this.loading = false;
+            this.errorEnrolled=false;
           }
         });
         this.store.select(selectEnrolledPathsError).subscribe((res) => {
           if (res != null) {
-            this.errorPathEnrolled.message = res.message.split('`').slice(1);
-            this.errorPathEnrolled.code = res.message.split('`').slice(0, 1);
-            this.loading = false;
+            this.errorPath.message = res.message.split('`').slice(1);
+            this.errorPath.code = res.message.split('`').slice(0, 1);
             this.errorEnrolled = true;
+          }
+        });
+        this.store.select(selectPathsLoading).subscribe((res) => {
+          if (res == false) {
+            setTimeout(() => {
+              this.loading = res;
+            }, 500);
+          } else {
+            this.loading = res;
           }
         });
       }

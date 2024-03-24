@@ -37,8 +37,8 @@
         </ng-container>
       </ng-container>
       <app-error-card
-        [title]="Title.COURSES"
-        [error]="errorPathEnrolled"
+        [title]="Title.PATHS"
+        [error]="errorPath"
         *ngIf="errorEnrolled"
       ></app-error-card>
       <app-error-card
@@ -59,7 +59,7 @@
       </ng-container>
       <app-error-card
         [title]="Title.COURSES"
-        [error]="errorCourseEnrolled"
+        [error]="errorCourse"
         *ngIf="errorEnrolled"
       ></app-error-card>
       <app-error-card

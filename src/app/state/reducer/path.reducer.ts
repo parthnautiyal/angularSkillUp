@@ -50,12 +50,14 @@ export const pathReducer = createReducer(
   on(PathActions.loadAllPathsSuccess, (state, { paths }) => ({
     ...state,
     allPaths: paths,
+    isLoading: false,
     error: null,
   })),
 
   on(PathActions.loadAllPathsFailed, (state, { error }) => ({
     ...state,
     allPaths: [],
+    isLoading: false,
     error,
   })),
   on(PathActions.loadPathById, (state, { id }) => ({
@@ -76,9 +78,17 @@ export const pathReducer = createReducer(
     error,
   })),
 
+  on(PathActions.loadEnrolledPaths, (state) => ({
+    ...state,
+
+    isLoading: true,
+    error: null,
+  })),
+
   on(PathActions.loadEnrolledPathsSuccess, (state, { enrolledPaths }) => ({
     ...state,
     enrolledPaths,
+    isLoading: false,
     error: null,
   })),
 
@@ -86,6 +96,7 @@ export const pathReducer = createReducer(
     ...state,
     enrolledPaths: [],
     errorEnrolled: error,
+    isLoading: false,
   })),
 
   on(
