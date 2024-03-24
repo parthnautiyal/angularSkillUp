@@ -37,7 +37,6 @@ export class PathInfoComponent implements OnInit {
     this.store.select(selectPathById).subscribe((path) => {
       this.pathData = path;
       this.about = this.pathData.about.split('/n');
-      console.log(this.about);
     });
   }
 }

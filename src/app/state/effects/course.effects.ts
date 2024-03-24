@@ -26,7 +26,6 @@ export class CourseEffects {
               CourseActions.loadAllCoursesSuccess({ courses: courses.data })
             ),
             catchError((error) => {
-              console.log('Error -> ' + error);
               //of(CourseActions.loadAllCoursesFailed({ error }));
               return of(CourseActions.loadAllCoursesFailed({ error }));
             })

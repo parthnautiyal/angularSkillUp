@@ -217,7 +217,6 @@ export class AllSectionContainerComponent implements OnInit {
       }
     });
     this.store.select(selectFavoritecourses).subscribe((res) =>{
-      console.log(res);
       if (res.length > 0) {
         this.allCoursesData = res;
         this.loading = false;
@@ -230,7 +229,6 @@ export class AllSectionContainerComponent implements OnInit {
   }
   ngOnInit(): void {
     this.activatedRoute.url.subscribe((urlSegments) => {
-      console.log(urlSegments);
       if (urlSegments.length >= 1) {
         this.heading = urlSegments[0].path;
       }
@@ -255,8 +253,6 @@ export class AllSectionContainerComponent implements OnInit {
       if (this.prefix === Prefix.MY) {
         this.getEnrolledCourses();
       }
-      console.log(this.Prefix.FAVOURITES);
-      console.log(this.prefix);
       if (this.prefix === Prefix.FAVOURITES) {
         this.getFavouriteCourses();
       }
