@@ -3,12 +3,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout.component';
 import { UserComponent } from './user/user.component';
-import { RouterModule } from '@angular/router';
 import { LayoutRoutingModule } from './layout-routing.module';
-import { ContainersModule } from '../shared/containers/containers.module';
+import { ErrorPageModule } from '../error-page/error-page.module';
 @NgModule({
   declarations: [LayoutComponent, UserComponent],
-  imports: [CommonModule, LayoutRoutingModule, HeaderFooterModule],
+  imports: [CommonModule, LayoutRoutingModule, HeaderFooterModule,ErrorPageModule],
   exports: [LayoutComponent],
 })
 export class LayoutModule {}
