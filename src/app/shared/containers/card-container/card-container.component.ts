@@ -36,6 +36,8 @@ import {
 } from 'src/app/state/action/path.action';
 import { Error } from 'src/app/models/Error';
 import { MessageService } from 'primeng/api';
+import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
+import { BatchDetails, EnrolledBatches } from 'src/app/models/EnrolledBatches';
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
@@ -52,6 +54,8 @@ export class CardContainerComponent implements OnInit {
   allPaths: Path[] = [];
   allCourses: Course[] = [];
   allBatches: Batch[] = [];
+  enrolledBatches: BatchDetails[] = [];
+
   @Input() title: string = '';
   @Input() prefixWord: string = '';
   errorBatch: Error = {
@@ -70,9 +74,13 @@ export class CardContainerComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private miscService: MiscellaneousService
   ) {}
   ngOnInit(): void {
+    this.miscService.getBatchesData().subscribe((res) => {
+      this.enrolledBatches = res.data.enrolledBatches;
+    });
     if (this.router.url == '/dashboard') {
       if (this.title == Title.COURSES) {
         this.store.dispatch(loadAllCourses());
