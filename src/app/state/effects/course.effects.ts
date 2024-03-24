@@ -19,7 +19,7 @@ export class CourseEffects {
       switchMap(() =>
         this.http
           .get<APIResponse<Course[]>>(
-            this.url + '/courses?pageSize=12&pageNo=1'
+            this.url + '/courses?pageSize=122&pageNo=1'
           )
           .pipe(
             map((courses) =>
@@ -47,7 +47,7 @@ export class CourseEffects {
               })
             ),
             catchError((error) =>
-              of(CourseActions.loadAllCoursesFailed({ error }))
+              of(CourseActions.loadNoOfEnrolledCoursesFailed({ error }))
             )
           )
       )

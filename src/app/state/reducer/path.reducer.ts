@@ -8,6 +8,7 @@ export interface PathState {
   enrolledPaths: Path[];
   numberOfEnrolledPaths: number;
   error: any | null;
+  errorEnrolled: any | null;
   isLoading: boolean;
 }
 
@@ -34,6 +35,7 @@ export const initialPathState: PathState = {
   enrolledPaths: [],
   numberOfEnrolledPaths: 0,
   error: null,
+  errorEnrolled: null,
   isLoading: false,
 };
 
@@ -83,7 +85,7 @@ export const pathReducer = createReducer(
   on(PathActions.loadEnrolledPathsFailed, (state, { error }) => ({
     ...state,
     enrolledPaths: [],
-    error,
+    errorEnrolled: error,
   })),
 
   on(
