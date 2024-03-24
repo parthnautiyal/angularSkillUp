@@ -42,3 +42,7 @@ export const selectFavoritecourses = createSelector(
   selectCourseState,
   (state) => state.favoriteCourses
 );
+export const selectFavouriteCoursesLoading = createSelector(
+  selectCourseState,
+  (state) => state.isLoadingFavourite
+);
