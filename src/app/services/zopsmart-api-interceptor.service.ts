@@ -56,10 +56,45 @@ export class ZopsmartApiInterceptorService implements HttpInterceptor {
 
           this.error.message = 'Session Expired. Please login again';
           this.error.code = 401;
+        } else if (error.status === 404) {
+          this.error.message = 'Not Found';
+          this.error.code = 404;
+        } else if (error.status === 500) {
+          this.error.message = 'Internal Server Error';
+          this.error.code = 500;
+        } else if (error.status === 400) {
+          this.error.message = 'Bad Request';
+          this.error.code = 400;
+        } else if (error.status === 403) {
+          this.error.message = 'Forbidden';
+          this.error.code = 403;
+        } else if (error.status === 405) {
+          this.error.message = 'Method Not Allowed';
+          this.error.code = 405;
+        } else if (error.status === 409) {
+          this.error.message = 'Conflict';
+          this.error.code = 409;
+        } else if (error.status === 408) {
+          this.error.message = 'Request Timeout';
+          this.error.code = 408;
+        } else if (error.status === 503) {
+          this.error.message = 'Service Unavailable';
+          this.error.code = 503;
+        } else if (error.status === 504) {
+          this.error.message = 'Gateway Timeout';
+          this.error.code = 504;
+        } else if (error.status === 0) {
+          this.error.message = 'Network Error';
+          this.error.code = 0;
         } else {
+          console.log('Error Code -> ' + error.status);
+          console.log('Error Message -> ' + error.message);
+
           localStorage.setItem('refreshCount', (0).toString());
         }
-        return throwError(() => new Error(this.error.message));
+        return throwError(
+          () => new Error(this.error.code + '`' + this.error.message)
+        );
       })
     );
   }

@@ -26,6 +26,10 @@ export const selectEnrolledCourses = createSelector(
   selectCourseState,
   (state) => state.enrolledCourses
 );
+export const selectEnrolledCoursesError = createSelector(
+  selectCourseState,
+  (state) => state.errorEnrolled
+);
 export const selectChapterData = createSelector(
   selectCourseState,
   (state) => state.chapterData

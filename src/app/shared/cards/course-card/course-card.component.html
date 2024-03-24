@@ -21,7 +21,7 @@
     </div>
     <div *ngIf="isProfile" class="footer">
       <div class="course-state-date">
-        Start Date: {{ singleCourse.createdAt | date : "dd MMM yyyy" }}
+        Start Date: {{ singleCourse.enrolledAt | date : "dd MMM yyyy" }}
       </div>
       <div class="course-state-date">End Date: In Progress</div>
     </div>
