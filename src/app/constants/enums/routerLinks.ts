@@ -1,5 +1,5 @@
 export enum RouterLinks {
   BATCHES = 'batchpage',
-  PATHS = 'pathdashboard',
+  PATH_DASHBOARD = 'pathdashboard',
   COURSES = 'course',
 }
