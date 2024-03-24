@@ -3,9 +3,12 @@
   <div class="cardContent">
     <div class="title">{{ singlePath.name }}{{ singlePath.pathName }}</div>
     <div class="courseCount">{{ singlePath.noOfCourses }} Courses</div>
-    <div *ngIf="isProfile" class="courseStateDate">Start Date: 29 Feb 2024</div>
+    <div *ngIf="isProfile" class="courseStateDate">Start Date:</div>
   </div>
   <div *ngIf="isProfile" class="progressCircle">
-    <app-circular-progress-bar class="circle" [progress]="singlePath.progress"></app-circular-progress-bar>
+    <app-circular-progress-bar
+      class="circle"
+      [progress]="singlePath.progress"
+    ></app-circular-progress-bar>
   </div>
 </div>

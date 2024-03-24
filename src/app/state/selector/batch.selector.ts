@@ -10,7 +10,7 @@ export const selectBatchs = createSelector(
 
 export const selectBatchsLoading = createSelector(
   selectBatchState,
-  (state) => state.isLoading
+  (state) => state.isLoadingBatches
 );
 
 export const selectBatchsError = createSelector(

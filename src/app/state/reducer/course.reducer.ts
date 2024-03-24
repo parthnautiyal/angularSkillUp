@@ -11,6 +11,7 @@ export interface CourseState {
   noOfEnrolledCourses: number;
   isLoading: boolean;
   error: any;
+  errorEnrolled: any;
   favoriteCourses: Course[];
 }
 
@@ -38,12 +39,13 @@ const initialState: CourseState = {
     completedAt: '',
     noOfChapters: 0,
     updatedAt: '',
-    level: 0
+    level: 0,
   },
   chapterData: [],
   noOfEnrolledCourses: 0,
   isLoading: false,
   error: null,
+  errorEnrolled: null,
   favoriteCourses: [],
 };
 
@@ -83,7 +85,7 @@ export const courseReducer = createReducer(
   on(CourseActions.loadEnrolledCoursesFailed, (state, { error }) => ({
     ...state,
     isLoading: false,
-    error: error,
+    errorEnrolled: error,
   })),
 
   // Load Course About Info
@@ -148,7 +150,7 @@ export const courseReducer = createReducer(
     CourseActions.loadFavoriteCoursesSuccess,
     (state, { favoriteCourses }) => ({
       ...state,
-      FavoriteCourses: favoriteCourses,
+      favoriteCourses: favoriteCourses,
       isLoading: false,
     })
   ),
