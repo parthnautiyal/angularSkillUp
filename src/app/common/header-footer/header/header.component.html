@@ -4,22 +4,20 @@
     <span class="up">Up</span>
   </a>
   <div class="header-links">
-    <button routerLink="courses/favourites">
-      <img
-        [src]="
-          isDarkMode
-            ? 'assets/dark/My Favourites.svg'
-            : 'assets/light/My Favourites.svg'
-        "
-        alt="favourite"
-      />
+    <button routerLink="courses/favourites"  *ngIf="!isResponsive">
+      <img [src]="isDarkMode? 'assets/dark/My Favourites.svg':'assets/light/My Favourites.svg'" alt="favourite" />
     </button>
-    <div class="search-bar">
-      <input class="search-box" type="text" placeholder="Search" />
-      <img class="search-icon" src="assets/dark/Search.svg" />
+    <div class="search-bar"  *ngIf="!isResponsive">
+      <input class="search-box" type="text" placeholder="Search">
+        <img class="search-icon" src="assets/dark/Search.svg">
+    </div>
+    <div *ngIf="isResponsive">
+      <button style="padding-left: 12px;">
+        <img class="search-icon" src="assets/dark/Search.svg">
+      </button>
     </div>
 
-    <app-theme-toggle></app-theme-toggle>
+    <app-theme-toggle  *ngIf="!isResponsive"></app-theme-toggle>
 
     <div class="org-wrapper">
       <div class="logo-wrapper">

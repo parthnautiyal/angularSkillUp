@@ -1,9 +1,13 @@
 .batch-card-container
   height: 200px
-  width: 350px
+  width: 310px
   border-radius: 10px
   color: white
   background-image: linear-gradient(180deg, #0499E6,#0B71C3 )
+
+  @media screen and (max-width: 768px)
+        width: 80vw
+        height: 186px
 
 .batch-card-content
   display: flex
@@ -16,6 +20,8 @@
   margin-top: 0.7rem
   font-size: 1.2rem
   font-weight: 500
+  @media screen and (max-width: 768px)
+    font-size: .9rem
 
 .stream
   display: flex
@@ -28,13 +34,22 @@
   background-color: hsla(0,0%,100%,.2)
   border-radius: 10px
 
+  @media screen and (max-width: 768px)
+    font-size: .8rem
+
 .no-of-students
   font-size: 1rem
   padding-bottom: 10px
 
+  @media screen and (max-width: 768px)
+    font-size: .8rem
+
 .date
   font-size: 0.7rem
   font-weight: 300
+
+  @media screen and (max-width: 768px)
+    font-size: .7rem
 
 .batch-card-type-2
   display: flex
