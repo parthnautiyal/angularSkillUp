@@ -3,7 +3,6 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import * as CourseActions from '../action/course.action';
-import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 import { Course } from 'src/app/models/Course';
 import { APIResponse } from 'src/app/models/ApiResponse';
@@ -20,26 +19,17 @@ export class CourseEffects {
       switchMap(() =>
         this.http
           .get<APIResponse<Course[]>>(
-            this.url + '/courses?pageSize=12&pageNo=1'
+            this.url + '/courses?pageSize=122&pageNo=1'
           )
           .pipe(
             map((courses) =>
               CourseActions.loadAllCoursesSuccess({ courses: courses.data })
             ),
-            catchError(
-              (error) => {
-                console.log('Error -> ' + error);
-                //of(CourseActions.loadAllCoursesFailed({ error }));
-                return of(CourseActions.loadCoursesFailure({ error }));
-              }
-              // this.store.dispatch(
-              //   CourseActions.loadAllCoursesFailed({ error })
-              // );
-              // console.log('Error -> ' + error);
-              //of(CourseActions.loadCoursesFailure({ error }))
-
-              // of(CourseActions.loadAllCoursesFailed({ error }))
-            )
+            catchError((error) => {
+              console.log('Error -> ' + error);
+              //of(CourseActions.loadAllCoursesFailed({ error }));
+              return of(CourseActions.loadAllCoursesFailed({ error }));
+            })
           )
       )
     )
@@ -57,7 +47,7 @@ export class CourseEffects {
               })
             ),
             catchError((error) =>
-              of(CourseActions.loadAllCoursesFailed({ error }))
+              of(CourseActions.loadNoOfEnrolledCoursesFailed({ error }))
             )
           )
       )
@@ -68,13 +58,11 @@ export class CourseEffects {
       ofType(CourseActions.loadCourseAboutInfo),
       switchMap(({ courseId }) =>
         this.http
-          .get<APIResponse<Course>>(
-            this.url + '/courses/' + courseId + '/chapters'
-          )
+          .get<APIResponse<Course>>(this.url + '/courses/' + courseId)
           .pipe(
             map((course) =>
               CourseActions.loadCourseAboutInfoSuccess({
-                course: course,
+                course: course.data,
               })
             ),
             catchError((error) =>
@@ -121,6 +109,27 @@ export class CourseEffects {
             ),
             catchError((error) =>
               of(CourseActions.loadChapterDataFailed({ error }))
+            )
+          )
+      )
+    )
+  );
+  loadFavoriteCourses$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CourseActions.loadFavoriteCourses),
+      switchMap(() =>
+        this.http
+          .get<APIResponse<Course[]>>(
+            'https://api.training.zopsmart.com/student/favourites'
+          )
+          .pipe(
+            map((courses) =>
+              CourseActions.loadFavoriteCoursesSuccess({
+                favoriteCourses: courses.data,
+              })
+            ),
+            catchError((error) =>
+              of(CourseActions.loadFavoriteCoursesFailed({ error }))
             )
           )
       )

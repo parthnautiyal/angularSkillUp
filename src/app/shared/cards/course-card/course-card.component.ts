@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 import { Course } from 'src/app/models/Course';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-course-card',
@@ -7,8 +9,11 @@ import { Course } from 'src/app/models/Course';
   styleUrls: ['./course-card.component.sass'],
 })
 export class CourseCardComponent implements OnInit {
+  RouterLinks = RouterLinks;
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
+  isDarkMode: boolean = false;
+
   @Input() singleCourse: Course = {
     id: 0,
     name: '',
@@ -28,13 +33,18 @@ export class CourseCardComponent implements OnInit {
     progress: 0,
     enrolledAt: '',
     completedAt: '',
+    noOfChapters: 0,
+    updatedAt: '',
+    level: 0,
   };
-  constructor() {}
+
+  constructor(private themeService: ThemeService) {
+    this.themeService.isDarkMode().subscribe((isDarkMode) => {
+      this.isDarkMode = isDarkMode;
+    });
+  }
 
   ngOnInit(): void {}
-  isButtonRed: boolean = false;
 
-  toggleColor() {
-    this.isButtonRed = !this.isButtonRed;
-  }
+  toggleColor() {}
 }

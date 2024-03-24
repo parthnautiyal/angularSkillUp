@@ -5,10 +5,12 @@ import { Store } from '@ngrx/store';
 import {
   loadAllCourses,
   loadEnrolledCourses,
+  loadFavoriteCourses,
 } from 'src/app/state/action/course.action';
 import {
   selectCourses,
   selectEnrolledCourses,
+  selectFavoritecourses,
 } from 'src/app/state/selector/course.selector';
 import { loadAllBatches } from 'src/app/state/action/batch.action';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
@@ -38,7 +40,7 @@ export class AllSectionContainerComponent implements OnInit {
   allPathsData: Path[] = [];
   allCoursesData: Course[] = [];
   allBatchesData: Batch[] = [];
-
+  loading:boolean = true;
   //enums
   Title = Title;
   RouterLinks = RouterLinks;
@@ -52,35 +54,59 @@ export class AllSectionContainerComponent implements OnInit {
   getAllPaths() {
     this.store.dispatch(loadAllPaths());
     this.store.select(selectPaths).subscribe((res) => {
-      if (res.length > 0) this.allPathsData = res;
+      
+      if (res.length > 0){
+        this.allPathsData = res;
+        this.loading = false;
+      } 
     });
   }
   getAllCourses() {
     this.store.dispatch(loadAllCourses());
     this.store.select(selectCourses).subscribe((res) => {
-      // this.loading = false;
-      if (res.length > 0) this.allCoursesData = res;
+      if (res.length > 0){
+        this.allCoursesData = res;
+        this.loading = false;
+      } 
     });
   }
   getAllBatches() {
     this.store.dispatch(loadAllBatches());
     this.store.select(selectBatchs).subscribe((res) => {
-      // this.loading = false;
-      if (res.length > 0) this.allBatchesData = res;
+      if (res.length > 0){
+        this.allBatchesData = res;
+        this.loading = false;
+      } 
     });
   }
   getEnrolledPaths() {
     this.store.dispatch(loadEnrolledPaths());
     this.store.select(selectEnrolledPaths).subscribe((res) => {
-      // this.loading = false;
-      if (res.length > 0) this.allPathsData = res;
+      if (res.length > 0){
+        this.allPathsData = res;
+        this.loading = false;
+      } 
     });
   }
   getEnrolledCourses() {
     this.store.dispatch(loadEnrolledCourses());
     this.store.select(selectEnrolledCourses).subscribe((res) => {
-      this.allCoursesData = res;
+      if (res.length > 0){
+        this.allCoursesData = res;
+        this.loading = false;
+      } 
     });
+  }
+  getFavouriteCourses(){
+    this.store.dispatch(loadFavoriteCourses());
+    this.store.select(selectFavoritecourses).subscribe((res) =>{
+      console.log(res);
+      if (res.length > 0){
+        this.allCoursesData = res;
+        this.loading = false;
+      }
+    }
+    );
   }
   ngOnInit(): void {
     this.activatedRoute.url.subscribe((urlSegments) => {
@@ -108,6 +134,11 @@ export class AllSectionContainerComponent implements OnInit {
       }
       if (this.prefix === Prefix.MY) {
         this.getEnrolledCourses();
+      }
+      console.log(this.Prefix.FAVOURITES);
+      console.log(this.prefix);
+      if (this.prefix === Prefix.FAVOURITES) {
+        this.getFavouriteCourses();
       }
     } else if (this.heading === Title.BATCHES) {
       if (this.prefix === Prefix.ALL) {

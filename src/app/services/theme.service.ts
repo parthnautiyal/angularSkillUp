@@ -13,7 +13,6 @@ export class ThemeService {
   }
 
   setDarkMode(isDarkMode: boolean) {
-    // this.darkMode=isDarkMode;
     this.darkModeSubject.next(isDarkMode);
 
     if (isDarkMode) {

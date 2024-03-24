@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 import { Path } from 'src/app/models/Path';
 @Component({
   selector: 'app-path-card',
@@ -6,10 +7,9 @@ import { Path } from 'src/app/models/Path';
   styleUrls: ['./path-card.component.sass'],
 })
 export class PathCardComponent implements OnInit {
+  RouterLinks = RouterLinks;
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
-
-  progress: number = 69;
   @Input() singlePath: Path = {
     id: 0,
     name: '',
@@ -20,7 +20,9 @@ export class PathCardComponent implements OnInit {
     progress: 0,
     completedAt: null,
   };
-  constructor() {}
+  constructor() {
+    console.log(this.singlePath);
+  }
 
   ngOnInit(): void {}
 }

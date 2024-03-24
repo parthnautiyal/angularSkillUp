@@ -14,7 +14,7 @@
   background-size: 1000px 1000px;
   animation: shimmerEffect 2s linear infinite forwards;
   &.rtl {
-    animation: shimmerEffectRTL 2s linear infinite forwards;
+    animation: shimmerEffectRTL 2s linear infinite backwards;
   }
 }
 @keyframes shimmerEffect {

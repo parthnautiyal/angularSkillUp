@@ -1,4 +1,8 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { loadAllBatches } from 'src/app/state/action/batch.action';
+import { loadAllCourses, loadEnrolledCourses } from 'src/app/state/action/course.action';
+import { loadEnrolledPaths } from 'src/app/state/action/path.action';
 
 @Component({
   selector: 'app-profile-page',
@@ -7,11 +11,14 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 })
 export class ProfilePageComponent implements OnInit, OnDestroy {
   heading: string = 'Profile';
-  constructor() {}
+  constructor(private store:Store) {}
 
   ngOnInit(): void {
     localStorage.setItem('profile', 'true');
     console.log('init');
+    // this.store.dispatch(loadEnrolledPaths());
+    // this.store.dispatch(loadEnrolledCourses());
+    // this.store.dispatch(loadAllBatches());
   }
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {

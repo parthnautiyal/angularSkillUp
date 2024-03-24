@@ -28,7 +28,4 @@ isEnrolled: boolean,
 isCompleted: boolean,
 createdAt: string;
 courses:Course[]
-
-
-
 }

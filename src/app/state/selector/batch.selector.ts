@@ -10,10 +10,27 @@ export const selectBatchs = createSelector(
 
 export const selectBatchsLoading = createSelector(
   selectBatchState,
-  (state) => state.isLoading
+  (state) => state.isLoadingBatches
 );
 
 export const selectBatchsError = createSelector(
   selectBatchState,
   (state) => state.error
+);
+
+export const selectBatchById = createSelector(
+  selectBatchState,
+  (state) => state.batchDetails
+);
+export const selectTrainers = createSelector(
+  selectBatchState,
+  (state) => state.trainers
+);
+export const selectStudents = createSelector(
+  selectBatchState,
+  (state) => state.students
+);
+export const selectBatchPaths = createSelector(
+  selectBatchState,
+  (state) => state.pathData
 );

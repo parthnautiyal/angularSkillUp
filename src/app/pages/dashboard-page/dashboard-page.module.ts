@@ -7,6 +7,9 @@ import { ContainersModule } from 'src/app/shared/containers/containers.module';
 import { CardsModule } from 'src/app/shared/cards/cards.module';
 import { DashboardPageComponent } from './dashboard-page.component';
 import { ShimmerModule } from 'src/app/shimmer/shimmer.module';
+import { ToastModule } from 'primeng/toast';
+import { RippleModule } from 'primeng/ripple';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [DashboardHeaderComponent, DashboardPageComponent],
@@ -15,8 +18,10 @@ import { ShimmerModule } from 'src/app/shimmer/shimmer.module';
     ContainersModule,
     DashboardPageRoutingModule,
     CardsModule,
-    ShimmerModule
-    
+    ShimmerModule,
+    RippleModule,
+    ToastModule,
   ],
+  providers: [MessageService],
 })
 export class DashboardPageModule {}

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 import { Course } from 'src/app/models/Course';
 
 @Component({
@@ -7,6 +8,8 @@ import { Course } from 'src/app/models/Course';
   styleUrls: ['./path-course-card.component.sass'],
 })
 export class PathCourseCardComponent implements OnInit {
+  RouterLinks = RouterLinks;
+  @Input() flag = false;
   @Input() courseData: Course = {
     id: 0,
     name: '',
@@ -25,7 +28,10 @@ export class PathCourseCardComponent implements OnInit {
     isFavourite: false,
     progress: 0,
     enrolledAt: '',
-    completedAt: null,
+    completedAt: '',
+    noOfChapters: 0,
+    updatedAt: '',
+    level: 0,
   };
   constructor() {
     console.log(this.courseData);

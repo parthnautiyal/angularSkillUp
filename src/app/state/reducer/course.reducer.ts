@@ -1,28 +1,52 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as CourseActions from '../action/course.action';
 import { Course } from '../../models/Course';
-import { CourseInfo } from 'src/app/models/CouseInfo';
-import { enrolledCourses } from 'src/app/models/EnrolledCourses';
 import { Chapter } from 'src/app/models/Chapter';
 
 export interface CourseState {
   allCourses: Course[];
   enrolledCourses: Course[];
-  courseAboutInfo: any[];
+  courseAboutInfo: Course;
   chapterData: Chapter[];
   noOfEnrolledCourses: number;
   isLoading: boolean;
   error: any;
+  errorEnrolled: any;
+  favoriteCourses: Course[];
 }
 
-const initialState: CourseState = {
+export const initialState: CourseState = {
   allCourses: [],
   enrolledCourses: [],
-  courseAboutInfo: [],
+  courseAboutInfo: {
+    id: 0,
+    name: '',
+    courseName: '',
+    imageUrl: '',
+    isAccessible: false,
+    description: '',
+    about: '',
+    createdBy: {
+      id: 0,
+      name: '',
+      imageUrl: '',
+      email: '',
+    },
+    createdAt: '',
+    isFavourite: false,
+    progress: 0,
+    enrolledAt: '',
+    completedAt: '',
+    noOfChapters: 0,
+    updatedAt: '',
+    level: 0,
+  },
   chapterData: [],
   noOfEnrolledCourses: 0,
   isLoading: false,
   error: null,
+  errorEnrolled: null,
+  favoriteCourses: [],
 };
 
 export const courseReducer = createReducer(
@@ -61,7 +85,7 @@ export const courseReducer = createReducer(
   on(CourseActions.loadEnrolledCoursesFailed, (state, { error }) => ({
     ...state,
     isLoading: false,
-    error: error,
+    errorEnrolled: error,
   })),
 
   // Load Course About Info
@@ -113,8 +137,30 @@ export const courseReducer = createReducer(
     ...state,
     isLoading: false,
     error: error,
+  })),
+
+  // Load favorite Courses
+
+  on(CourseActions.loadFavoriteCourses, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+  on(
+    CourseActions.loadFavoriteCoursesSuccess,
+    (state, { favoriteCourses }) => ({
+      ...state,
+      favoriteCourses: favoriteCourses,
+      isLoading: false,
+    })
+  ),
+  on(CourseActions.loadFavoriteCoursesFailed, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error: error,
   }))
 );
+
 export function reducer(state: CourseState | undefined, action: Action) {
   return courseReducer(state, action);
 }

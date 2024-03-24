@@ -1,7 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import { Course } from '../../models/Course';
-import { CourseInfo } from 'src/app/models/CouseInfo';
-import { enrolledCourses } from 'src/app/models/EnrolledCourses';
 import { Chapter } from 'src/app/models/Chapter';
 
 export const loadAllCourses = createAction('[Course] Load All Courses');
@@ -35,7 +33,7 @@ export const loadCourseAboutInfo = createAction(
 
 export const loadCourseAboutInfoSuccess = createAction(
   '[Course] Load Course About Info Success',
-  props<{ course: any }>()
+  props<{ course: Course }>()
 );
 
 export const loadCourseAboutInfoFailed = createAction(
@@ -69,9 +67,16 @@ export const loadNoOfEnrolledCoursesFailed = createAction(
   '[Course] Load Number of Enrolled Courses Failed',
   props<{ error: any }>()
 );
-export function loadCoursesFailure(arg0: { error: any }): any {
-  console.log('inside loadCoursesFailure function -> ' + arg0.error);
-  loadAllCoursesFailed({ error: arg0.error });
-  //return arg0.error;
-  throw new Error('inside loadCoursesFailure function -> ');
-}
+export const loadFavoriteCourses = createAction(
+  '[Course] Load Favorite Courses'
+);
+
+export const loadFavoriteCoursesSuccess = createAction(
+  '[Course] Load Favorite Courses Success',
+  props<{ favoriteCourses: Course[] }>()
+);
+
+export const loadFavoriteCoursesFailed = createAction(
+  '[Course] Load Favorite Courses Failed',
+  props<{ error: any }>()
+);

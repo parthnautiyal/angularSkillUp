@@ -1,29 +1,72 @@
+<p-toast></p-toast>
 <div class="heading">
   <div class="topic">{{ prefixWord }} {{ title | titlecase }}</div>
   <a class="view-all" *ngIf="isActive" [routerLink]="['/', title, 'all']"
     >View all {{ title }}</a
   >
 </div>
-<div class="card-wrapper">
-  <ng-container *ngIf="title == Title.BATCHES">
-    <ng-container *ngFor="let item of batch$ | async; let i = index">
-      <a [routerLink]="['/', RouterLinks.BATCHES, item.id]">
-        <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
-      </a>
+<ng-container *ngIf="loading">
+  <app-dashboard-shimmer
+    class="shimmer"
+    [shimmerCount]="3"
+  ></app-dashboard-shimmer>
+</ng-container>
+<ng-container *ngIf="!loading">
+  <div class="card-wrapper">
+    <ng-container *ngIf="title == Title.BATCHES">
+      <ng-container *ngIf="!error">
+        <ng-container *ngFor="let item of allBatches; let i = index">
+          <a [routerLink]="['/', RouterLinks.BATCHES, item.id]">
+            <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
+          </a>
+        </ng-container>
+      </ng-container>
+      <app-error-card
+        [title]="Title.BATCHES"
+        [error]="errorBatch"
+        *ngIf="error"
+      ></app-error-card>
     </ng-container>
-  </ng-container>
-  <ng-container *ngIf="title == Title.PATHS">
-    <ng-container *ngFor="let item of path$ | async">
-      <a [routerLink]="['/', RouterLinks.PATHS, item.id]"
-        ><app-path-card [singlePath]="item"></app-path-card
-      ></a>
+
+    <ng-container *ngIf="title == Title.PATHS">
+      <ng-container *ngIf="!error">
+        <ng-container *ngFor="let item of allPaths">
+          <a [routerLink]="['/', RouterLinks.PATH_DASHBOARD, item.id]"
+            ><app-path-card *ngIf="!error" [singlePath]="item"></app-path-card
+          ></a>
+        </ng-container>
+      </ng-container>
+      <app-error-card
+        [title]="Title.PATHS"
+        [error]="errorPath"
+        *ngIf="errorEnrolled"
+      ></app-error-card>
+      <app-error-card
+        [title]="Title.PATHS"
+        [error]="errorPath"
+        *ngIf="error"
+      ></app-error-card>
     </ng-container>
-  </ng-container>
-  <ng-container *ngIf="title == Title.COURSES">
-    <ng-container *ngFor="let item of courses$ | async">
-      <a [routerLink]="['/', RouterLinks.COURSES, item.id]">
-        <app-course-card [singleCourse]="item"></app-course-card>
-      </a>
+
+    <ng-container *ngIf="title == Title.COURSES">
+      <ng-container *ngIf="!error">
+        <ng-container *ngFor="let item of allCourses">
+          <app-course-card
+            *ngIf="!error"
+            [singleCourse]="item"
+          ></app-course-card>
+        </ng-container>
+      </ng-container>
+      <app-error-card
+        [title]="Title.COURSES"
+        [error]="errorCourse"
+        *ngIf="errorEnrolled"
+      ></app-error-card>
+      <app-error-card
+        [title]="Title.COURSES"
+        [error]="errorCourse"
+        *ngIf="error"
+      ></app-error-card>
     </ng-container>
-  </ng-container>
-</div>
+  </div>
+</ng-container>

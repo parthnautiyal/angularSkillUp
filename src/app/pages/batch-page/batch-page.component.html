@@ -2,14 +2,8 @@
 <div class="batch-component-container">
   <app-batch-details [batchData]="batchDetails"></app-batch-details>
   <div class="batch-path">
-    <app-path-course-card routerLink="/pathdashboard/4" [courseData]="paths[0]"></app-path-course-card>
+    <app-path-course-card [flag]="true" [courseData]="paths"></app-path-course-card>
   </div>
-  <app-batch-info-card-container
-    [cardsData]="trainerData"
-    [heading]="'Trainers'"
-  ></app-batch-info-card-container>
-  <app-batch-info-card-container
-    [cardsData]="studentData"
-    [heading]="'Peers'"
-  ></app-batch-info-card-container>
+  <app-batch-info-card-container [cardsData]="trainerData" [heading]="'Trainers'"></app-batch-info-card-container>
+  <app-batch-info-card-container [cardsData]="studentData" [heading]="'Peers'"></app-batch-info-card-container>
 </div>
