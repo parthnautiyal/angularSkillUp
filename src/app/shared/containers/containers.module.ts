@@ -6,15 +6,21 @@ import { AllSectionContainerComponent } from './all-section-container/all-sectio
 import { BatchInfoCardContainerComponent } from './batch-info-card-container/batch-info-card-container.component';
 import { RouterModule } from '@angular/router';
 import { ShimmerModule } from 'src/app/shimmer/shimmer.module';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
     CardContainerComponent,
     AllSectionContainerComponent,
     BatchInfoCardContainerComponent,
-   
   ],
-  imports: [CommonModule, CardsModule,RouterModule,ShimmerModule],
+  imports: [
+    CommonModule,
+    CardsModule,
+    RouterModule,
+    ShimmerModule,
+    ToastModule,
+  ],
   exports: [CardContainerComponent, BatchInfoCardContainerComponent],
 })
 export class ContainersModule {}

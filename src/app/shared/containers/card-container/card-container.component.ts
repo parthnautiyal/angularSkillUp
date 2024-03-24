@@ -8,8 +8,9 @@ import {
   selectCourses,
   selectCoursesError,
   selectEnrolledCourses,
+  selectEnrolledCoursesError,
 } from 'src/app/state/selector/course.selector';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import {
   selectBatchs,
   selectBatchsError,
@@ -18,6 +19,7 @@ import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 import {
   selectEnrolledPaths,
+  selectEnrolledPathsError,
   selectPaths,
   selectPathsError,
 } from 'src/app/state/selector/path.selector';
@@ -30,14 +32,18 @@ import {
   loadAllPaths,
   loadEnrolledPaths,
 } from 'src/app/state/action/path.action';
+import { Error } from 'src/app/models/Error';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
   styleUrls: ['./card-container.component.sass'],
+  providers: [MessageService],
 })
 export class CardContainerComponent implements OnInit {
   loading: Boolean = true;
   error: Boolean = false;
+  errorEnrolled: Boolean = false;
   isActive = true;
   Title = Title;
   RouterLinks = RouterLinks;
@@ -46,8 +52,32 @@ export class CardContainerComponent implements OnInit {
   allBatches: Batch[] = [];
   @Input() title: string = '';
   @Input() prefixWord: string = '';
+  errorBatch: Error = {
+    message: '',
+    code: 0,
+  };
+  errorCourse: Error = {
+    message: '',
+    code: 0,
+  };
+  errorPath: Error = {
+    message: '',
+    code: 0,
+  };
+  errorCourseEnrolled: Error = {
+    message: '',
+    code: 0,
+  };
+  errorPathEnrolled: Error = {
+    message: '',
+    code: 0,
+  };
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+    private messageService: MessageService
+  ) {}
   ngOnInit(): void {
     if (this.router.url == '/dashboard') {
       if (this.title == Title.COURSES) {
@@ -56,11 +86,14 @@ export class CardContainerComponent implements OnInit {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allCourses = res;
             this.loading = false;
+            this.error = false;
           }
         });
         this.store.select(selectCoursesError).subscribe((res) => {
           if (res != null) {
-            console.log(res);
+            this.errorCourse.message = res.message.split('`').slice(1);
+            this.errorCourse.code = res.message.split('`').slice(0, 1);
+            console.log('Courses Error -> ' + this.errorCourse);
             this.loading = false;
             this.error = true;
           }
@@ -72,11 +105,16 @@ export class CardContainerComponent implements OnInit {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allBatches = res;
             this.loading = false;
+            this.error = false;
           }
         });
         this.store.select(selectBatchsError).subscribe((res) => {
           if (res != null) {
-            console.log(res);
+            this.errorBatch.message = res.message.split('`').slice(1);
+            this.errorBatch.code = res.message.split('`').slice(0, 1);
+            console.log('Batch Error -> ' + this.errorBatch.message);
+            console.log('Batch Error -> ' + this.errorBatch.code);
+
             this.loading = false;
             this.error = true;
           }
@@ -95,12 +133,20 @@ export class CardContainerComponent implements OnInit {
           console.log('error in paths');
 
           if (res != null) {
-            console.log(res);
+            this.errorPath.message = res.message.split('`').slice(1);
+            this.errorPath.code = res.message.split('`').slice(0, 1);
+            console.log('Paths Error -> ' + this.errorPath.code);
             this.loading = false;
             this.error = true;
           }
         });
       }
+
+      this.store.select(selectCoursesError).subscribe((res) => {
+        if (res != null) {
+          this.showError();
+        }
+      });
     }
     if (this.router.url == '/user') {
       if (this.title == Title.BATCHES) {
@@ -126,13 +172,15 @@ export class CardContainerComponent implements OnInit {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allCourses = res;
             this.loading = false;
+            this.errorEnrolled = false;
           }
         });
-        this.store.select(selectCoursesError).subscribe((res) => {
+        this.store.select(selectEnrolledCoursesError).subscribe((res) => {
           if (res != null) {
-            console.log(res);
+            this.errorCourseEnrolled.message = res.message.split('`').slice(1);
+            this.errorCourseEnrolled.code = res.message.split('`').slice(0, 1);
             this.loading = false;
-            this.error = true;
+            this.errorEnrolled = true;
           }
         });
       }
@@ -144,14 +192,23 @@ export class CardContainerComponent implements OnInit {
             this.loading = false;
           }
         });
-        this.store.select(selectPathsError).subscribe((res) => {
+        this.store.select(selectEnrolledPathsError).subscribe((res) => {
           if (res != null) {
-            console.log(res);
+            this.errorPathEnrolled.message = res.message.split('`').slice(1);
+            this.errorPathEnrolled.code = res.message.split('`').slice(0, 1);
             this.loading = false;
-            this.error = true;
+            this.errorEnrolled = true;
           }
         });
       }
     }
+  }
+
+  showError() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Message Content',
+    });
   }
 }

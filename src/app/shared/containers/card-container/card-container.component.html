@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="heading">
   <div class="topic">{{ prefixWord }} {{ title | titlecase }}</div>
   <a class="view-all" *ngIf="isActive" [routerLink]="['/', title, 'all']"
@@ -20,7 +21,11 @@
           </a>
         </ng-container>
       </ng-container>
-      <app-error-card *ngIf="error"></app-error-card>
+      <app-error-card
+        [title]="Title.BATCHES"
+        [error]="errorBatch"
+        *ngIf="error"
+      ></app-error-card>
     </ng-container>
 
     <ng-container *ngIf="title == Title.PATHS">
@@ -31,7 +36,16 @@
           ></a>
         </ng-container>
       </ng-container>
-      <app-error-card *ngIf="error"></app-error-card>
+      <app-error-card
+        [title]="Title.COURSES"
+        [error]="errorPathEnrolled"
+        *ngIf="errorEnrolled"
+      ></app-error-card>
+      <app-error-card
+        [title]="Title.PATHS"
+        [error]="errorPath"
+        *ngIf="error"
+      ></app-error-card>
     </ng-container>
 
     <ng-container *ngIf="title == Title.COURSES">
@@ -43,7 +57,16 @@
           ></app-course-card>
         </ng-container>
       </ng-container>
-      <app-error-card *ngIf="error"></app-error-card>
+      <app-error-card
+        [title]="Title.COURSES"
+        [error]="errorCourseEnrolled"
+        *ngIf="errorEnrolled"
+      ></app-error-card>
+      <app-error-card
+        [title]="Title.COURSES"
+        [error]="errorCourse"
+        *ngIf="error"
+      ></app-error-card>
     </ng-container>
   </div>
 </ng-container>
