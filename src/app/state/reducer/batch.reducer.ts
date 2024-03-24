@@ -6,7 +6,7 @@ import { Course } from 'src/app/models/Course';
 
 export interface BatchState {
   batches: Batch[];
-  isLoading: boolean;
+  isLoadingBatches: boolean;
   isLoadingTrainer: boolean;
   isLoadingStudents: boolean;
   isLoadingPaths: boolean;
@@ -22,7 +22,7 @@ export interface BatchState {
 
 export const initialState: BatchState = {
   batches: [],
-  isLoading: false,
+  isLoadingBatches: false,
   error: null,
   students: [],
   isLoadingTrainer: false,
@@ -85,19 +85,19 @@ export const batchReducer = createReducer(
   initialState,
   on(BatchActions.loadAllBatches, (state) => ({
     ...state,
-    isLoading: true,
+    isLoadingBatches: true,
     error: null,
   })),
   on(BatchActions.loadAllBatchesSuccess, (state, { batches }) => ({
     ...state,
     batches,
-    isLoading: false,
+    isLoadingBatches: false,
     error: null,
   })),
   on(BatchActions.loadAllBatchesFailed, (state, { error }) => ({
     ...state,
-    isloading: false,
     error,
+    isLoadingBatches: false,
   })),
   on(BatchActions.loadBatchById, (state) => ({
     ...state,
@@ -168,5 +168,5 @@ export const batchReducer = createReducer(
 );
 
 export const getbatch = (state: BatchState) => state.batches;
-export const getbatchLoading = (state: BatchState) => state.isLoading;
+export const getbatchLoading = (state: BatchState) => state.isLoadingBatches;
 export const getbatchError = (state: BatchState) => state.error;

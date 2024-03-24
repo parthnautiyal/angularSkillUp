@@ -47,6 +47,7 @@ export class ErrorCardComponent implements OnInit {
       }
       if (this.title === Title.PATHS) {
         this.store.dispatch(loadEnrolledPaths());
+        console.log('Path refetched');
       }
       if (this.title === Title.BATCHES) {
         this.store.dispatch(loadAllBatches());

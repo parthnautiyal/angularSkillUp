@@ -150,7 +150,7 @@ export const courseReducer = createReducer(
     CourseActions.loadFavoriteCoursesSuccess,
     (state, { favoriteCourses }) => ({
       ...state,
-      FavoriteCourses: favoriteCourses,
+      favoriteCourses: favoriteCourses,
       isLoading: false,
     })
   ),

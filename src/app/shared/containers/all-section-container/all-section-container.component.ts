@@ -5,10 +5,12 @@ import { Store } from '@ngrx/store';
 import {
   loadAllCourses,
   loadEnrolledCourses,
+  loadFavoriteCourses,
 } from 'src/app/state/action/course.action';
 import {
   selectCourses,
   selectEnrolledCourses,
+  selectFavoritecourses,
 } from 'src/app/state/selector/course.selector';
 import { loadAllBatches } from 'src/app/state/action/batch.action';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
@@ -95,6 +97,17 @@ export class AllSectionContainerComponent implements OnInit {
       } 
     });
   }
+  getFavouriteCourses(){
+    this.store.dispatch(loadFavoriteCourses());
+    this.store.select(selectFavoritecourses).subscribe((res) =>{
+      console.log(res);
+      if (res.length > 0){
+        this.allCoursesData = res;
+        this.loading = false;
+      }
+    }
+    );
+  }
   ngOnInit(): void {
     this.activatedRoute.url.subscribe((urlSegments) => {
       console.log(urlSegments);
@@ -121,6 +134,11 @@ export class AllSectionContainerComponent implements OnInit {
       }
       if (this.prefix === Prefix.MY) {
         this.getEnrolledCourses();
+      }
+      console.log(this.Prefix.FAVOURITES);
+      console.log(this.prefix);
+      if (this.prefix === Prefix.FAVOURITES) {
+        this.getFavouriteCourses();
       }
     } else if (this.heading === Title.BATCHES) {
       if (this.prefix === Prefix.ALL) {
