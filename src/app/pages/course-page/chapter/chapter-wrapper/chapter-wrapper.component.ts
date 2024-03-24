@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PathDataService } from '../../../../services/path-data.service';
+import { MiscellaneousService } from '../../../../services/miscellaneous.service';
 import { Course } from 'src/app/models/Course';
 import { Chapter } from 'src/app/models/Chapter';
 

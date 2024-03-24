@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PathDataService } from './path-data.service';
+import { MiscellaneousService } from './miscellaneous.service';
 
-describe('PathDataService', () => {
-  let service: PathDataService;
+describe('MiscellaneousService', () => {
+  let service: MiscellaneousService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PathDataService);
+    service = TestBed.inject(MiscellaneousService);
   });
 
   it('should be created', () => {

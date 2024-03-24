@@ -143,7 +143,7 @@ export const courseReducer = createReducer(
 
   on(CourseActions.loadFavoriteCourses, (state) => ({
     ...state,
-    isLoading: true,
+    isLoading: false,
     error: null,
   })),
   on(

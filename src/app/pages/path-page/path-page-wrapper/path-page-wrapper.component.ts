@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { PathDataService } from '../../../services/path-data.service';
+import { MiscellaneousService } from '../../../services/miscellaneous.service';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadPathById } from 'src/app/state/action/path.action';
