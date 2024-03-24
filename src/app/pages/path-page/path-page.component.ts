@@ -30,7 +30,6 @@ export class PathPageComponent implements OnInit {
        this.error = true;
        this.errorCard.message = res.message.split('`').slice(1);
             this.errorCard.code = res.message.split('`').slice(0, 1);
-            console.log('Paths Error -> ' + this.errorCard.code);
             this.error = true;
       }
     });

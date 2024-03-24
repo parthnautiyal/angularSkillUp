@@ -10,7 +10,7 @@ export class AppComponent {
     localStorage.setItem('refreshCount', '0');
   }
   runTest(i: number) {
-    console.log('Inside App - > ' + i);
+
   }
   title = 'Skill Up';
   loggedIn: boolean = true;

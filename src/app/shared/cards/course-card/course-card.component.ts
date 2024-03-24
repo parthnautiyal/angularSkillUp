@@ -53,7 +53,6 @@ export class CourseCardComponent implements OnInit {
     this.themeService.isDarkMode().subscribe((isDarkMode) => {
       this.isDarkMode = isDarkMode;
     });
-    console.log(this.isRed);
   }
 
   ngOnInit(): void {}
@@ -62,13 +61,11 @@ export class CourseCardComponent implements OnInit {
     this.isRed = !this.isRed;
         if (this.isRed) {
       this.misc.postFavourite(this.singleCourse.id).subscribe((res: any) => {
-        console.log(res);
         this.showSuccess();
       });
     } else if (!this.isRed) {
       this.misc.deleteFavourite(this.singleCourse.id).subscribe((res: any) => {
         this.store.dispatch(loadFavoriteCourses());
-        console.log(res);
         this.showInfo();
       });
     }

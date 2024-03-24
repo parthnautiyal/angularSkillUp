@@ -24,7 +24,6 @@ export class ChapterWrapperComponent implements OnInit {
     this.isClicked = !this.isClicked;
   }
   constructor() {
-    console.log('courseTitles', this.courseTitles);
   }
 
   ngOnInit(): void {}

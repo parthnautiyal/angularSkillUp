@@ -12,9 +12,7 @@ export class PathPageWrapperComponent implements OnInit {
   courseData: any = {};
   constructor(private store: Store,private mis:MiscellaneousService) {
     this.store.select(selectPathById).subscribe((path) => {
-      console.log('path=', path);
       this.courseData = path.courses;
-      console.log(this.courseData);
     });
   }
 

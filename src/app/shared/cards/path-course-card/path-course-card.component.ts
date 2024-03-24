@@ -34,7 +34,6 @@ export class PathCourseCardComponent implements OnInit {
     level: 0,
   };
   constructor() {
-    console.log(this.courseData);
   }
 
   ngOnInit(): void {}

@@ -58,7 +58,6 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']).then(() => {
       window.location.reload();
     });
-    console.log('signout');
     this.closeDropdown();
   }
 
@@ -70,6 +69,5 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
-    console.log('Profile Picture ' + this.userProfile.picture);
   }
 }
