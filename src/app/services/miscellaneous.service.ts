@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { Path } from '../models/Path';
+import { Path, PathData } from '../models/Path';
 import { APIResponse } from '../models/ApiResponse';
+import { Ratings } from '../models/Ratings';
 @Injectable({
   providedIn: 'root',
 })
@@ -61,21 +62,29 @@ export class MiscellaneousService {
   private loading = new BehaviorSubject<boolean>(true);
   pathsData$ = this.PathDataSubject.asObservable();
   loading$ = this.loading.asObservable();
-  
-  
-  getPathData(id:number){
-     this.http.get(
-      'https://api.training.zopsmart.com/students/paths/' +
-                  id +
-                  '?projection=course'
-    ).subscribe((res:any)=>{
-      if (res!=null){
-        this.PathDataSubject.next(res.data);
+
+  getPathData(id: number) {
+    this.http
+      .get<APIResponse<PathData>>(
+        'https://api.training.zopsmart.com/students/paths/' +
+          id +
+          '?projection=course'
+      )
+      .subscribe((res) => {
+        if (res != null) {
+          this.PathDataSubject.next(res.data);
           this.loading.next(false);
-      }else{
-        this.loading.next(true);
-      }
-    });
+        } else {
+          this.loading.next(true);
+        }
+      });
   }
+
+  getRating(id: number) {
+    return this.http.get<APIResponse<Ratings>>(
+      'https://api.training.zopsmart.com/courses/' + id + '/ratings'
+    );
+  }
+
   // body: JSON.stringify({ courseId: courseId }),
 }

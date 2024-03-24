@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Ratings } from './../../../models/Ratings';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Rating } from 'src/app/models/Rating';
+import { ActivatedRoute } from '@angular/router';
+import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 
 @Component({
   selector: 'app-course-reviews',
@@ -9,27 +11,40 @@ import { Rating } from 'src/app/models/Rating';
   styleUrls: ['./course-reviews.component.sass'],
 })
 export class CourseReviewsComponent implements OnInit {
+  @Input() id = 0;
   ratingClicked: number = 3;
   isReviewOn: boolean = true;
   isReviewCommentOn: boolean = false;
-  rating: Rating = {
-    fiveStars: 1,
-    fourStars: 2,
-    threeStars: 0,
-    twoStars: 0,
-    oneStars: 0,
+  rating: Ratings = {
+    averageRating: 3.5,
+    rating: {
+      fiveStars: 2,
+      fourStars: 1,
+      threeStars: 0,
+      twoStars: 0,
+      oneStars: 0,
+    },
   };
   ratingPercentage: number[] = [];
   avgRatingArray: boolean[] = [];
-  avgRating: number = 2.5;
 
   totalRating: number = 0;
 
   constructor(
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private misc: MiscellaneousService,
+    private router: ActivatedRoute
   ) {
-    this.totalRating = Object.values(this.rating).reduce((a, b) => a + b, 0);
+    this.id = this.router.snapshot.params['id'];
+    this.misc.getRating(this.id).subscribe((rating) => {
+      this.rating = rating.data;
+      console.log('Rating -> ' + this.rating);
+    });
+    this.totalRating = Object.values(this.rating.rating).reduce(
+      (a, b) => a + b,
+      0
+    );
     console.log('Rating Total -> ' + this.totalRating);
     this.updateRating(this.rating);
     this.createAvgRatingArray();
@@ -58,24 +73,27 @@ export class CourseReviewsComponent implements OnInit {
     this.isReviewCommentOn = false;
   }
 
-  updateRating(rating: Rating) {
-    rating.fiveStars = (rating.fiveStars / this.totalRating) * 100;
-    rating.fourStars = (rating.fourStars / this.totalRating) * 100;
-    rating.threeStars = (rating.threeStars / this.totalRating) * 100;
-    rating.twoStars = (rating.twoStars / this.totalRating) * 100;
-    rating.oneStars = (rating.oneStars / this.totalRating) * 100;
-    this.ratingPercentage[0] = Math.floor(rating.fiveStars);
-    this.ratingPercentage[1] = Math.floor(rating.fourStars);
-    this.ratingPercentage[2] = Math.floor(rating.threeStars);
-    this.ratingPercentage[3] = Math.floor(rating.twoStars);
-    this.ratingPercentage[4] = Math.floor(rating.oneStars);
+  updateRating(rating: Ratings) {
+    rating.rating.fiveStars =
+      (rating.rating.fiveStars / this.totalRating) * 100;
+    rating.rating.fourStars =
+      (rating.rating.fourStars / this.totalRating) * 100;
+    rating.rating.threeStars =
+      (rating.rating.threeStars / this.totalRating) * 100;
+    rating.rating.twoStars = (rating.rating.twoStars / this.totalRating) * 100;
+    rating.rating.oneStars = (rating.rating.oneStars / this.totalRating) * 100;
+    this.ratingPercentage[0] = Math.floor(rating.rating.fiveStars);
+    this.ratingPercentage[1] = Math.floor(rating.rating.fourStars);
+    this.ratingPercentage[2] = Math.floor(rating.rating.threeStars);
+    this.ratingPercentage[3] = Math.floor(rating.rating.twoStars);
+    this.ratingPercentage[4] = Math.floor(rating.rating.oneStars);
     console.log(this.ratingPercentage);
   }
   createAvgRatingArray() {
-    for (let i = 0; i < Math.floor(this.avgRating); i++) {
+    for (let i = 0; i < Math.floor(this.rating.averageRating); i++) {
       this.avgRatingArray.push(true);
     }
-    if (this.avgRating % 1 != 0) {
+    if (this.rating.averageRating % 1 != 0) {
       this.avgRatingArray.push(false);
     }
 
