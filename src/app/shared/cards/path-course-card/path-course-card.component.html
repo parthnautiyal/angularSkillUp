@@ -1,19 +1,10 @@
 <div class="timeline-card">
   <div class="leftBar">
-    <div
-      class="circle"
-      [ngStyle]="
+    <div class="circle" [ngStyle]="
         [courseData.isAccessible] && { 'background-color': 'rgb(86, 36, 208)' }
-      "
-    ></div>
-    <div
-      [ngStyle]="{ height: courseData.progress + '%' }"
-      class="progress-line"
-    ></div>
-    <div
-      [ngStyle]="{ height: 100 - courseData.progress + '%' }"
-      class="insideLine"
-    ></div>
+      "></div>
+    <div [ngStyle]="{ height: courseData.progress + '%' }" class="progress-line"></div>
+    <div [ngStyle]="{ height: 100 - courseData.progress + '%' }" class="insideLine"></div>
   </div>
   <div class="content">
     <div class="path-page-content">
@@ -24,18 +15,10 @@
               <div class="course-card">
                 <!-- <a [routerLink]="['/', RouterLinks.PATHS, courseData.id]"> -->
 
-                <img
-                  *ngIf="!flag"
-                  [routerLink]="['/', RouterLinks.COURSES, courseData.id]"
-                  class="course-image"
-                  [src]="courseData.imageUrl"
-                />
-                <img
-                  *ngIf="flag"
-                  [routerLink]="['/', RouterLinks.PATH_DASHBOARD, courseData.id]"
-                  class="course-image"
-                  [src]="courseData.imageUrl"
-                />
+                <img *ngIf="!flag" [routerLink]="['/', RouterLinks.COURSES, courseData.id]" class="course-image"
+                  [src]="courseData.imageUrl" />
+                <img *ngIf="flag" [routerLink]="['/', RouterLinks.PATH_DASHBOARD, courseData.id]" class="course-image"
+                  [src]="courseData.imageUrl" />
                 <!-- </a> -->
                 <div class="course-details">
                   <div class="course-heading">
@@ -44,7 +27,7 @@
                   <div class="course-author">
                     By {{ courseData.createdBy.name }} |
                     {{
-                      courseData.createdAt.slice(0, 10) | date : "dd MMM yyyy"
+                    courseData.createdAt.slice(0, 10) | date : "dd MMM yyyy"
                     }}
                   </div>
                   <div class="course-content">
