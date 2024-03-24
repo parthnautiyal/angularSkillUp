@@ -11,6 +11,7 @@ export class BatchCardComponent implements OnInit {
     localStorage.getItem('profile') === 'true' ? true : false;
 
   @Input() index: number = 0;
+  @Input() progress: number = 0;
   @Input() batchData: Batch = {
     id: 0,
     name: '',
@@ -33,7 +34,7 @@ export class BatchCardComponent implements OnInit {
       streamId: 0,
       streamName: '',
     },
-    progress: 0,
+    progress: 10,
   };
 
   constructor() {}
