@@ -3,12 +3,12 @@
 
 <div class="batch-component-container">
   <ng-container *ngIf="loading">
-    <app-dashboard-shimmer></app-dashboard-shimmer>
+    <app-page-shimmer></app-page-shimmer>
     </ng-container>
     <ng-container *ngIf="!loading">
-      <ng-container *ngIf="error">
+      <div class="error-card" *ngIf="error">
       <app-error-card></app-error-card>
-      </ng-container>
+      </div>
       <ng-container *ngIf="!error">
   <app-batch-details [batchData]="batchDetails"></app-batch-details>
   <div class="batch-path">

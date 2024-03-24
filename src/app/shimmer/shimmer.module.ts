@@ -19,6 +19,6 @@ import { PathInfoShimmerComponent } from './path-info-shimmer/path-info-shimmer.
     PathCourseCardShimmerComponent,
     PathInfoShimmerComponent,
   ],
-  exports: [ShimmerComponent, CardShimmerComponent, DashboardShimmerComponent],
+  exports: [ShimmerComponent, CardShimmerComponent, DashboardShimmerComponent,PageShimmerComponent],
 })
 export class ShimmerModule {}

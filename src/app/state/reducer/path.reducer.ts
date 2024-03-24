@@ -62,42 +62,24 @@ export const pathReducer = createReducer(
     isLoading: false,
     error,
   })),
-  // on(PathActions.loadPathByIdPaths, (state, { id }) => ({
-  //   ...state,
-  //   isLoadingPathById: true,
-  //   error: null,
-  // })),
+  on(PathActions.loadPathById, (state, { id }) => ({
+    ...state,
+    isLoadingPathById: true,
+    error: null,
+  })),
 
-  // on(PathActions.loadPathByIdSuccess, (state, { pathById }) => ({
-  //   ...state,
-  //   pathById: pathById,
-  //   isLoadingPathById: false,
-  //   error: null,
-  // })),
+  on(PathActions.loadPathByIdSuccess, (state, { pathById }) => ({
+    ...state,
+    pathById: pathById,
+    isLoadingPathById: false,
+    error: null,
+  })),
 
-  // on(PathActions.loadPathByIdFailed, (state, { error }) => ({
-  //   ...state,
-  //   pathById: {
-  //     id: 0,
-  //     name: '',
-  //     imageUrl: '',
-  //     about: '',
-  //     createdBy: {
-  //       id: 0,
-  //       name: '',
-  //       imageUrl: '',
-  //       email: ''
-  //     },
-  //     updatedAt: '',
-  //     noOfCourses: 0,
-  //     isEnrolled: false,
-  //     isCompleted: false,
-  //     createdAt: '',
-  //     courses: []
-  //   },
-  //   isLoadingPathById: false,
-  //   error,
-  // })),
+  on(PathActions.loadPathByIdFailed, (state, { error }) => ({
+    ...state,
+    isLoadingPathById: false,
+    error,
+  })),
 
   on(PathActions.loadEnrolledPaths, (state) => ({
     ...state,

@@ -47,7 +47,10 @@ export class ErrorCardComponent implements OnInit {
       window.location.reload();
     } else if (this.router.url.split('/')[1] === 'pathdashboard') {
       window.location.reload();
-    } else {
+    }else if (this.router.url.split('/')[1] === 'course') {
+      window.location.reload();
+    } 
+    else {
       if (this.title === Title.PATHS) {
         this.store.dispatch(loadAllPaths());
       }

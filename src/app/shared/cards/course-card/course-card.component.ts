@@ -60,16 +60,12 @@ export class CourseCardComponent implements OnInit {
 
   toggleColor() {
     this.isRed = !this.isRed;
-    
-
-
-
-    if (this.singleCourse.isFavourite == false) {
+        if (this.isRed) {
       this.misc.postFavourite(this.singleCourse.id).subscribe((res: any) => {
         console.log(res);
         this.showSuccess();
       });
-    } else if (this.singleCourse.isFavourite == true) {
+    } else if (!this.isRed) {
       this.misc.deleteFavourite(this.singleCourse.id).subscribe((res: any) => {
         this.store.dispatch(loadFavoriteCourses());
         console.log(res);
