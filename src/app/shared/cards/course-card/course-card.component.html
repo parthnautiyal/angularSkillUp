@@ -1,6 +1,12 @@
+<p-toast></p-toast>
 <div class="card">
   <!-- <a [routerLink]="['/', RouterLinks.COURSES, singleCourse.id]"> -->
-  <img [routerLink]="['/', RouterLinks.COURSES, singleCourse.id]" [src]="singleCourse.imageUrl" alt="" class="image" />
+  <img
+    [routerLink]="['/', RouterLinks.COURSES, singleCourse.id]"
+    [src]="singleCourse.imageUrl"
+    alt=""
+    class="image"
+  />
   <!-- </a> -->
 
   <div class="content-div">
@@ -9,7 +15,9 @@
         {{ singleCourse.name }}{{ singleCourse.courseName }}
       </div>
       <div *ngIf="isProfile" class="progressCircle">
-        <app-circular-progress-bar [progress]="singleCourse.progress"></app-circular-progress-bar>
+        <app-circular-progress-bar
+          [progress]="singleCourse.progress"
+        ></app-circular-progress-bar>
       </div>
     </div>
     <div *ngIf="isProfile" class="footer">
@@ -23,15 +31,19 @@
     </div>
     <div *ngIf="!isProfile" class="fav-icon">
       <button id="btn1">
-        <img class="btn" *ngIf="isDarkMode; else lightIcon"
-          [src]="singleCourse.isFavourite ? 'assets/dark/Unlike.svg' : 'assets/dark/Like.svg'" />
+        <img
+          class="btn"
+          *ngIf="isDarkMode; else lightIcon"
+          [src]="isRed ? 'assets/dark/Unlike.svg' : 'assets/dark/Like.svg'"
+        />
 
         <ng-template #lightIcon>
-          <img class="btn" [src]="singleCourse.isFavourite ? 'assets/light/Unlike.svg' : 'assets/light/Like.svg'" />
+          <img
+            class="btn"
+            (click)="toggleColor()"
+            [src]="isRed ? 'assets/light/Unlike.svg' : 'assets/light/Like.svg'"
+          />
         </ng-template>
-
-
-
       </button>
     </div>
   </div>

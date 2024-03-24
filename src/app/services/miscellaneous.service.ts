@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { Path } from '../models/Path';
+import { APIResponse } from '../models/ApiResponse';
 @Injectable({
   providedIn: 'root',
 })
-export class PathDataService {
+export class MiscellaneousService {
   user: any = {
     token:
       'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTE3MzkzNywiaWF0IjoxNzExMTczNjM3LCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.I7PeGHmCRWRz33_o5hu63u8oOjdJDZJG_w318QRhXGoUkBxWfLMWfnjwTO1Nl17FCFucZaBkEEtB2jlBmLYxyzQjnbcZ5jt2Eqc3BQyk5STgcWhmP1nTTUIA8AmGigaKDapkFX_XLbwd6jhT2PGcNkwadhg8EtqE3h5MwMwDnMz0-g5_Xg2sqy3Tcw038ApqBwA_f2LDqAA7kyOO4kJicBUDBSmP2y52ARawS-kUAP34AEVlkw8pZZKCiqs33GgYaSZEauWJtPHapQAnvVn3RezjnSt-Nr_O3plzdjpHKPCujXYpq-KjzN_-9JewwbVJlPcAOQ7iMcATHA-HaRCeNA',
     refreshToken:
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTMwNDQ0OCwiaWF0IjoxNzExMjE4MDQ4LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJwYXJ0aC5uYXV0aXlhbEB6b3BzbWFydC5jb20ifQ.Ha8EwUdD53tBB_S8HvCg7YjSwXJLqv1KAcnXFpV-bmLj0qGrINqnKiyGZRJIkYidKUFuzxqxv7vhd95ZCAMkLhOL8fL-NAR2AUr_O_urt1x-T4oevNNPgEmLC3Zs9qqOVeYWJvMkGiEhCYqtiVY3Y8IVpmv9gsK5Mz6p6w_fx6ea8HrmP4V8MGGxO7SBHMB0A6CJ--wQ13idn4Lv0Z6LuD-wUN-v78nbm9a8jGZTdva1nr0jkxaZNGKkWEnNwNapX_vggtdjXsmqJ2BKPZVDiVnmeMHRJJnpg9xbwnt4iTfrj6FJii5km4VjMKNhj8fuDHfCI-gZ9tpjKtjNHPu3Pw',
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTM1NzgzOCwiaWF0IjoxNzExMjcxNDM4LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIn0.IxicIg79pm2kdeivaPLIxRKgtZZjjeZi-d1j0SKL0OaSSqsUj3fnQf3Ytosamtff9G9pALnAjnHLcWpiDHJTNy1Y6iNj3Y2Tr7zrpIiiH5CTLhwI1ZMW7sz6z6GiVu-OODCmm75b_3eKo5-ZNn6-NxJfp87Ty0wvTo0IJ0hrddFEdObn4ogi0tF3_hPB31VmB3hGDLGdr6bUqnTSFlbZoD86iqCiEI6jPN1SdWNgHg6uz1Jj9_ZK5qEdbT3Ra0fyDNamzEoetDiVx5jygbiNjCePuoty4m8B1wkrFT2Q6ERsCDwqJO85bHQukkXuQtUXo6AcNozIxQpGU6qctyLGoA',
   };
 
   refreshHeader = new HttpHeaders({
@@ -40,4 +43,39 @@ export class PathDataService {
       }
     );
   }
+
+  postFavourite(courseId: number) {
+    return this.http.post(
+      'https://api.training.zopsmart.com/student/favourites',
+      {
+        courseId: courseId,
+      }
+    );
+  }
+  deleteFavourite(courseId: number) {
+    return this.http.delete(
+      'https://api.training.zopsmart.com/student/favourites/' + courseId
+    );
+  }
+  private PathDataSubject = new BehaviorSubject<any>({});
+  private loading = new BehaviorSubject<boolean>(true);
+  pathsData$ = this.PathDataSubject.asObservable();
+  loading$ = this.loading.asObservable();
+  
+  
+  getPathData(id:number){
+     this.http.get(
+      'https://api.training.zopsmart.com/students/paths/' +
+                  id +
+                  '?projection=course'
+    ).subscribe((res:any)=>{
+      if (res!=null){
+        this.PathDataSubject.next(res.data);
+          this.loading.next(false);
+      }else{
+        this.loading.next(true);
+      }
+    });
+  }
+  // body: JSON.stringify({ courseId: courseId }),
 }

@@ -20,25 +20,36 @@
         </ng-container>
       </ng-container>
 
-      <ng-container *ngIf="heading == Title.COURSES">
-        <app-error-card [title]="Title.COURSES" [error]="errorCard" *ngIf="error">
-
-        </app-error-card>
-        <ng-container *ngIf="!error">
-          <div *ngFor="let item of allCoursesData" class="paths-card-wrapper">
-            <app-course-card [singleCourse]="item"></app-course-card>
+      <ng-container *ngIf="noContent">
+        <app-no-content></app-no-content>
+      </ng-container>
+      <ng-container *ngIf="!noContent">
+        <ng-container *ngIf="heading == Title.PATHS">
+          <div *ngFor="let item of allPathsData" class="paths-card-wrapper">
+            <app-path-card [singlePath]="item"></app-path-card>
           </div>
         </ng-container>
-      </ng-container>
 
-      <ng-container *ngIf="heading == Title.BATCHES">
-        <app-error-card [title]="Title.BATCHES" [error]="errorCard" *ngIf="error">
+        <ng-container *ngIf="heading == Title.COURSES">
+          <app-error-card [title]="Title.COURSES" [error]="errorCard" *ngIf="error">
 
-        </app-error-card>
-        <ng-container *ngIf="!error">
-          <div *ngFor="let item of allBatchesData; let i = index" class="paths-card-wrapper">
-            <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
-          </div>
+          </app-error-card>
+          <ng-container *ngIf="!error">
+            <div *ngFor="let item of allCoursesData" class="paths-card-wrapper">
+              <app-course-card [singleCourse]="item"></app-course-card>
+            </div>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="heading == Title.BATCHES">
+          <app-error-card [title]="Title.BATCHES" [error]="errorCard" *ngIf="error">
+
+          </app-error-card>
+          <ng-container *ngIf="!error">
+            <div *ngFor="let item of allBatchesData; let i = index" class="paths-card-wrapper">
+              <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
+            </div>
+          </ng-container>
         </ng-container>
       </ng-container>
 

@@ -54,6 +54,7 @@
           <app-course-card
             *ngIf="!error"
             [singleCourse]="item"
+            [isRed]="item.isFavourite"
           ></app-course-card>
         </ng-container>
       </ng-container>

@@ -24,7 +24,9 @@ export class ErrorCardComponent implements OnInit {
     code: 0,
   };
   @Input() title: Title = Title.PATHS;
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private router: Router) {
+    console.log(this.router.url.split('/')[1]);
+  }
 
   ngOnInit(): void {}
 
@@ -41,6 +43,10 @@ export class ErrorCardComponent implements OnInit {
       if (this.title === Title.BATCHES) {
         this.store.dispatch(loadAllBatches());
       }
+    } else if (this.router.url.split('/')[1] === 'batchpage') {
+      window.location.reload();
+    } else if (this.router.url.split('/')[1] === 'pathdashboard') {
+      window.location.reload();
     } else {
       if (this.title === Title.PATHS) {
         this.store.dispatch(loadAllPaths());

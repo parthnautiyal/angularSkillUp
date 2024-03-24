@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { AllSectionContainerComponent } from '../shared/containers/all-section-container/all-section-container.component';
+import { PageNotFoundComponent } from '../error-page/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,7 @@ const routes: Routes = [
         path: 'courses/favourites',
         component: AllSectionContainerComponent,
       },
+      { path: '**', component: PageNotFoundComponent },
     ],
   },
 ];

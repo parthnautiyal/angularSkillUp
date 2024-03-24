@@ -18,6 +18,7 @@ export interface BatchState {
   trainers: User[];
   batchDetails: Batch;
   pathData: Course;
+  isLoadingBatchById:boolean;
 }
 
 export const initialState: BatchState = {
@@ -27,6 +28,7 @@ export const initialState: BatchState = {
   students: [],
   isLoadingTrainer: false,
   isLoadingStudents: false,
+  isLoadingBatchById:false,
   errorStudents: null,
   errorTrainer: null,
   trainers: [],
@@ -101,55 +103,55 @@ export const batchReducer = createReducer(
   })),
   on(BatchActions.loadBatchById, (state) => ({
     ...state,
-    isloading: true,
+    isLoadingBatchById: true,
   })),
   on(BatchActions.loadBatchByIdSuccess, (state, { batchDetails }) => ({
     ...state,
-    isloading: false,
+    isLoadingBatchById: false,
     batchDetails: batchDetails,
   })),
   on(BatchActions.loadBatchByIdFailed, (state, { error }) => ({
     ...state,
-    isloading: false,
+    isLoadingBatchById: false,
     error,
   })),
 
   on(BatchActions.loadStudentsById, (state) => ({
     ...state,
     isLoadingStudents: true,
-    errorStudents: null,
+    error: null,
   })),
 
   on(BatchActions.loadStudentsByIdSuccess, (state, { students }) => ({
     ...state,
     students,
     isLoadingStudents: false,
-    errorStudents: null,
+    error: null,
   })),
   on(BatchActions.loadStudentsByIdFailed, (state, { error }) => ({
     ...state,
     isLoadingStudents: false,
-    errorStudents: error,
+    error: error,
   })),
   on(BatchActions.loadTrainersById, (state) => ({
     ...state,
     isLoadingTrainer: true,
-    errorTrainer: null,
+    error: null,
   })),
 
   on(BatchActions.loadTrainersByIdSuccess, (state, { trainers }) => ({
     ...state,
     trainers,
     isLoadingTrainer: false,
-    errorTrainer: null,
+    error: null,
   })),
   on(BatchActions.loadTrainersByIdFailed, (state, { error }) => ({
     ...state,
     isLoadingTrainer: false,
-    errorTrainer: error,
+    error: error,
   })),
 
-  on(BatchActions.loadBatchPathById, (state) => ({
+  on(BatchActions.loadBatchPathsById, (state) => ({
     ...state,
     isLoadingPaths: true,
     error: null,
@@ -163,10 +165,10 @@ export const batchReducer = createReducer(
   on(BatchActions.loadBatchPathByIdFailed, (state, { error }) => ({
     ...state,
     isLoadingPaths: false,
-    errorPaths: error,
+    error: error,
   }))
 );
 
-export const getbatch = (state: BatchState) => state.batches;
-export const getbatchLoading = (state: BatchState) => state.isLoadingBatches;
-export const getbatchError = (state: BatchState) => state.error;
+// export const getbatch = (state: BatchState) => state.batches;
+// export const getbatchLoading = (state: BatchState) => state.isLoadingBatches;
+// export const getbatchError = (state: BatchState) => state.error;

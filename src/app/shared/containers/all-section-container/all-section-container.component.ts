@@ -14,6 +14,7 @@ import {
   selectEnrolledCourses,
   selectEnrolledCoursesError,
   selectFavoritecourses,
+  selectFavouriteCoursesLoading,
 } from 'src/app/state/selector/course.selector';
 import { loadAllBatches } from 'src/app/state/action/batch.action';
 import {
@@ -61,6 +62,7 @@ export class AllSectionContainerComponent implements OnInit {
   Title = Title;
   RouterLinks = RouterLinks;
   Prefix = Prefix;
+  noContent:boolean = false;
 
   constructor(
     private store: Store,
@@ -205,11 +207,24 @@ export class AllSectionContainerComponent implements OnInit {
   }
   getFavouriteCourses() {
     this.store.dispatch(loadFavoriteCourses());
-    this.store.select(selectFavoritecourses).subscribe((res) => {
+    this.store.select(selectFavouriteCoursesLoading).subscribe((res)=>{
+      if (res == false){
+        setTimeout(() => {
+          this.loading = res;
+        }, 500);
+      }else{
+        this.loading = res;
+      }
+    });
+    this.store.select(selectFavoritecourses).subscribe((res) =>{
       console.log(res);
       if (res.length > 0) {
         this.allCoursesData = res;
         this.loading = false;
+        this.noContent = false;
+      }
+      if (res.length == 0){
+        this.noContent = true;
       }
     });
   }

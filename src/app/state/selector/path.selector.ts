@@ -37,3 +37,8 @@ export const selectPathById = createSelector(
   selectPathState,
   (state) => state.pathById
 );
+
+export const selectPathByIdLoading = createSelector(
+  selectPathState,
+  (state) => state.isLoadingPathById
+);
