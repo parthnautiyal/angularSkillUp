@@ -18,7 +18,7 @@
 
       <ng-container *ngIf="heading == Title.COURSES">
         <div *ngFor="let item of allCoursesData" class="paths-card-wrapper">
-          <app-course-card [singleCourse]="item"></app-course-card>
+          <app-course-card [singleCourse]="item" [isRed]="item.isFavourite"></app-course-card>
         </div>
       </ng-container>
 
