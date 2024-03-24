@@ -1,3 +1,5 @@
+import { Course } from "./Course";
+
 export interface Path {
   id: number;
   name: string;
@@ -5,8 +7,28 @@ export interface Path {
   imageUrl: string;
   isAccessible: boolean;
   noOfCourses: number;
+  progress: number;
+  completedAt: null;
 }
 
-export interface PathList {
-  data: Path[];
+export interface PathData{
+  id: number;
+  name: string;
+  imageUrl: string;
+  about:string;
+  createdBy: {
+    id: number,
+    name: string,
+    imageUrl: string,
+    email: string
+},
+updatedAt: string,
+noOfCourses: number,
+isEnrolled: boolean,
+isCompleted: boolean,
+createdAt: string;
+courses:Course[]
+
+
+
 }

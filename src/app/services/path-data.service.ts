@@ -3,16 +3,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
-import { PathList } from '../models/Path';
+import { Path } from '../models/Path';
 @Injectable({
   providedIn: 'root',
 })
 export class PathDataService {
   user: any = {
     token:
-      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMDkxMzMwNywiaWF0IjoxNzEwOTEzMDA3LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJwYXJ0aC5uYXV0aXlhbEB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyOX0.h9sENEzW6_vtm9o4k3u1j-4-UM0efuiRI8k0MWgG6RhW7XqVqSGk-4P_RyWowSEGjyY27sKs30ZDFXCeCcdA61ehuzPnrGmI1RWEwHoyy-K-gLOD_8UJzp21bfilZU_uPQDl56qzvoRh4kBCQVoo1MBI9BJ-NmA7LOiW9lNu7HT9cVA-PWL6y2LdK3D9f_3lL2OOjcohK96MqoW9BlOFCTIDbDn0uyX0IXcgwHBaIlFBPyxbPIG9LWD9daZc-CueID2Ih1vayUNGiLC6Qo0DXGdqwiLGQ4xmJq2noLCuPdN7uRBZ86t9HonooA4cEFTKF-hnpdOgCwfu2_7pw1tELQ',
+      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTA0NjIzNCwiaWF0IjoxNzExMDQ1OTM0LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.Qs8p2LqVCi4C0jFyoyLvVJB8vGzsgIuGVGz4Kyjoo89DuBa0jBiSv3b-N2XrtZ0FO8B_Qx7I0l5VRZI-GuQppuCW-fn04uTFZ_eX9aBRBYgcEfGkESbH1WoQwBu_H4OSIGv8trBLBbJeQ1yErGn-LYpdbmZL_ONXWCAaJtoa9j6m09NCFGVOobvY4Ix2Jfuy5z5ezwouYKUDg8Ufr_zyPW6WP7hRWz0cMSJrg3Y3U4GKJx6WRn1kN0Yi2peZE_RS8cPIy8NKh_4V9Iz5ZesaQ_5BsVwPhwuzb7qqPJB-4Po-mG95pTp9FE5qN4tpNEzIzIyCkonCn4mZ0kjIR1_DAg',
     refreshToken:
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTA0NDY4MywiaWF0IjoxNzEwOTU4MjgzLCJpc3MiOiJHT09HTEUiLCJzdWIiOiJwYXJ0aC5uYXV0aXlhbEB6b3BzbWFydC5jb20ifQ.Uf3XLt-iSzViBFeO32Z1639Fl2p4ngOaEDArgbkrpnkXp8qrJEoxC_h_izfNABps-v8bgD0LPIGUNtKuIafiqrBsY4z0wDCfkWjzkfJwD48U-w6wm__UX6K0m4Iivhe-RQXQoBUEKzuudhMAvaW75fbDC34n_iT-oFUAqDkr_qwq5LzzolUAL5azBbb_KvTO4lfipdOyXUi3GzuwqD6ufnqERy4PA-BJ2_gOdw0KnBpuJ1F0JXG0Os4_Xkq1S4SFKrIw1wvjc1lKNRSRIIge7aYY7wxc383HLjmrrh26OHu-BirpQi-V4SbghsuFzO3GSmUrGP35FUQAqPbYxGEucg',
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTE3MjExNiwiaWF0IjoxNzExMDg1NzE2LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20ifQ.kK6eYCa6056pHxuLaUFoD-KV8LyDgZ-ez41IVejHppybRCY27bFcmQLy5RjwOJqXtxWkX0bRH-7K5T9Eq2sBEM5aess3Ojp1K85WVQMp7PLgDziFIOESF6HcB01zDsaXM6mI-GfH1_2tvRv1MURekvzq_6fayyeT5LhRVv80IWIzk72yffM0mnCQYFvx1jR-P_oPzEI6Ob4LSJuWlYSZ78M-wLNz8vsTKDXZSTXcCvzvc4YpzVwHbGN2OUCB8ZYha-BvkmN8OsXPWELjPPb2iHMvliNmUtdM3gQ29lOi61Wux3ZReiE1tTyAwYDb0p0Om2GljyLB9FDiO9doReeobQ',
   };
 
   refreshHeader = new HttpHeaders({
@@ -32,37 +32,6 @@ export class PathDataService {
     // }, 60000);
   }
   private cache: any = null;
-  private allPathDataSubject = new BehaviorSubject<any>({});
-  allPathsData$ = this.allPathDataSubject.asObservable();
-  getPaths() {
-    if (this.cache != null) {
-      this.allPathDataSubject.next(this.cache);
-    } else {
-      this.http.get(this.url + '?pageSize=10&pageNo=1').subscribe((data) => {
-        this.cache = data;
-        this.allPathDataSubject.next(this.cache);
-      });
-    }
-  }
-
-  getPathData(id: string) {
-    return this.http.get(this.url + '/' + id + '?projection=course');
-  }
-  getAllPaths(): Observable<PathList> {
-    return this.http.get<PathList>(this.url + '?pageSize=12&pageNo=1');
-  }
-  getEnrolledPaths() {
-    return this.http.get(
-      'https://api.training.zopsmart.com/students/enrolled-paths'
-    );
-  }
-
-  getNoOfEnrolledPaths() {
-    return this.http.get(
-      'https://api.training.zopsmart.com/students/no-of-enrolled-paths'
-    );
-  }
-
   getRefreshToken() {
     return this.http.post(
       'https://api.training.zopsmart.com/login/refresh',

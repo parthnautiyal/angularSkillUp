@@ -5,12 +5,12 @@ export const selectBatchState = createFeatureSelector<BatchState>('batch');
 
 export const selectBatchs = createSelector(
   selectBatchState,
-  (state) => state.batch
+  (state) => state.batches
 );
 
 export const selectBatchsLoading = createSelector(
   selectBatchState,
-  (state) => state.loadingData
+  (state) => state.isLoading
 );
 
 export const selectBatchsError = createSelector(

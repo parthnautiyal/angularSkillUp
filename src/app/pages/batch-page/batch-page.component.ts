@@ -26,7 +26,7 @@ export class BatchPageComponent implements OnInit {
     });
     this.batchDataService.getPathById(this.id).subscribe((data: any) => {
       this.paths = data.data;
-      console.log(this.paths);
+      console.log("paths",this.paths);
     });
     this.batchDataService.getTrainersById(this.id).subscribe((data: any) => {
       this.trainerData = data.data;

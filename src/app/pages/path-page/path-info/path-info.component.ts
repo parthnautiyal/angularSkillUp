@@ -1,6 +1,9 @@
 import { ActivatedRoute } from '@angular/router';
-import { PathDataService } from '../../../services/path-data.service';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { loadPathById } from 'src/app/state/action/path.action';
+import { selectPathById } from 'src/app/state/selector/path.selector';
+import { PathData } from 'src/app/models/Path';
 
 @Component({
   selector: 'app-path-info',
@@ -9,21 +12,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PathInfoComponent implements OnInit {
   id: string = '';
-  pathData: any = {};
-  about: string[] = [];
-  constructor(
-    private pathDataService: PathDataService,
-    private route: ActivatedRoute,
-  ) {
+  pathData: PathData = {
+    id: 0,
+    name: '',
+    imageUrl: '',
+    about: '',
+    createdBy: {
+      id: 0,
+      name: '',
+      imageUrl: '',
+      email: '',
+    },
+    updatedAt: '',
+    noOfCourses: 0,
+    isEnrolled: false,
+    isCompleted: false,
+    createdAt: '',
+    courses: [],
+  };
+  about: string = '';
+  constructor(private store: Store, private route: ActivatedRoute) {
     this.id = this.route.snapshot.params['id'];
-    this.pathData = this.pathDataService
-      .getPathData(this.id)
-      .subscribe((data) => {
-        this.pathData = data.valueOf();
-        this.pathData = this.pathData.data;
-        console.log(this.pathData);
-      });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+    this.store.select(selectPathById).subscribe((path) => {
+      this.pathData = path;
+      this.about = this.pathData.about;
+      console.log(this.about);
+    });
+  }
 }

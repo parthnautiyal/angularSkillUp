@@ -13,6 +13,7 @@ export class ChapterContentContainerComponent implements OnInit {
   }
 
   openPopup(i: number) {
+    console.log("openin")
     this.allChapters[i].isVisited = true;
     this.close = true;
   }

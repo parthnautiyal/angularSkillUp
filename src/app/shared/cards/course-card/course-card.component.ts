@@ -7,7 +7,6 @@ import { Course } from 'src/app/models/Course';
   styleUrls: ['./course-card.component.sass'],
 })
 export class CourseCardComponent implements OnInit {
-  progress: number = 75;
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
   @Input() singleCourse: Course = {
@@ -17,17 +16,20 @@ export class CourseCardComponent implements OnInit {
     imageUrl: '',
     isAccessible: false,
     description: '',
+    about: '',
     createdBy: {
       id: 0,
       name: '',
       imageUrl: '',
-      email: ''
+      email: '',
     },
     createdAt: '',
-    isFavourite: false
+    isFavourite: false,
+    progress: 0,
+    enrolledAt: '',
+    completedAt: '',
   };
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {}
   isButtonRed: boolean = false;

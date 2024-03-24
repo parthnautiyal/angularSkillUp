@@ -1,17 +1,31 @@
-import { CourseDataService } from './../../../services/course-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { PathDataService } from './../../../services/path-data.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { loadCourses } from 'src/app/state/action/course.action';
-import { selectCourses } from 'src/app/state/selector/course.selector';
-import { loadBatch } from 'src/app/state/action/batch.action';
+import {
+  loadAllCourses,
+  loadEnrolledCourses,
+} from 'src/app/state/action/course.action';
+import {
+  selectCourses,
+  selectEnrolledCourses,
+} from 'src/app/state/selector/course.selector';
+import { loadAllBatches } from 'src/app/state/action/batch.action';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
 import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 import { Prefix } from 'src/app/constants/enums/prefix';
+import { Path } from 'src/app/models/Path';
+import { Course } from 'src/app/models/Course';
+import { Batch } from 'src/app/models/Batch';
+import {
+  loadAllPaths,
+  loadEnrolledPaths,
+} from 'src/app/state/action/path.action';
+import {
+  selectEnrolledPaths,
+  selectPaths,
+} from 'src/app/state/selector/path.selector';
 
 @Component({
   selector: 'app-all-section-container',
@@ -21,13 +35,9 @@ import { Prefix } from 'src/app/constants/enums/prefix';
 export class AllSectionContainerComponent implements OnInit {
   prefix: string = '';
   heading: string = '';
-  allPathsData: any[] = [];
-  allCoursesData: any[] = [];
-  allBatchesData: any[] = [];
-  // loading: boolean = true;
-  // batch$!: Observable<Batch[]>;
-  // loadingData$!: Observable<boolean>;
-  // error$!: Observable<any>;
+  allPathsData: Path[] = [];
+  allCoursesData: Course[] = [];
+  allBatchesData: Batch[] = [];
 
   //enums
   Title = Title;
@@ -36,52 +46,40 @@ export class AllSectionContainerComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private pathDataService: PathDataService,
     private activatedRoute: ActivatedRoute,
-    private courseDataService: CourseDataService,
     private router: Router
   ) {}
   getAllPaths() {
-    this.pathDataService.getPaths();
-    combineLatest([this.pathDataService.allPathsData$]).subscribe(
-      ([pathsdata]) => {
-        if (
-          typeof pathsdata === 'object' &&
-          Object.keys(pathsdata).length > 0
-        ) {
-          // this.loading = false;
-          this.allPathsData = pathsdata.data;
-        }
-      }
-    );
+    this.store.dispatch(loadAllPaths());
+    this.store.select(selectPaths).subscribe((res) => {
+      if (res.length > 0) this.allPathsData = res;
+    });
   }
   getAllCourses() {
-    this.store.dispatch(loadCourses());
+    this.store.dispatch(loadAllCourses());
     this.store.select(selectCourses).subscribe((res) => {
       // this.loading = false;
       if (res.length > 0) this.allCoursesData = res;
     });
-    // this.loading$ = this.store.pipe(select(selectCoursesLoading));
-    // this.error$ = this.store.pipe(select(selectCoursesError));
-    // if (Object.keys(this.courses$).length > 0) {
-    //   this.loading = false;
-    // }
   }
   getAllBatches() {
-    this.store.dispatch(loadBatch());
+    this.store.dispatch(loadAllBatches());
     this.store.select(selectBatchs).subscribe((res) => {
       // this.loading = false;
       if (res.length > 0) this.allBatchesData = res;
     });
   }
   getEnrolledPaths() {
-    this.pathDataService.getEnrolledPaths().subscribe((data: any) => {
-      this.allPathsData = data.data.enrolledPaths;
+    this.store.dispatch(loadEnrolledPaths());
+    this.store.select(selectEnrolledPaths).subscribe((res) => {
+      // this.loading = false;
+      if (res.length > 0) this.allPathsData = res;
     });
   }
   getEnrolledCourses() {
-    this.courseDataService.getEnrolledCourses().subscribe((data: any) => {
-      this.allCoursesData = data.data.enrolledCourses;
+    this.store.dispatch(loadEnrolledCourses());
+    this.store.select(selectEnrolledCourses).subscribe((res) => {
+      this.allCoursesData = res;
     });
   }
   ngOnInit(): void {

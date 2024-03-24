@@ -3,37 +3,37 @@ import { Batch } from '../../models/Batch';
 import * as BatchActions from '../action/batch.action';
 
 export interface BatchState {
-  batch: Batch[];
-  loadingData: boolean;
+  batches: Batch[];
+  isLoading: boolean;
   error: any;
 }
 
 export const initialState: BatchState = {
-  batch: [],
-  loadingData: false,
+  batches: [],
+  isLoading: false,
   error: null,
 };
 
 export const batchReducer = createReducer(
   initialState,
-  on(BatchActions.loadBatch, (state) => ({
+  on(BatchActions.loadAllBatches, (state) => ({
     ...state,
-    loadingData: true,
+    isLoading: true,
     error: null,
   })),
-  on(BatchActions.batchLoaded, (state, { batch }) => ({
+  on(BatchActions.loadAllBatchesSuccess, (state, { batches }) => ({
     ...state,
-    batch,
-    loadingData: false,
+    batches,
+    isLoading: false,
     error: null,
   })),
-  on(BatchActions.batchLoadFailed, (state, { error }) => ({
+  on(BatchActions.loadAllBatchesFailed, (state, { error }) => ({
     ...state,
-    loadingData: false,
+    isloading: false,
     error,
   }))
 );
 
-export const getbatch = (state: BatchState) => state.batch;
-export const getbatchLoading = (state: BatchState) => state.loadingData;
+export const getbatch = (state: BatchState) => state.batches;
+export const getbatchLoading = (state: BatchState) => state.isLoading;
 export const getbatchError = (state: BatchState) => state.error;
