@@ -65,9 +65,9 @@ export class CourseEffects {
                 course: course.data,
               })
             ),
-            catchError((error) =>
-              of(CourseActions.loadCourseAboutInfoFailed({ error }))
-            )
+            catchError((error) => {
+              return of(CourseActions.loadCourseAboutInfoFailed({ error }));
+            })
           )
       )
     )

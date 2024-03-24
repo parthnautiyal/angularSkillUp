@@ -32,17 +32,17 @@ export const loadBatchByIdFailed = createAction(
 );
 // // Action for loading path by ID
 export const loadBatchPathsById = createAction(
-  '[Path] Load Path By ID',
+  '[Batch] Load Path By ID',
   props<{ id: string }>()
 );
 
 export const loadBatchPathByIdSuccess = createAction(
-  '[Path] Load Path By ID Success',
+  '[Batch] Load Path By ID Success',
   props<{ pathById: Course }>()
 );
 
 export const loadBatchPathByIdFailed = createAction(
-  '[Path] Load Path By ID Failed',
+  '[Batch] Load Path By ID Failed',
   props<{ error: any }>()
 );
 
