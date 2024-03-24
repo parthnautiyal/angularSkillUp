@@ -11,6 +11,8 @@ export interface CourseState {
   noOfEnrolledCourses: number;
   isLoading: boolean;
   isLoadingFavourite:boolean;
+  isLoadingChapterData:boolean;
+  isLoadingAboutInfo:boolean;
   error: any;
   errorEnrolled: any;
   favoriteCourses: Course[];
@@ -46,6 +48,8 @@ const initialState: CourseState = {
   noOfEnrolledCourses: 0,
   isLoading: false,
   isLoadingFavourite:false,
+  isLoadingChapterData:false,
+  isLoadingAboutInfo:false,
   error: null,
   errorEnrolled: null,
   favoriteCourses: [],
@@ -93,34 +97,34 @@ export const courseReducer = createReducer(
   // Load Course About Info
   on(CourseActions.loadCourseAboutInfo, (state) => ({
     ...state,
-    isLoading: true,
+    isLoadingAboutInfo: true,
     error: null,
   })),
   on(CourseActions.loadCourseAboutInfoSuccess, (state, { course }) => ({
     ...state,
     courseAboutInfo: course,
-    isLoading: false,
+    isLoadingAboutInfo: false,
   })),
   on(CourseActions.loadCourseAboutInfoFailed, (state, { error }) => ({
     ...state,
-    isLoading: false,
+    isLoadingAboutInfo: false,
     error: error,
   })),
 
   // Load Chapter Data
   on(CourseActions.loadChapterData, (state) => ({
     ...state,
-    isLoading: true,
+    isLoadingChapterData: true,
     error: null,
   })),
   on(CourseActions.loadChapterDataSuccess, (state, { chapterData }) => ({
     ...state,
     chapterData: chapterData,
-    isLoading: false,
+    isLoadingChapterData: false,
   })),
   on(CourseActions.loadChapterDataFailed, (state, { error }) => ({
     ...state,
-    isLoading: false,
+    isLoadingChapterData: false,
     error: error,
   })),
 

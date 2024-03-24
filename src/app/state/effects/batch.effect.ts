@@ -26,8 +26,6 @@ export class BatchEffects {
               BatchActions.loadAllBatchesSuccess({ batches: batch.data })
             ),
             catchError((error) =>{
-              console.log("error received");
-              
               return of(BatchActions.loadAllBatchesFailed({ error }))
             }
             )

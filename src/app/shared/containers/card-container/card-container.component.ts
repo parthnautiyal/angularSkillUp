@@ -94,12 +94,10 @@ export class CardContainerComponent implements OnInit {
           if (res != null) {
             this.errorCourse.message = res.message.split('`').slice(1);
             this.errorCourse.code = res.message.split('`').slice(0, 1);
-            console.log('Courses Error -> ' + this.errorCourse);
             this.error = true;
           }
         });
         this.store.select(selectCoursesLoading).subscribe((res) => {
-          console.log('courses loading', res);
           if (res == false) {
             setTimeout(() => {
               this.loading = res;
@@ -122,11 +120,9 @@ export class CardContainerComponent implements OnInit {
             this.errorBatch.message = res.message.split('`').slice(1);
             this.errorBatch.code = res.message.split('`').slice(0, 1);
             this.error = true;
-            console.log('bTCHES ERROR' + res);
           }
         });
         this.store.select(selectBatchsLoading).subscribe((res) => {
-          console.log('batches loading', res);
           if (res == false) {
             setTimeout(() => {
               this.loading = res;
@@ -145,17 +141,13 @@ export class CardContainerComponent implements OnInit {
           }
         });
         this.store.select(selectPathsError).subscribe((res) => {
-          console.log('error in paths');
-
           if (res != null) {
             this.errorPath.message = res.message.split('`').slice(1);
             this.errorPath.code = res.message.split('`').slice(0, 1);
-            console.log('Paths Error -> ' + this.errorPath.code);
             this.error = true;
           }
         });
         this.store.select(selectPathsLoading).subscribe((res) => {
-          console.log('paths loading', res);
           if (res == false) {
             setTimeout(() => {
               this.loading = res;
@@ -182,7 +174,6 @@ export class CardContainerComponent implements OnInit {
         });
         this.store.select(selectBatchsError).subscribe((res) => {
           if (res != null) {
-            console.log(res);
             this.error = true;
           }
         });

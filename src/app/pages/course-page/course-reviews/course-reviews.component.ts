@@ -30,7 +30,6 @@ export class CourseReviewsComponent implements OnInit {
     private domSanitizer: DomSanitizer
   ) {
     this.totalRating = Object.values(this.rating).reduce((a, b) => a + b, 0);
-    console.log('Rating Total -> ' + this.totalRating);
     this.updateRating(this.rating);
     this.createAvgRatingArray();
 
@@ -69,7 +68,6 @@ export class CourseReviewsComponent implements OnInit {
     this.ratingPercentage[2] = Math.floor(rating.threeStars);
     this.ratingPercentage[3] = Math.floor(rating.twoStars);
     this.ratingPercentage[4] = Math.floor(rating.oneStars);
-    console.log(this.ratingPercentage);
   }
   createAvgRatingArray() {
     for (let i = 0; i < Math.floor(this.avgRating); i++) {
@@ -78,8 +76,6 @@ export class CourseReviewsComponent implements OnInit {
     if (this.avgRating % 1 != 0) {
       this.avgRatingArray.push(false);
     }
-
-    console.log('Avg rating array _> ' + this.avgRatingArray);
   }
 
   ngOnInit(): void {}

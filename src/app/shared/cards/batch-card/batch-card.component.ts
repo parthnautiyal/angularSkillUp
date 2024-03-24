@@ -37,10 +37,7 @@ export class BatchCardComponent implements OnInit {
     progress: 10,
   };
 
-  constructor() {
-    console.log(this.batchData);
-    
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }

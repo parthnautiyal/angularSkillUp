@@ -21,7 +21,6 @@ export class PathCardComponent implements OnInit {
     completedAt: null,
   };
   constructor() {
-    console.log(this.singlePath);
   }
 
   ngOnInit(): void {}

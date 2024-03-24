@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { Path } from '../models/Path';
 import { APIResponse } from '../models/ApiResponse';
 import { EnrolledBatches } from '../models/EnrolledBatches';
 @Injectable({
@@ -25,12 +24,6 @@ export class MiscellaneousService {
   url: string = 'https://api.training.zopsmart.com/students/paths';
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
-    // setInterval(() => {
-    //   this.getRefreshToken().subscribe((res: any) => {
-    //     localStorage.setItem('token', res.data.accessToken);
-    //     console.log('token refreshed');
-    //   });
-    // }, 60000);
   }
   getRefreshToken() {
     return this.http.post(
