@@ -219,7 +219,7 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectEnrolledPaths).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allPaths = res;
-            this.errorEnrolled=false;
+            this.errorEnrolled = false;
           }
         });
         this.store.select(selectEnrolledPathsError).subscribe((res) => {

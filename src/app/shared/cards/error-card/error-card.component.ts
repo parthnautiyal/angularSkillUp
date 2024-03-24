@@ -29,17 +29,6 @@ export class ErrorCardComponent implements OnInit {
   ngOnInit(): void {}
 
   handleReload() {
-    if (this.router.url === '/dashboard') {
-      if (this.title === Title.PATHS) {
-        this.store.dispatch(loadAllPaths());
-      }
-      if (this.title === Title.COURSES) {
-        this.store.dispatch(loadAllCourses());
-      }
-      if (this.title === Title.BATCHES) {
-        this.store.dispatch(loadAllBatches());
-      }
-    }
     if (this.router.url === '/user') {
       if (this.title === Title.COURSES) {
         this.store.dispatch(loadEnrolledCourses());
@@ -48,6 +37,16 @@ export class ErrorCardComponent implements OnInit {
       if (this.title === Title.PATHS) {
         this.store.dispatch(loadEnrolledPaths());
         console.log('Path refetched');
+      }
+      if (this.title === Title.BATCHES) {
+        this.store.dispatch(loadAllBatches());
+      }
+    } else {
+      if (this.title === Title.PATHS) {
+        this.store.dispatch(loadAllPaths());
+      }
+      if (this.title === Title.COURSES) {
+        this.store.dispatch(loadAllCourses());
       }
       if (this.title === Title.BATCHES) {
         this.store.dispatch(loadAllBatches());
