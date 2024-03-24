@@ -151,7 +151,7 @@ export const batchReducer = createReducer(
     error: error,
   })),
 
-  on(BatchActions.loadBatchPathById, (state) => ({
+  on(BatchActions.loadBatchPathsById, (state) => ({
     ...state,
     isLoadingPaths: true,
     error: null,
@@ -169,6 +169,6 @@ export const batchReducer = createReducer(
   }))
 );
 
-export const getbatch = (state: BatchState) => state.batches;
-export const getbatchLoading = (state: BatchState) => state.isLoadingBatches;
-export const getbatchError = (state: BatchState) => state.error;
+// export const getbatch = (state: BatchState) => state.batches;
+// export const getbatchLoading = (state: BatchState) => state.isLoadingBatches;
+// export const getbatchError = (state: BatchState) => state.error;

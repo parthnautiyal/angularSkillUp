@@ -15,20 +15,21 @@ export const loadAllPathsFailed = createAction(
 );
 
 // Action for loading path by ID
-export const loadPathById = createAction(
-  '[Path] Load Path By ID',
-  props<{ id: string }>()
-);
+// export const loadPathByIdPaths = createAction(
+//   '[Path] Load Path By ID',
+//   props<{ id: string }>()
+// );
 
-export const loadPathByIdSuccess = createAction(
-  '[Path] Load Path By ID Success',
-  props<{ pathById: PathData }>()
-);
+// export const loadPathByIdSuccess = createAction(
+//   '[Path] Load Path By ID Success',
+//   props<{ pathById: PathData }>()
+// );
 
-export const loadPathByIdFailed = createAction(
-  '[Path] Load Path By ID Failed',
-  props<{ error: any }>()
-);
+// export const loadPathByIdFailed = createAction(
+//   '[Path] Load Path By ID Failed',
+//   props<{ error: any }>()
+// );
+
 
 // Action for loading enrolled paths
 export const loadEnrolledPaths = createAction('[Path] Load Enrolled Paths');

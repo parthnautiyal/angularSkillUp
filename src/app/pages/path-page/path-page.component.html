@@ -1,5 +1,18 @@
 <app-component-header [heading]="'Path'"></app-component-header>
 <div class="container-path">
-  <app-path-info></app-path-info>
-  <app-path-page-wrapper></app-path-page-wrapper>
+  <ng-container *ngIf="loading">
+  <app-dashboard-shimmer></app-dashboard-shimmer>
+  </ng-container>
+  <ng-container *ngIf="!loading">
+    <ng-container *ngIf="error" >
+    <app-error-card [error]="errorCard" ></app-error-card>
+    </ng-container>
+    <ng-container *ngIf="!error">
+      <app-path-info></app-path-info>
+      <app-path-page-wrapper></app-path-page-wrapper>
+  
+    </ng-container>
+    
+  </ng-container>
+  
 </div>

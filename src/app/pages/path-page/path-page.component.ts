@@ -1,7 +1,9 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { loadPathById } from 'src/app/state/action/path.action';
+import { Store} from '@ngrx/store';
+import { Error } from 'src/app/models/Error';
+import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
+import { selectPathByIdLoading, selectPathsError } from 'src/app/state/selector/path.selector';
 
 @Component({
   selector: 'app-path-page',
@@ -9,12 +11,36 @@ import { loadPathById } from 'src/app/state/action/path.action';
   styleUrls: ['./path-page.component.sass'],
 })
 export class PathPageComponent implements OnInit {
-  //When the page is navigated back then implement this method
-  id: string = '';
-  constructor(private store: Store, private route: ActivatedRoute) {}
+  id: number = 0;
+  loading:boolean = true;
+  error:boolean = false;
+  errorCard: Error = {
+    message: '',
+    code: 0,
+  };
+  constructor(private store: Store, private route: ActivatedRoute,private mis:MiscellaneousService) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.store.dispatch(loadPathById({ id: this.id }));
+    this.mis.getPathData(this.id);
+    this.mis.loading$.subscribe((res)=>{
+      if (res==false){
+        setTimeout(() => {
+          this.loading = res;
+        }, 700);
+      }else{
+        this.loading = res;
+      }
+    });
+    this.store.select(selectPathsError).subscribe((res)=>{
+      if (res!=null){
+        this.loading =false;
+       this.error = true;
+       this.errorCard.message = res.message.split('`').slice(1);
+            this.errorCard.code = res.message.split('`').slice(0, 1);
+            console.log('Paths Error -> ' + this.errorCard.code);
+            this.error = true;
+      }
+    });
   }
 }

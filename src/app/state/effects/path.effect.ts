@@ -71,23 +71,25 @@ export class PathEffects {
       )
     )
   );
-  loadPathData$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(PathActions.loadPathById),
-      mergeMap(({ id }) =>
-        this.http
-          .get<APIResponse<PathData>>(
-            'https://api.training.zopsmart.com/students/paths/' +
-              id +
-              '?projection=course'
-          )
-          .pipe(
-            map((path) =>
-              PathActions.loadPathByIdSuccess({ pathById: path.data })
-            ),
-            catchError((error) => of(PathActions.loadAllPathsFailed({ error })))
-          )
-      )
-    )
-  );
+  // loadPathDataPath$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(PathActions.loadAllPaths),
+  //     mergeMap(({ id }) =>
+  //       this.http
+  //         .get<APIResponse<PathData>>(
+  //           'https://api.training.zopsmart.com/students/paths/' +
+  //             id +
+  //             '?projection=course'
+  //         )
+  //         .pipe(
+  //           map((path) =>
+  //             PathActions.loadPathByIdSuccess({ pathById: path.data })
+  //           ),
+  //           catchError((error) => of(PathActions.loadPathByIdFailed({ error })))
+  //         )
+  //     )
+  //   )
+  // );
+
+  
 }
