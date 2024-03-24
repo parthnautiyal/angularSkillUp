@@ -20,23 +20,8 @@
 
 <body>
   <app-root></app-root>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script>
-    function decodeJWTToken(token) {
-      return JSON.parse(atob(token.split(".")[1]));
-    }
+  <script src="https://accounts.google.com/gsi/client" defer async></script>
 
-    function handleCredentialResponse(response) {
-      const responsePayload = decodeJWTToken(response.credential);
-      sessionStorage.setItem("loggedInUser", JSON.stringify(responsePayload));
-      window.location.href = "/dashboard";
-
-    }
-
-    function handleSignOut() {
-      google.accounts.id.disableAutoSelect();
-    }
-  </script>
 </body>
 
 </html>
