@@ -7,6 +7,9 @@ footer
     justify-content: center
     background-color: var(--page-content-background-color)
 
+    @media screen and (max-width: 768px)
+        height: 100px
+
 footer
     .links
         text-decoration: none
@@ -16,22 +19,37 @@ footer
         font-size: 25px
         font-family: monospace,sans-serif
         letter-spacing: -2px
+    @media screen and (max-width: 768px)
+        .links
+            font-size: 1.1rem
+            gap: 20px
 
 .rights
     text-align: center
     width: 100vw
     padding-bottom: 10px
 
+    @media screen and (max-width: 768px)
+        font-size: 0.8rem
+        padding-bottom: 5px
+
 .skill
     font-size: 2rem
     font-weight: 600
     margin-bottom: 10px
+
+    @media screen and (max-width: 768px)
+        font-size: 1.5rem
 .up
     display: inline-block
     font-size: 2rem
     color: var(--primary-font-link-color)
     font-weight: 600
     margin-bottom: 10px
+
+    @media screen and (max-width: 768px)
+        font-size: 1.5rem
+        margin-bottom: 5px
 
 a
     color: var(--primary-font-color)
