@@ -12,6 +12,7 @@ import {
 import {
   loadAllPaths,
   loadEnrolledPaths,
+  loadPathById,
 } from 'src/app/state/action/path.actions';
 
 @Component({
@@ -52,7 +53,7 @@ export class ErrorCardComponent implements OnInit {
     } else if (this.router.url.split('/')[1] === 'batchpage') {
       window.location.reload();
     } else if (this.router.url.split('/')[1] === 'pathdashboard') {
-      window.location.reload();
+      this.store.dispatch(loadPathById({ id: this.router.url.split('/')[2] }));
     } else if (this.router.url.split('/')[1] === 'course') {
       window.location.reload();
     } else {

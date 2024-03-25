@@ -64,7 +64,7 @@ export class AllSectionContainerComponent implements OnInit {
   RouterLinks = RouterLinks;
   Prefix = Prefix;
   noContent: boolean = false;
-
+  height:number=112;
   constructor(
     private store: Store,
     private activatedRoute: ActivatedRoute,
@@ -242,6 +242,7 @@ export class AllSectionContainerComponent implements OnInit {
       }
     });
     if (this.heading === Title.PATHS) {
+      this.height=112;
       if (this.prefix === Prefix.ALL) {
         this.getAllPaths();
       }
@@ -249,6 +250,7 @@ export class AllSectionContainerComponent implements OnInit {
         this.getEnrolledPaths();
       }
     } else if (this.heading === Title.COURSES) {
+      this.height=262;
       if (this.prefix === Prefix.ALL) {
         this.getAllCourses();
       }
@@ -259,6 +261,7 @@ export class AllSectionContainerComponent implements OnInit {
         this.getFavouriteCourses();
       }
     } else if (this.heading === Title.BATCHES) {
+      this.height=120;
       if (this.prefix === Prefix.ALL) {
         this.getAllBatches();
       }

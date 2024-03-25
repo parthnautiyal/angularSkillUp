@@ -55,7 +55,7 @@ export class CardContainerComponent implements OnInit {
   allCourses: Course[] = [];
   allBatches: Batch[] = [];
   enrolledBatches: BatchDetails[] = [];
-
+  height: number = 0;
   @Input() title: string = '';
   @Input() prefixWord: string = '';
   errorBatch: Error = {
@@ -81,6 +81,7 @@ export class CardContainerComponent implements OnInit {
   ngOnInit(): void {
     if (this.router.url == '/dashboard') {
       if (this.title == Title.COURSES) {
+        this.height = 262;
         this.store.dispatch(loadAllCourses());
         this.store.select(selectCourses).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
@@ -100,13 +101,14 @@ export class CardContainerComponent implements OnInit {
           if (res == false) {
             setTimeout(() => {
               this.loading = res;
-            }, 500);
+            }, 1000);
           } else {
             this.loading = res;
           }
         });
       }
       if (this.title == Title.BATCHES) {
+        this.height = 200;
         this.store.dispatch(loadAllBatches());
         this.store.select(selectBatchs).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
@@ -132,6 +134,7 @@ export class CardContainerComponent implements OnInit {
         });
       }
       if (this.title == Title.PATHS) {
+        this.height = 112;
         this.store.dispatch(loadAllPaths());
         this.store.select(selectPaths).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
@@ -159,6 +162,7 @@ export class CardContainerComponent implements OnInit {
     }
     if (this.router.url == '/user') {
       if (this.title == Title.BATCHES) {
+        this.height = 200;
         // this.store.dispatch(loadAllBatches());
         // this.store.select(selectBatchs).subscribe((res) => {
         //   if (typeof res === 'object' && Object.keys(res).length > 0) {
@@ -188,6 +192,7 @@ export class CardContainerComponent implements OnInit {
       }
 
       if (this.title == Title.COURSES) {
+        this.height = 262;
         this.store.dispatch(loadEnrolledCourses());
         this.store.select(selectEnrolledCourses).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
@@ -213,6 +218,7 @@ export class CardContainerComponent implements OnInit {
         });
       }
       if (this.title == Title.PATHS) {
+        this.height = 112;
         this.store.dispatch(loadEnrolledPaths());
         this.store.select(selectEnrolledPaths).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
