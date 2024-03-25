@@ -98,10 +98,12 @@
           <div class="posted-by-name">{{ item.postedBy.name }}</div>
           <div class="rating-time-container">
             <div class="stars-container">
-              <img
-                src="assets/star-filled.svg"
-                style="width: 13px; margin-top: -4px"
-              />
+              <ng-container *ngFor="let st of [].constructor(item.rating)">
+                <img
+                  src="assets/star-filled.svg"
+                  style="width: 13px; margin-top: -4px"
+                />
+              </ng-container>
             </div>
             <span class="time-ago">
               {{ item.postedAt | date : "dd MM yyyy" }}
