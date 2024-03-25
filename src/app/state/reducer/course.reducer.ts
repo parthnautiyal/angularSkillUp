@@ -10,9 +10,9 @@ export interface CourseState {
   chapterData: Chapter[];
   noOfEnrolledCourses: number;
   isLoading: boolean;
-  isLoadingFavourite:boolean;
-  isLoadingChapterData:boolean;
-  isLoadingAboutInfo:boolean;
+  isLoadingFavourite: boolean;
+  isLoadingChapterData: boolean;
+  isLoadingAboutInfo: boolean;
   error: any;
   errorEnrolled: any;
   favoriteCourses: Course[];
@@ -47,9 +47,9 @@ export const initialState: CourseState = {
   chapterData: [],
   noOfEnrolledCourses: 0,
   isLoading: false,
-  isLoadingFavourite:false,
-  isLoadingChapterData:false,
-  isLoadingAboutInfo:false,
+  isLoadingFavourite: false,
+  isLoadingChapterData: false,
+  isLoadingAboutInfo: false,
   error: null,
   errorEnrolled: null,
   favoriteCourses: [],
@@ -78,7 +78,7 @@ export const courseReducer = createReducer(
   on(CourseActions.loadEnrolledCourses, (state) => ({
     ...state,
     isLoading: true,
-    error: null,
+    errorEnrolled: null,
   })),
   on(
     CourseActions.loadEnrolledCoursesSuccess,

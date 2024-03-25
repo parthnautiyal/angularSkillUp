@@ -40,7 +40,10 @@ export class ErrorCardComponent implements OnInit {
   }
 
   handleReload() {
-    if (this.router.url === '/user') {
+    if (
+      this.router.url === '/user' ||
+      this.router.url.split('/')[2] === 'ongoing'
+    ) {
       if (this.title === Title.COURSES) {
         this.store.dispatch(loadEnrolledCourses());
       }
