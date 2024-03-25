@@ -7,20 +7,23 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ChapterContentContainerComponent implements OnInit {
   close: boolean = false;
+  chapterUrl: string = '';
 
   closeButton() {
     this.close = false;
   }
 
   openPopup(i: number) {
-    this.allChapters[i].isVisited = true;
+    console.log(this.allChapters[i]);
+    // this.allChapters[i].isVisited = true;
+    this.chapterUrl = this.allChapters[i].resourceLink;
+
     this.close = true;
+    console.log(this.chapterUrl);
   }
 
-  iframeSrc = 'https://www.youtube.com/'; // Set your iframe source URL
-
   openInNewTab() {
-    window.open(this.iframeSrc, '_blank');
+    window.open(this.chapterUrl, '_blank');
   }
 
   @Input() allChapters: any = {};
