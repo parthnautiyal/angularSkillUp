@@ -3,7 +3,7 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import * as PathActions from '../action/path.action';
+import * as PathActions from '../action/path.actions';
 import { APIResponse } from 'src/app/models/ApiResponse';
 import { Path, PathData } from 'src/app/models/Path';
 import { EnrolledPathsData } from 'src/app/models/EnrolledPath';
@@ -85,7 +85,7 @@ export class PathEffects {
             map((path) =>
               PathActions.loadPathByIdSuccess({ pathById: path.data })
             ),
-            catchError((error) => of(PathActions.loadAllPathsFailed({ error })))
+            catchError((error) => of(PathActions.loadPathByIdFailed({ error })))
           )
       )
     )

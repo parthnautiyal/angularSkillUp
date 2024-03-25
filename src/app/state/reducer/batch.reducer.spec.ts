@@ -1,17 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import * as BatchActions from '../action/batch.action';
+import { provideMockStore } from '@ngrx/store/testing';
+import * as BatchActions from '../action/batch.actions';
 import { batchReducer, getbatch, getbatchError, getbatchLoading, initialState } from './batch.reducer';
 
 describe('Batch Reducer', () => {
-  //let store: MockStore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideMockStore({ initialState })]
     });
 
-    //store = TestBed.inject(MockStore);
   });
 
   // Test cases for loadAllBatches
@@ -19,7 +17,7 @@ describe('Batch Reducer', () => {
     const action = BatchActions.loadAllBatches();
     const state = batchReducer(initialState, action);
 
-    expect(state.isLoading).toBe(true);
+    expect(state.isLoadingBatches).toBe(true);
     expect(state.error).toBe(null);
   });
 
@@ -53,7 +51,7 @@ describe('Batch Reducer', () => {
     const state = batchReducer(initialState, action);
 
     expect(state.batches).toEqual(batches);
-    expect(state.isLoading).toBe(false);
+    expect(state.isLoadingBatches).toBe(false);
     expect(state.error).toBe(null);
   });
 
@@ -62,7 +60,7 @@ describe('Batch Reducer', () => {
     const action = BatchActions.loadAllBatchesFailed({ error });
     const state = batchReducer(initialState, action);
 
-    expect(state.isLoading).toBe(false);
+    expect(state.isLoadingBatches).toBe(false);
     expect(state.error).toEqual(error);
   });
 
@@ -71,7 +69,7 @@ describe('Batch Reducer', () => {
     const action = BatchActions.loadBatchById({id: '2'});
     const state = batchReducer(initialState, action);
 
-    expect(state.isLoading).toBe(true);
+    expect(state.isLoadingBatches).toBe(true);
   });
 
   it('should update state when loadBatchByIdSuccess action is dispatched', () => {
@@ -103,7 +101,7 @@ describe('Batch Reducer', () => {
     const state = batchReducer(initialState, action);
 
     expect(state.batchDetails).toEqual(batchDetails);
-    expect(state.isLoading).toBe(false);
+    expect(state.isLoadingBatches).toBe(false);
   });
 
   it('should update state when loadBatchByIdFailed action is dispatched', () => {
@@ -111,7 +109,7 @@ describe('Batch Reducer', () => {
     const action = BatchActions.loadBatchByIdFailed({ error });
     const state = batchReducer(initialState, action);
 
-    expect(state.isLoading).toBe(false);
+    expect(state.isLoadingBatches).toBe(false);
     expect(state.error).toEqual(error);
   });
 
@@ -261,8 +259,75 @@ describe('BatchState selectors', () => {
         },
         progress: 50,
       }],
-      isLoading: false,
-      error: null
+      isLoadingBatches: false,
+      isLoadingTrainer: false,
+      isLoadingStudents: false,
+      isLoadingPaths: false,
+      error: null,
+      errorStudents: null,
+      errorTrainer: null,
+      errorPaths: null,
+      students: [{
+        email: 'john.doe@example.com',
+        id: 1,
+        imageUrl: 'https://example.com/john-doe.jpg',
+        name: 'John Doe',
+        isActive: true,
+      }],
+      trainers: [{
+        email: 'john.doe@example.com',
+        id: 1,
+        imageUrl: 'https://example.com/john-doe.jpg',
+        name: 'John Doe',
+        isActive: true,
+      }],
+      batchDetails: {
+        createdAt: '2024-03-24T13:00:03Z',
+        createdBy: {
+          id: 1,
+          name: 'John Doe',
+          imageUrl: 'https://example.com/john-doe.jpg',
+          email: 'john.doe@example.com',
+          isActive: true,
+        },
+        endDate: '2024-06-24T13:00:03Z',
+        startDate: '2024-03-24T13:00:03Z',
+        id: 1,
+        isAccessible: true,
+        name: 'Batch 1',
+        noOfPaths: 10,
+        noOfStudents: 30,
+        noOfTrainers: 5,
+        streamName: 'Stream 1',
+        stream: {
+          streamId: 1,
+          streamName: 'Stream 1',
+        },
+        progress: 50,
+      },
+      pathData: {
+        id: 1,
+        name: "Introduction to TypeScript",
+        courseName: "Intro to TS",
+        imageUrl: "http://example.com/course.jpg",
+        isAccessible: true,
+        description: "This is a beginner's course on TypeScript.",
+        about: "In this course, you will learn the basics of TypeScript.",
+        createdBy: {
+          id: 101,
+          name: "John Doe",
+          imageUrl: "http://example.com/john.jpg",
+          email: "john@example.com"
+        },
+        createdAt: "2024-03-24T13:46:46.000Z",
+        isFavourite: false,
+        progress: 0,
+        enrolledAt: "2024-03-24T13:46:46.000Z",
+        completedAt: "",
+        noOfChapters: 10,
+        updatedAt: "2024-03-24T13:46:46.000Z",
+        level: 1
+      }
     };
   });
 

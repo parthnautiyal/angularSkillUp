@@ -1,67 +1,67 @@
 import { courseReducer, CourseState, initialState, reducer } from './course.reducer';
-import * as CourseActions from '../action/course.action';
+import * as CourseActions from '../action/course.actions';
 import { Action } from '@ngrx/store';
 import { state } from '@angular/animations';
 
 describe('CourseReducer', () => {
-    it('should return the default state', () => {
-      const action = { type: 'Unknown' };
-      const state = courseReducer(initialState, action);
+  it('should return the default state', () => {
+    const action = { type: 'Unknown' };
+    const state = courseReducer(initialState, action);
 
-      expect(state).toBe(initialState);
-    });
+    expect(state).toBe(initialState);
+  });
 
   //Load all courses
-    it('should set isLoading to true and error to null', () => {
-      const action = CourseActions.loadAllCourses();
-      const state = courseReducer(initialState, action);
+  it('should set isLoading to true and error to null', () => {
+    const action = CourseActions.loadAllCourses();
+    const state = courseReducer(initialState, action);
 
-      expect(state.isLoading).toBe(true);
-      expect(state.error).toBe(null);
-    });
-
-
-    it('should update allCourses and set isLoading to false', () => {
-      const courses = [ {
-        id: 1,
-        name: "Introduction to TypeScript",
-        courseName: "Intro to TS",
-        imageUrl: "http://example.com/course.jpg",
-        isAccessible: true,
-        description: "This is a beginner's course on TypeScript.",
-        about: "In this course, you will learn the basics of TypeScript.",
-        createdBy: {
-          id: 101,
-          name: "John Doe",
-          imageUrl: "http://example.com/john.jpg",
-          email: "john@example.com"
-        },
-        createdAt: "2024-03-24T13:46:46.000Z",
-        isFavourite: false,
-        progress: 0,
-        enrolledAt: "2024-03-24T13:46:46.000Z",
-        completedAt: "",
-        noOfChapters: 10,
-        updatedAt: "2024-03-24T13:46:46.000Z",
-        level: 1
-      }
-      ];
-      const action = CourseActions.loadAllCoursesSuccess({ courses });
-      const state = courseReducer(initialState, action);
-
-      expect(state.allCourses).toEqual(courses);
-      expect(state.isLoading).toBe(false);
-    });
+    expect(state.isLoading).toBe(true);
+    expect(state.error).toBe(null);
+  });
 
 
-    it('should update error and set isLoading to false', () => {
-      const error = { message: 'Error loading courses' };
-      const action = CourseActions.loadAllCoursesFailed({ error });
-      const state = courseReducer(initialState, action);
+  it('should update allCourses and set isLoading to false', () => {
+    const courses = [{
+      id: 1,
+      name: "Introduction to TypeScript",
+      courseName: "Intro to TS",
+      imageUrl: "http://example.com/course.jpg",
+      isAccessible: true,
+      description: "This is a beginner's course on TypeScript.",
+      about: "In this course, you will learn the basics of TypeScript.",
+      createdBy: {
+        id: 101,
+        name: "John Doe",
+        imageUrl: "http://example.com/john.jpg",
+        email: "john@example.com"
+      },
+      createdAt: "2024-03-24T13:46:46.000Z",
+      isFavourite: false,
+      progress: 0,
+      enrolledAt: "2024-03-24T13:46:46.000Z",
+      completedAt: "",
+      noOfChapters: 10,
+      updatedAt: "2024-03-24T13:46:46.000Z",
+      level: 1
+    }
+    ];
+    const action = CourseActions.loadAllCoursesSuccess({ courses });
+    const state = courseReducer(initialState, action);
 
-      expect(state.error).toEqual(error);
-      expect(state.isLoading).toBe(false);
-    });
+    expect(state.allCourses).toEqual(courses);
+    expect(state.isLoading).toBe(false);
+  });
+
+
+  it('should update error and set isLoading to false', () => {
+    const error = { message: 'Error loading courses' };
+    const action = CourseActions.loadAllCoursesFailed({ error });
+    const state = courseReducer(initialState, action);
+
+    expect(state.error).toEqual(error);
+    expect(state.isLoading).toBe(false);
+  });
 
   it('should update state for loadEnrolledCourses action', () => {
     const action = CourseActions.loadEnrolledCourses();
@@ -104,13 +104,13 @@ describe('CourseReducer', () => {
     const error = new Error('Test Error');
     const action = CourseActions.loadEnrolledCoursesFailed({ error });
     const newState = courseReducer(initialState, action);
-    expect(newState.error).toEqual(error);
+    expect(newState.errorEnrolled).toEqual(error);
     expect(newState.isLoading).toBe(false);
   });
 
   // Load Course About Info
   it('should set isLoading to true and error to null', () => {
-    const action = CourseActions.loadCourseAboutInfo({courseId: '2'});
+    const action = CourseActions.loadCourseAboutInfo({ courseId: '2' });
     const state = courseReducer(initialState, action);
 
     expect(state.isLoading).toBe(true);
@@ -157,9 +157,9 @@ describe('CourseReducer', () => {
     expect(state.isLoading).toBe(false);
   });
 
-// Load Chapter Data
+  // Load Chapter Data
   it('should set isLoading to true and error to null', () => {
-    const action = CourseActions.loadChapterData({courseId: '2'});
+    const action = CourseActions.loadChapterData({ courseId: '2' });
     const state = courseReducer(initialState, action);
 
     expect(state.isLoading).toBe(true);
@@ -167,7 +167,7 @@ describe('CourseReducer', () => {
   });
 
   it('should update chapterData and set isLoading to false', () => {
-    const chapterData = [ {
+    const chapterData = [{
       id: 1,
       name: "Introduction to TypeScript",
       resourceResponses: [
@@ -221,7 +221,7 @@ describe('CourseReducer', () => {
     expect(state.isLoading).toBe(false);
   });
 
-// Load Number of Enrolled Courses
+  // Load Number of Enrolled Courses
   it('should set isLoading to true and error to null', () => {
     const action = CourseActions.loadNoOfEnrolledCourses();
     const state = courseReducer(initialState, action);
@@ -248,7 +248,7 @@ describe('CourseReducer', () => {
     expect(state.isLoading).toBe(false);
   });
 
-// Load Favorite Courses
+  // Load Favorite Courses
   it('should set isLoading to true and error to null', () => {
     const action = CourseActions.loadFavoriteCourses();
     const state = courseReducer(initialState, action);
@@ -299,7 +299,7 @@ describe('CourseReducer', () => {
 
 });
 
-describe('Course Reducer', () => {
+describe('Reducer', () => {
   let initialState: CourseState;
 
   beforeEach(() => {
@@ -308,39 +308,40 @@ describe('Course Reducer', () => {
       allCourses: [],
       enrolledCourses: [],
       courseAboutInfo: {
-      id: 0,
-      name: '',
-      courseName: '',
-      imageUrl: '',
-      isAccessible: false,
-      description: '',
-      about: '',
-      createdBy: {
         id: 0,
         name: '',
+        courseName: '',
         imageUrl: '',
-        email: '',
+        isAccessible: false,
+        description: '',
+        about: '',
+        createdBy: {
+          id: 0,
+          name: '',
+          imageUrl: '',
+          email: '',
+        },
+        createdAt: '',
+        isFavourite: false,
+        progress: 0,
+        enrolledAt: '',
+        completedAt: '',
+        noOfChapters: 0,
+        updatedAt: '',
+        level: 0,
       },
-      createdAt: '',
-      isFavourite: false,
-      progress: 0,
-      enrolledAt: '',
-      completedAt: '',
-      noOfChapters: 0,
-      updatedAt: '',
-      level: 0
-  },
-  chapterData: [],
-  noOfEnrolledCourses: 0,
-  isLoading: false,
-  error: null,
-  favoriteCourses: [],
+      chapterData: [],
+      noOfEnrolledCourses: 0,
+      isLoading: false,
+      error: null,
+      errorEnrolled: null,
+      favoriteCourses: [],
     };
   });
 
   it('should return the initial state', () => {
     const action = {} as Action;
-    const state = reducer(undefined, action);
+    const state = reducer(initialState, action);
 
     expect(state).toBe(initialState);
   });

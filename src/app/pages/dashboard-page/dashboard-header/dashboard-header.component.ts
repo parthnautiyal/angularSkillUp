@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { loadNoOfEnrolledCourses } from 'src/app/state/action/course.action';
-import { loadNumberOfEnrolledPaths } from 'src/app/state/action/path.action';
+import { loadNoOfEnrolledCourses } from 'src/app/state/action/course.actions';
+import { loadNumberOfEnrolledPaths } from 'src/app/state/action/path.actions';
 import { selectNoOfCourses } from 'src/app/state/selector/course.selector';
 import { selectNoOfEnrolledPaths } from 'src/app/state/selector/path.selector';
 

@@ -1,8 +1,8 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadAllBatches } from 'src/app/state/action/batch.action';
-import { loadAllCourses, loadEnrolledCourses } from 'src/app/state/action/course.action';
-import { loadEnrolledPaths } from 'src/app/state/action/path.action';
+import { loadAllBatches } from 'src/app/state/action/batch.actions';
+import { loadAllCourses, loadEnrolledCourses } from 'src/app/state/action/course.actions';
+import { loadEnrolledPaths } from 'src/app/state/action/path.actions';
 
 @Component({
   selector: 'app-profile-page',

@@ -11,12 +11,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { CourseEffects } from './state/effects/course.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { BatchEffects } from './state/effects/batch.effect';
+import { BatchEffects } from './state/effects/batch.effects';
 import { batchReducer } from './state/reducer/batch.reducer';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { PathEffects } from './state/effects/path.effect';
+import { PathEffects } from './state/effects/path.effects';
 import { pathReducer } from './state/reducer/path.reducer';
+import { }
 
 
 

@@ -6,13 +6,13 @@ import {
   loadAllCourses,
   loadEnrolledCourses,
   loadFavoriteCourses,
-} from 'src/app/state/action/course.action';
+} from 'src/app/state/action/course.actions';
 import {
   selectCourses,
   selectEnrolledCourses,
   selectFavoritecourses,
 } from 'src/app/state/selector/course.selector';
-import { loadAllBatches } from 'src/app/state/action/batch.action';
+import { loadAllBatches } from 'src/app/state/action/batch.actions';
 import { selectBatchs } from 'src/app/state/selector/batch.selector';
 import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
@@ -23,7 +23,7 @@ import { Batch } from 'src/app/models/Batch';
 import {
   loadAllPaths,
   loadEnrolledPaths,
-} from 'src/app/state/action/path.action';
+} from 'src/app/state/action/path.actions';
 import {
   selectEnrolledPaths,
   selectPaths,
@@ -54,11 +54,11 @@ export class AllSectionContainerComponent implements OnInit {
   getAllPaths() {
     this.store.dispatch(loadAllPaths());
     this.store.select(selectPaths).subscribe((res) => {
-      
+
       if (res.length > 0){
         this.allPathsData = res;
         this.loading = false;
-      } 
+      }
     });
   }
   getAllCourses() {
@@ -67,7 +67,7 @@ export class AllSectionContainerComponent implements OnInit {
       if (res.length > 0){
         this.allCoursesData = res;
         this.loading = false;
-      } 
+      }
     });
   }
   getAllBatches() {
@@ -76,7 +76,7 @@ export class AllSectionContainerComponent implements OnInit {
       if (res.length > 0){
         this.allBatchesData = res;
         this.loading = false;
-      } 
+      }
     });
   }
   getEnrolledPaths() {
@@ -85,7 +85,7 @@ export class AllSectionContainerComponent implements OnInit {
       if (res.length > 0){
         this.allPathsData = res;
         this.loading = false;
-      } 
+      }
     });
   }
   getEnrolledCourses() {
@@ -94,7 +94,7 @@ export class AllSectionContainerComponent implements OnInit {
       if (res.length > 0){
         this.allCoursesData = res;
         this.loading = false;
-      } 
+      }
     });
   }
   getFavouriteCourses(){

@@ -1,7 +1,7 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { loadPathById } from 'src/app/state/action/path.action';
+import { loadPathById } from 'src/app/state/action/path.actions';
 
 @Component({
   selector: 'app-path-page',

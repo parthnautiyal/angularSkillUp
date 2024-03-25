@@ -75,5 +75,5 @@ export const loadStudentsByIdSuccess = createAction(
 
 export const loadStudentsByIdFailed = createAction(
   '[Batch] Load Students By ID Failed',
-  props<{ error: any }>()
+  props<{error : any}>()
 );

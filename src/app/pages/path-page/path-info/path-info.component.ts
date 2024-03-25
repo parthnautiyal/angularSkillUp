@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadPathById } from 'src/app/state/action/path.action';
+import { loadPathById } from 'src/app/state/action/path.actions';
 import { selectPathById } from 'src/app/state/selector/path.selector';
 import { PathData } from 'src/app/models/Path';
 
@@ -36,7 +36,7 @@ export class PathInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     this.store.select(selectPathById).subscribe((path) => {
       this.pathData = path;
       this.about = this.pathData.about;

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Batch } from '../../models/Batch';
-import * as BatchActions from '../action/batch.action';
+import * as BatchActions from '../action/batch.actions';
 import { User } from 'src/app/models/User';
 import { Course } from 'src/app/models/Course';
 
@@ -101,16 +101,16 @@ export const batchReducer = createReducer(
   })),
   on(BatchActions.loadBatchById, (state) => ({
     ...state,
-    isloading: true,
+    isLoadingBatches: true,
   })),
   on(BatchActions.loadBatchByIdSuccess, (state, { batchDetails }) => ({
     ...state,
-    isloading: false,
+    isLoadingBatches: false,
     batchDetails: batchDetails,
   })),
   on(BatchActions.loadBatchByIdFailed, (state, { error }) => ({
     ...state,
-    isloading: false,
+    isLoadingBatches: false,
     error,
   })),
 

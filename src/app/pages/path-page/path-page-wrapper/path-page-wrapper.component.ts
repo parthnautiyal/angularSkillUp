@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PathDataService } from '../../../services/path-data.service';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadPathById } from 'src/app/state/action/path.action';
+import { loadPathById } from 'src/app/state/action/path.actions';
 import { selectPathById } from 'src/app/state/selector/path.selector';
 import { Course } from 'src/app/models/Course';
 @Component({
