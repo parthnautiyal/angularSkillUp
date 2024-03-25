@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadGoogleIdentityLibrary();
     localStorage.setItem('login', 'true');
     window.handleCredentialResponse = this.handleCredentialResponse.bind(this);
   }
@@ -52,5 +53,12 @@ export class LoginComponent implements OnInit {
     const responsePayload = this.decodeJWTToken(response.credential);
     sessionStorage.setItem('loggedInUser', JSON.stringify(responsePayload));
     window.location.href = '/dashboard';
+  }
+  loadGoogleIdentityLibrary() {
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
   }
 }
