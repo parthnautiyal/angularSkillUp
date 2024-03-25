@@ -87,6 +87,7 @@ export class CardContainerComponent implements OnInit {
             this.error = false;
           }
         });
+
         this.store.select(selectCoursesError).subscribe((res) => {
           if (res != null) {
             this.errorCourse.message = res.message.split('`').slice(1);

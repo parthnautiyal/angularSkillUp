@@ -42,15 +42,17 @@
 }
 
 .progress-bar {
-  background-color: white;
+  background-color: black;
   border-radius: 6px;
+  height: 50px;
   width: calc(100% - 200px);
+  width: 100px;
 }
 
-.progress {
+.progress-lines {
   background: #ffc850;
   border-radius: 6px;
-  height: 11px;
+  height: 5px;
 }
 
 .ratings {
