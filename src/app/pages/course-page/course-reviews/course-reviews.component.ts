@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Review } from 'src/app/models/Reviews';
 import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 
 @Component({
@@ -25,6 +26,7 @@ export class CourseReviewsComponent implements OnInit {
       oneStars: 0,
     },
   };
+  courseReview: Review[] = [];
   ratingPercentage: number[] = [];
   avgRatingArray: boolean[] = [];
 
@@ -106,6 +108,12 @@ export class CourseReviewsComponent implements OnInit {
       console.log(res);
       this.rating = res;
     });
+
     this.updateRating(this.rating);
+    this.createAvgRatingArray();
+    this.misc.courseReviews$.subscribe((res) => {
+      console.log(res);
+      this.courseReview = res;
+    });
   }
 }

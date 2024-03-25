@@ -7,6 +7,7 @@ import { Ratings } from '../models/Ratings';
 import { APIResponse } from '../models/ApiResponse';
 import { EnrolledBatches } from '../models/EnrolledBatches';
 import { API } from '../constants/enums/API';
+import { Review } from '../models/Reviews';
 @Injectable({
   providedIn: 'root',
 })
@@ -94,8 +95,45 @@ export class MiscellaneousService {
       });
   }
 
+  private CourseReviewsSubject = new BehaviorSubject<Review[]>([
+    {
+      reviewId: 0,
+      postedBy: {
+        email: '',
+        id: 0,
+        imageUrl: '',
+        name: '',
+      },
+      postedAt: '',
+      updatedAt: '',
+      deletedBy: '',
+      deletedAt: '',
+      rating: 0,
+      feedback: '',
+    },
+  ]);
+
+  courseReviews$ = this.CourseReviewsSubject.asObservable();
+
+  getCourseReviews(id: number) {
+    return this.http
+      .get<APIResponse<Review[]>>(
+        'https://api.training.zopsmart.com/students/courses/' +
+          id +
+          '/reviews/all'
+      )
+      .subscribe((res) => {
+        if (res != null && res != undefined) {
+          this.CourseReviewsSubject.next(res.data);
+          console.log(res.data);
+        }
+      });
+  }
+
   // body: JSON.stringify({ courseId: courseId }),
 }
+
+// https://api.training.zopsmart.com/students/courses/114/reviews/all
 
 // fetch('https://api.training.zopsmart.com/students/courses/114/ratings', {
 //   headers: {
