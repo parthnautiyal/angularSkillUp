@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, NgZone, OnInit } from '@angular/core';
 import { Course } from 'src/app/models/Course';
 import { Path } from 'src/app/models/Path';
 import { Batch } from 'src/app/models/Batch';
@@ -75,7 +75,8 @@ export class CardContainerComponent implements OnInit {
     private store: Store,
     private router: Router,
     private messageService: MessageService,
-    private miscService: MiscellaneousService
+    private miscService: MiscellaneousService,
+    private ngZone: NgZone
   ) {}
   ngOnInit(): void {
     if (this.router.url == '/dashboard') {
@@ -237,5 +238,19 @@ export class CardContainerComponent implements OnInit {
         });
       }
     }
+    this.onResize();
+  }
+  shimmerCount = 3;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event?: any) {
+    this.ngZone.run(() => {
+      if (window.innerWidth < 768) {
+        // adjust the value as per your requirement
+        this.shimmerCount = 1; // adjust the value as per your requirement
+      } else {
+        this.shimmerCount = 3; // adjust the value as per your requirement
+      }
+    });
   }
 }

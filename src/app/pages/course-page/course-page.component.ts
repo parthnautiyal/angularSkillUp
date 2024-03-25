@@ -29,6 +29,7 @@ export class CoursePageComponent implements OnInit {
     code: 0,
     message: '',
   };
+  isRed: boolean = true;
   courseAbout$!: Observable<boolean>;
   chapterData$!: Observable<boolean>;
   constructor(
@@ -49,7 +50,7 @@ export class CoursePageComponent implements OnInit {
           if (res) {
             this.isAccessiblity = res.isEnrolled || false;
             console.log(this.isAccessiblity);
-
+            this.isRed = res.isFavourite;
             if (this.isAccessiblity) {
               this.store.dispatch(loadChapterData({ courseId: this.id }));
               this.store.select(selectChapterDataLoading).subscribe((res) => {
