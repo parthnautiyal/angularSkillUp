@@ -6,8 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-shimmer.component.sass'],
 })
 export class DashboardShimmerComponent implements OnInit {
-  @Input() shimmerCount: number = 9;
-
+  @Input() shimmerCount: number = 3;
+  @Input() height: number = 100;
   constructor() {}
 
   ngOnInit() {}
