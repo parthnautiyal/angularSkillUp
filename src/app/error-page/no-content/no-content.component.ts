@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-no-content',
   templateUrl: './no-content.component.html',
-  styleUrls: ['./no-content.component.sass']
+  styleUrls: ['./no-content.component.sass'],
 })
 export class NoContentComponent implements OnInit {
+  @Input() chapterFlag: boolean = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

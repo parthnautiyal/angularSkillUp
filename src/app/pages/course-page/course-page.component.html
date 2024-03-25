@@ -12,7 +12,10 @@
       <app-course-about-section></app-course-about-section>
 
       <app-chapter *ngIf="isAccessiblity"></app-chapter>
-      <app-no-content *ngIf="!isAccessiblity"></app-no-content>
+      <app-no-content
+        [chapterFlag]="isAccessiblity"
+        *ngIf="!isAccessiblity"
+      ></app-no-content>
       <app-forms></app-forms>
       <app-course-reviews></app-course-reviews>
     </ng-container>
