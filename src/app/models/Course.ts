@@ -16,6 +16,7 @@ export interface Course {
   createdAt: string;
   isFavourite: boolean;
   progress: number;
+  isEnrolled?: boolean;
   enrolledAt: string;
   completedAt: string;
   noOfChapters: number;

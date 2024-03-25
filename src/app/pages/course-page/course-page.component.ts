@@ -9,6 +9,7 @@ import {
 } from 'src/app/state/action/course.action';
 import {
   selectChapterDataLoading,
+  selectCourseAboutInfo,
   selectCourseAboutInfoLoading,
   selectCoursesError,
 } from 'src/app/state/selector/course.selector';
@@ -22,6 +23,7 @@ export class CoursePageComponent implements OnInit {
   id: string = '';
   loading: boolean = true;
   error: boolean = false;
+  isAccessiblity: boolean = false;
   errors: Error = {
     code: 0,
     message: '',
@@ -34,20 +36,50 @@ export class CoursePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadCourseAboutInfo({ courseId: this.id }));
-    this.store.dispatch(loadChapterData({ courseId: this.id }));
+    // this.store.dispatch(loadChapterData({ courseId: this.id }));
     this.courseAbout$ = this.store.select(selectCourseAboutInfoLoading);
-    this.chapterData$ = this.store.select(selectChapterDataLoading);
-    combineLatest([this.courseAbout$, this.chapterData$]).subscribe(
-      ([courseAbt, chapterData]) => {
-        if (!courseAbt && !chapterData) {
-          setTimeout(() => {
-            this.loading = false;
-          }, 500);
-        } else {
-          this.loading = true;
-        }
+    this.courseAbout$.subscribe((res) => {
+      if (res == false) {
+        this.store.select(selectCourseAboutInfo).subscribe((res) => {
+          if (res) {
+            this.isAccessiblity = res.isEnrolled || false;
+            console.log(this.isAccessiblity);
+
+            if (this.isAccessiblity) {
+              this.store.dispatch(loadChapterData({ courseId: this.id }));
+              this.store.select(selectChapterDataLoading).subscribe((res) => {
+                if (res == false) {
+                  setTimeout(() => {
+                    this.loading = res;
+                  }, 500);
+                } else {
+                  this.loading = res;
+                }
+              });
+            }
+          }
+        });
+
+        setTimeout(() => {
+          this.loading = res;
+        }, 500);
+      } else {
+        this.loading = res;
       }
-    );
+    });
+
+    // this.chapterData$ = this.store.select(selectChapterDataLoading);
+    // combineLatest([this.courseAbout$, this.chapterData$]).subscribe(
+    //   ([courseAbt, chapterData]) => {
+    //     if (!courseAbt && !chapterData) {
+    //       setTimeout(() => {
+    //         this.loading = false;
+    //       }, 500);
+    //     } else {
+    //       this.loading = true;
+    //     }
+    //   }
+    // );
     this.store.select(selectCoursesError).subscribe((res) => {
       if (res != null) {
         this.error = true;
