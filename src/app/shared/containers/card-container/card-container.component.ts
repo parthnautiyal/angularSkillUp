@@ -78,9 +78,6 @@ export class CardContainerComponent implements OnInit {
     private miscService: MiscellaneousService
   ) {}
   ngOnInit(): void {
-    this.miscService.getBatchesData().subscribe((res) => {
-      this.enrolledBatches = res.data.enrolledBatches;
-    });
     if (this.router.url == '/dashboard') {
       if (this.title == Title.COURSES) {
         this.store.dispatch(loadAllCourses());
@@ -160,12 +157,18 @@ export class CardContainerComponent implements OnInit {
     }
     if (this.router.url == '/user') {
       if (this.title == Title.BATCHES) {
-        this.store.dispatch(loadAllBatches());
-        this.store.select(selectBatchs).subscribe((res) => {
-          if (typeof res === 'object' && Object.keys(res).length > 0) {
-            this.allBatches = res;
-          }
+        // this.store.dispatch(loadAllBatches());
+        // this.store.select(selectBatchs).subscribe((res) => {
+        //   if (typeof res === 'object' && Object.keys(res).length > 0) {
+        //     this.allBatches = res;
+        //   }
+        // });
+
+        this.miscService.pathsData$.subscribe((res) => {
+          console.log(res);
+          this.allBatches = res.enrolledBatches;
         });
+
         this.store.select(selectBatchsError).subscribe((res) => {
           if (res != null) {
             this.error = true;

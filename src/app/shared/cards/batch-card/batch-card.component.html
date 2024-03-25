@@ -24,7 +24,8 @@
       <div class="batch-type">{{ batchData.streamName }}</div>
     </div>
     <div class="progressCircle">
-      <app-circular-progress-bar [progress]="progress"> </app-circular-progress-bar>
+      <app-circular-progress-bar [progress]="batchData.progress">
+      </app-circular-progress-bar>
     </div>
   </div>
 </div>
