@@ -21,7 +21,7 @@
       Enrolled Courses
     </div>
   </a>
-  <div class="recent-course" *ngIf="enrolledCourse" (click)="navigateToCourse()">
+  <div class="recent-course" *ngIf="enrolledCourse;else loading" (click)="navigateToCourse()">
     <div class="recent-course-text">
       <span class="course-name">{{enrolledCourse.courseName}}</span>
       <p>By {{enrolledCourse.createdBy.name}}</p>
@@ -32,4 +32,15 @@
 
     <i class="fa-solid fa-play play-button"></i>
   </div>
+  <ng-template #loading>
+    <div class="recent-course">
+      <div class="recent-course-text">
+        <span class="course-name">___</span>
+        <p>By Admin</p>
+      </div>
+      <div>
+        <app-circular-progress-bar [progress]="0"></app-circular-progress-bar>
+      </div>
+    </div>
+  </ng-template>
 </div>
