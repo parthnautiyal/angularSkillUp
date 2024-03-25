@@ -15,6 +15,7 @@ import { selectCourses } from 'src/app/state/selector/course.selector';
   providers: [MessageService],
 })
 export class CourseCardComponent implements OnInit {
+  @Input() onGoingFlag: boolean = false;
   RouterLinks = RouterLinks;
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
@@ -22,6 +23,7 @@ export class CourseCardComponent implements OnInit {
   @Input() isRed: boolean = true;
   @Input() singleCourse: Course = {
     id: 0,
+    courseId: 0,
     name: '',
     courseName: '',
     imageUrl: '',
@@ -59,7 +61,7 @@ export class CourseCardComponent implements OnInit {
 
   toggleColor() {
     this.isRed = !this.isRed;
-        if (this.isRed) {
+    if (this.isRed) {
       this.misc.postFavourite(this.singleCourse.id).subscribe((res: any) => {
         this.showSuccess();
       });
@@ -74,15 +76,15 @@ export class CourseCardComponent implements OnInit {
   showInfo() {
     this.messageService.add({
       severity: 'info',
-      summary: 'Info',
-      detail: 'Message Content',
+      summary: 'Removed',
+      detail: 'Removed from Favorites -> ' + this.singleCourse.id,
     });
   }
   showSuccess() {
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
-      detail: 'Message Content',
+      detail: 'Favorite Added -> ' + this.singleCourse.id,
     });
   }
 }

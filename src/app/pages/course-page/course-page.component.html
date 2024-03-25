@@ -5,7 +5,7 @@
 
   <ng-container *ngIf="!loading">
     <div *ngIf="error" class="error-card">
-      <app-error-card></app-error-card>
+      <app-error-card [error]="errors"></app-error-card>
     </div>
     <ng-container *ngIf="!error">
       <app-courses-banner></app-courses-banner>

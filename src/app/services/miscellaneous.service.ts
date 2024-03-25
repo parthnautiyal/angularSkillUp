@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { Path, PathData } from '../models/Path';
+import { Ratings } from '../models/Ratings';
 import { APIResponse } from '../models/ApiResponse';
 import { EnrolledBatches } from '../models/EnrolledBatches';
 import { API } from '../constants/enums/API';
@@ -53,22 +55,17 @@ export class MiscellaneousService {
   pathsData$ = this.PathDataSubject.asObservable();
   loading$ = this.loading.asObservable();
 
-  getPathData(id: number) {
-    this.http
-      .get(API.BASE_URL + API.STUDENTS + API.PATHS + '/' + id + API.PATH_DATA)
-      .subscribe((res: any) => {
-        if (res != null) {
-          this.PathDataSubject.next(res.data);
-          this.loading.next(false);
-        } else {
-          this.loading.next(true);
-        }
-      });
-  }
   getBatchesData() {
     return this.http.get<APIResponse<EnrolledBatches>>(
       API.BASE_URL + API.STUDENT + '/329' + API.ENROLLED_BATCHES + API.PAGE_SIZE
     );
   }
+
+  getRating(id: number) {
+    return this.http.get<APIResponse<Ratings>>(
+      'https://api.training.zopsmart.com/courses/' + id + '/ratings'
+    );
+  }
+
   // body: JSON.stringify({ courseId: courseId }),
 }
