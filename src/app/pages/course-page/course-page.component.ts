@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 import { Error } from 'src/app/models/Error';
+import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 import {
   loadChapterData,
   loadCourseAboutInfo,
@@ -30,7 +31,11 @@ export class CoursePageComponent implements OnInit {
   };
   courseAbout$!: Observable<boolean>;
   chapterData$!: Observable<boolean>;
-  constructor(private router: ActivatedRoute, private store: Store) {
+  constructor(
+    private router: ActivatedRoute,
+    private store: Store,
+    private mis: MiscellaneousService
+  ) {
     this.id = router.snapshot.params['id'];
   }
 
@@ -67,6 +72,9 @@ export class CoursePageComponent implements OnInit {
         this.loading = res;
       }
     });
+
+    this.mis.getRating(parseInt(this.id));
+    // console.log('id -> ' + this.id);
 
     // this.chapterData$ = this.store.select(selectChapterDataLoading);
     // combineLatest([this.courseAbout$, this.chapterData$]).subscribe(
