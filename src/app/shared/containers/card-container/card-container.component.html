@@ -4,11 +4,7 @@
   <a class="view-all" *ngIf="isActive" [routerLink]="['/', title, 'all']">View all {{ title }}</a>
 </div>
 <ng-container *ngIf="loading">
-  <app-dashboard-shimmer
-    class="shimmer"
-    [shimmerCount]="3"
-    [height]="height"
-  ></app-dashboard-shimmer>
+  <app-dashboard-shimmer class="shimmer" [shimmerCount]="3" [height]="height"></app-dashboard-shimmer>
 </ng-container>
 <ng-container *ngIf="!loading">
   <div class="card-wrapper">
@@ -20,15 +16,8 @@
           </a>
         </ng-container>
       </ng-container>
-<<<<<<< HEAD
-      <app-error-card [title]="Title.BATCHES" [error]="errorBatch" *ngIf="error"></app-error-card>
-=======
-      <div [ngStyle]="{'height':'200px'}"><app-error-card
-        [title]="Title.BATCHES"
-        [error]="errorBatch"
-        *ngIf="error"
-      ></app-error-card></div>
->>>>>>> origin
+      <div [ngStyle]="{'height':'200px'}"><app-error-card [title]="Title.BATCHES" [error]="errorBatch"
+          *ngIf="error"></app-error-card></div>
     </ng-container>
 
     <ng-container *ngIf="title == Title.PATHS">
@@ -37,16 +26,8 @@
           <app-path-card *ngIf="!error" [singlePath]="item"></app-path-card>
         </ng-container>
       </ng-container>
-<<<<<<< HEAD
-      <app-error-card [title]="Title.PATHS" [error]="errorPath" *ngIf="errorEnrolled"></app-error-card>
-      <app-error-card [title]="Title.PATHS" [error]="errorPath" *ngIf="error"></app-error-card>
-=======
-      <div [ngStyle]="{'height':'112px'}"><app-error-card
-        [title]="Title.PATHS"
-        [error]="errorPath"
-        *ngIf="error"
-      ></app-error-card></div>
->>>>>>> origin
+      <div [ngStyle]="{'height':'112px'}"><app-error-card [title]="Title.PATHS" [error]="errorPath"
+          *ngIf="error"></app-error-card></div>
     </ng-container>
 
     <ng-container *ngIf="title == Title.COURSES">
@@ -55,16 +36,8 @@
           <app-course-card *ngIf="!error" [singleCourse]="item" [isRed]="item.isFavourite"></app-course-card>
         </ng-container>
       </ng-container>
-<<<<<<< HEAD
-      <app-error-card [title]="Title.COURSES" [error]="errorCourse" *ngIf="errorEnrolled"></app-error-card>
-      <app-error-card [title]="Title.COURSES" [error]="errorCourse" *ngIf="error"></app-error-card>
-=======
-      <div [ngStyle]="{'height':'262px'}"><app-error-card
-        [title]="Title.COURSES"
-        [error]="errorCourse"
-        *ngIf="error"
-      ></app-error-card></div>
->>>>>>> origin
+      <div [ngStyle]="{'height':'262px'}"><app-error-card [title]="Title.COURSES" [error]="errorCourse"
+          *ngIf="error"></app-error-card></div>
     </ng-container>
   </div>
 </ng-container>
