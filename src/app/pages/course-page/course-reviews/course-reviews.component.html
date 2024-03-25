@@ -8,13 +8,9 @@
       <div class="average-rating-star-container">
         <div class="stars-container">
           <ng-container *ngFor="let item of avgRatingArray">
-            <mat-icon *ngIf="item" svgIcon="star"></mat-icon>
-            <div
-              *ngIf="!item"
-              class="hidden-star"
-              style="width: 10px; overflow: hidden"
-            >
-              <mat-icon svgIcon="star"></mat-icon>
+            <img *ngIf="item" src="assets/star-filled.svg">
+            <div *ngIf="!item" class="hidden-star" style="width: 10px; overflow: hidden">
+              <img src="assets/star-filled.svg" style=" margin-top: 8px">
             </div>
           </ng-container>
         </div>
@@ -25,17 +21,11 @@
       <ng-container *ngFor="let star of [5, 4, 3, 2, 1]; let k = index">
         <div class="rating">
           <div class="progress-bar">
-            <div
-              class="progress-lines"
-              [style.width]="ratingPercentage[k] + '%'"
-            ></div>
+            <div class="progress-lines" [style.width]="ratingPercentage[k] + '%'"></div>
           </div>
           <div class="percent-rating">
             <div class="stars-container stars-container-info">
-              <mat-icon
-                *ngFor="let j of [].constructor(star)"
-                svgIcon="star"
-              ></mat-icon>
+              <img *ngFor="let j of [].constructor(star)" src="assets/star-filled.svg">
             </div>
             <div class="percentage-info">{{ ratingPercentage[k] }}%</div>
           </div>
@@ -45,17 +35,9 @@
   </div>
   <div class="rating-review">
     <div class="rating-review-left">
-      <span
-        (click)="handleMyReviewButton()"
-        [ngClass]="{ active: isReviewOn }"
-        style="margin-right: 15px"
-        >My Review</span
-      >
-      <span
-        [ngClass]="{ active: isReviewCommentOn }"
-        (click)="handleReviewCommentButton()"
-        >All Reviews</span
-      >
+      <span (click)="handleMyReviewButton()" [ngClass]="{ active: isReviewOn }" style="margin-right: 15px">My
+        Review</span>
+      <span [ngClass]="{ active: isReviewCommentOn }" (click)="handleReviewCommentButton()">All Reviews</span>
     </div>
     <div class="rating-review-right">
       <button (click)="handleReviewButton()" class="add-feedback-button">
@@ -68,42 +50,30 @@
     <div class="stars">
       <div>
         <ng-container *ngFor="let i of [].constructor(5); let index">
-          <mat-icon svgIcon="review-star"></mat-icon>
+          <img src="assets/star-empty.svg">
         </ng-container>
       </div>
     </div>
     <div class="info-heading">Comments</div>
     <div class="review-container">
-      <textarea
-        name="feedback"
-        class="add-feedback"
-        id="add-feedback"
-        rows="10"
-        placeholder="Share your feedback...."
-        spellcheck="false"
-      ></textarea>
+      <textarea name="feedback" class="add-feedback" id="add-feedback" rows="10" placeholder="Share your feedback...."
+        spellcheck="false"></textarea>
     </div>
     <div class="buttons">
       <button (click)="handleReviewButton()" class="cancel-button" id="cancel">
-        Cancel</button
-      ><button type="submit" class="update-button" id="submit">Submit</button>
+        Cancel</button><button type="submit" class="update-button" id="submit">Submit</button>
     </div>
   </div>
 
   <div *ngIf="isReviewCommentOn" class="review-component-container">
     <div class="review">
-      <img
-        src="https://lh3.googleusercontent.com/a/AAcHTtevWj3vfYohx1De1scm-Rc-FvxqN6zrhLPxYUIxduoc5A=s96-c"
-        class="posted-by-img"
-      />
+      <img src="https://lh3.googleusercontent.com/a/AAcHTtevWj3vfYohx1De1scm-Rc-FvxqN6zrhLPxYUIxduoc5A=s96-c"
+        class="posted-by-img" />
       <div class="review-detail">
         <div class="posted-by-name">Zubair Ahmed</div>
         <div class="rating-time-container">
           <div class="stars-container">
-            <mat-icon
-              svgIcon="star"
-              style="width: 13px; margin-top: -4px"
-            ></mat-icon>
+            <img src="assets/star-filled.svg" style="width: 13px; margin-top: -4px">
           </div>
           <span class="time-ago">16 Jul 2023</span>
         </div>
@@ -115,18 +85,14 @@
       </div>
     </div>
     <div class="review">
-      <img
-        src="https://lh3.googleusercontent.com/a/AAcHTtevWj3vfYohx1De1scm-Rc-FvxqN6zrhLPxYUIxduoc5A=s96-c"
-        class="posted-by-img"
-      />
+      <img src="https://lh3.googleusercontent.com/a/AAcHTtevWj3vfYohx1De1scm-Rc-FvxqN6zrhLPxYUIxduoc5A=s96-c"
+        class="posted-by-img" />
       <div class="review-detail">
         <div class="posted-by-name">Zubair Ahmed</div>
         <div class="rating-time-container">
           <div class="stars-container">
-            <mat-icon
-              svgIcon="star"
-              style="width: 13px; margin-top: -4px"
-            ></mat-icon>
+            <img src="assets/star-filled.svg" style="width: 13px; margin-top: -4px">
+
           </div>
           <span class="time-ago">16 Jul 2023</span>
         </div>

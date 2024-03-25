@@ -107,5 +107,6 @@ export class CourseReviewsComponent implements OnInit {
       this.rating = res;
     });
     this.updateRating(this.rating);
+    this.createAvgRatingArray();
   }
 }
