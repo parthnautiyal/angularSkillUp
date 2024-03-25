@@ -47,11 +47,12 @@
     <div class="rating-review-left">
       <span
         (click)="handleMyReviewButton()"
-        [ngClass]="{ active: isReviewOn }"
+        [ngClass]="{ active: isMyReviewOn }"
         style="margin-right: 15px"
         >My Review</span
       >
       <span
+        *ngIf="isAllReviewOn"
         [ngClass]="{ active: isReviewCommentOn }"
         (click)="handleReviewCommentButton()"
         >All Reviews</span
@@ -67,8 +68,17 @@
     <div class="info-heading">Ratings<span class="required">*</span></div>
     <div class="stars">
       <div>
-        <ng-container *ngFor="let i of [].constructor(5); let index">
-          <img src="assets/star-empty.svg" />
+        <ng-container *ngFor="let i of [].constructor(6); let index = index">
+          <img
+            *ngIf="index < ratingClicked"
+            (click)="handleReviewStarClick(index)"
+            src="assets/star-filled.svg"
+          />
+          <img
+            *ngIf="index > ratingClicked"
+            (click)="handleReviewStarClick(index)"
+            src="assets/star-empty.svg"
+          />
         </ng-container>
       </div>
     </div>
@@ -84,7 +94,11 @@
       ></textarea>
     </div>
     <div class="buttons">
-      <button (click)="handleReviewButton()" class="cancel-button" id="cancel">
+      <button
+        (click)="handleCancelReviewButton()"
+        class="cancel-button"
+        id="cancel"
+      >
         Cancel</button
       ><button type="submit" class="update-button" id="submit">Submit</button>
     </div>
