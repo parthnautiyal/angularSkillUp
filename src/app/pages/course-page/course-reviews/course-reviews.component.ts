@@ -46,9 +46,9 @@ export class CourseReviewsComponent implements OnInit {
       0
     );
     console.log('Rating Total -> ' + this.totalRating);
-    this.totalRating = Object.values(this.rating).reduce((a, b) => a + b, 0);
+
     this.updateRating(this.rating);
-    this.createAvgRatingArray();
+    //this.createAvgRatingArray();
 
     this.matIconRegistry.addSvgIcon(
       'star',
@@ -77,6 +77,8 @@ export class CourseReviewsComponent implements OnInit {
   updateRating(rating: Ratings) {
     rating.rating.fiveStars =
       (rating.rating.fiveStars / this.totalRating) * 100;
+    console.log(rating.rating);
+
     rating.rating.fourStars =
       (rating.rating.fourStars / this.totalRating) * 100;
     rating.rating.threeStars =
