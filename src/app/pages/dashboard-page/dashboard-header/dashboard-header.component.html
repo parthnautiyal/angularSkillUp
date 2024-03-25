@@ -23,8 +23,8 @@
   </a>
   <div class="recent-course" *ngIf="enrolledCourse" (click)="navigateToCourse()">
     <div class="recent-course-text">
-      <span>{{enrolledCourse.courseName}}</span>
-      <p>{{enrolledCourse.createdBy.name}}</p>
+      <span class="course-name">{{enrolledCourse.courseName}}</span>
+      <p>By {{enrolledCourse.createdBy.name}}</p>
     </div>
     <div>
       <app-circular-progress-bar [progress]="enrolledCourse.progress"></app-circular-progress-bar>
