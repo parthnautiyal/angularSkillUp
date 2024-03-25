@@ -1,5 +1,6 @@
 export interface Course {
   id: number;
+  courseId?: number;
   name: string;
   courseName: string;
   imageUrl: string;
@@ -15,6 +16,7 @@ export interface Course {
   createdAt: string;
   isFavourite: boolean;
   progress: number;
+  isEnrolled?: boolean;
   enrolledAt: string;
   completedAt: string;
   noOfChapters: number;

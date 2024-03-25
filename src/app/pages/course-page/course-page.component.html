@@ -5,12 +5,17 @@
 
   <ng-container *ngIf="!loading">
     <div *ngIf="error" class="error-card">
-      <app-error-card></app-error-card>
+      <app-error-card [error]="errors"></app-error-card>
     </div>
     <ng-container *ngIf="!error">
       <app-courses-banner></app-courses-banner>
       <app-course-about-section></app-course-about-section>
-      <app-chapter></app-chapter>
+
+      <app-chapter *ngIf="isAccessiblity"></app-chapter>
+      <app-no-content
+        [chapterFlag]="isAccessiblity"
+        *ngIf="!isAccessiblity"
+      ></app-no-content>
       <app-forms></app-forms>
       <app-course-reviews></app-course-reviews>
     </ng-container>

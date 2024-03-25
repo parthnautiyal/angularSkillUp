@@ -157,12 +157,6 @@ export class CardContainerComponent implements OnInit {
           }
         });
       }
-
-      this.store.select(selectCoursesError).subscribe((res) => {
-        if (res != null) {
-          this.showError();
-        }
-      });
     }
     if (this.router.url == '/user') {
       if (this.title == Title.BATCHES) {
@@ -239,13 +233,5 @@ export class CardContainerComponent implements OnInit {
         });
       }
     }
-  }
-
-  showError() {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: 'Message Content',
-    });
   }
 }

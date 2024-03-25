@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { MessageService } from 'primeng/api';
 import { Title } from 'src/app/constants/enums/title';
 import { Error } from 'src/app/models/Error';
 import { loadAllBatches } from 'src/app/state/action/batch.actions';
@@ -17,6 +18,7 @@ import {
   selector: 'app-error-card',
   templateUrl: './error-card.component.html',
   styleUrls: ['./error-card.component.sass'],
+  providers: [MessageService],
 })
 export class ErrorCardComponent implements OnInit {
   @Input() error: Error = {
@@ -24,10 +26,17 @@ export class ErrorCardComponent implements OnInit {
     code: 0,
   };
   @Input() title: Title = Title.PATHS;
-  constructor(private store: Store, private router: Router) {
+  constructor(
+    private store: Store,
+    private router: Router,
+    private messageService: MessageService
+  ) {
+    // this.showInfo();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.showInfo();
+  }
 
   handleReload() {
     if (this.router.url === '/user') {
@@ -44,10 +53,9 @@ export class ErrorCardComponent implements OnInit {
       window.location.reload();
     } else if (this.router.url.split('/')[1] === 'pathdashboard') {
       window.location.reload();
-    }else if (this.router.url.split('/')[1] === 'course') {
+    } else if (this.router.url.split('/')[1] === 'course') {
       window.location.reload();
-    } 
-    else {
+    } else {
       if (this.title === Title.PATHS) {
         this.store.dispatch(loadAllPaths());
       }
@@ -58,5 +66,20 @@ export class ErrorCardComponent implements OnInit {
         this.store.dispatch(loadAllBatches());
       }
     }
+  }
+
+  showInfo() {
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Removed',
+      detail: 'Removed from Favorites -> ',
+    });
+  }
+  showSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Favourite Added',
+    });
   }
 }
