@@ -1,5 +1,6 @@
 export enum API {
   BASE_URL = 'https://api.training.zopsmart.com',
+  // BASE_URL = 'https://staging.api.training.zopsmart.com',
   STUDENTS = '/students',
   STUDENT = '/student',
   BATCHES = '/batches/',
