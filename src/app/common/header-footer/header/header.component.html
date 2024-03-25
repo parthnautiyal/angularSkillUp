@@ -27,7 +27,7 @@
           alt=""
         />
         <div class="dropdown-icon">
-          <i class="fa-solid fa-caret-down"></i>
+          <img [src]="isDarkMode ?'assets/dark/Expand.svg':'assets/light/Expand.svg' ">
         </div>
       </div>
       <div class="user-organization dropdown" *ngIf="isOrgDropdownOpen">
