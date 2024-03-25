@@ -8,7 +8,7 @@
       <img [src]="isDarkMode? 'assets/dark/My Favourites.svg':'assets/light/My Favourites.svg'" alt="favourite" />
     </button>
     <div class="search-bar"  *ngIf="!isResponsive">
-      <input class="search-box" type="text" placeholder="Search">
+      <input class="search-box" type="text" placeholder="Search" [(ngModel)]="searchQuery" (keyup.enter)="submitSearch()">
         <img class="search-icon" src="assets/dark/Search.svg">
     </div>
     <div *ngIf="isResponsive">

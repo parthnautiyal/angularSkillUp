@@ -7,11 +7,13 @@ import { Path } from 'src/app/models/Path';
   styleUrls: ['./path-card.component.sass'],
 })
 export class PathCardComponent implements OnInit {
+  @Input() onGoingFlag: boolean = false;
   RouterLinks = RouterLinks;
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
   @Input() singlePath: Path = {
     id: 0,
+    pathId: 0,
     name: '',
     pathName: '',
     imageUrl: '',
@@ -20,8 +22,7 @@ export class PathCardComponent implements OnInit {
     progress: 0,
     completedAt: null,
   };
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }

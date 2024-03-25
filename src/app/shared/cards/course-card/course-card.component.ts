@@ -15,6 +15,7 @@ import { selectCourses } from 'src/app/state/selector/course.selector';
   providers: [MessageService],
 })
 export class CourseCardComponent implements OnInit {
+  @Input() onGoingFlag: boolean = false;
   RouterLinks = RouterLinks;
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
@@ -22,6 +23,7 @@ export class CourseCardComponent implements OnInit {
   @Input() isRed: boolean = true;
   @Input() singleCourse: Course = {
     id: 0,
+    courseId: 0,
     name: '',
     courseName: '',
     imageUrl: '',

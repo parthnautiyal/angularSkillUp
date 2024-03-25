@@ -16,10 +16,10 @@ export class LoginGuard implements CanActivate {
       sessionStorage.getItem('loggedInUser') != undefined;
     if (isAuthenticated) {
       this.router.navigate(['/dashboard']);
-      return false;
-    } else {
-      this.router.navigate(["login"]);
       return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
     }
   }
 }

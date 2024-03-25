@@ -1,5 +1,6 @@
 export interface Course {
   id: number;
+  courseId?: number;
   name: string;
   courseName: string;
   imageUrl: string;

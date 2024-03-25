@@ -58,11 +58,12 @@ export class AllSectionContainerComponent implements OnInit {
     message: '',
     code: 0,
   };
+  onGoingFlag: boolean = false;
   //enums
   Title = Title;
   RouterLinks = RouterLinks;
   Prefix = Prefix;
-  noContent:boolean = false;
+  noContent: boolean = false;
 
   constructor(
     private store: Store,
@@ -102,7 +103,7 @@ export class AllSectionContainerComponent implements OnInit {
     this.store.select(selectCourses).subscribe((res) => {
       if (res.length > 0) {
         this.allCoursesData = res;
-        this.error=false;
+        this.error = false;
       }
     });
 
@@ -129,7 +130,7 @@ export class AllSectionContainerComponent implements OnInit {
     this.store.select(selectBatchs).subscribe((res) => {
       if (res.length > 0) {
         this.allBatchesData = res;
-        this.error=false;
+        this.error = false;
       }
     });
 
@@ -156,7 +157,7 @@ export class AllSectionContainerComponent implements OnInit {
     this.store.select(selectEnrolledPaths).subscribe((res) => {
       if (res.length > 0) {
         this.allPathsData = res;
-        this.error=false;
+        this.error = false;
       }
     });
 
@@ -183,7 +184,7 @@ export class AllSectionContainerComponent implements OnInit {
     this.store.select(selectEnrolledCourses).subscribe((res) => {
       if (res.length > 0) {
         this.allCoursesData = res;
-        this.error=false;
+        this.error = false;
       }
     });
 
@@ -207,22 +208,22 @@ export class AllSectionContainerComponent implements OnInit {
   }
   getFavouriteCourses() {
     this.store.dispatch(loadFavoriteCourses());
-    this.store.select(selectFavouriteCoursesLoading).subscribe((res)=>{
-      if (res == false){
+    this.store.select(selectFavouriteCoursesLoading).subscribe((res) => {
+      if (res == false) {
         setTimeout(() => {
           this.loading = res;
         }, 500);
-      }else{
+      } else {
         this.loading = res;
       }
     });
-    this.store.select(selectFavoritecourses).subscribe((res) =>{
+    this.store.select(selectFavoritecourses).subscribe((res) => {
       if (res.length > 0) {
         this.allCoursesData = res;
         this.loading = false;
         this.noContent = false;
       }
-      if (res.length == 0){
+      if (res.length == 0) {
         this.noContent = true;
       }
     });
@@ -235,6 +236,7 @@ export class AllSectionContainerComponent implements OnInit {
       if (urlSegments.length >= 2) {
         this.prefix = urlSegments[1].path;
         if (this.prefix == Prefix.ONGOING) {
+          this.onGoingFlag = true;
           this.prefix = Prefix.MY;
         }
       }

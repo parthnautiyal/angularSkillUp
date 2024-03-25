@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   isOrgDropdownOpen = false;
   isDarkMode: boolean = false;
   isResponsive: boolean = false;
+  searchQuery: string = '';
 
   constructor(private themeService: ThemeService, private router: Router) {
     this.themeService.isDarkMode().subscribe((isDarkMode) => {
@@ -69,5 +70,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
+  }
+
+  submitSearch() {
+    console.log(this.searchQuery); // replace this with your actual logic
   }
 }

@@ -6,6 +6,7 @@ import { Path, PathData } from '../models/Path';
 import { Ratings } from '../models/Ratings';
 import { APIResponse } from '../models/ApiResponse';
 import { EnrolledBatches } from '../models/EnrolledBatches';
+import { API } from '../constants/enums/API';
 @Injectable({
   providedIn: 'root',
 })
@@ -23,12 +24,12 @@ export class MiscellaneousService {
 
     'Referrer-Policy': 'strict-origin-when-cross-origin',
   });
-  url: string = 'https://api.training.zopsmart.com/students/paths';
+  url: string = API.BASE_URL + API.STUDENTS + API.PATHS;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
   getRefreshToken() {
     return this.http.post(
-      'https://api.training.zopsmart.com/login/refresh',
+      API.BASE_URL + API.LOGIN + API.REFRESH,
       {
         organizationId: 2,
         currentRole: 'student',
@@ -40,16 +41,13 @@ export class MiscellaneousService {
   }
 
   postFavourite(courseId: number) {
-    return this.http.post(
-      'https://api.training.zopsmart.com/student/favourites',
-      {
-        courseId: courseId,
-      }
-    );
+    return this.http.post(API.BASE_URL + API.STUDENT + API.FAVOURITES, {
+      courseId: courseId,
+    });
   }
   deleteFavourite(courseId: number) {
     return this.http.delete(
-      'https://api.training.zopsmart.com/student/favourites/' + courseId
+      API.BASE_URL + API.STUDENT + API.FAVOURITES + '/' + courseId
     );
   }
   private PathDataSubject = new BehaviorSubject<any>({});
@@ -59,7 +57,7 @@ export class MiscellaneousService {
 
   getBatchesData() {
     return this.http.get<APIResponse<EnrolledBatches>>(
-      'https://api.training.zopsmart.com/student/329/enrolled-batches?pageSize=100&pageNo=1'
+      API.BASE_URL + API.STUDENT + '/329' + API.ENROLLED_BATCHES + API.PAGE_SIZE
     );
   }
 
