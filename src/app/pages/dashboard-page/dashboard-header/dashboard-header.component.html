@@ -21,13 +21,13 @@
       Enrolled Courses
     </div>
   </a>
-  <div class="recent-course">
+  <div class="recent-course" *ngIf="enrolledCourse" (click)="navigateToCourse()">
     <div class="recent-course-text">
-      <span>Project SkillUp</span>
-      <p>By Ujjwal Misra</p>
+      <span>{{enrolledCourse.courseName}}</span>
+      <p>{{enrolledCourse.createdBy.name}}</p>
     </div>
     <div>
-      <app-circular-progress-bar [progress]="60"></app-circular-progress-bar>
+      <app-circular-progress-bar [progress]="enrolledCourse.progress"></app-circular-progress-bar>
     </div>
 
     <i class="fa-solid fa-play play-button"></i>
