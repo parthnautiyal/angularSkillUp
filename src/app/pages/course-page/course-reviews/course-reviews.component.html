@@ -2,7 +2,9 @@
   <p>Review</p>
   <div class="rating-container">
     <div class="average-rating-container">
-      <div class="rating" style="font-size: 2rem">2.5</div>
+      <div class="rating" style="font-size: 2rem">
+        {{ rating.averageRating }}
+      </div>
       <div class="average-rating-star-container">
         <div class="stars-container">
           <ng-container *ngFor="let item of avgRatingArray">
@@ -24,7 +26,7 @@
         <div class="rating">
           <div class="progress-bar">
             <div
-              class="progress"
+              class="progress-lines"
               [style.width]="ratingPercentage[k] + '%'"
             ></div>
           </div>

@@ -41,13 +41,7 @@ export class CourseReviewsComponent implements OnInit {
     //   this.rating = rating.data;
     //   console.log('Rating -> ' + this.rating);
     // });
-    this.totalRating = Object.values(this.rating.rating).reduce(
-      (a, b) => a + b,
-      0
-    );
-    console.log('Rating Total -> ' + this.totalRating);
 
-    this.updateRating(this.rating);
     //this.createAvgRatingArray();
 
     this.matIconRegistry.addSvgIcon(
@@ -75,6 +69,10 @@ export class CourseReviewsComponent implements OnInit {
   }
 
   updateRating(rating: Ratings) {
+    this.totalRating = Object.values(this.rating.rating).reduce(
+      (a, b) => a + b,
+      0
+    );
     rating.rating.fiveStars =
       (rating.rating.fiveStars / this.totalRating) * 100;
     console.log(rating.rating);
@@ -101,5 +99,13 @@ export class CourseReviewsComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('Rating Total -> ' + this.totalRating);
+
+    this.misc.courseRating$.subscribe((res) => {
+      console.log(res);
+      this.rating = res;
+    });
+    this.updateRating(this.rating);
+  }
 }
