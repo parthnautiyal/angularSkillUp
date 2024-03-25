@@ -9,7 +9,10 @@
         <span *ngIf="!enrolledPathsNumber; else pathsData">_</span>
         <ng-template #pathsData>{{ enrolledPathsNumber }}</ng-template>
       </div>
-      Enrolled Paths
+      <div class="message">
+        Enrolled<br> Paths
+      </div>
+
     </div>
   </a>
   <a [routerLink]="['/', 'courses', 'ongoing']">
@@ -18,13 +21,21 @@
         <span *ngIf="!enrolledCoursesNumber; else coursesData">_</span>
         <ng-template #coursesData>{{ enrolledCoursesNumber }}</ng-template>
       </div>
-      Enrolled Courses
+      <div class="message">
+        Enrolled Courses
+      </div>
+
     </div>
   </a>
   <div class="recent-course" *ngIf="enrolledCourse;else loading" (click)="navigateToCourse()">
     <div class="recent-course-text">
-      <span class="course-name">{{enrolledCourse.courseName}}</span>
-      <p>By {{enrolledCourse.createdBy.name}}</p>
+      <div>
+        <span class="course-name">{{enrolledCourse.courseName}}</span>
+      </div>
+      <div>
+        <p class="author">By {{enrolledCourse.createdBy.name}}</p>
+      </div>
+
     </div>
     <div>
       <app-circular-progress-bar [progress]="enrolledCourse.progress"></app-circular-progress-bar>
@@ -36,7 +47,7 @@
     <div class="recent-course">
       <div class="recent-course-text">
         <span class="course-name">___</span>
-        <p>By Admin</p>
+        <p class="author">By Admin</p>
       </div>
       <div>
         <app-circular-progress-bar [progress]="0"></app-circular-progress-bar>
