@@ -34,11 +34,23 @@ export const selectChapterData = createSelector(
   selectCourseState,
   (state) => state.chapterData
 );
+export const selectChapterDataLoading = createSelector(
+  selectCourseState,
+  (state) => state.isLoadingChapterData
+);
 export const selectCourseAboutInfo = createSelector(
   selectCourseState,
   (state) => state.courseAboutInfo
 );
+export const selectCourseAboutInfoLoading = createSelector(
+  selectCourseState,
+  (state) => state.isLoadingAboutInfo
+);
 export const selectFavoritecourses = createSelector(
   selectCourseState,
   (state) => state.favoriteCourses
+);
+export const selectFavouriteCoursesLoading = createSelector(
+  selectCourseState,
+  (state) => state.isLoadingFavourite
 );

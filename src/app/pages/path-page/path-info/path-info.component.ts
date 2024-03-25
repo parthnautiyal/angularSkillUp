@@ -1,9 +1,8 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadPathById } from 'src/app/state/action/path.actions';
 import { selectPathById } from 'src/app/state/selector/path.selector';
 import { PathData } from 'src/app/models/Path';
+import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 
 @Component({
   selector: 'app-path-info',
@@ -30,17 +29,15 @@ export class PathInfoComponent implements OnInit {
     createdAt: '',
     courses: [],
   };
-  about: string = '';
-  constructor(private store: Store, private route: ActivatedRoute) {
-    this.id = this.route.snapshot.params['id'];
+  about: string[] = [];
+  constructor(private store: Store,private mis:MiscellaneousService) {
   }
 
   ngOnInit(): void {
 
     this.store.select(selectPathById).subscribe((path) => {
       this.pathData = path;
-      this.about = this.pathData.about;
-      console.log(this.about);
+      this.about = this.pathData.about.split('/n');
     });
   }
 }

@@ -16,20 +16,19 @@ declare let window: any;
 })
 export class LoginComponent implements OnInit {
   constructor(private messageService: MessageService) {
-    console.log("hello");
+
 
   }
 
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {
     localStorage.setItem('login', 'false');
-    console.log('destroyed');
     this.showSuccess();
   }
 
   ngOnInit(): void {
+    this.loadGoogleIdentityLibrary();
     localStorage.setItem('login', 'true');
-    console.log('init');
     window.handleCredentialResponse = this.handleCredentialResponse.bind(this);
   }
   @Output() eventEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -54,5 +53,12 @@ export class LoginComponent implements OnInit {
     const responsePayload = this.decodeJWTToken(response.credential);
     sessionStorage.setItem('loggedInUser', JSON.stringify(responsePayload));
     window.location.href = '/dashboard';
+  }
+  loadGoogleIdentityLibrary() {
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
   }
 }

@@ -41,7 +41,7 @@ export class CoursesBannerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadCourseAboutInfo({ courseId: this.id }));
+    // this.store.dispatch(loadCourseAboutInfo({ courseId: this.id }));
     this.store.select(selectCourseAboutInfo).subscribe((courseData) => {
       this.CourseDetails = courseData;
     });

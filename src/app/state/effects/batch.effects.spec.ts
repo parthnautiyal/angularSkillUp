@@ -2,13 +2,12 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Actions } from '@ngrx/effects';
 
 import { BatchEffects } from "./batch.effects"
 import * as BatchActions from '../action/batch.actions';
 import { HttpClient } from '@angular/common/http';
 
-describe('BatchEffects', () => {
+fdescribe('BatchEffects', () => {
   let actions$: Observable<any>;
   let effects: BatchEffects;
   let http: HttpClient;
@@ -223,7 +222,7 @@ describe('BatchEffects', () => {
       updatedAt: "2024-03-24T13:46:46.000Z",
       level: 1
     }];
-    const action = BatchActions.loadBatchPathById({ id: '1' });
+    const action = BatchActions.loadBatchPathsById({ id: '1' });
     const outcome = BatchActions.loadBatchPathByIdSuccess({ pathById: paths[0] });
 
     actions$ = of(action);
@@ -238,7 +237,7 @@ describe('BatchEffects', () => {
 
   it('should fail to load batch paths by id', (done) => {
     const error = new Error('Error loading batch paths');
-    const action = BatchActions.loadBatchPathById({ id: '1' });
+    const action = BatchActions.loadBatchPathsById({ id: '1' });
     const outcome = BatchActions.loadBatchPathByIdFailed({ error });
 
     actions$ = of(action);

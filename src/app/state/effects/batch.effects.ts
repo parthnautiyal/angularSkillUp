@@ -12,7 +12,8 @@ import { Course } from 'src/app/models/Course';
 
 @Injectable()
 export class BatchEffects {
-  private url = 'https://api.training.zopsmart.com/student/batches/';
+  private url = API.BASE_URL + API.STUDENT + API.BATCHES + '/';
+
   loadAllBatches$ = createEffect(() =>
       this.actions$.pipe(
       ofType(BatchActions.loadAllBatches),
@@ -25,9 +26,9 @@ export class BatchEffects {
             map((batch) =>
               BatchActions.loadAllBatchesSuccess({ batches: batch.data })
             ),
-            catchError((error) =>
-              of(BatchActions.loadAllBatchesFailed({ error }))
-            )
+            catchError((error) => {
+              return of(BatchActions.loadAllBatchesFailed({ error }));
+            })
           )
       )
     )
@@ -49,7 +50,7 @@ export class BatchEffects {
     this.actions$.pipe(
       ofType(BatchActions.loadTrainersById),
       switchMap(({ id }) =>
-        this.http.get<APIResponse<User[]>>(this.url + id + '/trainers').pipe(
+        this.http.get<APIResponse<User[]>>(this.url + id + API.TRAINERS).pipe(
           map((trainers) =>
             BatchActions.loadTrainersByIdSuccess({ trainers: trainers.data })
           ),
@@ -64,7 +65,7 @@ export class BatchEffects {
     this.actions$.pipe(
       ofType(BatchActions.loadStudentsById),
       switchMap(({ id }) =>
-        this.http.get<APIResponse<User[]>>(this.url + id + '/students').pipe(
+        this.http.get<APIResponse<User[]>>(this.url + id + API.STUDENTS).pipe(
           map((users) =>
             BatchActions.loadStudentsByIdSuccess({ students: users.data })
           ),
@@ -77,9 +78,9 @@ export class BatchEffects {
   );
   loadBatchPaths$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(BatchActions.loadBatchPathById),
+      ofType(BatchActions.loadBatchPathsById),
       switchMap(({ id }) =>
-        this.http.get<APIResponse<Course[]>>(this.url + id + '/paths').pipe(
+        this.http.get<APIResponse<Course[]>>(this.url + id + API.PATHS).pipe(
           map((pathData) =>
             BatchActions.loadBatchPathByIdSuccess({
               pathById: pathData.data[0],

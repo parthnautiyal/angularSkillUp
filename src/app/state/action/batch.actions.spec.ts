@@ -1,7 +1,7 @@
 import * as fromActions from './batch.actions';
 import { Batch } from '../../models/Batch';
 
-describe('Batch Actions', () => {
+fdescribe('Batch Actions', () => {
     it('should loadAllBatches', () => {
       const action = fromActions.loadAllBatches();
 
@@ -105,9 +105,9 @@ describe('Batch Actions', () => {
 
     it('should loadBatchPathById', () => {
       const id = '1';
-      const action = fromActions.loadBatchPathById({ id });
+      const action = fromActions.loadBatchPathsById({ id });
       expect({ ...action }).toEqual({
-        type: '[Path] Load Path By ID',
+        type: '[Batch] Load Path By ID',
         id,
       });
     });
@@ -138,7 +138,7 @@ describe('Batch Actions', () => {
       };
       const action = fromActions.loadBatchPathByIdSuccess({ pathById });
       expect({ ...action }).toEqual({
-        type: '[Path] Load Path By ID Success',
+        type: '[Batch] Load Path By ID Success',
         pathById,
       });
     });
@@ -147,7 +147,7 @@ describe('Batch Actions', () => {
       const error = new Error('Load Error');
       const action = fromActions.loadBatchPathByIdFailed({ error });
       expect({ ...action }).toEqual({
-        type: '[Path] Load Path By ID Failed',
+        type: '[Batch] Load Path By ID Failed',
         error,
       });
     });

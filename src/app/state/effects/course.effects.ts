@@ -8,29 +8,26 @@ import { Course } from 'src/app/models/Course';
 import { APIResponse } from 'src/app/models/ApiResponse';
 import { enrolledCourses } from 'src/app/models/EnrolledCourses';
 import { Chapter } from 'src/app/models/Chapter';
+import { API } from 'src/app/constants/enums/API';
 
 @Injectable()
 export class CourseEffects {
-  private url = 'https://api.training.zopsmart.com/students';
+  private url = API.BASE_URL + API.STUDENTS;
+
+  constructor(private actions$: Actions, private http: HttpClient) {}
 
   loadCourses$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CourseActions.loadAllCourses),
       switchMap(() =>
-        this.http
-          .get<APIResponse<Course[]>>(
-            this.url + '/courses?pageSize=122&pageNo=1'
-          )
-          .pipe(
-            map((courses) =>
-              CourseActions.loadAllCoursesSuccess({ courses: courses.data })
-            ),
-            catchError((error) => {
-              console.log('Error -> ' + error);
-              //of(CourseActions.loadAllCoursesFailed({ error }));
-              return of(CourseActions.loadAllCoursesFailed({ error }));
-            })
-          )
+        this.http.get<APIResponse<Course[]>>(this.url + API.COURSES_ALL).pipe(
+          map((courses) =>
+            CourseActions.loadAllCoursesSuccess({ courses: courses.data })
+          ),
+          catchError((error) => {
+            return of(CourseActions.loadAllCoursesFailed({ error }));
+          })
+        )
       )
     )
   );
@@ -39,7 +36,7 @@ export class CourseEffects {
       ofType(CourseActions.loadNoOfEnrolledCourses),
       switchMap(() =>
         this.http
-          .get<APIResponse<number>>(this.url + '/no-of-enrolled-courses')
+          .get<APIResponse<number>>(this.url + API.NO_OF_ENROLLED_COURSES)
           .pipe(
             map((count) =>
               CourseActions.loadNoOfEnrolledCoursesSuccess({
@@ -58,16 +55,16 @@ export class CourseEffects {
       ofType(CourseActions.loadCourseAboutInfo),
       switchMap(({ courseId }) =>
         this.http
-          .get<APIResponse<Course>>(this.url + '/courses/' + courseId)
+          .get<APIResponse<Course>>(this.url + API.COURSES + '/' + courseId)
           .pipe(
             map((course) =>
               CourseActions.loadCourseAboutInfoSuccess({
                 course: course.data,
               })
             ),
-            catchError((error) =>
-              of(CourseActions.loadCourseAboutInfoFailed({ error }))
-            )
+            catchError((error) => {
+              return of(CourseActions.loadCourseAboutInfoFailed({ error }));
+            })
           )
       )
     )
@@ -77,9 +74,7 @@ export class CourseEffects {
       ofType(CourseActions.loadEnrolledCourses),
       switchMap(() =>
         this.http
-          .get<APIResponse<enrolledCourses>>(
-            'https://api.training.zopsmart.com/students/enrolled-courses'
-          )
+          .get<APIResponse<enrolledCourses>>(this.url + API.ENROLLED_COURSES)
           .pipe(
             map((course) =>
               CourseActions.loadEnrolledCoursesSuccess({
@@ -99,7 +94,7 @@ export class CourseEffects {
       switchMap(({ courseId }) =>
         this.http
           .get<APIResponse<Chapter[]>>(
-            this.url + '/courses/' + courseId + '/chapters'
+            this.url + API.COURSES + '/' + courseId + API.CHAPTERS
           )
           .pipe(
             map((chapterData) =>
@@ -120,7 +115,7 @@ export class CourseEffects {
       switchMap(() =>
         this.http
           .get<APIResponse<Course[]>>(
-            'https://api.training.zopsmart.com/student/favourites'
+            API.BASE_URL + API.STUDENT + API.FAVOURITES
           )
           .pipe(
             map((courses) =>
@@ -135,6 +130,4 @@ export class CourseEffects {
       )
     )
   );
-
-  constructor(private actions$: Actions, private http: HttpClient) {}
 }

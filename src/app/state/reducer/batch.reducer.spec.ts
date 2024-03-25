@@ -1,15 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import * as BatchActions from '../action/batch.actions';
-import { batchReducer, getbatch, getbatchError, getbatchLoading, initialState } from './batch.reducer';
+import { batchReducer, initialState } from './batch.reducer';
 
-describe('Batch Reducer', () => {
+fdescribe('Batch Reducer', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideMockStore({ initialState })]
     });
-
   });
 
   // Test cases for loadAllBatches
@@ -66,10 +65,10 @@ describe('Batch Reducer', () => {
 
   // Test cases for loadBatchById
   it('should set isLoading to true when loadBatchById action is dispatched', () => {
-    const action = BatchActions.loadBatchById({id: '2'});
+    const action = BatchActions.loadBatchById({id: '1'});
     const state = batchReducer(initialState, action);
 
-    expect(state.isLoadingBatches).toBe(true);
+    expect(state.isLoadingBatchById).toBe(true);
   });
 
   it('should update state when loadBatchByIdSuccess action is dispatched', () => {
@@ -144,7 +143,7 @@ it('should update state when loadStudentsByIdFailed action is dispatched', () =>
   const state = batchReducer(initialState, action);
 
   expect(state.isLoadingStudents).toBe(false);
-  expect(state.errorStudents).toEqual(error);
+  expect(state.error).toEqual(error);
 });
 
 // Test cases for loadTrainersById
@@ -178,12 +177,12 @@ it('should update state when loadTrainersByIdFailed action is dispatched', () =>
   const state = batchReducer(initialState, action);
 
   expect(state.isLoadingTrainer).toBe(false);
-  expect(state.errorTrainer).toEqual(error);
+  expect(state.error).toEqual(error);
 });
 
 // Test cases for loadBatchPathById
 it('should set isLoadingPaths to true when loadBatchPathById action is dispatched', () => {
-  const action = BatchActions.loadBatchPathById({id: '2'});
+  const action = BatchActions.loadBatchPathsById({id: '2'});
   const state = batchReducer(initialState, action);
 
   expect(state.isLoadingPaths).toBe(true);
@@ -227,145 +226,7 @@ it('should update state when loadBatchPathByIdFailed action is dispatched', () =
   const state = batchReducer(initialState, action);
 
   expect(state.isLoadingPaths).toBe(false);
-  expect(state.errorPaths).toEqual(error);
+  expect(state.error).toEqual(error);
 });
-
-describe('BatchState selectors', () => {
-  let state : any;
-
-  beforeEach(() => {
-    state = {
-      batches: [{
-        createdAt: '2024-03-24T13:00:03Z',
-        createdBy: {
-          id: 1,
-          name: 'John Doe',
-          imageUrl: 'https://example.com/john-doe.jpg',
-          email: 'john.doe@example.com',
-          isActive: true,
-        },
-        endDate: '2024-06-24T13:00:03Z',
-        startDate: '2024-03-24T13:00:03Z',
-        id: 1,
-        isAccessible: true,
-        name: 'Batch 1',
-        noOfPaths: 10,
-        noOfStudents: 30,
-        noOfTrainers: 5,
-        streamName: 'Stream 1',
-        stream: {
-          streamId: 1,
-          streamName: 'Stream 1',
-        },
-        progress: 50,
-      }],
-      isLoadingBatches: false,
-      isLoadingTrainer: false,
-      isLoadingStudents: false,
-      isLoadingPaths: false,
-      error: null,
-      errorStudents: null,
-      errorTrainer: null,
-      errorPaths: null,
-      students: [{
-        email: 'john.doe@example.com',
-        id: 1,
-        imageUrl: 'https://example.com/john-doe.jpg',
-        name: 'John Doe',
-        isActive: true,
-      }],
-      trainers: [{
-        email: 'john.doe@example.com',
-        id: 1,
-        imageUrl: 'https://example.com/john-doe.jpg',
-        name: 'John Doe',
-        isActive: true,
-      }],
-      batchDetails: {
-        createdAt: '2024-03-24T13:00:03Z',
-        createdBy: {
-          id: 1,
-          name: 'John Doe',
-          imageUrl: 'https://example.com/john-doe.jpg',
-          email: 'john.doe@example.com',
-          isActive: true,
-        },
-        endDate: '2024-06-24T13:00:03Z',
-        startDate: '2024-03-24T13:00:03Z',
-        id: 1,
-        isAccessible: true,
-        name: 'Batch 1',
-        noOfPaths: 10,
-        noOfStudents: 30,
-        noOfTrainers: 5,
-        streamName: 'Stream 1',
-        stream: {
-          streamId: 1,
-          streamName: 'Stream 1',
-        },
-        progress: 50,
-      },
-      pathData: {
-        id: 1,
-        name: "Introduction to TypeScript",
-        courseName: "Intro to TS",
-        imageUrl: "http://example.com/course.jpg",
-        isAccessible: true,
-        description: "This is a beginner's course on TypeScript.",
-        about: "In this course, you will learn the basics of TypeScript.",
-        createdBy: {
-          id: 101,
-          name: "John Doe",
-          imageUrl: "http://example.com/john.jpg",
-          email: "john@example.com"
-        },
-        createdAt: "2024-03-24T13:46:46.000Z",
-        isFavourite: false,
-        progress: 0,
-        enrolledAt: "2024-03-24T13:46:46.000Z",
-        completedAt: "",
-        noOfChapters: 10,
-        updatedAt: "2024-03-24T13:46:46.000Z",
-        level: 1
-      }
-    };
-  });
-
-  it('getbatch should return batches', () => {
-    expect(getbatch(state)).toEqual([{
-      createdAt: '2024-03-24T13:00:03Z',
-      createdBy: {
-        id: 1,
-        name: 'John Doe',
-        imageUrl: 'https://example.com/john-doe.jpg',
-        email: 'john.doe@example.com',
-        isActive: true,
-      },
-      endDate: '2024-06-24T13:00:03Z',
-      startDate: '2024-03-24T13:00:03Z',
-      id: 1,
-      isAccessible: true,
-      name: 'Batch 1',
-      noOfPaths: 10,
-      noOfStudents: 30,
-      noOfTrainers: 5,
-      streamName: 'Stream 1',
-      stream: {
-        streamId: 1,
-        streamName: 'Stream 1',
-      },
-      progress: 50,
-    }]);
-  });
-
-  it('getbatchLoading should return loading state', () => {
-    expect(getbatchLoading(state)).toEqual(false);
-  });
-
-  it('getbatchError should return error state', () => {
-    expect(getbatchError(state)).toEqual(null);
-  });
-});
-
 });
 

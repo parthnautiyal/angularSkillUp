@@ -10,6 +10,7 @@ export interface PathState {
   error: any | null;
   errorEnrolled: any | null;
   isLoading: boolean;
+  isLoadingPathById: boolean,
 }
 
 export const initialPathState: PathState = {
@@ -37,6 +38,7 @@ export const initialPathState: PathState = {
   error: null,
   errorEnrolled: null,
   isLoading: false,
+  isLoadingPathById: false,
 };
 
 export const pathReducer = createReducer(
@@ -62,25 +64,25 @@ export const pathReducer = createReducer(
   })),
   on(PathActions.loadPathById, (state, { id }) => ({
     ...state,
-    isLoading: true,
+    isLoadingPathById: true,
     error: null,
   })),
 
   on(PathActions.loadPathByIdSuccess, (state, { pathById }) => ({
     ...state,
     pathById: pathById,
+    isLoadingPathById: false,
     error: null,
   })),
 
   on(PathActions.loadPathByIdFailed, (state, { error }) => ({
     ...state,
-
+    isLoadingPathById: false,
     error,
   })),
 
   on(PathActions.loadEnrolledPaths, (state) => ({
     ...state,
-
     isLoading: true,
     error: null,
   })),

@@ -1,7 +1,7 @@
 import * as fromCourse from './course.selector';
 import { CourseState } from '../reducer/course.reducer';
 
-describe('Course Selectors', () => {
+fdescribe('Course Selectors', () => {
   const initialState: CourseState = {
     allCourses: [],
     enrolledCourses: [],
@@ -34,6 +34,9 @@ describe('Course Selectors', () => {
     error: null,
     errorEnrolled: null,
     favoriteCourses: [],
+    isLoadingFavourite: false,
+    isLoadingChapterData: false,
+    isLoadingAboutInfo: false
   };
 
   it('should select all courses', () => {

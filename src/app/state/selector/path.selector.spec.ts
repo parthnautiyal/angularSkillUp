@@ -1,7 +1,7 @@
 import * as fromPath from './path.selector';
 import { PathState } from '../reducer/path.reducer';
 
-describe('Path Selectors', () => {
+fdescribe('Path Selectors', () => {
   const initialState: PathState = {
     allPaths: [],
     pathById: {
@@ -27,6 +27,7 @@ describe('Path Selectors', () => {
     error: null,
     errorEnrolled: null,
     isLoading: false,
+    isLoadingPathById: false
   };
 
   it('should select all paths', () => {

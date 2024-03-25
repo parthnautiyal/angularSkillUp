@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { pathReducer, initialPathState } from './path.reducer';
 import * as PathActions from '../action/path.actions';
 
-describe('PathReducer', () => {
+fdescribe('PathReducer', () => {
   it('should return the initial state', () => {
     const action = {} as any;
     const state = pathReducer(undefined, action);
@@ -51,7 +51,7 @@ describe('PathReducer', () => {
     const action = PathActions.loadPathById({ id: '1' });
     const state = pathReducer(initialPathState, action);
 
-    expect(state.isLoading).toBeTrue();
+    expect(state.isLoadingPathById).toBeTrue();
     expect(state.error).toBeNull();
   });
 

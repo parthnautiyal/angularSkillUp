@@ -28,9 +28,7 @@ export class ChapterContentContainerComponent implements OnInit {
   constructor() {}
 
   markBtn(i: number) {
-    console.log('clicked');
     this.allChapters[i].isCompleted = !this.allChapters[i].isCompleted;
-    console.log(i);
   }
 
   ngOnInit(): void {}

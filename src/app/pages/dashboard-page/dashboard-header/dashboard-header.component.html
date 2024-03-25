@@ -1,28 +1,57 @@
 <div class="dashboard-header">
-  <div class="greeting-box">
-    <span>Hello {{ userProfile.given_name |titlecase }} !</span>
+  <div class="greeting-box ">
+    <span class="header-count">Hello {{ userProfile.given_name | titlecase }}!</span>
     <p>It's good to see you here</p>
   </div>
   <a [routerLink]="['/', 'paths', 'ongoing']">
     <div class="enrolled-path">
-      <span> {{ enrolledPathsNumber }} </span>
-      Enrolled Paths
+      <div class="header-count">
+        <span *ngIf="!enrolledPathsNumber; else pathsData">_</span>
+        <ng-template #pathsData>{{ enrolledPathsNumber }}</ng-template>
+      </div>
+      <div class="message">
+        Enrolled<br> Paths
+      </div>
+
     </div>
   </a>
   <a [routerLink]="['/', 'courses', 'ongoing']">
     <div class="enrolled-courses">
-      <span> {{ enrolledCoursesNumber }} </span> Enrolled Courses
+      <div class="header-count">
+        <span *ngIf="!enrolledCoursesNumber; else coursesData">_</span>
+        <ng-template #coursesData>{{ enrolledCoursesNumber }}</ng-template>
+      </div>
+      <div class="message">
+        Enrolled Courses
+      </div>
+
     </div>
   </a>
-  <div class="recent-course">
+  <div class="recent-course" *ngIf="enrolledCourse;else loading" (click)="navigateToCourse()">
     <div class="recent-course-text">
-      <span>Project SkillUp</span>
-      <p>By Ujjwal Misra</p>
+      <div>
+        <span class="course-name">{{enrolledCourse.courseName}}</span>
+      </div>
+      <div>
+        <p class="author">By {{enrolledCourse.createdBy.name}}</p>
+      </div>
+
     </div>
     <div>
-      <app-circular-progress-bar [progress]="60"></app-circular-progress-bar>
+      <app-circular-progress-bar [progress]="enrolledCourse.progress"></app-circular-progress-bar>
     </div>
 
     <i class="fa-solid fa-play play-button"></i>
   </div>
+  <ng-template #loading>
+    <div class="recent-course">
+      <div class="recent-course-text">
+        <span class="course-name">___</span>
+        <p class="author">By Admin</p>
+      </div>
+      <div>
+        <app-circular-progress-bar [progress]="0"></app-circular-progress-bar>
+      </div>
+    </div>
+  </ng-template>
 </div>

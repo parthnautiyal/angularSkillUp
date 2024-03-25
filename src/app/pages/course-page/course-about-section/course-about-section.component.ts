@@ -42,7 +42,7 @@ export class CourseAboutSectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadCourseAboutInfo({ courseId: this.id }));
+    // this.store.dispatch(loadCourseAboutInfo({ courseId: this.id }));
     this.store.select(selectCourseAboutInfo).subscribe((data) => {
       this.courseInfo = data;
       this.aboutArray = this.courseInfo.about.split('\n');

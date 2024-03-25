@@ -15,7 +15,7 @@ export class ChapterComponent implements OnInit {
   allChapters: Chapter[] = [];
   constructor(private store: Store, private router: ActivatedRoute) {
     this.id = this.router.snapshot.params['id'];
-    this.store.dispatch(loadChapterData({ courseId: this.id }));
+    // this.store.dispatch(loadChapterData({ courseId: this.id }));
     this.store.select(selectChapterData).subscribe((chapter) => {
       this.allChapters = chapter;
     });

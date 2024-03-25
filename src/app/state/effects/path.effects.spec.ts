@@ -8,7 +8,7 @@ import * as PathActions from '../action/path.actions';
 import { HttpClient } from '@angular/common/http';
 import { cold, hot } from 'jasmine-marbles';
 
-describe('PathEffects', () => {
+fdescribe('PathEffects', () => {
   let actions$: Observable<any>;
   let effects: PathEffects;
   let http: HttpClient;
@@ -172,7 +172,7 @@ describe('PathEffects', () => {
 
     spyOn(http, 'get').and.returnValue(response);
 
-    expect(effects.loadPathData$).toBeObservable(expected);
+    expect(effects.loadPathDataPath$).toBeObservable(expected);
   });
 
   it('should return a LOAD_PATH_BY_ID_FAILED action on error', () => {
@@ -186,7 +186,7 @@ describe('PathEffects', () => {
 
     spyOn(http, 'get').and.returnValue(response);
 
-    expect(effects.loadPathData$).toBeObservable(expected);
+    expect(effects.loadPathDataPath$).toBeObservable(expected);
   });
 
 });

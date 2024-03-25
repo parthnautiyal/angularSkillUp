@@ -7,6 +7,7 @@ import { BatchInfoCardContainerComponent } from './batch-info-card-container/bat
 import { RouterModule } from '@angular/router';
 import { ShimmerModule } from 'src/app/shimmer/shimmer.module';
 import { ToastModule } from 'primeng/toast';
+import { ErrorPageModule } from 'src/app/error-page/error-page.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ToastModule } from 'primeng/toast';
     RouterModule,
     ShimmerModule,
     ToastModule,
+    ErrorPageModule
   ],
   exports: [CardContainerComponent, BatchInfoCardContainerComponent],
 })

@@ -6,6 +6,8 @@ import { CardsModule } from '../shared/cards/cards.module';
 import { CardShimmerComponent } from './card-shimmer/card-shimmer.component';
 import { DashboardShimmerComponent } from './dashboard-shimmer/dashboard-shimmer.component';
 import { PageShimmerComponent } from './page-shimmer/page-shimmer.component';
+import { PathCourseCardShimmerComponent } from './path-course-card-shimmer/path-course-card-shimmer.component';
+import { PathInfoShimmerComponent } from './path-info-shimmer/path-info-shimmer.component';
 
 @NgModule({
   imports: [CommonModule, CardsModule],
@@ -14,7 +16,9 @@ import { PageShimmerComponent } from './page-shimmer/page-shimmer.component';
     CardShimmerComponent,
     DashboardShimmerComponent,
     PageShimmerComponent,
+    PathCourseCardShimmerComponent,
+    PathInfoShimmerComponent,
   ],
-  exports: [ShimmerComponent, CardShimmerComponent, DashboardShimmerComponent],
+  exports: [ShimmerComponent, CardShimmerComponent, DashboardShimmerComponent,PageShimmerComponent],
 })
 export class ShimmerModule {}

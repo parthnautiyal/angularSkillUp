@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
+import { PageNotFoundModule } from './error-page/page-not-found/page-not-found.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ZopsmartApiInterceptorService } from './services/zopsmart-api-interceptor.service';
 import { StoreModule } from '@ngrx/store';
@@ -17,9 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PathEffects } from './state/effects/path.effects';
 import { pathReducer } from './state/reducer/path.reducer';
-import { }
-
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +39,7 @@ import { }
       logOnly: environment.production,
       autoPause: true,
     }),
+    RouterModule
   ],
 
   providers: [

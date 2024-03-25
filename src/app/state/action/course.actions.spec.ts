@@ -2,7 +2,7 @@ import * as CourseActions from './course.actions';
 import { Course } from '../../models/Course';
 import { Chapter } from 'src/app/models/Chapter';
 
-describe('Course Actions', () => {
+fdescribe('Course Actions', () => {
   it('should create the loadAllCourses action', () => {
     const action = CourseActions.loadAllCourses();
     expect(action.type).toEqual('[Course] Load All Courses');

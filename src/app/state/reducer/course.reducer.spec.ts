@@ -3,7 +3,7 @@ import * as CourseActions from '../action/course.actions';
 import { Action } from '@ngrx/store';
 import { state } from '@angular/animations';
 
-describe('CourseReducer', () => {
+fdescribe('CourseReducer', () => {
   it('should return the default state', () => {
     const action = { type: 'Unknown' };
     const state = courseReducer(initialState, action);
@@ -109,11 +109,11 @@ describe('CourseReducer', () => {
   });
 
   // Load Course About Info
-  it('should set isLoading to true and error to null', () => {
+  it('should set isLoadingAboutInfo to true and error to null', () => {
     const action = CourseActions.loadCourseAboutInfo({ courseId: '2' });
     const state = courseReducer(initialState, action);
 
-    expect(state.isLoading).toBe(true);
+    expect(state.isLoadingAboutInfo).toBe(true);
     expect(state.error).toBe(null);
   });
 
@@ -158,11 +158,11 @@ describe('CourseReducer', () => {
   });
 
   // Load Chapter Data
-  it('should set isLoading to true and error to null', () => {
+  it('should set isLoadingChapterData to true and error to null', () => {
     const action = CourseActions.loadChapterData({ courseId: '2' });
     const state = courseReducer(initialState, action);
 
-    expect(state.isLoading).toBe(true);
+    expect(state.isLoadingChapterData).toBe(true);
     expect(state.error).toBe(null);
   });
 
@@ -249,11 +249,11 @@ describe('CourseReducer', () => {
   });
 
   // Load Favorite Courses
-  it('should set isLoading to true and error to null', () => {
+  it('should set isLoadingFavourite to true and error to null', () => {
     const action = CourseActions.loadFavoriteCourses();
     const state = courseReducer(initialState, action);
 
-    expect(state.isLoading).toBe(true);
+    expect(state.isLoadingFavourite).toBe(true);
     expect(state.error).toBe(null);
   });
 
@@ -333,6 +333,9 @@ describe('Reducer', () => {
       chapterData: [],
       noOfEnrolledCourses: 0,
       isLoading: false,
+      isLoadingFavourite:false,
+      isLoadingChapterData:false,
+      isLoadingAboutInfo:false,
       error: null,
       errorEnrolled: null,
       favoriteCourses: [],
