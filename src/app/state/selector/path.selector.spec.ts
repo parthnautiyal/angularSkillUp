@@ -64,4 +64,9 @@ fdescribe('Path Selectors', () => {
     const result = fromPath.selectPathById.projector(initialState);
     expect(result).toBe(initialState.pathById);
   });
+
+  it('should select isLoadingPathById', () => {
+    const result = fromPath.selectPathByIdLoading.projector(initialState);
+    expect(result).toBe(initialState.isLoadingPathById);
+  })
 });

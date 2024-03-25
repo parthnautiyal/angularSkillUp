@@ -10,8 +10,8 @@ import {
 import {
   selectBatchById,
   selectBatchPaths,
-  selectBatchsError,
-  selectBatchsLoadingById,
+  selectBatchesError,
+  selectBatchesLoadingById,
   selectStudents,
   selectStudentsLoading,
   selectTrainers,
@@ -86,7 +86,7 @@ export class BatchPageComponent implements OnInit {
   trainer$!: Observable<boolean>;
   sub: any;
   error:boolean = false;
-  
+
 
 
   constructor(private store: Store, private router: ActivatedRoute) {
@@ -110,7 +110,7 @@ export class BatchPageComponent implements OnInit {
     this.store.select(selectTrainers).subscribe((trainers) => {
       this.trainerData = trainers;
     });
-    this.batchById$ = this.store.select(selectBatchsLoadingById);
+    this.batchById$ = this.store.select(selectBatchesLoadingById);
     this.students$ = this.store.select(selectStudentsLoading);
     this.paths$ = this.store.select(selectPathsLoading);
     this.trainer$ = this.store.select(selectTrainersLoading);
@@ -123,7 +123,7 @@ export class BatchPageComponent implements OnInit {
         this.loading = true;
       }
     });
-    this.store.select(selectBatchsError).subscribe((res)=>{
+    this.store.select(selectBatchesError).subscribe((res)=>{
       if (res!=null){
         this.error = true;
       }

@@ -4,17 +4,17 @@ import { state } from '@angular/animations';
 
 export const selectBatchState = createFeatureSelector<BatchState>('batch');
 
-export const selectBatchs = createSelector(
+export const selectBatches = createSelector(
   selectBatchState,
   (state) => state.batches
 );
 
-export const selectBatchsLoading = createSelector(
+export const selectBatchesLoading = createSelector(
   selectBatchState,
   (state) => state.isLoadingBatches
 );
 
-export const selectBatchsError = createSelector(
+export const selectBatchesError = createSelector(
   selectBatchState,
   (state) => state.error
 );
@@ -23,7 +23,7 @@ export const selectBatchById = createSelector(
   selectBatchState,
   (state) => state.batchDetails
 );
-export const selectBatchsLoadingById = createSelector(
+export const selectBatchesLoadingById = createSelector(
   selectBatchState,
   (state) => state.isLoadingBatchById
 );

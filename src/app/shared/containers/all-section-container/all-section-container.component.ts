@@ -18,9 +18,9 @@ import {
 } from 'src/app/state/selector/course.selector';
 import { loadAllBatches } from 'src/app/state/action/batch.actions';
 import {
-  selectBatchs,
-  selectBatchsError,
-  selectBatchsLoading,
+  selectBatches,
+  selectBatchesError,
+  selectBatchesLoading,
 } from 'src/app/state/selector/batch.selector';
 import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
@@ -127,14 +127,14 @@ export class AllSectionContainerComponent implements OnInit {
   }
   getAllBatches() {
     this.store.dispatch(loadAllBatches());
-    this.store.select(selectBatchs).subscribe((res) => {
+    this.store.select(selectBatches).subscribe((res) => {
       if (res.length > 0) {
         this.allBatchesData = res;
         this.error = false;
       }
     });
 
-    this.store.select(selectBatchsError).subscribe((res) => {
+    this.store.select(selectBatchesError).subscribe((res) => {
       if (res) {
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
@@ -142,7 +142,7 @@ export class AllSectionContainerComponent implements OnInit {
       }
     });
 
-    this.store.select(selectBatchsLoading).subscribe((res) => {
+    this.store.select(selectBatchesLoading).subscribe((res) => {
       if (!res) {
         setTimeout(() => {
           this.loading = false;

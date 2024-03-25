@@ -12,9 +12,9 @@ import {
   selectEnrolledCoursesError,
 } from 'src/app/state/selector/course.selector';
 import {
-  selectBatchs,
-  selectBatchsError,
-  selectBatchsLoading,
+  selectBatches,
+  selectBatchesError,
+  selectBatchesLoading,
 } from 'src/app/state/selector/batch.selector';
 import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
@@ -109,20 +109,20 @@ export class CardContainerComponent implements OnInit {
       }
       if (this.title == Title.BATCHES) {
         this.store.dispatch(loadAllBatches());
-        this.store.select(selectBatchs).subscribe((res) => {
+        this.store.select(selectBatches).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allBatches = res;
             this.error = false;
           }
         });
-        this.store.select(selectBatchsError).subscribe((res) => {
+        this.store.select(selectBatchesError).subscribe((res) => {
           if (res != null) {
             this.errorBatch.message = res.message.split('`').slice(1);
             this.errorBatch.code = res.message.split('`').slice(0, 1);
             this.error = true;
           }
         });
-        this.store.select(selectBatchsLoading).subscribe((res) => {
+        this.store.select(selectBatchesLoading).subscribe((res) => {
           if (res == false) {
             setTimeout(() => {
               this.loading = res;
@@ -161,17 +161,17 @@ export class CardContainerComponent implements OnInit {
     if (this.router.url == '/user') {
       if (this.title == Title.BATCHES) {
         this.store.dispatch(loadAllBatches());
-        this.store.select(selectBatchs).subscribe((res) => {
+        this.store.select(selectBatches).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allBatches = res;
           }
         });
-        this.store.select(selectBatchsError).subscribe((res) => {
+        this.store.select(selectBatchesError).subscribe((res) => {
           if (res != null) {
             this.error = true;
           }
         });
-        this.store.select(selectBatchsLoading).subscribe((res) => {
+        this.store.select(selectBatchesLoading).subscribe((res) => {
           if (res == false) {
             setTimeout(() => {
               this.loading = res;

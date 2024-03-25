@@ -3,6 +3,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import * as fromBatch from './batch.selector';
 import { BatchState } from '../reducer/batch.reducer';
 import { TestBed } from '@angular/core/testing';
+import { initTestScheduler } from 'jasmine-marbles';
 
 fdescribe('Batch Selectors', () => {
   let store: MockStore;
@@ -77,17 +78,17 @@ fdescribe('Batch Selectors', () => {
   });
 
   it('should select the list of batches', () => {
-    const result = fromBatch.selectBatchs.projector(initialState);
+    const result = fromBatch.selectBatches.projector(initialState);
     expect(result).toEqual([]);
   });
 
   it('should select the loading state', () => {
-    const result = fromBatch.selectBatchsLoading.projector(initialState);
-    expect(result).toEqual(false);
+    const result = fromBatch.selectBatchesLoading.projector(initialState);
+    expect(result).toBe(false);
   });
 
   it('should select the error', () => {
-    const result = fromBatch.selectBatchsError.projector(initialState);
+    const result = fromBatch.selectBatchesError.projector(initialState);
     expect(result).toBe(null);
   });
 
@@ -110,4 +111,24 @@ fdescribe('Batch Selectors', () => {
     const result = fromBatch.selectBatchPaths.projector(initialState);
     expect(result).toBe(initialState.pathData);
   });
+
+  it('should select isLoadingPaths', () => {
+    const result = fromBatch.selectBatchPathsLoading.projector(initialState);
+    expect(result).toBe(initialState.isLoadingPaths);
+  })
+
+  it('should select isLoadingStudents', () => {
+    const result = fromBatch.selectStudentsLoading.projector(initialState);
+    expect(result).toBe(initialState.isLoadingStudents);
+  })
+
+  it('should select isLoadingTrainer', () => {
+    const result = fromBatch.selectTrainersLoading.projector(initialState);
+    expect(result).toBe(initialState.isLoadingTrainer);
+  })
+
+  it('should select isLoadingBatchById', () => {
+    const result = fromBatch.selectBatchesLoadingById.projector(initialState);
+    expect(result).toBe(initialState.isLoadingBatchById);
+  })
 });

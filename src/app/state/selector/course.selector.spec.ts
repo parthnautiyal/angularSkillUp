@@ -83,4 +83,19 @@ fdescribe('Course Selectors', () => {
     const result = fromCourse.selectFavoritecourses.projector(initialState);
     expect(result).toEqual([]);
   });
+
+  it('should select isLoadingChapterData', () => {
+    const result = fromCourse.selectChapterDataLoading.projector(initialState);
+    expect(result).toBe(initialState.isLoadingChapterData);
+  })
+
+  it('should select isLoadingFavourite', () => {
+    const result = fromCourse.selectFavouriteCoursesLoading.projector(initialState);
+    expect(result).toBe(initialState.isLoadingFavourite);
+  })
+
+  it('should select isLoadingAboutInfo', () => {
+    const result = fromCourse.selectCourseAboutInfoLoading.projector(initialState);
+    expect(result).toBe(initialState.isLoadingAboutInfo);
+  })
 });

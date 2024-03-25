@@ -169,6 +169,6 @@ export const batchReducer = createReducer(
   }))
 );
 
-// export const getbatch = (state: BatchState) => state.batches;
-// export const getbatchLoading = (state: BatchState) => state.isLoadingBatches;
-// export const getbatchError = (state: BatchState) => state.error;
+// export const getbatch = (state: Batchestate) => state.batches;
+// export const getbatchLoading = (state: Batchestate) => state.isLoadingBatches;
+// export const getbatchError = (state: Batchestate) => state.error;
