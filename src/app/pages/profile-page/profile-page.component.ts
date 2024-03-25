@@ -1,5 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -8,10 +9,11 @@ import { Store } from '@ngrx/store';
 })
 export class ProfilePageComponent implements OnInit, OnDestroy {
   heading: string = 'Profile';
-  constructor(private store:Store) {}
+  constructor(private store: Store, private mis: MiscellaneousService) {}
 
   ngOnInit(): void {
     localStorage.setItem('profile', 'true');
+    this.mis.getBatchesData();
   }
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {
