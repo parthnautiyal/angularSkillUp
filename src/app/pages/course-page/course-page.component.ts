@@ -6,7 +6,7 @@ import { Error } from 'src/app/models/Error';
 import {
   loadChapterData,
   loadCourseAboutInfo,
-} from 'src/app/state/action/course.action';
+} from 'src/app/state/action/course.actions';
 import {
   selectChapterDataLoading,
   selectCourseAboutInfo,

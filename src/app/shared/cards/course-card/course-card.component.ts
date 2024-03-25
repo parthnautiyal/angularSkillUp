@@ -5,7 +5,7 @@ import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 import { Course } from 'src/app/models/Course';
 import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 import { ThemeService } from 'src/app/services/theme.service';
-import { loadFavoriteCourses } from 'src/app/state/action/course.action';
+import { loadFavoriteCourses } from 'src/app/state/action/course.actions';
 import { selectCourses } from 'src/app/state/selector/course.selector';
 
 @Component({

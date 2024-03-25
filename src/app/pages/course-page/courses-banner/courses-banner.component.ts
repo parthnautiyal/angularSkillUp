@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadCourseAboutInfo } from 'src/app/state/action/course.action';
+import { loadCourseAboutInfo } from 'src/app/state/action/course.actions';
 import { selectCourseAboutInfo } from 'src/app/state/selector/course.selector';
 import { Course } from 'src/app/models/Course';
 

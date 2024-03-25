@@ -28,12 +28,12 @@ import {
 import {
   loadAllCourses,
   loadEnrolledCourses,
-} from 'src/app/state/action/course.action';
-import { loadAllBatches } from 'src/app/state/action/batch.action';
+} from 'src/app/state/action/course.actions';
+import { loadAllBatches } from 'src/app/state/action/batch.actions';
 import {
   loadAllPaths,
   loadEnrolledPaths,
-} from 'src/app/state/action/path.action';
+} from 'src/app/state/action/path.actions';
 import { Error } from 'src/app/models/Error';
 import { MessageService } from 'primeng/api';
 import { MiscellaneousService } from 'src/app/services/miscellaneous.service';

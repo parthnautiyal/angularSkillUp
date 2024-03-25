@@ -6,7 +6,7 @@ import {
   loadBatchPathsById,
   loadStudentsById,
   loadTrainersById,
-} from 'src/app/state/action/batch.action';
+} from 'src/app/state/action/batch.actions';
 import {
   selectBatchById,
   selectBatchPaths,

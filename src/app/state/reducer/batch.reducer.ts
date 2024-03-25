@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Batch } from '../../models/Batch';
-import * as BatchActions from '../action/batch.action';
+import * as BatchActions from '../action/batch.actions';
 import { User } from 'src/app/models/User';
 import { Course } from 'src/app/models/Course';
 

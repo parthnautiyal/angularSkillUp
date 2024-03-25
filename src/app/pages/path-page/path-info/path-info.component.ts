@@ -34,6 +34,7 @@ export class PathInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.store.select(selectPathById).subscribe((path) => {
       this.pathData = path;
       this.about = this.pathData.about.split('/n');

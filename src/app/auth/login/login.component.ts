@@ -17,7 +17,7 @@ declare let window: any;
 export class LoginComponent implements OnInit {
   constructor(private messageService: MessageService) {
 
-    
+
   }
 
   @HostListener('window:beforeunload')

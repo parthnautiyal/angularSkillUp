@@ -6,7 +6,7 @@ import {
   loadAllCourses,
   loadEnrolledCourses,
   loadFavoriteCourses,
-} from 'src/app/state/action/course.action';
+} from 'src/app/state/action/course.actions';
 import {
   selectCourses,
   selectCoursesError,
@@ -16,7 +16,7 @@ import {
   selectFavoritecourses,
   selectFavouriteCoursesLoading,
 } from 'src/app/state/selector/course.selector';
-import { loadAllBatches } from 'src/app/state/action/batch.action';
+import { loadAllBatches } from 'src/app/state/action/batch.actions';
 import {
   selectBatchs,
   selectBatchsError,
@@ -31,7 +31,7 @@ import { Batch } from 'src/app/models/Batch';
 import {
   loadAllPaths,
   loadEnrolledPaths,
-} from 'src/app/state/action/path.action';
+} from 'src/app/state/action/path.actions';
 import {
   selectEnrolledPaths,
   selectEnrolledPathsError,

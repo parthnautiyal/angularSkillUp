@@ -4,15 +4,15 @@ import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 import { Title } from 'src/app/constants/enums/title';
 import { Error } from 'src/app/models/Error';
-import { loadAllBatches } from 'src/app/state/action/batch.action';
+import { loadAllBatches } from 'src/app/state/action/batch.actions';
 import {
   loadAllCourses,
   loadEnrolledCourses,
-} from 'src/app/state/action/course.action';
+} from 'src/app/state/action/course.actions';
 import {
   loadAllPaths,
   loadEnrolledPaths,
-} from 'src/app/state/action/path.action';
+} from 'src/app/state/action/path.actions';
 
 @Component({
   selector: 'app-error-card',

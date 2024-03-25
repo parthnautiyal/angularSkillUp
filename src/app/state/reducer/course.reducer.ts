@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as CourseActions from '../action/course.action';
+import * as CourseActions from '../action/course.actions';
 import { Course } from '../../models/Course';
 import { Chapter } from 'src/app/models/Chapter';
 
@@ -18,7 +18,7 @@ export interface CourseState {
   favoriteCourses: Course[];
 }
 
-const initialState: CourseState = {
+export const initialState: CourseState = {
   allCourses: [],
   enrolledCourses: [],
   courseAboutInfo: {
@@ -166,6 +166,7 @@ export const courseReducer = createReducer(
     error: error,
   }))
 );
+
 export function reducer(state: CourseState | undefined, action: Action) {
   return courseReducer(state, action);
 }

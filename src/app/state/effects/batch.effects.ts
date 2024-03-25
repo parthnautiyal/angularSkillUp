@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
-import * as BatchActions from '../action/batch.action';
+import { asyncScheduler, of } from 'rxjs';
+import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
+import * as BatchActions from '../action/batch.actions';
 import { HttpClient } from '@angular/common/http';
 import { Batch } from 'src/app/models/Batch';
 import { APIResponse } from 'src/app/models/ApiResponse';
@@ -15,7 +15,7 @@ export class BatchEffects {
   private url = API.BASE_URL + API.STUDENT + API.BATCHES + '/';
 
   loadAllBatches$ = createEffect(() =>
-    this.actions$.pipe(
+      this.actions$.pipe(
       ofType(BatchActions.loadAllBatches),
       switchMap(() =>
         this.http

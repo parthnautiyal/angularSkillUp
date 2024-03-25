@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Error } from 'src/app/models/Error';
 import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
-import { loadPathById } from 'src/app/state/action/path.action';
+import { loadPathById } from 'src/app/state/action/path.actions';
 import {
   selectPathByIdLoading,
   selectPathsError,

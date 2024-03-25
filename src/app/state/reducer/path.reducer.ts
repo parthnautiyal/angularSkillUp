@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as PathActions from '../action/path.action';
+import * as PathActions from '../action/path.actions';
 import { Path, PathData } from '../../models/Path';
 
 export interface PathState {
