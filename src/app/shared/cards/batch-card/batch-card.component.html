@@ -17,16 +17,14 @@
   </div>
 </div>
 
-<div *ngIf="isProfile" class="batch-card-type-2">
+<div *ngIf="isProfile" class="batch-card-type-2" [appRandomColor]="index">
   <div class="header">
     <div class="batch-title">
       <div class="batch-name">{{ batchData.name }}</div>
       <div class="batch-type">{{ batchData.streamName }}</div>
     </div>
     <div class="progressCircle">
-      <app-circular-progress-bar
-        [progress]="batchData.progress"
-      ></app-circular-progress-bar>
+      <app-circular-progress-bar [progress]="progress"> </app-circular-progress-bar>
     </div>
   </div>
 </div>

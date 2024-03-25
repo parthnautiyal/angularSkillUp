@@ -5,7 +5,10 @@
   height: 70px
   width: 100vw
   display: flex
-  justify-content: space-around
+  padding: 0px 7%
+  justify-content: space-between
+  @media screen and (min-width:768px)
+    padding: 0px 7%
 
 .header-links
   display: flex
@@ -42,13 +45,17 @@ button
   background-color: var(--header-icons-background-color)
 
 .search-box
-  width: 36vw
+  width: 30vw
   border: none
   border-radius: 10px
   background-color: var(--header-icons-background-color)
   height: 50px
   padding-left: 20px
   font-size: 1.2rem
+  outline: none
+
+  @media screen and (max-width: 858px)
+    width: 15vw
 
 .search-icon
   padding-right: 15px

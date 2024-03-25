@@ -53,26 +53,19 @@ export class CourseCardComponent implements OnInit {
     this.themeService.isDarkMode().subscribe((isDarkMode) => {
       this.isDarkMode = isDarkMode;
     });
-    console.log(this.isRed);
   }
 
   ngOnInit(): void {}
 
   toggleColor() {
     this.isRed = !this.isRed;
-    
-
-
-
-    if (this.singleCourse.isFavourite == false) {
+    if (this.isRed) {
       this.misc.postFavourite(this.singleCourse.id).subscribe((res: any) => {
-        console.log(res);
         this.showSuccess();
       });
-    } else if (this.singleCourse.isFavourite == true) {
+    } else if (!this.isRed) {
       this.misc.deleteFavourite(this.singleCourse.id).subscribe((res: any) => {
         this.store.dispatch(loadFavoriteCourses());
-        console.log(res);
         this.showInfo();
       });
     }
@@ -81,15 +74,15 @@ export class CourseCardComponent implements OnInit {
   showInfo() {
     this.messageService.add({
       severity: 'info',
-      summary: 'Info',
-      detail: 'Message Content',
+      summary: 'Removed',
+      detail: 'Removed from Favorites -> ' + this.singleCourse.id,
     });
   }
   showSuccess() {
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
-      detail: 'Message Content',
+      detail: 'Favorite Added -> ' + this.singleCourse.id,
     });
   }
 }

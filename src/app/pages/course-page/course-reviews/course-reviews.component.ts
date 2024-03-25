@@ -37,15 +37,16 @@ export class CourseReviewsComponent implements OnInit {
     private router: ActivatedRoute
   ) {
     this.id = this.router.snapshot.params['id'];
-    this.misc.getRating(this.id).subscribe((rating) => {
-      this.rating = rating.data;
-      console.log('Rating -> ' + this.rating);
-    });
+    // this.misc.getRating(this.id).subscribe((rating) => {
+    //   this.rating = rating.data;
+    //   console.log('Rating -> ' + this.rating);
+    // });
     this.totalRating = Object.values(this.rating.rating).reduce(
       (a, b) => a + b,
       0
     );
     console.log('Rating Total -> ' + this.totalRating);
+    this.totalRating = Object.values(this.rating).reduce((a, b) => a + b, 0);
     this.updateRating(this.rating);
     this.createAvgRatingArray();
 
@@ -96,8 +97,6 @@ export class CourseReviewsComponent implements OnInit {
     if (this.rating.averageRating % 1 != 0) {
       this.avgRatingArray.push(false);
     }
-
-    console.log('Avg rating array _> ' + this.avgRatingArray);
   }
 
   ngOnInit(): void {}

@@ -16,20 +16,18 @@ declare let window: any;
 })
 export class LoginComponent implements OnInit {
   constructor(private messageService: MessageService) {
-    console.log("hello");
+
     
   }
 
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {
     localStorage.setItem('login', 'false');
-    console.log('destroyed');
     this.showSuccess();
   }
 
   ngOnInit(): void {
     localStorage.setItem('login', 'true');
-    console.log('init');
     window.handleCredentialResponse = this.handleCredentialResponse.bind(this);
   }
   @Output() eventEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();

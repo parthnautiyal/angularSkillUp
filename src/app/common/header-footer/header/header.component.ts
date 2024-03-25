@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   isDropdownOpen = false;
   isOrgDropdownOpen = false;
   isDarkMode: boolean = false;
+  isResponsive: boolean = false;
 
   constructor(private themeService: ThemeService, private router: Router) {
     this.themeService.isDarkMode().subscribe((isDarkMode) => {
@@ -57,12 +58,16 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']).then(() => {
       window.location.reload();
     });
-    console.log('signout');
     this.closeDropdown();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    // Check window width and set the variable accordingly
+    this.isResponsive = window.innerWidth <= 768;
   }
 
   ngOnInit(): void {
     this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
-    console.log('Profile Picture ' + this.userProfile.picture);
   }
 }

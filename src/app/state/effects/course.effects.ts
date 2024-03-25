@@ -26,7 +26,6 @@ export class CourseEffects {
               CourseActions.loadAllCoursesSuccess({ courses: courses.data })
             ),
             catchError((error) => {
-              console.log('Error -> ' + error);
               //of(CourseActions.loadAllCoursesFailed({ error }));
               return of(CourseActions.loadAllCoursesFailed({ error }));
             })
@@ -65,9 +64,9 @@ export class CourseEffects {
                 course: course.data,
               })
             ),
-            catchError((error) =>
-              of(CourseActions.loadCourseAboutInfoFailed({ error }))
-            )
+            catchError((error) => {
+              return of(CourseActions.loadCourseAboutInfoFailed({ error }));
+            })
           )
       )
     )

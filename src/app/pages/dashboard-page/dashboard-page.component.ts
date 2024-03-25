@@ -13,7 +13,6 @@ export class DashboardPageComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     private messageService: MessageService
   ) {
-    console.log('Logged In');
     this.showSuccess();
   }
   loading: boolean = true;

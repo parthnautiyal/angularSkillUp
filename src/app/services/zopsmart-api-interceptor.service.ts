@@ -28,23 +28,19 @@ export class ZopsmartApiInterceptorService implements HttpInterceptor {
     const modifiedReq = req.clone({
       headers: req.headers.append('Authorization', 'Bearer ' + token),
     });
-    console.log('intercepted');
     return next.handle(modifiedReq).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           this.refreshCount = parseInt(
             localStorage.getItem('refreshCount') || '0'
           );
-          console.log('Refresh Count -> ' + this.refreshCount);
           if (this.refreshCount <= 2) {
             this.mis.getRefreshToken().subscribe((res: any) => {
-              console.log('token refreshed');
               this.refreshCount = this.refreshCount + 1;
               localStorage.setItem(
                 'refreshCount',
                 this.refreshCount.toString()
               );
-              console.log('Refresh Count subscribe -> ' + this.refreshCount);
               localStorage.setItem('token', res.data.accessToken);
             });
             setTimeout(() => {
@@ -85,9 +81,6 @@ export class ZopsmartApiInterceptorService implements HttpInterceptor {
           this.error.message = 'Network Error';
           this.error.code = 0;
         } else {
-          console.log('Error Code -> ' + error.status);
-          console.log('Error Message -> ' + error.message);
-
           localStorage.setItem('refreshCount', (0).toString());
         }
         return throwError(
