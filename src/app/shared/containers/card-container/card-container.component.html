@@ -17,7 +17,11 @@
       <ng-container *ngIf="!error">
         <ng-container *ngFor="let item of allBatches; let i = index">
           <a [routerLink]="['/', RouterLinks.BATCHES, item.id]">
-            <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
+            <app-batch-card
+              [progress]="enrolledBatches[i].progress"
+              [batchData]="item"
+              [index]="i"
+            ></app-batch-card>
           </a>
         </ng-container>
       </ng-container>
