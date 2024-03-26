@@ -19,10 +19,10 @@ export class CourseReviewsComponent implements OnInit {
   isAllReviewOn: boolean = true;
   isReviewCommentOn: boolean = false;
   rating: Ratings = {
-    averageRating: 3.5,
+    averageRating: 0,
     rating: {
-      fiveStars: 2,
-      fourStars: 1,
+      fiveStars: 0,
+      fourStars: 0,
       threeStars: 0,
       twoStars: 0,
       oneStars: 0,
@@ -88,6 +88,9 @@ export class CourseReviewsComponent implements OnInit {
       (a, b) => a + b,
       0
     );
+    console.log('Total Rating -> ' + this.totalRating);
+    this.totalRating = this.totalRating == 0 ? 1 : this.totalRating;
+
     rating.rating.fiveStars =
       (rating.rating.fiveStars / this.totalRating) * 100;
     console.log(rating.rating);
@@ -119,7 +122,7 @@ export class CourseReviewsComponent implements OnInit {
 
     this.misc.courseRating$.subscribe((res) => {
       console.log(res);
-      this.rating = res;
+      if (res.averageRating != 0) this.rating = res;
     });
 
     this.updateRating(this.rating);

@@ -88,9 +88,9 @@ export class MiscellaneousService {
         'https://api.training.zopsmart.com/students/courses/' + id + '/ratings'
       )
       .subscribe((res) => {
-        if (res != null && res.data != null) {
+        if (res != null) {
           this.CourseRatingSubject.next(res.data);
-          console.log(res.data);
+          console.log(res);
         }
       });
   }

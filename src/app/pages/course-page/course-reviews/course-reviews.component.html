@@ -48,13 +48,14 @@
       <span
         (click)="handleMyReviewButton()"
         [ngClass]="{ active: isMyReviewOn }"
-        style="margin-right: 15px"
+        style="margin-right: 15px; cursor: pointer"
         >My Review</span
       >
       <span
         *ngIf="isAllReviewOn"
         [ngClass]="{ active: isReviewCommentOn }"
         (click)="handleReviewCommentButton()"
+        style="cursor: pointer"
         >All Reviews</span
       >
     </div>

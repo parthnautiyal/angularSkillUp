@@ -228,6 +228,11 @@ export class AllSectionContainerComponent implements OnInit {
     });
     this.store.select(selectFavoritecourses).subscribe((res) => {
       if (res.length > 0) {
+        // this.store.select(selectFavoritecourses).subscribe((res) => {
+        //   res = res.filter(
+        //     (course: Course) => course.id !== this.singleCourse.id
+        //   );
+        // });
         this.allCoursesData = res;
         this.loading = false;
         this.noContent = false;
