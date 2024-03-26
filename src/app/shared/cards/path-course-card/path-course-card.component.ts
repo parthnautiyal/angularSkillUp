@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 import { Course } from 'src/app/models/Course';
 
@@ -8,6 +8,7 @@ import { Course } from 'src/app/models/Course';
   styleUrls: ['./path-course-card.component.sass'],
 })
 export class PathCourseCardComponent implements OnInit {
+  isResponsive: boolean = false;
   RouterLinks = RouterLinks;
   @Input() flag = false;
   @Input() courseData: Course = {
@@ -33,7 +34,11 @@ export class PathCourseCardComponent implements OnInit {
     updatedAt: '',
     level: 0,
   };
-  constructor() {
+  constructor() {}
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isResponsive = window.innerWidth <= 768;
   }
 
   ngOnInit(): void {}
