@@ -222,8 +222,6 @@ export class AllSectionContainerComponent implements OnInit {
         setTimeout(() => {
           this.loading = res;
         }, 500);
-      } else {
-        this.loading = res;
       }
     });
     this.store.select(selectFavoriteCourses).subscribe((res) => {
@@ -234,7 +232,6 @@ export class AllSectionContainerComponent implements OnInit {
         //   );
         // });
         this.allCoursesData = res;
-        this.loading = false;
         this.noContent = false;
       }
       if (res.length == 0) {
