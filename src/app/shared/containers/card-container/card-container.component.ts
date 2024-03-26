@@ -86,7 +86,6 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectCourses).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allCourses = res;
-            this.error = false;
           }
         });
 
@@ -95,6 +94,8 @@ export class CardContainerComponent implements OnInit {
             this.errorCourse.message = res.message.split('`').slice(1);
             this.errorCourse.code = res.message.split('`').slice(0, 1);
             this.error = true;
+          } else {
+            this.error = false;
           }
         });
         this.store.select(selectCoursesLoading).subscribe((res) => {
@@ -113,7 +114,6 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectBatchs).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allBatches = res;
-            this.error = false;
           }
         });
         this.store.select(selectBatchsError).subscribe((res) => {
@@ -121,6 +121,8 @@ export class CardContainerComponent implements OnInit {
             this.errorBatch.message = res.message.split('`').slice(1);
             this.errorBatch.code = res.message.split('`').slice(0, 1);
             this.error = true;
+          } else {
+            this.error = false;
           }
         });
         this.store.select(selectBatchsLoading).subscribe((res) => {
@@ -139,7 +141,6 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectPaths).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allPaths = res;
-            this.error = false;
           }
         });
         this.store.select(selectPathsError).subscribe((res) => {
@@ -147,6 +148,8 @@ export class CardContainerComponent implements OnInit {
             this.errorPath.message = res.message.split('`').slice(1);
             this.errorPath.code = res.message.split('`').slice(0, 1);
             this.error = true;
+          } else {
+            this.error = false;
           }
         });
         this.store.select(selectPathsLoading).subscribe((res) => {
@@ -178,6 +181,8 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectBatchsError).subscribe((res) => {
           if (res != null) {
             this.error = true;
+          } else {
+            this.error = false;
           }
         });
         this.store.select(selectBatchsLoading).subscribe((res) => {
@@ -197,14 +202,16 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectEnrolledCourses).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allCourses = res;
-            this.errorEnrolled = false;
           }
         });
         this.store.select(selectEnrolledCoursesError).subscribe((res) => {
           if (res != null) {
+            console.log('inside enrolled courses error');
             this.errorCourse.message = res.message.split('`').slice(1);
             this.errorCourse.code = res.message.split('`').slice(0, 1);
-            this.errorEnrolled = true;
+            this.error = true;
+          } else {
+            this.error = false;
           }
         });
         this.store.select(selectCoursesLoading).subscribe((res) => {
@@ -223,14 +230,15 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectEnrolledPaths).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allPaths = res;
-            this.errorEnrolled = false;
           }
         });
         this.store.select(selectEnrolledPathsError).subscribe((res) => {
           if (res != null) {
             this.errorPath.message = res.message.split('`').slice(1);
             this.errorPath.code = res.message.split('`').slice(0, 1);
-            this.errorEnrolled = true;
+            this.error = true;
+          } else {
+            this.error = false;
           }
         });
         this.store.select(selectPathsLoading).subscribe((res) => {
