@@ -59,7 +59,7 @@ export class MiscellaneousService {
       .get<APIResponse<EnrolledBatches>>(
         API.BASE_URL +
           API.STUDENT +
-          '/332' +
+          '/329' +
           API.ENROLLED_BATCHES +
           API.PAGE_SIZE
       )

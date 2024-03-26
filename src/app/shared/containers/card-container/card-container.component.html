@@ -13,7 +13,7 @@
   ></app-dashboard-shimmer>
 </ng-container>
 <ng-container *ngIf="!loading">
-  <div class="card-wrapper">
+  <div class="card-wrapper profile-card-wrapper">
     <ng-container *ngIf="title == Title.BATCHES">
       <ng-container *ngIf="!error">
         <ng-container *ngFor="let item of allBatches; let i = index">
