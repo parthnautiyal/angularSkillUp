@@ -43,20 +43,22 @@ export class SearchPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const searchQuery = this.route.snapshot.queryParamMap.get('q');
-    if (searchQuery != null) {
-      this.searchService
-        .searchByTitle(searchQuery)
-        .subscribe((data: APIResponse<SearchResponse>) => {
-          this.searchResponse = data.data;
-          this.allPathsData = this.searchResponse.paths;
-          this.allCoursesData = this.searchResponse.courses;
-          this.loading = false;
-        
-          console.log(this.searchResponse);
-          console.log('pathdata: ', this.allPathsData);
-          console.log('coursedata; ', this.allCoursesData);
-        });
-    }
+    this.route.queryParams.subscribe((params) => {
+      const searchQuery = params['q'];
+      if (searchQuery != null) {
+        this.loading = true;
+        this.searchService
+          .searchByTitle(searchQuery)
+          .subscribe((data: APIResponse<SearchResponse>) => {
+            this.searchResponse = data.data;
+            this.allPathsData = this.searchResponse.paths;
+            this.allCoursesData = this.searchResponse.courses;
+            this.loading = false;
+            console.log(this.searchResponse);
+            console.log('pathdata: ', this.allPathsData);
+            console.log('coursedata; ', this.allCoursesData);
+          });
+      }
+    });
   }
 }
