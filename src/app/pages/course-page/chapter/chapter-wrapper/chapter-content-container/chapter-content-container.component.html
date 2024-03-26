@@ -1,5 +1,10 @@
 <div class="contentWrapper">
-  <div class="contents_row">Content</div>
+  <div *ngIf="!quizFlag" style="margin-left: 24px" class="contents_row">
+    Content
+  </div>
+  <div *ngIf="quizFlag" style="margin-left: 24px" class="contents_row">
+    Quiz
+  </div>
 </div>
 <ng-container *ngFor="let chapters of allChapters; index as i">
   <div class="contentWrapper">
@@ -7,20 +12,41 @@
       <div class="icon">
         <img src="assets/Chapter.svg" />
       </div>
-      <div class="contents row" (click)="openPopup(i)">
-        {{ chapters.resourceName }}
-      </div>
-    </div>
-    <div (click)="markBtn(i)" class="rightBar">
-      <ng-container *ngIf="chapters.isVisited">
-        <div *ngIf="!chapters.isCompleted" class="completeBtn">
-          Mark as Completed
+      <ng-container *ngIf="!quizFlag">
+        <div class="contents row" (click)="openPopup(i)">
+          {{ chapters.resourceName }}
         </div>
         <div *ngIf="chapters.isCompleted" class="completeBtn">
           <img src="assets/Completed.svg" />Completed
         </div>
       </ng-container>
     </div>
+    <ng-container *ngIf="!quizFlag">
+      <div (click)="markBtn(i)" class="rightBar">
+        <ng-container *ngIf="chapters.isVisited">
+          <div *ngIf="!chapters.isCompleted" class="completeBtn">
+            Mark as Completed
+          </div>
+          <div *ngIf="chapters.isCompleted" class="completeBtn">
+            <img src="assets/Completed.svg" />Completed
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="quizFlag">
+      <div class="rightBar">
+        <ng-container *ngIf="chapters.status === 'NOT_ATTEMPTED'">
+          <button>Not Attempted</button>
+        </ng-container>
+        <ng-container *ngIf="chapters.status === 'PASS'">
+          <button>Pass</button>
+        </ng-container>
+        <ng-container *ngIf="chapters.status === 'FAIL'">
+          <button>FAIL</button>
+        </ng-container>
+        <button>Leaderboard</button>
+      </div>
+    </ng-container>
   </div>
 
   <!-- popup.component.html -->

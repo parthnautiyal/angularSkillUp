@@ -22,6 +22,7 @@ import { Batch } from 'src/app/models/Batch';
 import { Course } from 'src/app/models/Course';
 import { Observable, combineLatest } from 'rxjs';
 import { selectPathsLoading } from 'src/app/state/selector/path.selector';
+import { Error } from 'src/app/models/Error';
 
 @Component({
   selector: 'app-batch-page',
@@ -86,7 +87,10 @@ export class BatchPageComponent implements OnInit {
   trainer$!: Observable<boolean>;
   sub: any;
   error:boolean = false;
-  
+  errorCard: Error = {
+    code: 0,
+    message: '',
+  };
 
 
   constructor(private store: Store, private router: ActivatedRoute) {
@@ -126,6 +130,10 @@ export class BatchPageComponent implements OnInit {
     this.store.select(selectBatchsError).subscribe((res)=>{
       if (res!=null){
         this.error = true;
+        this.errorCard.message = res.message.split('`').slice(1);
+        this.errorCard.code = res.message.split('`').slice(0, 1);
+      }else{
+        this.error = false;
       }
     });
   }

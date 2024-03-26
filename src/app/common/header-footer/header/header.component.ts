@@ -65,12 +65,14 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event?: any) {
-    // Check window width and set the variable accordingly
     this.isResponsive = window.innerWidth <= 768;
   }
 
   ngOnInit(): void {
     this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
+    setTimeout(() => {
+      this.onResize();
+    }, 100);
   }
 
   submitSearch() {

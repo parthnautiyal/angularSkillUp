@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ChapterContentContainerComponent implements OnInit {
   close: boolean = false;
   chapterUrl: string = '';
+  @Input() quizFlag: boolean = false;
 
   closeButton() {
     this.close = false;

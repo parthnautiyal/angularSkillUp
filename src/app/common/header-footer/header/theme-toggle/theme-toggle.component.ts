@@ -18,7 +18,6 @@ export class ThemeToggleComponent implements OnInit {
 
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
-    localStorage.setItem('isDarkMode', this.isDarkMode ? 'true' : 'false');
 
     this.themeService.setDarkMode(this.isDarkMode);
   }
