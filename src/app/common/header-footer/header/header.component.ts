@@ -60,16 +60,19 @@ export class HeaderComponent implements OnInit {
       window.location.reload();
     });
     this.closeDropdown();
+    this.onResize();
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    // Check window width and set the variable accordingly
+  onResize(event?: any) {
     this.isResponsive = window.innerWidth <= 768;
   }
 
   ngOnInit(): void {
     this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
+    setTimeout(() => {
+      this.onResize();
+    }, 100);
   }
 
   submitSearch() {
