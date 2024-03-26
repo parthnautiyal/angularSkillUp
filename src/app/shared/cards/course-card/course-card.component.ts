@@ -85,7 +85,7 @@ export class CourseCardComponent implements OnInit {
 
   showInfo() {
     this.messageService.add({
-      severity: 'info',
+      severity: 'success',
       summary: 'Removed',
       detail: 'Removed from Favorites -> ' + this.currentId,
     });
