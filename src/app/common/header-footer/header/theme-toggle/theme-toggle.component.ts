@@ -17,10 +17,16 @@ export class ThemeToggleComponent implements OnInit {
   }
 
   toggleTheme() {
-    setInterval(() => {
-      this.isDarkMode = !this.isDarkMode;
-      this.themeService.setDarkMode(this.isDarkMode);
-    }, 50);
+    this.isDarkMode = !this.isDarkMode;
+
+    this.themeService.setDarkMode(this.isDarkMode);
   }
-  ngOnInit(): void {}
+  ngOnInit() {
+    const storedTheme = localStorage.getItem('isDarkMode');
+    if (storedTheme !== null) {
+      this.isDarkMode = storedTheme === 'true';
+
+      this.themeService.setDarkMode(this.isDarkMode);
+    }
+  }
 }
