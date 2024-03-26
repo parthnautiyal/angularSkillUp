@@ -7,7 +7,6 @@ import { loadPathById } from 'src/app/state/action/path.actions';
 import {
   selectPathByIdLoading,
   selectPathsError,
-  selectPathById,
 } from 'src/app/state/selector/path.selector';
 
 @Component({
@@ -34,11 +33,11 @@ export class PathPageComponent implements OnInit {
     this.store.dispatch(loadPathById({ id: this.id }));
     this.store.select(selectPathsError).subscribe((res) => {
       if (res != null) {
-        // this.loading =false;
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
         this.errorCard.code = res.message.split('`').slice(0, 1);
-        this.error = true;
+      }else{
+        this.error = false;
       }
     });
     this.store.select(selectPathByIdLoading).subscribe((res) => {
