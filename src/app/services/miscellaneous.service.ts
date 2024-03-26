@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Path, PathData } from '../models/Path';
 import { Ratings } from '../models/Ratings';
 import { APIResponse } from '../models/ApiResponse';
 import { EnrolledBatches } from '../models/EnrolledBatches';
 import { API } from '../constants/enums/API';
 import { Review } from '../models/Reviews';
+import { SearchResponse } from '../models/SearchResponse';
 @Injectable({
   providedIn: 'root',
 })
 export class MiscellaneousService {
   user: any = {
     token:
-      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTE3MzkzNywiaWF0IjoxNzExMTczNjM3LCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.I7PeGHmCRWRz33_o5hu63u8oOjdJDZJG_w318QRhXGoUkBxWfLMWfnjwTO1Nl17FCFucZaBkEEtB2jlBmLYxyzQjnbcZ5jt2Eqc3BQyk5STgcWhmP1nTTUIA8AmGigaKDapkFX_XLbwd6jhT2PGcNkwadhg8EtqE3h5MwMwDnMz0-g5_Xg2sqy3Tcw038ApqBwA_f2LDqAA7kyOO4kJicBUDBSmP2y52ARawS-kUAP34AEVlkw8pZZKCiqs33GgYaSZEauWJtPHapQAnvVn3RezjnSt-Nr_O3plzdjpHKPCujXYpq-KjzN_-9JewwbVJlPcAOQ7iMcATHA-HaRCeNA',
+      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTQ0MTc1MiwiaWF0IjoxNzExNDQxNDUyLCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJhZGl0eWEuc0B6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMzNH0.IWNsrjPZEixn_Er4pfnkSI0cbKwhGJjJmUd7nweug75JE4dFqpr5p-DTaSfT-hrcqvlHoYV-b-uSUZHgbMX1xi2IyWbNVmXdKOiOPva2w0yOS6zRAfCtXSS2KVB9uDj7NNZceruGemxUdd-OnaQdNGnnIUFppblMh99gwTvZx5SEcnFmQ0dccP2HX0zumSLK-7w06jtye1W4qA7omFjIQRis0TbUVA3aH6sqt1p9asoKGSvys2GHTY5ErMl6GuLIODTOpcWi02YY2WbjqzmXFGtouww-KeQwz_lzwbuJssbfbOvegkrBRUwLwe85X2SSPd6Tnvg1hiMG-RdspdRuSw',
+
     refreshToken:
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTUxNzgzNCwiaWF0IjoxNzExNDMxNDM0LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIn0.ezdZV6I2Aw4t6I5utGvXwiFH0qGB8xak4YIdofzKS6ORz13LLvgw8ix7oFEpvoA7SApfQA5cXx3lD1vFwO4evymgtynh-7PnOPE_g7Xeo57NcVtexMwkL05UDcCGN2vp_EfQklTlkVq11OrtM0ZUxA5q-lax3_uV5jw__kfdWjc0qjvsI2otwJ8bG1yp40V6asyBc1QgchkabZnLJb5O-9z1uNejgzU8HGCzCXlCsAp2L98Inbliq6A2d9nRs2VRqK20FZyhKAw-gsMPKRObr5E6fic_wrRQGJsLbai7n7BE_Q9kISvdDJPuIVJVSA6-w1wZTChGz5EwB1ZJgf1qdg',
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTUyNTU2NSwiaWF0IjoxNzExNDM5MTY1LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJhZGl0eWEuc0B6b3BzbWFydC5jb20ifQ.hJ2oJJI3ru2Y6QCT52t4B0Muwhxrxpe7oWmgUHbbywPhoSp2wg4O2hdqHHkk6YqUXx3kAhmNRoz5o4jSWz74FVQUJuP_IVGZZkpot4OsQMJ5n3gGDyzVwyVenTYIcsdV4RegONX5rHGJ-ums6ZJSDiaIzZYdFstSKmnLt-jpLdiBCFMt2NSR_QU9wQE09ciLCh3hcgVyeAYmssaDfLa9remgWZEaOXQHC10BDFjlMEvnO4LRq0B4yM6ZTMZjBM7QGVeP3MATtM68vczE1FcbyTE7Au--z5hjL9ICARlfyPS0kpD82TxINFN2TO7P0uhZuSM4muKDkDkH0h6tHgBjew'
+
   };
 
   refreshHeader = new HttpHeaders({
@@ -130,6 +133,10 @@ export class MiscellaneousService {
       });
   }
 
+  searchByTitle(title: string): Observable<APIResponse<SearchResponse>> {
+    return this.http.get<APIResponse<SearchResponse>>(
+      API.BASE_URL + '/search?title=' + title + '&role=student&field=all');
+  }
   // body: JSON.stringify({ courseId: courseId }),
 }
 
