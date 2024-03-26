@@ -34,8 +34,6 @@ import {
 import { Error } from 'src/app/models/Error';
 import { MessageService } from 'primeng/api';
 import { EnrolledBatches } from 'src/app/models/EnrolledBatches';
-import { filter } from 'rxjs';
-import { AllCoursesState } from 'src/app/state/reducer/course.reducer';
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
@@ -82,40 +80,39 @@ export class CardContainerComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     if (this.title == Title.COURSES) {
-      this.height = 262;
-      // this.store.dispatch(loadAllCourses());
-      this.store.select(selectAllCourses).subscribe((res) => {
-        if (typeof res === 'object' && Object.keys(res).length > 0) {
-          this.allCourses = res;
-        }
-      });
-      this.store.select(selectAllCoursesError).subscribe((res) => {
-        if (res != null) {
-          this.errorCourse.message = res.message.split('`').slice(1);
-          this.errorCourse.code = res.message.split('`').slice(0, 1);
-          this.error = true;
-        } else {
-          this.error = false;
-        }
-      });
-      this.store
-        .select(selectAllCoursesLoading)
-        .subscribe((res) => {
-          console.log('inside all courses loading');
-          this.loading = res;
+      if (this.router.url=='/dashboard'){
+        this.height = 262;
+        this.store.select(selectAllCourses).subscribe((res) => {
+          if (typeof res === 'object' && Object.keys(res).length > 0) {
+            this.allCourses = res;
+          }
         });
-      // this.store.dispatch(loadEnrolledCourses());
-      this.store
+        this.store.select(selectAllCoursesError).subscribe((res) => {
+          console.log("inside all course loading",this.error);
+          if (res != null) {
+            this.errorCourse.message = res.message.split('`').slice(1);
+            this.errorCourse.code = res.message.split('`').slice(0, 1);
+            this.error = true;
+          } else {
+            this.error = false;
+          }
+        });
+        this.store
+          .select(selectAllCoursesLoading)
+          .subscribe((res) => {
+            this.loading = res;
+          });
+      }
+      else{
+        this.store
         .select(selectEnrolledCourses)
         .subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
-            console.log('inside enrolled courses');
             this.allCourses = res;
           }
         });
       this.store.select(selectEnrolledCoursesError).subscribe((res) => {
         if (res != null) {
-          console.log('inside enrolled courses error');
           this.errorCourse.message = res.message.split('`').slice(1);
           this.errorCourse.code = res.message.split('`').slice(0, 1);
           this.error = true;
@@ -126,14 +123,14 @@ export class CardContainerComponent implements OnInit {
       this.store
         .select(selectEnrolledCoursesLoading)
         .subscribe((res) => {
-          console.log('inside enrolled courses loading');
           this.loading = res;
         });
+      }
+      
     }
     if (this.title == Title.BATCHES && !(this.router.url == '/user')) {
       this.height = 200;
       this.enrolled = false;
-      // this.store.dispatch(loadAllBatches());
       this.store.select(selectBatches).subscribe((res) => {
         if (typeof res === 'object' && Object.keys(res).length > 0) {
           this.allBatches = res;
@@ -144,19 +141,18 @@ export class CardContainerComponent implements OnInit {
           this.errorBatch.message = res.message.split('`').slice(1);
           this.errorBatch.code = res.message.split('`').slice(0, 1);
           this.error = true;
+        }else{
+          this.error = false;
         }
       });
       this.store.select(selectBatchesLoading).subscribe((res) => {
-        console.log("inside batch loading");
         this.loading = res;
       });
     }
     if (this.title == Title.BATCHES && this.router.url == '/user') {
       this.height = 120;
       this.enrolled = true;
-      // this.store.dispatch(loadEnrolledBatches());
       this.store.select(selectEnrolledBatches).subscribe((data) => {
-        console.log(data);
         this.enrolledBatches = data;
       });
 
@@ -171,13 +167,11 @@ export class CardContainerComponent implements OnInit {
         }
       });
       this.store.select(selectEnrolledBatchesLoading).subscribe((res) => {
-        console.log("inside enrolled batch loading");
        this.loading = res;
       });
     }
     if (this.title == Title.PATHS) {
       this.height = 112;
-      // this.store.dispatch(loadAllPaths());
       this.store.select(selectAllPaths).subscribe((res) => {
         if (typeof res === 'object' && Object.keys(res).length > 0) {
           this.allPaths = res;
@@ -193,7 +187,6 @@ export class CardContainerComponent implements OnInit {
         }
       });
       this.store.select(selectAllPathsLoading).subscribe((res) => {
-        console.log("inside path loading",res);
         this.loading = res;
       });
       this.store.select(selectEnrolledPaths).subscribe((res) => {
@@ -211,7 +204,6 @@ export class CardContainerComponent implements OnInit {
         }
       });
       this.store.select(selectEnrolledPathsLoading).subscribe((res) => {
-        console.log("inside enrolled path loading", res);
         this.loading = res;
       });
     }

@@ -4,7 +4,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { ERROR, HEADINGS_TITLE } from 'src/app/constants/headingsTitle';
 import { loadAllBatches } from 'src/app/state/action/batch.actions';
-import { loadEnrolledCourses } from 'src/app/state/action/course.actions';
+import { loadAllCourses, loadEnrolledCourses } from 'src/app/state/action/course.actions';
 import { loadAllPaths } from 'src/app/state/action/path.actions';
 @Component({
   selector: 'app-dashboard-page',
@@ -25,6 +25,7 @@ export class DashboardPageComponent implements OnInit {
   error = ERROR;
 
   ngOnInit(): void {
+    this.store.dispatch(loadAllCourses());
     this.store.dispatch(loadEnrolledCourses());
     this.store.dispatch(loadAllBatches());
     this.store.dispatch(loadAllPaths());

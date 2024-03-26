@@ -16,6 +16,10 @@ export interface PathByIdState {
 
 export interface EnrolledPathsState {
   enrolledPaths: Path[];
+  isLoading: boolean;
+  error: any | null;
+}
+export interface numberOfEnrolledPathsState {
   numberOfEnrolledPaths: number;
   isLoading: boolean;
   error: any | null;
@@ -46,12 +50,16 @@ export const initialPathByIdState: PathByIdState = {
     createdAt: '',
     courses: [],
   },
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
 export const initialEnrolledPathsState: EnrolledPathsState = {
   enrolledPaths: [],
+  isLoading: true,
+  error: null,
+};
+export const initialNumberOfEnrolledPathState: numberOfEnrolledPathsState = {
   numberOfEnrolledPaths: 0,
   isLoading: true,
   error: null,
@@ -120,13 +128,22 @@ export const enrolledPathsReducer = createReducer(
     enrolledPaths: [],
     isLoading: false,
     error,
+  }))
+);
+
+export const NoOfenrolledPathsReducer = createReducer(
+  initialNumberOfEnrolledPathState,
+  on(PathActions.loadNumberOfEnrolledPaths, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
   })),
 
   on(
     PathActions.loadNumberOfEnrolledPathsSuccess,
     (state, { numberOfEnrolledPaths }) => ({
       ...state,
-      numberOfEnrolledPaths,
+      numberOfEnrolledPaths: numberOfEnrolledPaths,
       isLoading: false,
       error: null,
     })

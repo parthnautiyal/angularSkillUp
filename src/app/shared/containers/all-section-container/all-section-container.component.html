@@ -7,6 +7,7 @@
       <app-dashboard-shimmer
         class="shimmer"
         [shimmerCount]="9"
+        [height]="this.height"
       ></app-dashboard-shimmer>
     </div>
     <div *ngIf="!loading" class="paths-box">
@@ -15,7 +16,7 @@
       </ng-container>
       <ng-container *ngIf="!noContent">
         <ng-container *ngIf="heading == Title.PATHS">
-          <app-error-card
+         <app-error-card
             [title]="Title.PATHS"
             [error]="errorCard"
             *ngIf="error"
@@ -48,7 +49,7 @@
         </ng-container>
 
         <ng-container *ngIf="heading == Title.BATCHES">
-          <app-error-card
+         <app-error-card
             [title]="Title.BATCHES"
             [error]="errorCard"
             *ngIf="error"

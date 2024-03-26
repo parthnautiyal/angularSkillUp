@@ -76,25 +76,25 @@ export const initialCourseAboutInfoState: CourseAboutInfoState = {
     updatedAt: '',
     level: 0,
   },
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
 export const initialChapterDataState: ChapterDataState = {
   chapterData: [],
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
 export const initialNoOfEnrolledCoursesState: NoOfEnrolledCoursesState = {
   noOfEnrolledCourses: 0,
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
 export const initialFavoriteCoursesState: FavoriteCoursesState = {
   favoriteCourses: [],
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 

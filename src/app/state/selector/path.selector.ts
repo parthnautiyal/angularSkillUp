@@ -3,6 +3,7 @@ import {
   AllPathsState,
   EnrolledPathsState,
   PathByIdState,
+  numberOfEnrolledPathsState,
 } from '../reducer/path.reducer';
 
 // Selectors for All Paths
@@ -51,10 +52,6 @@ export const selectEnrolledPaths = createSelector(
   selectEnrolledPathsState,
   (state) => state.enrolledPaths
 );
-export const selectNoOfEnrolledPaths = createSelector(
-  selectEnrolledPathsState,
-  (state) => state.numberOfEnrolledPaths
-);
 
 export const selectEnrolledPathsLoading = createSelector(
   selectEnrolledPathsState,
@@ -63,5 +60,23 @@ export const selectEnrolledPathsLoading = createSelector(
 
 export const selectEnrolledPathsError = createSelector(
   selectEnrolledPathsState,
+  (state) => state.error
+);
+
+export const selectNoOfEnrolledPathsState =
+  createFeatureSelector<numberOfEnrolledPathsState>('numberOfEnrolledPaths');
+
+export const selectNoOfEnrolledPaths = createSelector(
+  selectNoOfEnrolledPathsState,
+  (state) => state.numberOfEnrolledPaths
+);
+
+export const selectNoOfEnrolledPathsLoading = createSelector(
+  selectNoOfEnrolledPathsState,
+  (state) => state.isLoading
+);
+
+export const selectNoOfEnrolledPathsError = createSelector(
+  selectNoOfEnrolledPathsState,
   (state) => state.error
 );

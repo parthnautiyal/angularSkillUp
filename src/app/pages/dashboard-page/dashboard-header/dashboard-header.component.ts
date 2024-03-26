@@ -4,7 +4,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { loadNoOfEnrolledCourses } from 'src/app/state/action/course.actions';
 import { loadNumberOfEnrolledPaths } from 'src/app/state/action/path.actions';
-import { selectEnrolledCourses, selectNoOfEnrolledCourses } from 'src/app/state/selector/course.selector';
+import {
+  selectAllCourses,
+  selectEnrolledCourses,
+  selectNoOfEnrolledCourses,
+} from 'src/app/state/selector/course.selector';
 import { selectNoOfEnrolledPaths } from 'src/app/state/selector/path.selector';
 import { enrolledCourses } from '../../../models/EnrolledCourses';
 import { Router } from '@angular/router';
@@ -45,11 +49,8 @@ export class DashboardHeaderComponent implements OnInit {
         const randomIndex = Math.floor(Math.random() * courses.length);
         this.enrolledCourse = courses[randomIndex];
       }
-
     });
     this.onResize();
-
-
   }
   navigateToCourse() {
     this.router.navigate(['/course', this.enrolledCourse.courseId]);
@@ -60,5 +61,4 @@ export class DashboardHeaderComponent implements OnInit {
     // Check window width and set the variable accordingly
     this.isResponsive = window.innerWidth <= 768;
   }
- 
 }
