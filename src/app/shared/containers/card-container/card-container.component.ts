@@ -176,6 +176,7 @@ export class CardContainerComponent implements OnInit {
         this.miscService.pathsData$.subscribe((res) => {
           console.log(res);
           this.allBatches = res.enrolledBatches;
+          console.log(this.allBatches);
         });
 
         this.store.select(selectBatchsError).subscribe((res) => {

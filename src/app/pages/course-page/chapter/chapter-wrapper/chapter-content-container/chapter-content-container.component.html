@@ -10,14 +10,26 @@
   <div class="contentWrapper">
     <div class="leftBar">
       <div class="icon">
-        <img src="assets/Chapter.svg" />
+        <ng-container *ngIf="!quizFlag">
+          <img src="assets/document.svg" />
+        </ng-container>
+        <ng-container *ngIf="quizFlag">
+          <ng-container *ngIf="chapters.status === 'PASS'">
+            <img src="assets/Completed.svg" />
+          </ng-container>
+          <ng-container *ngIf="chapters.status === 'FAIL'">
+            <img style="width: 70%; height: 70%" src="assets/cross-mark.svg" />
+          </ng-container>
+        </ng-container>
       </div>
       <ng-container *ngIf="!quizFlag">
         <div class="contents row" (click)="openPopup(i)">
           {{ chapters.resourceName }}
         </div>
-        <div *ngIf="chapters.isCompleted" class="completeBtn">
-          <img src="assets/Completed.svg" />Completed
+      </ng-container>
+      <ng-container *ngIf="quizFlag">
+        <div class="contents row">
+          {{ chapters.name }}
         </div>
       </ng-container>
     </div>
@@ -57,7 +69,7 @@
         <img src="src/assets/cross-mark.svg" />
       </span>
       <button (click)="openInNewTab()">
-        <img src="assets/light/openInNewTab.svg">
+        <img src="assets/light/openInNewTab.svg" />
       </button>
       <iframe
         [src]="chapterUrl"
