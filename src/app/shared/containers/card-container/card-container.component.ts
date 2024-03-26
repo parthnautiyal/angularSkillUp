@@ -5,31 +5,39 @@ import { Path } from 'src/app/models/Path';
 import { Batch } from 'src/app/models/Batch';
 import { Store } from '@ngrx/store';
 import {
-  selectCourses,
-  selectCoursesError,
-  selectCoursesLoading,
+  selectAllCourses,
+  selectAllCoursesError,
+  selectAllCoursesLoading,
   selectEnrolledCourses,
   selectEnrolledCoursesError,
+  selectEnrolledCoursesLoading,
 } from 'src/app/state/selector/course.selector';
 import {
-  selectBatchs,
-  selectBatchsError,
-  selectBatchsLoading,
+  selectBatches,
+  selectBatchesError,
+  selectBatchesLoading,
+  selectEnrolledBatches,
+  selectEnrolledBatchesError,
+  selectEnrolledBatchesLoading,
 } from 'src/app/state/selector/batch.selector';
 import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
 import {
+  selectAllPaths,
+  selectAllPathsError,
+  selectAllPathsLoading,
   selectEnrolledPaths,
   selectEnrolledPathsError,
-  selectPaths,
-  selectPathsError,
-  selectPathsLoading,
+  selectEnrolledPathsLoading,
 } from 'src/app/state/selector/path.selector';
 import {
   loadAllCourses,
   loadEnrolledCourses,
 } from 'src/app/state/action/course.actions';
-import { loadAllBatches } from 'src/app/state/action/batch.actions';
+import {
+  loadAllBatches,
+  loadEnrolledBatches,
+} from 'src/app/state/action/batch.actions';
 import {
   loadAllPaths,
   loadEnrolledPaths,
@@ -49,12 +57,17 @@ export class CardContainerComponent implements OnInit {
   error: Boolean = false;
   errorEnrolled: Boolean = false;
   isActive = true;
+  isDashBoard = false;
   Title = Title;
   RouterLinks = RouterLinks;
   allPaths: Path[] = [];
   allCourses: Course[] = [];
   allBatches: Batch[] = [];
-  enrolledBatches: BatchDetails[] = [];
+  enrolledBatches: EnrolledBatches = {
+    averageProgress: 0,
+    count: 0,
+    enrolledBatches: [],
+  };
   height: number = 0;
   @Input() title: string = '';
   @Input() prefixWord: string = '';
@@ -70,188 +83,331 @@ export class CardContainerComponent implements OnInit {
     message: '',
     code: 0,
   };
-
+  enrolled: boolean = false;
   constructor(
     private store: Store,
     private router: Router,
     private messageService: MessageService,
-    private miscService: MiscellaneousService,
     private ngZone: NgZone
   ) {}
   ngOnInit(): void {
-    if (this.router.url == '/dashboard') {
-      if (this.title == Title.COURSES) {
-        this.height = 262;
-        this.store.dispatch(loadAllCourses());
-        this.store.select(selectCourses).subscribe((res) => {
-          if (typeof res === 'object' && Object.keys(res).length > 0) {
-            this.allCourses = res;
-          }
-        });
+    // if (this.router.url == '/dashboard') {
+    //   // if (this.title == Title.COURSES) {
+    //   //   this.height = 262;
+    //   //   this.store.dispatch(loadAllCourses());
+    //   //   this.store.select(selectAllCourses).subscribe((res) => {
+    //   //     if (typeof res === 'object' && Object.keys(res).length > 0) {
+    //   //       this.allCourses = res;
+    //   //       this.error = false;
+    //   //     }
+    //   //   });
 
-        this.store.select(selectCoursesError).subscribe((res) => {
-          if (res != null) {
-            this.errorCourse.message = res.message.split('`').slice(1);
-            this.errorCourse.code = res.message.split('`').slice(0, 1);
-            this.error = true;
-          } else {
-            this.error = false;
-          }
-        });
-        this.store.select(selectCoursesLoading).subscribe((res) => {
-          if (res == false) {
-            setTimeout(() => {
-              this.loading = res;
-            }, 1000);
-          } else {
+    //   //   this.store.select(selectAllCoursesError).subscribe((res) => {
+    //   //     if (res != null) {
+    //   //       this.errorCourse.message = res.message.split('`').slice(1);
+    //   //       this.errorCourse.code = res.message.split('`').slice(0, 1);
+    //   //       this.error = true;
+    //   //     }
+    //   //   });
+    //   //   this.store.select(selectAllCoursesLoading).subscribe((res) => {
+    //   //     if (res == false) {
+    //   //       setTimeout(() => {
+    //   //         this.loading = res;
+    //   //       }, 1000);
+    //   //     } else {
+    //   //       this.loading = res;
+    //   //     }
+    //   //   });
+    //   // }
+    //   if (this.title == Title.BATCHES) {
+    //     this.height = 200;
+    //     this.store.dispatch(loadAllBatches());
+    //     this.store.select(selectBatches).subscribe((res) => {
+    //       if (typeof res === 'object' && Object.keys(res).length > 0) {
+    //         this.allBatches = res;
+    //         this.error = false;
+    //       }
+    //     });
+    //     this.store.select(selectBatchesError).subscribe((res) => {
+    //       if (res != null) {
+    //         this.errorBatch.message = res.message.split('`').slice(1);
+    //         this.errorBatch.code = res.message.split('`').slice(0, 1);
+    //         this.error = true;
+    //       }
+    //     });
+    //     this.store.select(selectBatchesLoading).subscribe((res) => {
+    //       if (res == false) {
+    //         setTimeout(() => {
+    //           this.loading = res;
+    //         }, 500);
+    //       } else {
+    //         this.loading = res;
+    //       }
+    //     });
+    //   }
+    //   if (this.title == Title.PATHS) {
+    //     this.height = 112;
+    //     this.store.dispatch(loadAllPaths());
+    //     this.store.select(selectAllPaths).subscribe((res) => {
+    //       if (typeof res === 'object' && Object.keys(res).length > 0) {
+    //         this.allPaths = res;
+    //         this.error = false;
+    //       }
+    //     });
+    //     this.store.select(selectAllPathsError).subscribe((res) => {
+    //       if (res != null) {
+    //         this.errorPath.message = res.message.split('`').slice(1);
+    //         this.errorPath.code = res.message.split('`').slice(0, 1);
+    //         this.error = true;
+    //       }
+    //     });
+    //     this.store.select(selectAllPathsLoading).subscribe((res) => {
+    //       if (res == false) {
+    //         setTimeout(() => {
+    //           this.loading = res;
+    //         }, 500);
+    //       } else {
+    //         this.loading = res;
+    //       }
+    //     });
+    //   }
+    // }
+    // if (this.router.url == '/user') {
+    //   if (this.title == Title.BATCHES) {
+    //     this.height = 120;
+    //     this.store.dispatch(loadEnrolledBatches());
+    //     this.store.select(selectEnrolledBatches).subscribe((data) => {
+    //       console.log(data);
+    //       this.enrolledBatches = data;
+    //     });
+
+    //     this.store.select(selectBatchesError).subscribe((res) => {
+    //       if (res != null) {
+    //         this.error = true;
+    //       }
+    //     });
+    //     this.store.select(selectBatchesLoading).subscribe((res) => {
+    //       if (res == false) {
+    //         setTimeout(() => {
+    //           this.loading = res;
+    //         }, 500);
+    //       } else {
+    //         this.loading = res;
+    //       }
+    //     });
+    //   }
+
+    //   if (this.title == Title.COURSES) {
+    //     this.height = 262;
+    //     this.store.dispatch(loadEnrolledCourses());
+    //     this.store.select(selectEnrolledCourses).subscribe((res) => {
+    //       if (typeof res === 'object' && Object.keys(res).length > 0) {
+    //         this.allCourses = res;
+    //         this.errorEnrolled = false;
+    //       }
+    //     });
+    //     this.store.select(selectEnrolledCoursesError).subscribe((res) => {
+    //       if (res != null) {
+    //         this.errorCourse.message = res.message.split('`').slice(1);
+    //         this.errorCourse.code = res.message.split('`').slice(0, 1);
+    //         this.errorEnrolled = true;
+    //       }
+    //     });
+    //     this.store.select(selectEnrolledCoursesLoading).subscribe((res) => {
+    //       if (res == false) {
+    //         setTimeout(() => {
+    //           this.loading = res;
+    //         }, 500);
+    //       } else {
+    //         this.loading = res;
+    //       }
+    //     });
+    //   }
+    //   if (this.title == Title.PATHS) {
+    //     this.height = 112;
+    //     this.store.dispatch(loadEnrolledPaths());
+    //     this.store.select(selectEnrolledPaths).subscribe((res) => {
+    //       if (typeof res === 'object' && Object.keys(res).length > 0) {
+    //         this.allPaths = res;
+    //         this.errorEnrolled = false;
+    //       }
+    //     });
+    //     this.store.select(selectEnrolledPathsError).subscribe((res) => {
+    //       if (res != null) {
+    //         this.errorPath.message = res.message.split('`').slice(1);
+    //         this.errorPath.code = res.message.split('`').slice(0, 1);
+    //         this.errorEnrolled = true;
+    //       }
+    //     });
+    //     this.store.select(selectEnrolledPathsLoading).subscribe((res) => {
+    //       if (res == false) {
+    //         setTimeout(() => {
+    //           this.loading = res;
+    //         }, 500);
+    //       } else {
+    //         this.loading = res;
+    //       }
+    //     });
+    //   }
+    // }
+
+    if (this.title == Title.COURSES) {
+      this.height = 262;
+      // this.store.dispatch(loadAllCourses());
+      this.store.select(selectAllCourses).subscribe((res) => {
+        if (typeof res === 'object' && Object.keys(res).length > 0) {
+          this.allCourses = res;
+        }
+      });
+      this.store.select(selectAllCoursesError).subscribe((res) => {
+        if (res != null) {
+          this.errorCourse.message = res.message.split('`').slice(1);
+          this.errorCourse.code = res.message.split('`').slice(0, 1);
+          this.error = true;
+        } else {
+          this.error = false;
+        }
+      });
+      this.store.select(selectAllCoursesLoading).subscribe((res) => {
+        if (res == false) {
+          setTimeout(() => {
             this.loading = res;
-          }
-        });
-      }
-      if (this.title == Title.BATCHES) {
-        this.height = 200;
-        this.store.dispatch(loadAllBatches());
-        this.store.select(selectBatchs).subscribe((res) => {
-          if (typeof res === 'object' && Object.keys(res).length > 0) {
-            this.allBatches = res;
-          }
-        });
-        this.store.select(selectBatchsError).subscribe((res) => {
-          if (res != null) {
-            this.errorBatch.message = res.message.split('`').slice(1);
-            this.errorBatch.code = res.message.split('`').slice(0, 1);
-            this.error = true;
-          } else {
-            this.error = false;
-          }
-        });
-        this.store.select(selectBatchsLoading).subscribe((res) => {
-          if (res == false) {
-            setTimeout(() => {
-              this.loading = res;
-            }, 500);
-          } else {
+          }, 1000);
+        } else {
+          this.loading = res;
+        }
+      });
+      // this.store.dispatch(loadEnrolledCourses());
+      this.store.select(selectEnrolledCourses).subscribe((res) => {
+        if (typeof res === 'object' && Object.keys(res).length > 0) {
+          this.allCourses = res;
+        }
+      });
+      this.store.select(selectEnrolledCoursesError).subscribe((res) => {
+        if (res != null) {
+          console.log('inside enrolled courses error');
+          this.errorCourse.message = res.message.split('`').slice(1);
+          this.errorCourse.code = res.message.split('`').slice(0, 1);
+          this.error = true;
+        } else {
+          this.error = false;
+        }
+      });
+      this.store.select(selectEnrolledCoursesLoading).subscribe((res) => {
+        if (res == false) {
+          setTimeout(() => {
             this.loading = res;
-          }
-        });
-      }
-      if (this.title == Title.PATHS) {
-        this.height = 112;
-        this.store.dispatch(loadAllPaths());
-        this.store.select(selectPaths).subscribe((res) => {
-          if (typeof res === 'object' && Object.keys(res).length > 0) {
-            this.allPaths = res;
-          }
-        });
-        this.store.select(selectPathsError).subscribe((res) => {
-          if (res != null) {
-            this.errorPath.message = res.message.split('`').slice(1);
-            this.errorPath.code = res.message.split('`').slice(0, 1);
-            this.error = true;
-          } else {
-            this.error = false;
-          }
-        });
-        this.store.select(selectPathsLoading).subscribe((res) => {
-          if (res == false) {
-            setTimeout(() => {
-              this.loading = res;
-            }, 500);
-          } else {
-            this.loading = res;
-          }
-        });
-      }
+          }, 500);
+        } else {
+          this.loading = res;
+        }
+      });
     }
-    if (this.router.url == '/user') {
-      if (this.title == Title.BATCHES) {
-        this.height = 200;
-        // this.store.dispatch(loadAllBatches());
-        // this.store.select(selectBatchs).subscribe((res) => {
-        //   if (typeof res === 'object' && Object.keys(res).length > 0) {
-        //     this.allBatches = res;
-        //   }
-        // });
-
-        this.miscService.pathsData$.subscribe((res) => {
-          console.log(res);
-          this.allBatches = res.enrolledBatches;
-          console.log(this.allBatches);
-        });
-
-        this.store.select(selectBatchsError).subscribe((res) => {
-          if (res != null) {
-            this.error = true;
-          } else {
-            this.error = false;
-          }
-        });
-        this.store.select(selectBatchsLoading).subscribe((res) => {
-          if (res == false) {
-            setTimeout(() => {
-              this.loading = res;
-            }, 500);
-          } else {
+    if (this.title == Title.BATCHES && !(this.router.url == '/user')) {
+      this.height = 200;
+      this.enrolled = false;
+      // this.store.dispatch(loadAllBatches());
+      this.store.select(selectBatches).subscribe((res) => {
+        if (typeof res === 'object' && Object.keys(res).length > 0) {
+          this.allBatches = res;
+        }
+      });
+      this.store.select(selectBatchesError).subscribe((res) => {
+        if (res != null) {
+          this.errorBatch.message = res.message.split('`').slice(1);
+          this.errorBatch.code = res.message.split('`').slice(0, 1);
+          this.error = true;
+        }
+      });
+      this.store.select(selectBatchesLoading).subscribe((res) => {
+        if (res == false) {
+          setTimeout(() => {
             this.loading = res;
-          }
-        });
-      }
+          }, 500);
+        } else {
+          this.loading = res;
+        }
+      });
+    }
+    if (this.title == Title.BATCHES && this.router.url == '/user') {
+      this.height = 120;
+      this.enrolled = true;
+      // this.store.dispatch(loadEnrolledBatches());
+      this.store.select(selectEnrolledBatches).subscribe((data) => {
+        console.log(data);
+        this.enrolledBatches = data;
+      });
 
-      if (this.title == Title.COURSES) {
-        this.height = 262;
-        this.store.dispatch(loadEnrolledCourses());
-        this.store.select(selectEnrolledCourses).subscribe((res) => {
-          if (typeof res === 'object' && Object.keys(res).length > 0) {
-            this.allCourses = res;
-          }
-        });
-        this.store.select(selectEnrolledCoursesError).subscribe((res) => {
-          if (res != null) {
-            console.log('inside enrolled courses error');
-            this.errorCourse.message = res.message.split('`').slice(1);
-            this.errorCourse.code = res.message.split('`').slice(0, 1);
-            this.error = true;
-          } else {
-            this.error = false;
-          }
-        });
-        this.store.select(selectCoursesLoading).subscribe((res) => {
-          if (res == false) {
-            setTimeout(() => {
-              this.loading = res;
-            }, 500);
-          } else {
+      this.store.select(selectEnrolledBatchesError).subscribe((error) => {
+        console.log(error);
+        if (error == null) {
+          this.error = false;
+        } 
+        else {
+          this.errorBatch.message = error.message.split('`').slice(1);
+          this.errorBatch.code = error.message.split('`').slice(0, 1);
+          this.error = true;
+        }
+      });
+      this.store.select(selectEnrolledBatchesLoading).subscribe((res) => {
+        if (res == false) {
+          setTimeout(() => {
             this.loading = res;
-          }
-        });
-      }
-      if (this.title == Title.PATHS) {
-        this.height = 112;
-        this.store.dispatch(loadEnrolledPaths());
-        this.store.select(selectEnrolledPaths).subscribe((res) => {
-          if (typeof res === 'object' && Object.keys(res).length > 0) {
-            this.allPaths = res;
-          }
-        });
-        this.store.select(selectEnrolledPathsError).subscribe((res) => {
-          if (res != null) {
-            this.errorPath.message = res.message.split('`').slice(1);
-            this.errorPath.code = res.message.split('`').slice(0, 1);
-            this.error = true;
-          } else {
-            this.error = false;
-          }
-        });
-        this.store.select(selectPathsLoading).subscribe((res) => {
-          if (res == false) {
-            setTimeout(() => {
-              this.loading = res;
-            }, 500);
-          } else {
+          }, 500);
+        } else {
+          this.loading = res;
+        }
+      });
+    }
+    if (this.title == Title.PATHS) {
+      this.height = 112;
+      // this.store.dispatch(loadAllPaths());
+      this.store.select(selectAllPaths).subscribe((res) => {
+        if (typeof res === 'object' && Object.keys(res).length > 0) {
+          this.allPaths = res;
+        }
+      });
+      this.store.select(selectAllPathsError).subscribe((res) => {
+        if (res != null) {
+          this.errorPath.message = res.message.split('`').slice(1);
+          this.errorPath.code = res.message.split('`').slice(0, 1);
+          this.error = true;
+        } else {
+          this.error = false;
+        }
+      });
+      this.store.select(selectAllPathsLoading).subscribe((res) => {
+        if (res == false) {
+          setTimeout(() => {
             this.loading = res;
-          }
-        });
-      }
+          }, 500);
+        } else {
+          this.loading = res;
+        }
+      });
+      this.store.select(selectEnrolledPaths).subscribe((res) => {
+        if (typeof res === 'object' && Object.keys(res).length > 0) {
+          this.allPaths = res;
+        }
+      });
+      this.store.select(selectEnrolledPathsError).subscribe((res) => {
+        if (res != null) {
+          this.errorPath.message = res.message.split('`').slice(1);
+          this.errorPath.code = res.message.split('`').slice(0, 1);
+          this.error = true;
+        } else {
+          this.error = false;
+        }
+      });
+      this.store.select(selectEnrolledPathsLoading).subscribe((res) => {
+        if (res == false) {
+          setTimeout(() => {
+            this.loading = res;
+          }, 500);
+        } else {
+          this.loading = res;
+        }
+      });
     }
     this.onResize();
   }

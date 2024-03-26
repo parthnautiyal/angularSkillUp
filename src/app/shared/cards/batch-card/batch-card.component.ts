@@ -14,7 +14,7 @@ export class BatchCardComponent implements OnInit {
   @Input() index: number = 0;
   @Input() progress: number = 0;
 
-  @Input() batchData: Batch = {
+  @Input() batchData: any = {
     id: 0,
     name: '',
     createdBy: {

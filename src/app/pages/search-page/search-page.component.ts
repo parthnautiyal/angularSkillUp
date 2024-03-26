@@ -14,7 +14,7 @@ import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
-  styleUrls: ['./search-page.component.sass']
+  styleUrls: ['./search-page.component.sass'],
 })
 export class SearchPageComponent implements OnInit {
   prefix: string = '';
@@ -37,24 +37,28 @@ export class SearchPageComponent implements OnInit {
   searchResponse: any;
   activatedRoute: any;
 
-  constructor(private searchService: MiscellaneousService,
-    private route: ActivatedRoute) { }
-    
+  constructor(
+    private searchService: MiscellaneousService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    const searchQuery = this.route.snapshot.queryParamMap.get("q");
-    if(searchQuery != null) {
-      this.searchService.searchByTitle(searchQuery).subscribe((data: APIResponse<SearchResponse>) => {
-        this.searchResponse = data.data
-        this.allPathsData = this.searchResponse.paths;
-        this.allCoursesData = this.searchResponse.courses;
-        this.loading = false;
-        console.log(this.searchResponse)
-        console.log('pathdata: ', this.allPathsData)
-        console.log('coursedata; ', this.allCoursesData)
-      })
-
-    }
+    this.route.queryParams.subscribe((params) => {
+      const searchQuery = params['q'];
+      if (searchQuery != null) {
+        this.loading = true;
+        this.searchService
+          .searchByTitle(searchQuery)
+          .subscribe((data: APIResponse<SearchResponse>) => {
+            this.searchResponse = data.data;
+            this.allPathsData = this.searchResponse.paths;
+            this.allCoursesData = this.searchResponse.courses;
+            this.loading = false;
+            console.log(this.searchResponse);
+            console.log('pathdata: ', this.allPathsData);
+            console.log('coursedata; ', this.allCoursesData);
+          });
+      }
+    });
   }
-
 }

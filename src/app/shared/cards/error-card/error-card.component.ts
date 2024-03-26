@@ -4,7 +4,10 @@ import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 import { Title } from 'src/app/constants/enums/title';
 import { Error } from 'src/app/models/Error';
-import { loadAllBatches } from 'src/app/state/action/batch.actions';
+import {
+  loadAllBatches,
+  loadEnrolledBatches,
+} from 'src/app/state/action/batch.actions';
 import {
   loadAllCourses,
   loadEnrolledCourses,
@@ -51,7 +54,7 @@ export class ErrorCardComponent implements OnInit {
         this.store.dispatch(loadEnrolledPaths());
       }
       if (this.title === Title.BATCHES) {
-        this.store.dispatch(loadAllBatches());
+        this.store.dispatch(loadEnrolledBatches());
       }
     } else if (this.router.url.split('/')[1] === 'batchpage') {
       window.location.reload();

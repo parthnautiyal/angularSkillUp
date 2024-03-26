@@ -16,19 +16,23 @@
   <div class="card-wrapper profile-card-wrapper">
     <ng-container *ngIf="title == Title.BATCHES">
       <ng-container *ngIf="!error">
+        <ng-container *ngIf="!enrolled">
         <ng-container *ngFor="let item of allBatches; let i = index">
           <a [routerLink]="['/', RouterLinks.BATCHES, item.id]">
             <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
           </a>
         </ng-container>
       </ng-container>
-      <div [ngStyle]="{ height: '200px' }">
-        <app-error-card
-          [title]="Title.BATCHES"
-          [error]="errorBatch"
-          *ngIf="error"
-        ></app-error-card>
-      </div>
+      <ng-container *ngIf="enrolled">
+        <ng-container *ngFor="let item of enrolledBatches.enrolledBatches; let i = index">
+          <a [routerLink]="['/', RouterLinks.BATCHES, item.id]">
+            <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
+          </a>
+        </ng-container>
+      </ng-container>
+      </ng-container>
+      <div [ngStyle]="{'height':'120px'}"><app-error-card [title]="Title.BATCHES" [error]="errorBatch"
+          *ngIf="error"></app-error-card></div>
     </ng-container>
 
     <ng-container *ngIf="title == Title.PATHS">

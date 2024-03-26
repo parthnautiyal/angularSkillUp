@@ -17,7 +17,7 @@ export class MiscellaneousService {
     token:
       'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTQzMTcxMiwiaWF0IjoxNzExNDMxNDEyLCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJhZGl0eWEuYmhhcmR3YWpAem9wc21hcnQuY29tIiwidXNlcklkIjozMzN9.kK93i3usF9QKNi7YcWxNgq1wZagBIHsNNGV7UOhxLfLljk8cFWE2LZCLI-JFCD7MsDGXYIr73-lExzeS0psdCOwF0IMxTywnqVf4KH9IJ9D2ExL79xeXrklC-sjur72i2YxPNgS7Ka5Zm0IQvjheO8iiasdBTUhmE_Offu2G8OdSiaOJiQM-_MiHI0GYvASEvwndJPz9l0cgB_gWIbZpiOWy0czDRBM86UNUTIj62O4kLMrlkySlhRAeK3hYWCCmdvf4pobZqIFQFJr_t2cU7J8zjDHAK1O8gF3_4j0Dg6h26cgQw4ywKqNhnYFoLo5UrrP23iICjxbULJB5TSBTEw',
     refreshToken:
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTUxODUyNywiaWF0IjoxNzExNDMyMTI3LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJwYXJ0aC5uYXV0aXlhbEB6b3BzbWFydC5jb20ifQ.cPvRQQ-MXWxkbuF1_CunlRZbmDKq09MGQyPouMOQX9LbeWobzkIR0XhwjVUfLwIktEqPrwCDD9nY0x4VBj2DnABKQP9yPRep_RgKOn2H01D22TfRFqK9H_-p5YScL3mgEDXo0j6JBlyJaCqHhN9BlDkK7rAxEOj4dxNw60XVDr9rZdwrOlv6sdwmZH3hS6NG4xA73BrJ5Dt6d9Bz-EcVjUCTmrkvedI1qPalPtcpGP7SYVKgLucJLiKnbAJPjgoddXTXHJsqWKsflJ43s8qYMWlw5x_1C316CNC96SmFGypntfrrtc8z24foAzvYZ8H-7MUZv1ihydQS9jrJFiQ6fQ',
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTUxNTE2MywiaWF0IjoxNzExNDI4NzYzLCJpc3MiOiJHT09HTEUiLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20ifQ.gZBu7VBWk9A6rfmv2DgyvsJ-csZSy7-3kEjSM3F45FBgiJ1U-CDhiEVVCr1fW-KfmekT5xmOSmNgAKk0yunRsYCH01mTtkNBYYWEujoad6IdWt2ZJxazpnQ12MPhVQiOM3bl9jUxJrhY9XaYd3I-xo1UeGaiX27y3Zjw5mmQXKW9EEwbR3_Nb76tIENU2YxQNsGbHnQS-2R7RWf3Jr52Y8LpTd-QYhWpDr3mH6SEkSbIk2CBIcDTogtxqllQKGeAcniwncMi0J5jiYDueUlRpr5O_LHnQLZdZKihup1SZtY1EjiwT1vQQh4cUThFpa_MrqW5PHlOnmZnnArD6ayS6A',
   };
 
   refreshHeader = new HttpHeaders({
@@ -60,11 +60,12 @@ export class MiscellaneousService {
       .get<APIResponse<EnrolledBatches>>(
         API.BASE_URL +
           API.STUDENT +
-          '/329' +
+          '/327' +
           API.ENROLLED_BATCHES +
           API.PAGE_SIZE
       )
       .subscribe((res) => {
+        console.log(res);
         if (res != null && res.data != null) {
           this.PathDataSubject.next(res.data);
         }
@@ -135,27 +136,4 @@ export class MiscellaneousService {
     return this.http.get<APIResponse<SearchResponse>>(
       API.BASE_URL + '/search?title=' + title + '&role=student&field=all');
   }
-  // body: JSON.stringify({ courseId: courseId }),
 }
-
-// https://api.training.zopsmart.com/students/courses/114/reviews/all
-
-// fetch('https://api.training.zopsmart.com/students/courses/114/ratings', {
-//   headers: {
-//     accept: '*/*',
-//     'accept-language': 'en-US,en;q=0.9',
-//     authorization:
-//       'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTM5NDI1OCwiaWF0IjoxNzExMzkzOTU4LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIiwidXNlcklkIjozMzJ9.fRTGtzuJUFHsgH98MYjGWFgdHW8iWeB0TLrKMWy-vhmf7oQoWA0AcCHVdDeXodVlvJHvaOkFLYNMc-iFQwMPY_5a1CfWC6mqqr-sOXA4eCgI36mwDTWWfXJ3uUB3z9cj6kC4zMWXqrt21TLJQ_xYXYeTOKV1NKE1z9X6UfpdIpyKsETCFuNy6V6ArJbq5nWEYB4ISpGN01v0kUGTGgpe7aNSCPdvC0fCDI9RcnuZ3bB4Nn_4Dai3nfH3rhwmewH6pNZtpbqJvGtYzHSTEikfhAX5jwgCfl00uj7AsZB46JaZTbAGqA39xqXESs_-guik1Ct5oNjPkNNiQ7X3g5JsHw',
-//     'sec-ch-ua':
-//       '"Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
-//     'sec-ch-ua-mobile': '?0',
-//     'sec-ch-ua-platform': '"macOS"',
-//     'sec-fetch-dest': 'empty',
-//     'sec-fetch-mode': 'cors',
-//     'sec-fetch-site': 'same-site',
-//     Referer: 'https://training.zopsmart.com/',
-//     'Referrer-Policy': 'strict-origin-when-cross-origin',
-//   },
-//   body: null,
-//   method: 'GET',
-// });

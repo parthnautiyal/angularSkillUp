@@ -80,3 +80,8 @@ export const loadFavoriteCoursesFailed = createAction(
   '[Course] Load Favorite Courses Failed',
   props<{ error: any }>()
 );
+export const loadCourseRating = createAction('[Course] Load Courses rating');
+// export const loadCourseRatingSuccess = createAction(
+//   '[Course] Load Courses rating Success',
+//   props<{  }>()
+// );
