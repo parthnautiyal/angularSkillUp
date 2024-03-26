@@ -15,10 +15,7 @@ declare let window: any;
   providers: [MessageService],
 })
 export class LoginComponent implements OnInit {
-  constructor(private messageService: MessageService) {
-
-
-  }
+  constructor(private messageService: MessageService) {}
 
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {
