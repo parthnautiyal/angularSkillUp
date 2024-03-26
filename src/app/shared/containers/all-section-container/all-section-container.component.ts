@@ -8,19 +8,20 @@ import {
   loadFavoriteCourses,
 } from 'src/app/state/action/course.actions';
 import {
-  selectCourses,
-  selectCoursesError,
-  selectCoursesLoading,
+  selectAllCourses,
+  selectAllCoursesError,
+  selectAllCoursesLoading,
   selectEnrolledCourses,
   selectEnrolledCoursesError,
-  selectFavoritecourses,
-  selectFavouriteCoursesLoading,
+  selectEnrolledCoursesLoading,
+  selectFavoriteCourses,
+  selectFavoriteCoursesLoading,
 } from 'src/app/state/selector/course.selector';
 import { loadAllBatches } from 'src/app/state/action/batch.actions';
 import {
-  selectBatchs,
-  selectBatchsError,
-  selectBatchsLoading,
+  selectBatches,
+  selectBatchesError,
+  selectBatchesLoading,
 } from 'src/app/state/selector/batch.selector';
 import { Title } from 'src/app/constants/enums/title';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
@@ -33,11 +34,12 @@ import {
   loadEnrolledPaths,
 } from 'src/app/state/action/path.actions';
 import {
+  selectAllPaths,
+  selectAllPathsError,
+  selectAllPathsLoading,
   selectEnrolledPaths,
   selectEnrolledPathsError,
-  selectPaths,
-  selectPathsError,
-  selectPathsLoading,
+  selectEnrolledPathsLoading,
 } from 'src/app/state/selector/path.selector';
 import { Error } from 'src/app/models/Error';
 
@@ -72,13 +74,13 @@ export class AllSectionContainerComponent implements OnInit {
   ) {}
   getAllPaths() {
     this.store.dispatch(loadAllPaths());
-    this.store.select(selectPaths).subscribe((res) => {
+    this.store.select(selectAllPaths).subscribe((res) => {
       if (res.length > 0) {
         this.allPathsData = res;
       }
     });
 
-    this.store.select(selectPathsError).subscribe((res) => {
+    this.store.select(selectAllPathsError).subscribe((res) => {
       if (res) {
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
@@ -88,7 +90,7 @@ export class AllSectionContainerComponent implements OnInit {
       }
     });
 
-    this.store.select(selectPathsLoading).subscribe((res) => {
+    this.store.select(selectAllPathsLoading).subscribe((res) => {
       if (!res) {
         setTimeout(() => {
           this.loading = false;
@@ -101,13 +103,13 @@ export class AllSectionContainerComponent implements OnInit {
   getAllCourses() {
     this.store.dispatch(loadAllCourses());
 
-    this.store.select(selectCourses).subscribe((res) => {
+    this.store.select(selectAllCourses).subscribe((res) => {
       if (res.length > 0) {
         this.allCoursesData = res;
       }
     });
 
-    this.store.select(selectCoursesError).subscribe((res) => {
+    this.store.select(selectAllCoursesError).subscribe((res) => {
       if (res) {
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
@@ -117,7 +119,7 @@ export class AllSectionContainerComponent implements OnInit {
       }
     });
 
-    this.store.select(selectCoursesLoading).subscribe((res) => {
+    this.store.select(selectAllCoursesLoading).subscribe((res) => {
       if (!res) {
         setTimeout(() => {
           this.loading = false;
@@ -129,13 +131,13 @@ export class AllSectionContainerComponent implements OnInit {
   }
   getAllBatches() {
     this.store.dispatch(loadAllBatches());
-    this.store.select(selectBatchs).subscribe((res) => {
+    this.store.select(selectBatches).subscribe((res) => {
       if (res.length > 0) {
         this.allBatchesData = res;
       }
     });
 
-    this.store.select(selectBatchsError).subscribe((res) => {
+    this.store.select(selectBatchesError).subscribe((res) => {
       if (res) {
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
@@ -145,7 +147,7 @@ export class AllSectionContainerComponent implements OnInit {
       }
     });
 
-    this.store.select(selectBatchsLoading).subscribe((res) => {
+    this.store.select(selectBatchesLoading).subscribe((res) => {
       if (!res) {
         setTimeout(() => {
           this.loading = false;
@@ -165,9 +167,7 @@ export class AllSectionContainerComponent implements OnInit {
     });
 
     this.store.select(selectEnrolledPathsError).subscribe((res) => {
-      console.log('hel;llom upper');
       if (res) {
-        console.log('hel;llo');
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
         this.errorCard.code = res.message.split('`').slice(0, 1);
@@ -177,7 +177,7 @@ export class AllSectionContainerComponent implements OnInit {
       }
     });
 
-    this.store.select(selectPathsLoading).subscribe((res) => {
+    this.store.select(selectEnrolledPathsLoading).subscribe((res) => {
       if (!res) {
         setTimeout(() => {
           this.loading = false;
@@ -205,7 +205,7 @@ export class AllSectionContainerComponent implements OnInit {
       }
     });
 
-    this.store.select(selectCoursesLoading).subscribe((res) => {
+    this.store.select(selectEnrolledCoursesLoading).subscribe((res) => {
       if (!res) {
         setTimeout(() => {
           this.loading = false;
@@ -217,7 +217,7 @@ export class AllSectionContainerComponent implements OnInit {
   }
   getFavouriteCourses() {
     this.store.dispatch(loadFavoriteCourses());
-    this.store.select(selectFavouriteCoursesLoading).subscribe((res) => {
+    this.store.select(selectFavoriteCoursesLoading).subscribe((res) => {
       if (res == false) {
         setTimeout(() => {
           this.loading = res;
@@ -226,7 +226,7 @@ export class AllSectionContainerComponent implements OnInit {
         this.loading = res;
       }
     });
-    this.store.select(selectFavoritecourses).subscribe((res) => {
+    this.store.select(selectFavoriteCourses).subscribe((res) => {
       if (res.length > 0) {
         // this.store.select(selectFavoritecourses).subscribe((res) => {
         //   res = res.filter(

@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Batch } from '../../models/Batch';
 import { User } from 'src/app/models/User';
 import { Course } from 'src/app/models/Course';
+import { EnrolledBatches } from 'src/app/models/EnrolledBatches';
 
 // Action for loading all batches
 export const loadAllBatches = createAction('[Batch] Load All Batches');
@@ -75,5 +76,17 @@ export const loadStudentsByIdSuccess = createAction(
 
 export const loadStudentsByIdFailed = createAction(
   '[Batch] Load Students By ID Failed',
-  props<{error : any}>()
+  props<{ error: any }>()
+);
+
+export const loadEnrolledBatches = createAction(
+  '[Batch] Load Enrolled Batches'
+);
+export const loadEnrolledBatchesFailed = createAction(
+  '[Batch] Load Enrolled batches Failed',
+  props<{ error: any }>()
+);
+export const loadEnrolledBatchesSuccess = createAction(
+  '[Batch] Load Enrolled batches Success',
+  props<{ enrolledBatches: EnrolledBatches }>()
 );

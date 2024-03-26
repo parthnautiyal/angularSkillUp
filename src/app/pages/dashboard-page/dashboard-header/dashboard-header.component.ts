@@ -4,10 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { loadNoOfEnrolledCourses } from 'src/app/state/action/course.actions';
 import { loadNumberOfEnrolledPaths } from 'src/app/state/action/path.actions';
-import {
-  selectEnrolledCourses,
-  selectNoOfCourses,
-} from 'src/app/state/selector/course.selector';
+import { selectEnrolledCourses, selectNoOfEnrolledCourses } from 'src/app/state/selector/course.selector';
 import { selectNoOfEnrolledPaths } from 'src/app/state/selector/path.selector';
 import { enrolledCourses } from '../../../models/EnrolledCourses';
 import { Router } from '@angular/router';
@@ -31,7 +28,7 @@ export class DashboardHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.store$.dispatch(loadNoOfEnrolledCourses());
-    this.store$.select(selectNoOfCourses).subscribe((data) => {
+    this.store$.select(selectNoOfEnrolledCourses).subscribe((data) => {
       this.enrolledCoursesNumber = data;
     });
     this.store$.dispatch(loadNumberOfEnrolledPaths());

@@ -16,7 +16,7 @@ export class MiscellaneousService {
     token:
       'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTE3MzkzNywiaWF0IjoxNzExMTczNjM3LCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.I7PeGHmCRWRz33_o5hu63u8oOjdJDZJG_w318QRhXGoUkBxWfLMWfnjwTO1Nl17FCFucZaBkEEtB2jlBmLYxyzQjnbcZ5jt2Eqc3BQyk5STgcWhmP1nTTUIA8AmGigaKDapkFX_XLbwd6jhT2PGcNkwadhg8EtqE3h5MwMwDnMz0-g5_Xg2sqy3Tcw038ApqBwA_f2LDqAA7kyOO4kJicBUDBSmP2y52ARawS-kUAP34AEVlkw8pZZKCiqs33GgYaSZEauWJtPHapQAnvVn3RezjnSt-Nr_O3plzdjpHKPCujXYpq-KjzN_-9JewwbVJlPcAOQ7iMcATHA-HaRCeNA',
     refreshToken:
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTQzMDk4MiwiaWF0IjoxNzExMzQ0NTgyLCJpc3MiOiJHT09HTEUiLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIn0.jhyBi9Js8tmJbJNAiYr1UfGOcXD2zo7K4DrqJS8KYAfFbRP3HGrn_PDuutzDTXoXLQFZFR1x6Qc72Nkep0lvnx_xIFXgWKw2YoPVXXWaDLB2Am7ZfEPm4Auy0T1QV0vImtj-D9cjrxyAuH8ynH29zIUEDNmJPFHc6_XuvL697-KXj-c-bHIsDwDFVcedHjhsCYxMtofPGufFFmOFT0pYeAIEyaHjvc_6OUwg9QrRwn9kOpwB8laf0xvK8-3MYgRE_mbipY2ycW7vcq7QjX5_idbhhDIsW_uzurIN_OZWyYfisp-81oGLnUNEmylrdwV_NMtF5Fk7ynZmvhdep9GlBw',
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTUxNTE2MywiaWF0IjoxNzExNDI4NzYzLCJpc3MiOiJHT09HTEUiLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20ifQ.gZBu7VBWk9A6rfmv2DgyvsJ-csZSy7-3kEjSM3F45FBgiJ1U-CDhiEVVCr1fW-KfmekT5xmOSmNgAKk0yunRsYCH01mTtkNBYYWEujoad6IdWt2ZJxazpnQ12MPhVQiOM3bl9jUxJrhY9XaYd3I-xo1UeGaiX27y3Zjw5mmQXKW9EEwbR3_Nb76tIENU2YxQNsGbHnQS-2R7RWf3Jr52Y8LpTd-QYhWpDr3mH6SEkSbIk2CBIcDTogtxqllQKGeAcniwncMi0J5jiYDueUlRpr5O_LHnQLZdZKihup1SZtY1EjiwT1vQQh4cUThFpa_MrqW5PHlOnmZnnArD6ayS6A',
   };
 
   refreshHeader = new HttpHeaders({
@@ -59,11 +59,12 @@ export class MiscellaneousService {
       .get<APIResponse<EnrolledBatches>>(
         API.BASE_URL +
           API.STUDENT +
-          '/332' +
+          '/327' +
           API.ENROLLED_BATCHES +
           API.PAGE_SIZE
       )
       .subscribe((res) => {
+        console.log(res);
         if (res != null && res.data != null) {
           this.PathDataSubject.next(res.data);
         }
@@ -129,28 +130,4 @@ export class MiscellaneousService {
         }
       });
   }
-
-  // body: JSON.stringify({ courseId: courseId }),
 }
-
-// https://api.training.zopsmart.com/students/courses/114/reviews/all
-
-// fetch('https://api.training.zopsmart.com/students/courses/114/ratings', {
-//   headers: {
-//     accept: '*/*',
-//     'accept-language': 'en-US,en;q=0.9',
-//     authorization:
-//       'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTM5NDI1OCwiaWF0IjoxNzExMzkzOTU4LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIiwidXNlcklkIjozMzJ9.fRTGtzuJUFHsgH98MYjGWFgdHW8iWeB0TLrKMWy-vhmf7oQoWA0AcCHVdDeXodVlvJHvaOkFLYNMc-iFQwMPY_5a1CfWC6mqqr-sOXA4eCgI36mwDTWWfXJ3uUB3z9cj6kC4zMWXqrt21TLJQ_xYXYeTOKV1NKE1z9X6UfpdIpyKsETCFuNy6V6ArJbq5nWEYB4ISpGN01v0kUGTGgpe7aNSCPdvC0fCDI9RcnuZ3bB4Nn_4Dai3nfH3rhwmewH6pNZtpbqJvGtYzHSTEikfhAX5jwgCfl00uj7AsZB46JaZTbAGqA39xqXESs_-guik1Ct5oNjPkNNiQ7X3g5JsHw',
-//     'sec-ch-ua':
-//       '"Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
-//     'sec-ch-ua-mobile': '?0',
-//     'sec-ch-ua-platform': '"macOS"',
-//     'sec-fetch-dest': 'empty',
-//     'sec-fetch-mode': 'cors',
-//     'sec-fetch-site': 'same-site',
-//     Referer: 'https://training.zopsmart.com/',
-//     'Referrer-Policy': 'strict-origin-when-cross-origin',
-//   },
-//   body: null,
-//   method: 'GET',
-// });

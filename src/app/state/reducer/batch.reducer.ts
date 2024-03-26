@@ -3,35 +3,72 @@ import { Batch } from '../../models/Batch';
 import * as BatchActions from '../action/batch.actions';
 import { User } from 'src/app/models/User';
 import { Course } from 'src/app/models/Course';
+import { EnrolledBatches } from 'src/app/models/EnrolledBatches';
 
 export interface BatchState {
   batches: Batch[];
-  isLoadingBatches: boolean;
-  isLoadingTrainer: boolean;
-  isLoadingStudents: boolean;
-  isLoadingPaths: boolean;
+  isLoading: boolean;
   error: any;
-  errorStudents: any;
-  errorTrainer: any;
-  errorPaths: any;
-  students: User[];
-  trainers: User[];
-  batchDetails: Batch;
-  pathData: Course;
-  isLoadingBatchById:boolean;
+}
+export interface EnrolledbatchState {
+  enrolledBatches: EnrolledBatches;
+  isLoading: boolean;
+  error: any;
 }
 
-export const initialState: BatchState = {
+export interface StudentState {
+  students: User[];
+  isLoading: boolean;
+  error: any;
+}
+
+export interface TrainerState {
+  trainers: User[];
+  isLoading: boolean;
+  error: any;
+}
+
+export interface BatchDetailsState {
+  batchDetails: Batch;
+  isLoading: boolean;
+  error: any;
+}
+
+export interface BatchPathDataState {
+  BatchPathData: Course;
+  isLoading: boolean;
+  error: any;
+}
+
+export const initialBatchState: BatchState = {
   batches: [],
-  isLoadingBatches: false,
+  isLoading: false,
   error: null,
+};
+
+export const initialEnrolledBatchState: EnrolledbatchState = {
+  enrolledBatches: {
+    averageProgress: 0,
+    count: 0,
+    enrolledBatches: [],
+  },
+  isLoading: false,
+  error: null,
+};
+
+export const initialStudentState: StudentState = {
   students: [],
-  isLoadingTrainer: false,
-  isLoadingStudents: false,
-  isLoadingBatchById:false,
-  errorStudents: null,
-  errorTrainer: null,
+  isLoading: false,
+  error: null,
+};
+
+export const initialTrainerState: TrainerState = {
   trainers: [],
+  isLoading: false,
+  error: null,
+};
+
+export const initialBatchDetailsState: BatchDetailsState = {
   batchDetails: {
     createdAt: '',
     createdBy: {
@@ -56,7 +93,12 @@ export const initialState: BatchState = {
     },
     progress: 0,
   },
-  pathData: {
+  isLoading: false,
+  error: null,
+};
+
+export const initialBatchPathDataState: BatchPathDataState = {
+  BatchPathData: {
     id: 0,
     name: '',
     courseName: '',
@@ -79,96 +121,125 @@ export const initialState: BatchState = {
     updatedAt: '',
     level: 0,
   },
-  isLoadingPaths: false,
-  errorPaths: undefined,
+  isLoading: false,
+  error: null,
 };
 
 export const batchReducer = createReducer(
-  initialState,
+  initialBatchState,
   on(BatchActions.loadAllBatches, (state) => ({
     ...state,
-    isLoadingBatches: true,
+    isLoading: true,
     error: null,
   })),
   on(BatchActions.loadAllBatchesSuccess, (state, { batches }) => ({
     ...state,
     batches,
-    isLoadingBatches: false,
+    isLoading: false,
     error: null,
   })),
   on(BatchActions.loadAllBatchesFailed, (state, { error }) => ({
     ...state,
     error,
-    isLoadingBatches: false,
-  })),
-  on(BatchActions.loadBatchById, (state) => ({
-    ...state,
-    isLoadingBatchById: true,
-  })),
-  on(BatchActions.loadBatchByIdSuccess, (state, { batchDetails }) => ({
-    ...state,
-    isLoadingBatchById: false,
-    batchDetails: batchDetails,
-  })),
-  on(BatchActions.loadBatchByIdFailed, (state, { error }) => ({
-    ...state,
-    isLoadingBatchById: false,
-    error,
-  })),
+    isLoading: false,
+  }))
+);
 
+export const studentReducer = createReducer(
+  initialStudentState,
   on(BatchActions.loadStudentsById, (state) => ({
     ...state,
-    isLoadingStudents: true,
+    isLoading: true,
     error: null,
   })),
-
   on(BatchActions.loadStudentsByIdSuccess, (state, { students }) => ({
     ...state,
     students,
-    isLoadingStudents: false,
+    isLoading: false,
     error: null,
   })),
   on(BatchActions.loadStudentsByIdFailed, (state, { error }) => ({
     ...state,
-    isLoadingStudents: false,
-    error: error,
-  })),
+    isLoading: false,
+    error,
+  }))
+);
+
+export const trainerReducer = createReducer(
+  initialTrainerState,
   on(BatchActions.loadTrainersById, (state) => ({
     ...state,
-    isLoadingTrainer: true,
+    isLoading: true,
     error: null,
   })),
-
   on(BatchActions.loadTrainersByIdSuccess, (state, { trainers }) => ({
     ...state,
     trainers,
-    isLoadingTrainer: false,
+    isLoading: false,
     error: null,
   })),
   on(BatchActions.loadTrainersByIdFailed, (state, { error }) => ({
     ...state,
-    isLoadingTrainer: false,
-    error: error,
-  })),
-
-  on(BatchActions.loadBatchPathsById, (state) => ({
-    ...state,
-    isLoadingPaths: true,
-    error: null,
-  })),
-
-  on(BatchActions.loadBatchPathByIdSuccess, (state, { pathById }) => ({
-    ...state,
-    pathData: pathById,
-    isLoadingPaths: false,
-  })),
-  on(BatchActions.loadBatchPathByIdFailed, (state, { error }) => ({
-    ...state,
-    isLoadingPaths: false,
-    error: error,
+    isLoading: false,
+    error,
   }))
 );
 
-// export const getbatch = (state: BatchState) => state.batches;
-// export const getbatchLoading = (state: BatchState) => state.isLoadingBatches;
-// export const getbatchError = (state: BatchState) => state.error;
+export const batchDetailsReducer = createReducer(
+  initialBatchDetailsState,
+  on(BatchActions.loadBatchById, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+  on(BatchActions.loadBatchByIdSuccess, (state, { batchDetails }) => ({
+    ...state,
+    batchDetails,
+    isLoading: false,
+    error: null,
+  })),
+  on(BatchActions.loadBatchByIdFailed, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
+  }))
+);
+
+export const pathDataReducer = createReducer(
+  initialBatchPathDataState,
+  on(BatchActions.loadBatchPathsById, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+  on(BatchActions.loadBatchPathByIdSuccess, (state, { pathById }) => ({
+    ...state,
+    BatchPathData: pathById,
+    isLoading: false,
+    error: null,
+  })),
+  on(BatchActions.loadBatchPathByIdFailed, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
+  }))
+);
+export const enrolledBatchesReducer = createReducer(
+  initialEnrolledBatchState,
+  on(BatchActions.loadEnrolledBatches, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+  on(BatchActions.loadEnrolledBatchesSuccess, (state, { enrolledBatches }) => ({
+    ...state,
+    enrolledBatches: enrolledBatches,
+    isLoading: false,
+    error: null,
+  })),
+  on(BatchActions.loadEnrolledBatchesFailed, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
+  }))
+);

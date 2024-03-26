@@ -6,10 +6,6 @@ import { Course } from 'src/app/models/Course';
 import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { loadFavoriteCourses } from 'src/app/state/action/course.actions';
-import {
-  selectCourses,
-  selectFavoritecourses,
-} from 'src/app/state/selector/course.selector';
 
 @Component({
   selector: 'app-course-card',
