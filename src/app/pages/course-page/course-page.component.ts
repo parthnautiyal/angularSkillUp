@@ -11,8 +11,8 @@ import {
 import {
   selectChapterDataLoading,
   selectCourseAboutInfo,
+  selectCourseAboutInfoError,
   selectCourseAboutInfoLoading,
-  selectCoursesError,
 } from 'src/app/state/selector/course.selector';
 
 @Component({
@@ -90,7 +90,7 @@ export class CoursePageComponent implements OnInit {
     //     }
     //   }
     // );
-    this.store.select(selectCoursesError).subscribe((res) => {
+    this.store.select(selectCourseAboutInfoError).subscribe((res) => {
       if (res != null) {
         this.error = true;
         this.errors.message = res.message.split('`').slice(1);

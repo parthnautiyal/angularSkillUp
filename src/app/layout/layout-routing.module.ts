@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { AllSectionContainerComponent } from '../shared/containers/all-section-container/all-section-container.component';
 import { PageNotFoundComponent } from '../error-page/page-not-found/page-not-found.component';
+import { SearchPageComponent } from '../pages/search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -73,7 +74,19 @@ const routes: Routes = [
         path: 'courses/favourites',
         component: AllSectionContainerComponent,
       },
+      {
+        path: 'courses/favourites',
+        component: AllSectionContainerComponent,
+      },
+      {
+        path: 'search',
+        loadChildren: () =>
+          import('../pages/search-page/search-page.module').then(
+            (m) => m.SearchPageModule
+          ),
+      },
       { path: '**', component: PageNotFoundComponent },
+      
     ],
   },
 ];

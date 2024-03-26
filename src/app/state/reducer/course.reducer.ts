@@ -3,24 +3,56 @@ import * as CourseActions from '../action/course.actions';
 import { Course } from '../../models/Course';
 import { Chapter } from 'src/app/models/Chapter';
 
-export interface CourseState {
+export interface AllCoursesState {
   allCourses: Course[];
-  enrolledCourses: Course[];
-  courseAboutInfo: Course;
-  chapterData: Chapter[];
-  noOfEnrolledCourses: number;
   isLoading: boolean;
-  isLoadingFavourite: boolean;
-  isLoadingChapterData: boolean;
-  isLoadingAboutInfo: boolean;
   error: any;
-  errorEnrolled: any;
-  favoriteCourses: Course[];
 }
 
-export const initialState: CourseState = {
+export interface EnrolledCoursesState {
+  enrolledCourses: Course[];
+  isLoading: boolean;
+  error: any;
+}
+
+export interface CourseAboutInfoState {
+  courseAboutInfo: Course;
+  isLoading: boolean;
+  error: any;
+}
+
+export interface ChapterDataState {
+  chapterData: Chapter[];
+  isLoading: boolean;
+  error: any;
+}
+
+export interface NoOfEnrolledCoursesState {
+  noOfEnrolledCourses: number;
+  isLoading: boolean;
+  error: any;
+}
+
+export interface FavoriteCoursesState {
+  favoriteCourses: Course[];
+  isLoading: boolean;
+  error: any;
+}
+
+// Define the initial state for each sub-state
+export const initialAllCoursesState: AllCoursesState = {
   allCourses: [],
+  isLoading: true,
+  error: null,
+};
+
+export const initialEnrolledCoursesState: EnrolledCoursesState = {
   enrolledCourses: [],
+  isLoading: true,
+  error: null,
+};
+
+export const initialCourseAboutInfoState: CourseAboutInfoState = {
   courseAboutInfo: {
     id: 0,
     name: '',
@@ -44,20 +76,30 @@ export const initialState: CourseState = {
     updatedAt: '',
     level: 0,
   },
-  chapterData: [],
-  noOfEnrolledCourses: 0,
   isLoading: false,
-  isLoadingFavourite: false,
-  isLoadingChapterData: false,
-  isLoadingAboutInfo: false,
   error: null,
-  errorEnrolled: null,
-  favoriteCourses: [],
 };
 
-export const courseReducer = createReducer(
-  initialState,
-  // Load All Courses
+export const initialChapterDataState: ChapterDataState = {
+  chapterData: [],
+  isLoading: false,
+  error: null,
+};
+
+export const initialNoOfEnrolledCoursesState: NoOfEnrolledCoursesState = {
+  noOfEnrolledCourses: 0,
+  isLoading: false,
+  error: null,
+};
+
+export const initialFavoriteCoursesState: FavoriteCoursesState = {
+  favoriteCourses: [],
+  isLoading: false,
+  error: null,
+};
+
+export const allCoursesReducer = createReducer(
+  initialAllCoursesState,
   on(CourseActions.loadAllCourses, (state) => ({
     ...state,
     isLoading: true,
@@ -71,64 +113,72 @@ export const courseReducer = createReducer(
   on(CourseActions.loadAllCoursesFailed, (state, { error }) => ({
     ...state,
     isLoading: false,
-    error: error,
-  })),
+    error,
+  }))
+);
 
-  // Load Enrolled Courses
+export const enrolledCoursesReducer = createReducer(
+  initialEnrolledCoursesState,
   on(CourseActions.loadEnrolledCourses, (state) => ({
     ...state,
     isLoading: true,
-    errorEnrolled: null,
+    error: null,
   })),
   on(
     CourseActions.loadEnrolledCoursesSuccess,
     (state, { enrolledCourses }) => ({
       ...state,
-      enrolledCourses: enrolledCourses,
+      enrolledCourses,
       isLoading: false,
     })
   ),
   on(CourseActions.loadEnrolledCoursesFailed, (state, { error }) => ({
     ...state,
     isLoading: false,
-    errorEnrolled: error,
-  })),
+    error,
+  }))
+);
 
-  // Load Course About Info
+export const courseAboutInfoReducer = createReducer(
+  initialCourseAboutInfoState,
   on(CourseActions.loadCourseAboutInfo, (state) => ({
     ...state,
-    isLoadingAboutInfo: true,
+    isLoading: true,
     error: null,
   })),
   on(CourseActions.loadCourseAboutInfoSuccess, (state, { course }) => ({
     ...state,
     courseAboutInfo: course,
-    isLoadingAboutInfo: false,
+    isLoading: false,
   })),
   on(CourseActions.loadCourseAboutInfoFailed, (state, { error }) => ({
     ...state,
-    isLoadingAboutInfo: false,
-    error: error,
-  })),
+    isLoading: false,
+    error,
+  }))
+);
 
-  // Load Chapter Data
+export const chapterDataReducer = createReducer(
+  initialChapterDataState,
   on(CourseActions.loadChapterData, (state) => ({
     ...state,
-    isLoadingChapterData: true,
+    isLoading: true,
     error: null,
   })),
   on(CourseActions.loadChapterDataSuccess, (state, { chapterData }) => ({
     ...state,
-    chapterData: chapterData,
-    isLoadingChapterData: false,
+    chapterData,
+    isLoading: false,
   })),
   on(CourseActions.loadChapterDataFailed, (state, { error }) => ({
     ...state,
-    isLoadingChapterData: false,
-    error: error,
-  })),
+    isLoading: false,
+    error,
+  }))
+);
 
-  // Load Number of Enrolled Courses
+export const noOfEnrolledCoursesReducer = createReducer(
+  initialNoOfEnrolledCoursesState,
   on(CourseActions.loadNoOfEnrolledCourses, (state) => ({
     ...state,
     isLoading: true,
@@ -142,31 +192,28 @@ export const courseReducer = createReducer(
   on(CourseActions.loadNoOfEnrolledCoursesFailed, (state, { error }) => ({
     ...state,
     isLoading: false,
-    error: error,
-  })),
+    error,
+  }))
+);
 
-  // Load favorite Courses
-
+export const favoriteCoursesReducer = createReducer(
+  initialFavoriteCoursesState,
   on(CourseActions.loadFavoriteCourses, (state) => ({
     ...state,
-    isLoadingFavourite: true,
+    isLoading: true,
     error: null,
   })),
   on(
     CourseActions.loadFavoriteCoursesSuccess,
     (state, { favoriteCourses }) => ({
       ...state,
-      favoriteCourses: favoriteCourses,
-      isLoadingFavourite: false,
+      favoriteCourses,
+      isLoading: false,
     })
   ),
   on(CourseActions.loadFavoriteCoursesFailed, (state, { error }) => ({
     ...state,
-    isLoadingFavourite: false,
-    error: error,
+    isLoading: false,
+    error,
   }))
 );
-
-export function reducer(state: CourseState | undefined, action: Action) {
-  return courseReducer(state, action);
-}
