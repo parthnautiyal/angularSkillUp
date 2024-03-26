@@ -44,7 +44,6 @@ import {
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    PageNotFoundModule,
     AppRoutingModule,
     StoreModule.forRoot({
       allCourses: allCoursesReducer,
