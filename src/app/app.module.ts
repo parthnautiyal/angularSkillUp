@@ -23,6 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PathEffects } from './state/effects/path.effects';
 import {
+  NoOfenrolledPathsReducer,
   PathByIdReducer,
   enrolledPathsReducer,
   pathReducer,
@@ -61,6 +62,7 @@ import {
       batchDetails: batchDetailsReducer,
       batchPathData: pathDataReducer,
       enrolledBatches: enrolledBatchesReducer,
+      numberOfEnrolledPaths: NoOfenrolledPathsReducer,
     }),
     EffectsModule.forRoot([CourseEffects, BatchEffects, PathEffects]),
     StoreDevtoolsModule.instrument({

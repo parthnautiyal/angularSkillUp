@@ -272,7 +272,7 @@ export class AllSectionContainerComponent implements OnInit {
         this.getFavouriteCourses();
       }
     } else if (this.heading === Title.BATCHES) {
-      this.height = 120;
+      this.height = 200;
       if (this.prefix === Prefix.ALL) {
         this.getAllBatches();
       }
