@@ -251,7 +251,7 @@ export class CardContainerComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event?: any) {
     this.ngZone.run(() => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth <= 768) {
         // adjust the value as per your requirement
         this.shimmerCount = 1; // adjust the value as per your requirement
       } else {

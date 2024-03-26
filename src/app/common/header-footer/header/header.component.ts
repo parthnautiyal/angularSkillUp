@@ -60,10 +60,11 @@ export class HeaderComponent implements OnInit {
       window.location.reload();
     });
     this.closeDropdown();
+    this.onResize();
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize(event?: any) {
     // Check window width and set the variable accordingly
     this.isResponsive = window.innerWidth <= 768;
   }
