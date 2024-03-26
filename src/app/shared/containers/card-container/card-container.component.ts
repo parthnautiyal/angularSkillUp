@@ -30,22 +30,12 @@ import {
   selectEnrolledPathsError,
   selectEnrolledPathsLoading,
 } from 'src/app/state/selector/path.selector';
-import {
-  loadAllCourses,
-  loadEnrolledCourses,
-} from 'src/app/state/action/course.actions';
-import {
-  loadAllBatches,
-  loadEnrolledBatches,
-} from 'src/app/state/action/batch.actions';
-import {
-  loadAllPaths,
-  loadEnrolledPaths,
-} from 'src/app/state/action/path.actions';
+
 import { Error } from 'src/app/models/Error';
 import { MessageService } from 'primeng/api';
-import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
-import { BatchDetails, EnrolledBatches } from 'src/app/models/EnrolledBatches';
+import { EnrolledBatches } from 'src/app/models/EnrolledBatches';
+import { filter } from 'rxjs';
+import { AllCoursesState } from 'src/app/state/reducer/course.reducer';
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
@@ -91,166 +81,6 @@ export class CardContainerComponent implements OnInit {
     private ngZone: NgZone
   ) {}
   ngOnInit(): void {
-    // if (this.router.url == '/dashboard') {
-    //   // if (this.title == Title.COURSES) {
-    //   //   this.height = 262;
-    //   //   this.store.dispatch(loadAllCourses());
-    //   //   this.store.select(selectAllCourses).subscribe((res) => {
-    //   //     if (typeof res === 'object' && Object.keys(res).length > 0) {
-    //   //       this.allCourses = res;
-    //   //       this.error = false;
-    //   //     }
-    //   //   });
-
-    //   //   this.store.select(selectAllCoursesError).subscribe((res) => {
-    //   //     if (res != null) {
-    //   //       this.errorCourse.message = res.message.split('`').slice(1);
-    //   //       this.errorCourse.code = res.message.split('`').slice(0, 1);
-    //   //       this.error = true;
-    //   //     }
-    //   //   });
-    //   //   this.store.select(selectAllCoursesLoading).subscribe((res) => {
-    //   //     if (res == false) {
-    //   //       setTimeout(() => {
-    //   //         this.loading = res;
-    //   //       }, 1000);
-    //   //     } else {
-    //   //       this.loading = res;
-    //   //     }
-    //   //   });
-    //   // }
-    //   if (this.title == Title.BATCHES) {
-    //     this.height = 200;
-    //     this.store.dispatch(loadAllBatches());
-    //     this.store.select(selectBatches).subscribe((res) => {
-    //       if (typeof res === 'object' && Object.keys(res).length > 0) {
-    //         this.allBatches = res;
-    //         this.error = false;
-    //       }
-    //     });
-    //     this.store.select(selectBatchesError).subscribe((res) => {
-    //       if (res != null) {
-    //         this.errorBatch.message = res.message.split('`').slice(1);
-    //         this.errorBatch.code = res.message.split('`').slice(0, 1);
-    //         this.error = true;
-    //       }
-    //     });
-    //     this.store.select(selectBatchesLoading).subscribe((res) => {
-    //       if (res == false) {
-    //         setTimeout(() => {
-    //           this.loading = res;
-    //         }, 500);
-    //       } else {
-    //         this.loading = res;
-    //       }
-    //     });
-    //   }
-    //   if (this.title == Title.PATHS) {
-    //     this.height = 112;
-    //     this.store.dispatch(loadAllPaths());
-    //     this.store.select(selectAllPaths).subscribe((res) => {
-    //       if (typeof res === 'object' && Object.keys(res).length > 0) {
-    //         this.allPaths = res;
-    //         this.error = false;
-    //       }
-    //     });
-    //     this.store.select(selectAllPathsError).subscribe((res) => {
-    //       if (res != null) {
-    //         this.errorPath.message = res.message.split('`').slice(1);
-    //         this.errorPath.code = res.message.split('`').slice(0, 1);
-    //         this.error = true;
-    //       }
-    //     });
-    //     this.store.select(selectAllPathsLoading).subscribe((res) => {
-    //       if (res == false) {
-    //         setTimeout(() => {
-    //           this.loading = res;
-    //         }, 500);
-    //       } else {
-    //         this.loading = res;
-    //       }
-    //     });
-    //   }
-    // }
-    // if (this.router.url == '/user') {
-    //   if (this.title == Title.BATCHES) {
-    //     this.height = 120;
-    //     this.store.dispatch(loadEnrolledBatches());
-    //     this.store.select(selectEnrolledBatches).subscribe((data) => {
-    //       console.log(data);
-    //       this.enrolledBatches = data;
-    //     });
-
-    //     this.store.select(selectBatchesError).subscribe((res) => {
-    //       if (res != null) {
-    //         this.error = true;
-    //       }
-    //     });
-    //     this.store.select(selectBatchesLoading).subscribe((res) => {
-    //       if (res == false) {
-    //         setTimeout(() => {
-    //           this.loading = res;
-    //         }, 500);
-    //       } else {
-    //         this.loading = res;
-    //       }
-    //     });
-    //   }
-
-    //   if (this.title == Title.COURSES) {
-    //     this.height = 262;
-    //     this.store.dispatch(loadEnrolledCourses());
-    //     this.store.select(selectEnrolledCourses).subscribe((res) => {
-    //       if (typeof res === 'object' && Object.keys(res).length > 0) {
-    //         this.allCourses = res;
-    //         this.errorEnrolled = false;
-    //       }
-    //     });
-    //     this.store.select(selectEnrolledCoursesError).subscribe((res) => {
-    //       if (res != null) {
-    //         this.errorCourse.message = res.message.split('`').slice(1);
-    //         this.errorCourse.code = res.message.split('`').slice(0, 1);
-    //         this.errorEnrolled = true;
-    //       }
-    //     });
-    //     this.store.select(selectEnrolledCoursesLoading).subscribe((res) => {
-    //       if (res == false) {
-    //         setTimeout(() => {
-    //           this.loading = res;
-    //         }, 500);
-    //       } else {
-    //         this.loading = res;
-    //       }
-    //     });
-    //   }
-    //   if (this.title == Title.PATHS) {
-    //     this.height = 112;
-    //     this.store.dispatch(loadEnrolledPaths());
-    //     this.store.select(selectEnrolledPaths).subscribe((res) => {
-    //       if (typeof res === 'object' && Object.keys(res).length > 0) {
-    //         this.allPaths = res;
-    //         this.errorEnrolled = false;
-    //       }
-    //     });
-    //     this.store.select(selectEnrolledPathsError).subscribe((res) => {
-    //       if (res != null) {
-    //         this.errorPath.message = res.message.split('`').slice(1);
-    //         this.errorPath.code = res.message.split('`').slice(0, 1);
-    //         this.errorEnrolled = true;
-    //       }
-    //     });
-    //     this.store.select(selectEnrolledPathsLoading).subscribe((res) => {
-    //       if (res == false) {
-    //         setTimeout(() => {
-    //           this.loading = res;
-    //         }, 500);
-    //       } else {
-    //         this.loading = res;
-    //       }
-    //     });
-    //   }
-    // }
-
     if (this.title == Title.COURSES) {
       this.height = 262;
       // this.store.dispatch(loadAllCourses());
@@ -268,21 +98,21 @@ export class CardContainerComponent implements OnInit {
           this.error = false;
         }
       });
-      this.store.select(selectAllCoursesLoading).subscribe((res) => {
-        if (res == false) {
-          setTimeout(() => {
-            this.loading = res;
-          }, 1000);
-        } else {
+      this.store
+        .select(selectAllCoursesLoading)
+        .subscribe((res) => {
+          console.log('inside all courses loading');
           this.loading = res;
-        }
-      });
+        });
       // this.store.dispatch(loadEnrolledCourses());
-      this.store.select(selectEnrolledCourses).subscribe((res) => {
-        if (typeof res === 'object' && Object.keys(res).length > 0) {
-          this.allCourses = res;
-        }
-      });
+      this.store
+        .select(selectEnrolledCourses)
+        .subscribe((res) => {
+          if (typeof res === 'object' && Object.keys(res).length > 0) {
+            console.log('inside enrolled courses');
+            this.allCourses = res;
+          }
+        });
       this.store.select(selectEnrolledCoursesError).subscribe((res) => {
         if (res != null) {
           console.log('inside enrolled courses error');
@@ -293,15 +123,12 @@ export class CardContainerComponent implements OnInit {
           this.error = false;
         }
       });
-      this.store.select(selectEnrolledCoursesLoading).subscribe((res) => {
-        if (res == false) {
-          setTimeout(() => {
-            this.loading = res;
-          }, 500);
-        } else {
+      this.store
+        .select(selectEnrolledCoursesLoading)
+        .subscribe((res) => {
+          console.log('inside enrolled courses loading');
           this.loading = res;
-        }
-      });
+        });
     }
     if (this.title == Title.BATCHES && !(this.router.url == '/user')) {
       this.height = 200;
@@ -320,13 +147,8 @@ export class CardContainerComponent implements OnInit {
         }
       });
       this.store.select(selectBatchesLoading).subscribe((res) => {
-        if (res == false) {
-          setTimeout(() => {
-            this.loading = res;
-          }, 500);
-        } else {
-          this.loading = res;
-        }
+        console.log("inside batch loading");
+        this.loading = res;
       });
     }
     if (this.title == Title.BATCHES && this.router.url == '/user') {
@@ -342,21 +164,15 @@ export class CardContainerComponent implements OnInit {
         console.log(error);
         if (error == null) {
           this.error = false;
-        } 
-        else {
+        } else {
           this.errorBatch.message = error.message.split('`').slice(1);
           this.errorBatch.code = error.message.split('`').slice(0, 1);
           this.error = true;
         }
       });
       this.store.select(selectEnrolledBatchesLoading).subscribe((res) => {
-        if (res == false) {
-          setTimeout(() => {
-            this.loading = res;
-          }, 500);
-        } else {
-          this.loading = res;
-        }
+        console.log("inside enrolled batch loading");
+       this.loading = res;
       });
     }
     if (this.title == Title.PATHS) {
@@ -377,13 +193,8 @@ export class CardContainerComponent implements OnInit {
         }
       });
       this.store.select(selectAllPathsLoading).subscribe((res) => {
-        if (res == false) {
-          setTimeout(() => {
-            this.loading = res;
-          }, 500);
-        } else {
-          this.loading = res;
-        }
+        console.log("inside path loading",res);
+        this.loading = res;
       });
       this.store.select(selectEnrolledPaths).subscribe((res) => {
         if (typeof res === 'object' && Object.keys(res).length > 0) {
@@ -400,13 +211,8 @@ export class CardContainerComponent implements OnInit {
         }
       });
       this.store.select(selectEnrolledPathsLoading).subscribe((res) => {
-        if (res == false) {
-          setTimeout(() => {
-            this.loading = res;
-          }, 500);
-        } else {
-          this.loading = res;
-        }
+        console.log("inside enrolled path loading", res);
+        this.loading = res;
       });
     }
     this.onResize();

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Batch } from 'src/app/models/Batch';
 import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 
@@ -8,8 +9,7 @@ import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
   styleUrls: ['./batch-card.component.sass'],
 })
 export class BatchCardComponent implements OnInit {
-  isProfile: boolean =
-    localStorage.getItem('profile') === 'true' ? true : false;
+  isProfile: boolean = false;
 
   @Input() index: number = 0;
   @Input() progress: number = 0;
@@ -39,7 +39,9 @@ export class BatchCardComponent implements OnInit {
     progress: 10,
   };
 
-  constructor(private mis: MiscellaneousService) {}
+  constructor(private mis: MiscellaneousService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isProfile = this.router.url.includes('user') ? true : false;
+  }
 }

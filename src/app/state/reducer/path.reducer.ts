@@ -23,7 +23,7 @@ export interface EnrolledPathsState {
 
 export const initialAllPathsState: AllPathsState = {
   allPaths: [],
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
@@ -53,7 +53,7 @@ export const initialPathByIdState: PathByIdState = {
 export const initialEnrolledPathsState: EnrolledPathsState = {
   enrolledPaths: [],
   numberOfEnrolledPaths: 0,
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 

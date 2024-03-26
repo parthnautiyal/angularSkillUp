@@ -15,12 +15,11 @@ import { loadFavoriteCourses } from 'src/app/state/action/course.actions';
   providers: [MessageService],
 })
 export class CourseCardComponent implements OnInit {
-  currentId:number=0;
+  currentId: number = 0;
   @Input() onGoingFlag: boolean = false;
-  isDashBoard:boolean=false;
+  isDashBoard: boolean = false;
   RouterLinks = RouterLinks;
-  isProfile: boolean =
-    localStorage.getItem('profile') === 'true' ? true : false;
+  isProfile: boolean = false;
   isDarkMode: boolean = false;
   @Input() isRed: boolean = true;
   @Input() singleCourse: Course = {
@@ -53,24 +52,24 @@ export class CourseCardComponent implements OnInit {
     private misc: MiscellaneousService,
     private store: Store,
     private messageService: MessageService,
-    private router:Router
+    private router: Router
   ) {
     this.themeService.isDarkMode().subscribe((isDarkMode) => {
       this.isDarkMode = isDarkMode;
-      
     });
   }
 
   ngOnInit(): void {
-    if(this.router.url=='/dashboard'){
+    this.isProfile = this.router.url.includes('user') ? true : false;
+    if (this.router.url == '/dashboard') {
       console.log('dashboard');
-      this.isDashBoard=true;
+      this.isDashBoard = true;
     }
   }
 
   toggleColor() {
     this.isRed = !this.isRed;
-    this.currentId=this.singleCourse.courseId || this.singleCourse.id;
+    this.currentId = this.singleCourse.courseId || this.singleCourse.id;
     if (this.isRed) {
       this.misc.postFavourite(this.currentId).subscribe((res: any) => {
         this.showSuccess();

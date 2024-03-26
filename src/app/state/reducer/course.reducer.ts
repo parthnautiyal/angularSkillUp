@@ -42,13 +42,13 @@ export interface FavoriteCoursesState {
 // Define the initial state for each sub-state
 export const initialAllCoursesState: AllCoursesState = {
   allCourses: [],
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
 export const initialEnrolledCoursesState: EnrolledCoursesState = {
   enrolledCourses: [],
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
