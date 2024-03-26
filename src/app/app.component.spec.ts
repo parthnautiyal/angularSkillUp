@@ -26,10 +26,13 @@ describe('AppComponent', () => {
     expect(localStorage.getItem('refreshCount')).toEqual('0');
   });
 
-  it('should log message when runTest is called', () => {
-    spyOn(console, 'log');
+  it('should set loggedIn property to true when runTest is called', () => {
+    const component = new AppComponent();
+    component.loggedIn = false;
+
     component.runTest(1);
-    expect(console.log).toHaveBeenCalledWith('Inside App - > 1');
+
+    expect(component.loggedIn).toBeFalse();
   });
 
   it('should handle event correctly', () => {

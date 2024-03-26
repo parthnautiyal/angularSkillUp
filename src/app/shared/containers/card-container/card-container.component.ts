@@ -157,13 +157,6 @@ export class CardContainerComponent implements OnInit {
     }
     if (this.router.url == '/user') {
       if (this.title == Title.BATCHES) {
-        // this.store.dispatch(loadAllBatches());
-        // this.store.select(selectBatchs).subscribe((res) => {
-        //   if (typeof res === 'object' && Object.keys(res).length > 0) {
-        //     this.allBatches = res;
-        //   }
-        // });
-
         this.miscService.pathsData$.subscribe((res) => {
           console.log(res);
           this.allBatches = res.enrolledBatches;
