@@ -37,9 +37,11 @@ export class PathCourseCardComponent implements OnInit {
   constructor() {}
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize(event?: any) {
     this.isResponsive = window.innerWidth <= 768;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.onResize();
+  }
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { loadNoOfEnrolledCourses } from 'src/app/state/action/course.actions';
@@ -23,6 +23,8 @@ export class DashboardHeaderComponent implements OnInit {
   enrolledPathsNumber: number = 0;
   enrolledCoursesNumber: number = 0;
   noOfEnrolledCourses!: Observable<Number>;
+  isResponsive: boolean = false;
+
   constructor(
     private store$: Store,
     private http: HttpClient,
@@ -46,9 +48,20 @@ export class DashboardHeaderComponent implements OnInit {
         const randomIndex = Math.floor(Math.random() * courses.length);
         this.enrolledCourse = courses[randomIndex];
       }
+
     });
+    this.onResize();
+
+
   }
   navigateToCourse() {
     this.router.navigate(['/course', this.enrolledCourse.courseId]);
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event?: any) {
+    // Check window width and set the variable accordingly
+    this.isResponsive = window.innerWidth <= 768;
+  }
+ 
 }
