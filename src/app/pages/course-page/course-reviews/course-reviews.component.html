@@ -8,13 +8,13 @@
       <div class="average-rating-star-container">
         <div class="stars-container">
           <ng-container *ngFor="let item of avgRatingArray">
-            <mat-icon *ngIf="item" svgIcon="star"></mat-icon>
+            <img *ngIf="item" src="assets/star-filled.svg" />
             <div
               *ngIf="!item"
               class="hidden-star"
               style="width: 10px; overflow: hidden"
             >
-              <mat-icon svgIcon="star"></mat-icon>
+              <img src="assets/star-filled.svg" style="margin-top: 8px" />
             </div>
           </ng-container>
         </div>
@@ -32,10 +32,10 @@
           </div>
           <div class="percent-rating">
             <div class="stars-container stars-container-info">
-              <mat-icon
+              <img
                 *ngFor="let j of [].constructor(star)"
-                svgIcon="star"
-              ></mat-icon>
+                src="assets/star-filled.svg"
+              />
             </div>
             <div class="percentage-info">{{ ratingPercentage[k] }}%</div>
           </div>
@@ -47,13 +47,15 @@
     <div class="rating-review-left">
       <span
         (click)="handleMyReviewButton()"
-        [ngClass]="{ active: isReviewOn }"
-        style="margin-right: 15px"
+        [ngClass]="{ active: isMyReviewOn }"
+        style="margin-right: 15px; cursor: pointer"
         >My Review</span
       >
       <span
+        *ngIf="isAllReviewOn"
         [ngClass]="{ active: isReviewCommentOn }"
         (click)="handleReviewCommentButton()"
+        style="cursor: pointer"
         >All Reviews</span
       >
     </div>
@@ -67,8 +69,17 @@
     <div class="info-heading">Ratings<span class="required">*</span></div>
     <div class="stars">
       <div>
-        <ng-container *ngFor="let i of [].constructor(5); let index">
-          <mat-icon svgIcon="review-star"></mat-icon>
+        <ng-container *ngFor="let i of [].constructor(6); let index = index">
+          <img
+            *ngIf="index < ratingClicked"
+            (click)="handleReviewStarClick(index)"
+            src="assets/star-filled.svg"
+          />
+          <img
+            *ngIf="index > ratingClicked"
+            (click)="handleReviewStarClick(index)"
+            src="assets/star-empty.svg"
+          />
         </ng-container>
       </div>
     </div>
@@ -84,58 +95,40 @@
       ></textarea>
     </div>
     <div class="buttons">
-      <button (click)="handleReviewButton()" class="cancel-button" id="cancel">
+      <button
+        (click)="handleCancelReviewButton()"
+        class="cancel-button"
+        id="cancel"
+      >
         Cancel</button
       ><button type="submit" class="update-button" id="submit">Submit</button>
     </div>
   </div>
 
   <div *ngIf="isReviewCommentOn" class="review-component-container">
-    <div class="review">
-      <img
-        src="https://lh3.googleusercontent.com/a/AAcHTtevWj3vfYohx1De1scm-Rc-FvxqN6zrhLPxYUIxduoc5A=s96-c"
-        class="posted-by-img"
-      />
-      <div class="review-detail">
-        <div class="posted-by-name">Zubair Ahmed</div>
-        <div class="rating-time-container">
-          <div class="stars-container">
-            <mat-icon
-              svgIcon="star"
-              style="width: 13px; margin-top: -4px"
-            ></mat-icon>
+    <ng-container *ngFor="let item of courseReview">
+      <div class="review">
+        <img [src]="item.postedBy.imageUrl" class="posted-by-img" />
+        <div class="review-detail">
+          <div class="posted-by-name">{{ item.postedBy.name }}</div>
+          <div class="rating-time-container">
+            <div class="stars-container">
+              <ng-container *ngFor="let st of [].constructor(item.rating)">
+                <img
+                  src="assets/star-filled.svg"
+                  style="width: 13px; margin-top: -4px"
+                />
+              </ng-container>
+            </div>
+            <span class="time-ago">
+              {{ item.postedAt | date : "dd MM yyyy" }}
+            </span>
           </div>
-          <span class="time-ago">16 Jul 2023</span>
-        </div>
-        <div class="review-content">
-          The maximum time to complete the quiz is 60 mins. Then why it is
-          getting stop before it. It stopped and evaluated the attempt questions
-          and given the result. Very disappointing.
+          <div class="review-content">
+            {{ item.feedback }}
+          </div>
         </div>
       </div>
-    </div>
-    <div class="review">
-      <img
-        src="https://lh3.googleusercontent.com/a/AAcHTtevWj3vfYohx1De1scm-Rc-FvxqN6zrhLPxYUIxduoc5A=s96-c"
-        class="posted-by-img"
-      />
-      <div class="review-detail">
-        <div class="posted-by-name">Zubair Ahmed</div>
-        <div class="rating-time-container">
-          <div class="stars-container">
-            <mat-icon
-              svgIcon="star"
-              style="width: 13px; margin-top: -4px"
-            ></mat-icon>
-          </div>
-          <span class="time-ago">16 Jul 2023</span>
-        </div>
-        <div class="review-content">
-          The maximum time to complete the quiz is 60 mins. Then why it is
-          getting stop before it. It stopped and evaluated the attempt questions
-          and given the result. Very disappointing.
-        </div>
-      </div>
-    </div>
+    </ng-container>
   </div>
 </div>

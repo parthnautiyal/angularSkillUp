@@ -64,7 +64,7 @@ export class AllSectionContainerComponent implements OnInit {
   RouterLinks = RouterLinks;
   Prefix = Prefix;
   noContent: boolean = false;
-  height:number=112;
+  height: number = 112;
   constructor(
     private store: Store,
     private activatedRoute: ActivatedRoute,
@@ -75,7 +75,6 @@ export class AllSectionContainerComponent implements OnInit {
     this.store.select(selectPaths).subscribe((res) => {
       if (res.length > 0) {
         this.allPathsData = res;
-        this.error = false;
       }
     });
 
@@ -84,6 +83,8 @@ export class AllSectionContainerComponent implements OnInit {
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
         this.errorCard.code = res.message.split('`').slice(0, 1);
+      } else {
+        this.error = false;
       }
     });
 
@@ -103,7 +104,6 @@ export class AllSectionContainerComponent implements OnInit {
     this.store.select(selectCourses).subscribe((res) => {
       if (res.length > 0) {
         this.allCoursesData = res;
-        this.error = false;
       }
     });
 
@@ -112,6 +112,8 @@ export class AllSectionContainerComponent implements OnInit {
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
         this.errorCard.code = res.message.split('`').slice(0, 1);
+      } else {
+        this.error = false;
       }
     });
 
@@ -130,7 +132,6 @@ export class AllSectionContainerComponent implements OnInit {
     this.store.select(selectBatchs).subscribe((res) => {
       if (res.length > 0) {
         this.allBatchesData = res;
-        this.error = false;
       }
     });
 
@@ -139,6 +140,8 @@ export class AllSectionContainerComponent implements OnInit {
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
         this.errorCard.code = res.message.split('`').slice(0, 1);
+      } else {
+        this.error = false;
       }
     });
 
@@ -155,17 +158,22 @@ export class AllSectionContainerComponent implements OnInit {
   getEnrolledPaths() {
     this.store.dispatch(loadEnrolledPaths());
     this.store.select(selectEnrolledPaths).subscribe((res) => {
+      console.log('hel;llo');
       if (res.length > 0) {
         this.allPathsData = res;
-        this.error = false;
       }
     });
 
     this.store.select(selectEnrolledPathsError).subscribe((res) => {
+      console.log('hel;llom upper');
       if (res) {
+        console.log('hel;llo');
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
         this.errorCard.code = res.message.split('`').slice(0, 1);
+      } else {
+        console.log('hel;llo');
+        this.error = false;
       }
     });
 
@@ -184,7 +192,6 @@ export class AllSectionContainerComponent implements OnInit {
     this.store.select(selectEnrolledCourses).subscribe((res) => {
       if (res.length > 0) {
         this.allCoursesData = res;
-        this.error = false;
       }
     });
 
@@ -193,6 +200,8 @@ export class AllSectionContainerComponent implements OnInit {
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
         this.errorCard.code = res.message.split('`').slice(0, 1);
+      } else {
+        this.error = false;
       }
     });
 
@@ -219,6 +228,11 @@ export class AllSectionContainerComponent implements OnInit {
     });
     this.store.select(selectFavoritecourses).subscribe((res) => {
       if (res.length > 0) {
+        // this.store.select(selectFavoritecourses).subscribe((res) => {
+        //   res = res.filter(
+        //     (course: Course) => course.id !== this.singleCourse.id
+        //   );
+        // });
         this.allCoursesData = res;
         this.loading = false;
         this.noContent = false;
@@ -242,7 +256,7 @@ export class AllSectionContainerComponent implements OnInit {
       }
     });
     if (this.heading === Title.PATHS) {
-      this.height=112;
+      this.height = 112;
       if (this.prefix === Prefix.ALL) {
         this.getAllPaths();
       }
@@ -250,7 +264,7 @@ export class AllSectionContainerComponent implements OnInit {
         this.getEnrolledPaths();
       }
     } else if (this.heading === Title.COURSES) {
-      this.height=262;
+      this.height = 262;
       if (this.prefix === Prefix.ALL) {
         this.getAllCourses();
       }
@@ -261,7 +275,7 @@ export class AllSectionContainerComponent implements OnInit {
         this.getFavouriteCourses();
       }
     } else if (this.heading === Title.BATCHES) {
-      this.height=120;
+      this.height = 120;
       if (this.prefix === Prefix.ALL) {
         this.getAllBatches();
       }

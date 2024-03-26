@@ -6,7 +6,10 @@ import { Course } from 'src/app/models/Course';
 import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { loadFavoriteCourses } from 'src/app/state/action/course.actions';
-import { selectCourses } from 'src/app/state/selector/course.selector';
+import {
+  selectCourses,
+  selectFavoritecourses,
+} from 'src/app/state/selector/course.selector';
 
 @Component({
   selector: 'app-course-card',
@@ -68,6 +71,7 @@ export class CourseCardComponent implements OnInit {
     } else if (!this.isRed) {
       this.misc.deleteFavourite(this.singleCourse.id).subscribe((res: any) => {
         this.store.dispatch(loadFavoriteCourses());
+
         this.showInfo();
       });
     }
