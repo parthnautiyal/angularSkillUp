@@ -5,7 +5,7 @@
       <div class="stream">Stream: {{ batchData.streamName }}</div>
 
       <div class="no-of-students">
-        <img src="assets/graduation-cap.svg">
+        <img src="assets/graduation-cap.svg" />
         {{ batchData.noOfStudents }} Students
       </div>
       <div class="date">
@@ -21,7 +21,7 @@
   <div class="header">
     <div class="batch-title">
       <div class="batch-name">{{ batchData.name }}</div>
-      <div class="batch-type">{{ batchData.streamName }}</div>
+      <div class="batch-type">{{ batchData.stream }}</div>
     </div>
     <div class="progressCircle">
       <app-circular-progress-bar [progress]="batchData.progress">

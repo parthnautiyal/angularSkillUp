@@ -3,5 +3,5 @@ export interface User {
   id: number;
   imageUrl: String;
   name: string;
-  isActive: boolean;
+  isActive?: boolean;
 }
