@@ -42,7 +42,7 @@ export interface BatchPathDataState {
 
 export const initialBatchState: BatchState = {
   batches: [],
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
@@ -52,19 +52,19 @@ export const initialEnrolledBatchState: EnrolledbatchState = {
     count: 0,
     enrolledBatches: [],
   },
-  isLoading: false,
+  isLoading: true,
   error: 'error',
 };
 
 export const initialStudentState: StudentState = {
   students: [],
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
 export const initialTrainerState: TrainerState = {
   trainers: [],
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
@@ -93,7 +93,7 @@ export const initialBatchDetailsState: BatchDetailsState = {
     },
     progress: 0,
   },
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
@@ -121,7 +121,7 @@ export const initialBatchPathDataState: BatchPathDataState = {
     updatedAt: '',
     level: 0,
   },
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
