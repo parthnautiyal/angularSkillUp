@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Path, PathData } from '../models/Path';
 import { Ratings } from '../models/Ratings';
 import { APIResponse } from '../models/ApiResponse';
 import { EnrolledBatches } from '../models/EnrolledBatches';
 import { API } from '../constants/enums/API';
 import { Review } from '../models/Reviews';
+import { SearchResponse } from '../models/SearchResponse';
 @Injectable({
   providedIn: 'root',
 })
@@ -130,6 +131,10 @@ export class MiscellaneousService {
       });
   }
 
+  searchByTitle(title: string): Observable<APIResponse<SearchResponse>> {
+    return this.http.get<APIResponse<SearchResponse>>(
+      API.BASE_URL + '/search?title=' + title + '&role=student&field=all');
+  }
   // body: JSON.stringify({ courseId: courseId }),
 }
 

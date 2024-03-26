@@ -18,37 +18,42 @@ import { HttpClientModule } from '@angular/common/http';
 import { PathEffects } from './state/effects/path.effects';
 import { pathReducer } from './state/reducer/path.reducer';
 import { RouterModule } from '@angular/router';
+import { SearchPageComponent } from './pages/search-page/search-page/search-page.component';
+import { ShimmerModule } from "./shimmer/shimmer.module";
+import { CardsModule } from "./shared/cards/cards.module";
+import { ErrorPageModule } from "./error-page/error-page.module";
 
 @NgModule({
-  declarations: [AppComponent],
-
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    PageNotFoundModule,
-    AppRoutingModule,
-    StoreModule.forRoot({
-      courses: courseReducer,
-      batch: batchReducer,
-      path: pathReducer,
-    }),
-    EffectsModule.forRoot([CourseEffects, BatchEffects, PathEffects]),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production,
-      autoPause: true,
-    }),
-    RouterModule
-  ],
-
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ZopsmartApiInterceptorService,
-      multi: true,
-    },
-  ],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, SearchPageComponent],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ZopsmartApiInterceptorService,
+            multi: true,
+        },
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        PageNotFoundModule,
+        AppRoutingModule,
+        StoreModule.forRoot({
+            courses: courseReducer,
+            batch: batchReducer,
+            path: pathReducer,
+        }),
+        EffectsModule.forRoot([CourseEffects, BatchEffects, PathEffects]),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: environment.production,
+            autoPause: true,
+        }),
+        RouterModule,
+        ShimmerModule,
+        CardsModule,
+        ErrorPageModule
+    ]
 })
 export class AppModule {}
