@@ -55,7 +55,7 @@ import {
       favoriteCourses: favoriteCoursesReducer,
       batch: batchReducer,
       allPaths: pathReducer,
-      PathById: PathByIdReducer,
+      pathById: PathByIdReducer,
       enrolledPaths: enrolledPathsReducer,
       student: studentReducer,
       trainer: trainerReducer,

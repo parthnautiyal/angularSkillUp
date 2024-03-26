@@ -18,6 +18,7 @@ export class ChapterComponent implements OnInit {
     // this.store.dispatch(loadChapterData({ courseId: this.id }));
     this.store.select(selectChapterData).subscribe((chapter) => {
       this.allChapters = chapter;
+      console.log(this.allChapters);
     });
   }
   ngOnInit(): void {}

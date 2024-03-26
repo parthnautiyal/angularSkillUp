@@ -53,7 +53,7 @@ export const initialEnrolledBatchState: EnrolledbatchState = {
     enrolledBatches: [],
   },
   isLoading: false,
-  error: null,
+  error: 'error',
 };
 
 export const initialStudentState: StudentState = {
@@ -240,6 +240,6 @@ export const enrolledBatchesReducer = createReducer(
   on(BatchActions.loadEnrolledBatchesFailed, (state, { error }) => ({
     ...state,
     isLoading: false,
-    error,
+    error: error,
   }))
 );

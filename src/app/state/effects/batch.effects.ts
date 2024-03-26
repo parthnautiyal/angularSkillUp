@@ -53,6 +53,7 @@ export class BatchEffects {
               })
             ),
             catchError((error) => {
+              console.log(error);
               return of(BatchActions.loadEnrolledBatchesFailed({ error }));
             })
           )

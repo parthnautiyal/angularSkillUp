@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
@@ -14,7 +15,9 @@ import { loadFavoriteCourses } from 'src/app/state/action/course.actions';
   providers: [MessageService],
 })
 export class CourseCardComponent implements OnInit {
+  currentId:number=0;
   @Input() onGoingFlag: boolean = false;
+  isDashBoard:boolean=false;
   RouterLinks = RouterLinks;
   isProfile: boolean =
     localStorage.getItem('profile') === 'true' ? true : false;
@@ -49,23 +52,31 @@ export class CourseCardComponent implements OnInit {
     private themeService: ThemeService,
     private misc: MiscellaneousService,
     private store: Store,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router:Router
   ) {
     this.themeService.isDarkMode().subscribe((isDarkMode) => {
       this.isDarkMode = isDarkMode;
+      
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.router.url=='/dashboard'){
+      console.log('dashboard');
+      this.isDashBoard=true;
+    }
+  }
 
   toggleColor() {
     this.isRed = !this.isRed;
+    this.currentId=this.singleCourse.courseId || this.singleCourse.id;
     if (this.isRed) {
-      this.misc.postFavourite(this.singleCourse.id).subscribe((res: any) => {
+      this.misc.postFavourite(this.currentId).subscribe((res: any) => {
         this.showSuccess();
       });
     } else if (!this.isRed) {
-      this.misc.deleteFavourite(this.singleCourse.id).subscribe((res: any) => {
+      this.misc.deleteFavourite(this.currentId).subscribe((res: any) => {
         this.store.dispatch(loadFavoriteCourses());
 
         this.showInfo();
@@ -77,14 +88,14 @@ export class CourseCardComponent implements OnInit {
     this.messageService.add({
       severity: 'info',
       summary: 'Removed',
-      detail: 'Removed from Favorites -> ' + this.singleCourse.id,
+      detail: 'Removed from Favorites -> ' + this.currentId,
     });
   }
   showSuccess() {
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
-      detail: 'Favorite Added -> ' + this.singleCourse.id,
+      detail: 'Favorite Added -> ' + this.currentId,
     });
   }
 }

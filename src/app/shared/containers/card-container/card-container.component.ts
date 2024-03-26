@@ -57,6 +57,7 @@ export class CardContainerComponent implements OnInit {
   error: Boolean = false;
   errorEnrolled: Boolean = false;
   isActive = true;
+  isDashBoard = false;
   Title = Title;
   RouterLinks = RouterLinks;
   allPaths: Path[] = [];
@@ -82,7 +83,7 @@ export class CardContainerComponent implements OnInit {
     message: '',
     code: 0,
   };
-  enrolled:boolean = false;
+  enrolled: boolean = false;
   constructor(
     private store: Store,
     private router: Router,
@@ -263,8 +264,8 @@ export class CardContainerComponent implements OnInit {
           this.errorCourse.message = res.message.split('`').slice(1);
           this.errorCourse.code = res.message.split('`').slice(0, 1);
           this.error = true;
-        }else{
-          this.error=false;
+        } else {
+          this.error = false;
         }
       });
       this.store.select(selectAllCoursesLoading).subscribe((res) => {
@@ -276,32 +277,33 @@ export class CardContainerComponent implements OnInit {
           this.loading = res;
         }
       });
-        // this.store.dispatch(loadEnrolledCourses());
-        this.store.select(selectEnrolledCourses).subscribe((res) => {
-          if (typeof res === 'object' && Object.keys(res).length > 0) {
-            this.allCourses = res;
-          }
-        });
-        this.store.select(selectEnrolledCoursesError).subscribe((res) => {
-          if (res != null) {
-            this.errorCourse.message = res.message.split('`').slice(1);
-            this.errorCourse.code = res.message.split('`').slice(0, 1);
-            this.error = true;
-          }else{
-            this.error=false;
-          }
-        });
-        this.store.select(selectEnrolledCoursesLoading).subscribe((res) => {
-          if (res == false) {
-            setTimeout(() => {
-              this.loading = res;
-            }, 500);
-          } else {
+      // this.store.dispatch(loadEnrolledCourses());
+      this.store.select(selectEnrolledCourses).subscribe((res) => {
+        if (typeof res === 'object' && Object.keys(res).length > 0) {
+          this.allCourses = res;
+        }
+      });
+      this.store.select(selectEnrolledCoursesError).subscribe((res) => {
+        if (res != null) {
+          console.log('inside enrolled courses error');
+          this.errorCourse.message = res.message.split('`').slice(1);
+          this.errorCourse.code = res.message.split('`').slice(0, 1);
+          this.error = true;
+        } else {
+          this.error = false;
+        }
+      });
+      this.store.select(selectEnrolledCoursesLoading).subscribe((res) => {
+        if (res == false) {
+          setTimeout(() => {
             this.loading = res;
-          }
-        });
+          }, 500);
+        } else {
+          this.loading = res;
+        }
+      });
     }
-    if (this.title == Title.BATCHES && !(this.router.url == "/user")) {
+    if (this.title == Title.BATCHES && !(this.router.url == '/user')) {
       this.height = 200;
       this.enrolled = false;
       // this.store.dispatch(loadAllBatches());
@@ -327,7 +329,7 @@ export class CardContainerComponent implements OnInit {
         }
       });
     }
-    if (this.title == Title.BATCHES && this.router.url == "/user") {
+    if (this.title == Title.BATCHES && this.router.url == '/user') {
       this.height = 120;
       this.enrolled = true;
       // this.store.dispatch(loadEnrolledBatches());
@@ -336,13 +338,15 @@ export class CardContainerComponent implements OnInit {
         this.enrolledBatches = data;
       });
 
-      this.store.select(selectEnrolledBatchesError).subscribe((res) => {
-        if (res != null) {
+      this.store.select(selectEnrolledBatchesError).subscribe((error) => {
+        console.log(error);
+        if (error == null) {
+          this.error = false;
+        } 
+        else {
+          this.errorBatch.message = error.message.split('`').slice(1);
+          this.errorBatch.code = error.message.split('`').slice(0, 1);
           this.error = true;
-        }else{
-          this.errorBatch.message = res.message.split('`').slice(1);
-          this.errorBatch.code = res.message.split('`').slice(0, 1);
-          this.error=false;
         }
       });
       this.store.select(selectEnrolledBatchesLoading).subscribe((res) => {
@@ -368,8 +372,8 @@ export class CardContainerComponent implements OnInit {
           this.errorPath.message = res.message.split('`').slice(1);
           this.errorPath.code = res.message.split('`').slice(0, 1);
           this.error = true;
-        }else{
-          this.error=false;
+        } else {
+          this.error = false;
         }
       });
       this.store.select(selectAllPathsLoading).subscribe((res) => {
@@ -391,8 +395,8 @@ export class CardContainerComponent implements OnInit {
           this.errorPath.message = res.message.split('`').slice(1);
           this.errorPath.code = res.message.split('`').slice(0, 1);
           this.error = true;
-        }else{
-          this.error=false;
+        } else {
+          this.error = false;
         }
       });
       this.store.select(selectEnrolledPathsLoading).subscribe((res) => {
@@ -412,7 +416,7 @@ export class CardContainerComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event?: any) {
     this.ngZone.run(() => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth <= 768) {
         // adjust the value as per your requirement
         this.shimmerCount = 1; // adjust the value as per your requirement
       } else {

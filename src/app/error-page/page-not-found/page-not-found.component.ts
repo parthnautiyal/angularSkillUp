@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -6,8 +7,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./page-not-found.component.sass'],
 })
 export class PageNotFoundComponent implements OnInit {
-  @Input() chapterFlag: boolean = false;
-  constructor() {}
+  chapterFlag: boolean = false;
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.chapterFlag = this.router.url == '/invitations' ? true : false;
+  }
 }
