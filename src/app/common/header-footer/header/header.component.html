@@ -1,23 +1,45 @@
 <header class="navbar">
   <a [routerLink]="['/', 'dashboard']">
-    <span class="skill">Skill</span>
-    <span class="up">Up</span>
+    <!-- <span class="skill">Skill</span>
+    <span class="up">Up</span> -->
+    <img
+      class="logo"
+      [src]="
+        isDarkMode
+          ? 'assets/dark/skillup-dark.svg'
+          : 'assets/light/skillup-light.svg'
+      "
+      alt="SkillUp"
+    />
   </a>
   <div class="header-links">
-    <button routerLink="courses/favourites"  *ngIf="!isResponsive">
-      <img [src]="isDarkMode? 'assets/dark/My Favourites.svg':'assets/light/My Favourites.svg'" alt="favourite" />
+    <button routerLink="courses/favourites" *ngIf="!isResponsive">
+      <img
+        [src]="
+          isDarkMode
+            ? 'assets/dark/MyFavourites.svg'
+            : 'assets/light/MyFavourites.svg'
+        "
+        alt="favourite"
+      />
     </button>
-    <div class="search-bar"  *ngIf="!isResponsive">
-      <input class="search-box" type="text" placeholder="Search" [(ngModel)]="searchQuery" (keyup.enter)="submitSearch()">
-        <img class="search-icon" src="assets/dark/Search.svg">
+    <div class="search-bar" *ngIf="!isResponsive">
+      <input
+        class="search-box"
+        type="text"
+        placeholder="Search"
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="submitSearch()"
+      />
+      <img class="search-icon" src="assets/dark/Search.svg" />
     </div>
     <div *ngIf="isResponsive">
-      <button style="padding-left: 12px;">
-        <img class="search-icon" src="assets/dark/Search.svg">
+      <button style="padding-left: 12px">
+        <img class="search-icon" src="assets/dark/Search.svg" />
       </button>
     </div>
 
-    <app-theme-toggle  *ngIf="!isResponsive"></app-theme-toggle>
+    <app-theme-toggle *ngIf="!isResponsive"></app-theme-toggle>
 
     <div class="org-wrapper">
       <div class="logo-wrapper">
@@ -27,7 +49,11 @@
           alt=""
         />
         <div class="dropdown-icon">
-          <i class="fa-solid fa-caret-down"></i>
+          <img
+            [src]="
+              isDarkMode ? 'assets/dark/Expand.svg' : 'assets/light/Expand.svg'
+            "
+          />
         </div>
       </div>
       <div class="user-organization dropdown" *ngIf="isOrgDropdownOpen">

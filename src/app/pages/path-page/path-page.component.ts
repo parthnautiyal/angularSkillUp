@@ -5,9 +5,8 @@ import { Error } from 'src/app/models/Error';
 import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 import { loadPathById } from 'src/app/state/action/path.actions';
 import {
+  selectPathByIdError,
   selectPathByIdLoading,
-  selectPathsError,
-  selectPathById,
 } from 'src/app/state/selector/path.selector';
 
 @Component({
@@ -32,13 +31,13 @@ export class PathPageComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.store.dispatch(loadPathById({ id: this.id }));
-    this.store.select(selectPathsError).subscribe((res) => {
+    this.store.select(selectPathByIdError).subscribe((res) => {
       if (res != null) {
-        // this.loading =false;
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
         this.errorCard.code = res.message.split('`').slice(0, 1);
-        this.error = true;
+      } else {
+        this.error = false;
       }
     });
     this.store.select(selectPathByIdLoading).subscribe((res) => {

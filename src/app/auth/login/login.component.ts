@@ -6,6 +6,7 @@ import {
   HostListener,
 } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { environment } from 'src/environments/environment';
 
 declare let window: any;
 @Component({
@@ -15,10 +16,8 @@ declare let window: any;
   providers: [MessageService],
 })
 export class LoginComponent implements OnInit {
-  constructor(private messageService: MessageService) {
-
-
-  }
+  constructor(private messageService: MessageService) {}
+  googleClientId = environment.googleClientId;
 
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {

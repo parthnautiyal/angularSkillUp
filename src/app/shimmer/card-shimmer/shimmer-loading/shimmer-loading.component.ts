@@ -24,8 +24,6 @@ export class ShimmerLoadingComponent implements OnInit {
         return this.width;
       case 'rect':
         return this.height;
-      default:
-        return this.height;
     }
   }
 

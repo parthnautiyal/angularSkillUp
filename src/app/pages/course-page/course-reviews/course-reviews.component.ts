@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Review } from 'src/app/models/Reviews';
 import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 
 @Component({
@@ -12,19 +13,22 @@ import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 })
 export class CourseReviewsComponent implements OnInit {
   @Input() id = 0;
-  ratingClicked: number = 3;
-  isReviewOn: boolean = true;
+  ratingClicked: number = 0;
+  isReviewOn: boolean = false;
+  isMyReviewOn: boolean = true;
+  isAllReviewOn: boolean = true;
   isReviewCommentOn: boolean = false;
   rating: Ratings = {
-    averageRating: 3.5,
+    averageRating: 0,
     rating: {
-      fiveStars: 2,
-      fourStars: 1,
+      fiveStars: 0,
+      fourStars: 0,
       threeStars: 0,
       twoStars: 0,
       oneStars: 0,
     },
   };
+  courseReview: Review[] = [];
   ratingPercentage: number[] = [];
   avgRatingArray: boolean[] = [];
 
@@ -41,13 +45,7 @@ export class CourseReviewsComponent implements OnInit {
     //   this.rating = rating.data;
     //   console.log('Rating -> ' + this.rating);
     // });
-    this.totalRating = Object.values(this.rating.rating).reduce(
-      (a, b) => a + b,
-      0
-    );
-    console.log('Rating Total -> ' + this.totalRating);
 
-    this.updateRating(this.rating);
     //this.createAvgRatingArray();
 
     this.matIconRegistry.addSvgIcon(
@@ -62,19 +60,37 @@ export class CourseReviewsComponent implements OnInit {
     );
   }
 
+  handleReviewStarClick(rating: number) {
+    this.ratingClicked = rating;
+  }
+
   handleReviewButton() {
-    this.isReviewOn = !this.isReviewOn;
-    this.isReviewCommentOn = false;
+    this.isReviewOn = true;
+    this.isAllReviewOn = false;
+  }
+
+  handleCancelReviewButton() {
+    this.isReviewOn = false;
+    this.isAllReviewOn = true;
   }
   handleReviewCommentButton() {
     this.isReviewOn = false;
+    this.isMyReviewOn = false;
     this.isReviewCommentOn = !this.isReviewCommentOn;
   }
   handleMyReviewButton() {
+    this.isMyReviewOn = true;
     this.isReviewCommentOn = false;
   }
 
   updateRating(rating: Ratings) {
+    this.totalRating = Object.values(this.rating.rating).reduce(
+      (a, b) => a + b,
+      0
+    );
+    console.log('Total Rating -> ' + this.totalRating);
+    this.totalRating = this.totalRating == 0 ? 1 : this.totalRating;
+
     rating.rating.fiveStars =
       (rating.rating.fiveStars / this.totalRating) * 100;
     console.log(rating.rating);
@@ -101,5 +117,19 @@ export class CourseReviewsComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('Rating Total -> ' + this.totalRating);
+
+    this.misc.courseRating$.subscribe((res) => {
+      console.log(res);
+      if (res.averageRating != 0) this.rating = res;
+    });
+
+    this.updateRating(this.rating);
+    this.createAvgRatingArray();
+    this.misc.courseReviews$.subscribe((res) => {
+      console.log(res);
+      this.courseReview = res;
+    });
+  }
 }

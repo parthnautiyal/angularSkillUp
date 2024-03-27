@@ -1,9 +1,10 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadCourseAboutInfo } from 'src/app/state/action/course.actions';
 import { selectCourseAboutInfo } from 'src/app/state/selector/course.selector';
 import { Course } from 'src/app/models/Course';
+import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 
 @Component({
   selector: 'app-courses-banner',
@@ -12,6 +13,7 @@ import { Course } from 'src/app/models/Course';
 })
 export class CoursesBannerComponent implements OnInit {
   id: string = '';
+  @Input() isRed: boolean = true;
 
   CourseDetails: Course = {
     id: 0,
@@ -36,7 +38,11 @@ export class CoursesBannerComponent implements OnInit {
     updatedAt: '',
     level: 0,
   };
-  constructor(private store: Store, private router: ActivatedRoute) {
+  constructor(
+    private store: Store,
+    private router: ActivatedRoute,
+    private misc: MiscellaneousService
+  ) {
     this.id = router.snapshot.params['id'];
   }
 
@@ -46,9 +52,18 @@ export class CoursesBannerComponent implements OnInit {
       this.CourseDetails = courseData;
     });
   }
-  isButtonRed: boolean = false;
 
   toggleColor() {
-    this.isButtonRed = !this.isButtonRed;
+    this.isRed = !this.isRed;
+    if (this.isRed) {
+      this.misc.postFavourite(this.CourseDetails.id).subscribe((res: any) => {
+        // this.showSuccess();
+      });
+    } else if (!this.isRed) {
+      this.misc.deleteFavourite(this.CourseDetails.id).subscribe((res: any) => {
+        // this.store.dispatch(loadFavoriteCourses());
+        // this.showInfo();
+      });
+    }
   }
 }

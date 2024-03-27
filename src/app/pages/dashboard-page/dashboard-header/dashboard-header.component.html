@@ -1,7 +1,14 @@
 <div class="dashboard-header">
   <div class="greeting-box ">
-    <span class="header-count">Hello {{ userProfile.given_name | titlecase }}!</span>
-    <p>It's good to see you here</p>
+    <div class="greeting-text">
+      <span class="header-count">Hello {{ userProfile.given_name | titlecase }}!</span>
+      <p>It's good to see you here</p>
+    </div>
+    <div *ngIf="isResponsive">
+      <img  class="welcome-image" src="assets/welcome-mobile.svg"  />
+    </div>
+
+
   </div>
   <a [routerLink]="['/', 'paths', 'ongoing']">
     <div class="enrolled-path">
@@ -41,7 +48,7 @@
       <app-circular-progress-bar [progress]="enrolledCourse.progress"></app-circular-progress-bar>
     </div>
 
-    <i class="fa-solid fa-play play-button"></i>
+    <img src="assets/play-button.svg" class="play-button" />
   </div>
   <ng-template #loading>
     <div class="recent-course">

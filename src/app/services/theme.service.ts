@@ -14,6 +14,7 @@ export class ThemeService {
 
   setDarkMode(isDarkMode: boolean) {
     this.darkModeSubject.next(isDarkMode);
+    localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
 
     if (isDarkMode) {
       document.body.classList.add('dark-theme');

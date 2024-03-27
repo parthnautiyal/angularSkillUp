@@ -14,9 +14,9 @@
 
 .greeting-box
     display: flex
-    flex-direction: column
-    justify-content: center
-    padding: 15px 20px
+    flex-direction: row
+    justify-content: space-between
+    padding: 20px
     background-color: var(--page-content-background-color)
     height: 100%
     min-width: 30%
@@ -28,6 +28,8 @@
     @media screen and (max-width: 768px)
         width: 100%
         margin-bottom: 20px
+
+.greeting-text
 
 .enrolled-path
     display: flex
@@ -51,7 +53,7 @@
 .enrolled-courses
     display: flex
     flex-direction: column
-    justify-content: center
+    justify-content: space-evenly
     background-color: var(--page-content-background-color)
     border-radius: 10px
     height: 100%
@@ -64,7 +66,6 @@
         width: 42vw
         flex-direction: row
         align-items: center
-        padding: 10px 0px
         justify-content: space-evenly
         font-size: .8rem
 
@@ -144,6 +145,7 @@ span
 .message
     font-size: 1.2rem
     color: var(--primary-font-color)
+    width: 70px
 
     @media screen and (max-width: 768px)
         font-size: 1rem
@@ -154,3 +156,6 @@ span
 
     @media screen and (max-width: 768px)
         font-size: 0.6rem
+
+.welcome-image
+    padding-right: 15px

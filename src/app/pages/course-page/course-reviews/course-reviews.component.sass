@@ -32,14 +32,13 @@
   opacity: 0.5
   font-size: 14px
   position: relative
-  top: -10px
 
 .progress-bar
   background-color: white
   border-radius: 6px
   width: calc(100% - 200px)
 
-.progress
+.progress-lines
   background: #ffc850
   border-radius: 6px
   height: 11px
@@ -68,6 +67,9 @@
     font-size: 17px
     opacity: 0.5
 
+    @media screen and (max-width: 768px)
+      font-size: 14px
+
     &.active
       opacity: 1
       border-bottom: 4px solid #5624d0
@@ -87,6 +89,9 @@
   font-size: 1rem
   border-radius: 6px
   color: #5624d0
+
+  @media screen and (max-width: 768px)
+    width: 130px
 
 .add-review-and-rating-container
   margin-top: 30px
@@ -139,6 +144,7 @@
       color: #f75a5b
 
 .review-component-container
+  margin-top: 20px
   background-color: #fff
   border-radius: 12px
   display: flex

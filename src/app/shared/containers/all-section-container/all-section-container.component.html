@@ -7,27 +7,21 @@
       <app-dashboard-shimmer
         class="shimmer"
         [shimmerCount]="9"
+        [height]="this.height"
       ></app-dashboard-shimmer>
     </div>
     <div *ngIf="!loading" class="paths-box">
-      <ng-container *ngIf="heading == Title.PATHS">
-        <app-error-card [title]="Title.PATHS" [error]="errorCard" *ngIf="error">
-        </app-error-card>
-        <ng-container *ngIf="!error">
-          <div *ngFor="let item of allPathsData" class="paths-card-wrapper">
-            <app-path-card
-              [onGoingFlag]="onGoingFlag"
-              [singlePath]="item"
-            ></app-path-card>
-          </div>
-        </ng-container>
-      </ng-container>
-
       <ng-container *ngIf="noContent">
         <app-no-content></app-no-content>
       </ng-container>
       <ng-container *ngIf="!noContent">
         <ng-container *ngIf="heading == Title.PATHS">
+         <app-error-card
+            [title]="Title.PATHS"
+            [error]="errorCard"
+            *ngIf="error"
+          >
+          </app-error-card>
           <div *ngFor="let item of allPathsData" class="paths-card-wrapper">
             <app-path-card
               [onGoingFlag]="onGoingFlag"
@@ -55,7 +49,7 @@
         </ng-container>
 
         <ng-container *ngIf="heading == Title.BATCHES">
-          <app-error-card
+         <app-error-card
             [title]="Title.BATCHES"
             [error]="errorCard"
             *ngIf="error"

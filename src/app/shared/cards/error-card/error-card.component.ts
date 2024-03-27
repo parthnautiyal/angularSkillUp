@@ -4,7 +4,10 @@ import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 import { Title } from 'src/app/constants/enums/title';
 import { Error } from 'src/app/models/Error';
-import { loadAllBatches } from 'src/app/state/action/batch.actions';
+import {
+  loadAllBatches,
+  loadEnrolledBatches,
+} from 'src/app/state/action/batch.actions';
 import {
   loadAllCourses,
   loadEnrolledCourses,
@@ -12,6 +15,7 @@ import {
 import {
   loadAllPaths,
   loadEnrolledPaths,
+  loadPathById,
 } from 'src/app/state/action/path.actions';
 
 @Component({
@@ -39,7 +43,10 @@ export class ErrorCardComponent implements OnInit {
   }
 
   handleReload() {
-    if (this.router.url === '/user') {
+    if (
+      this.router.url === '/user' ||
+      this.router.url.split('/')[2] === 'ongoing'
+    ) {
       if (this.title === Title.COURSES) {
         this.store.dispatch(loadEnrolledCourses());
       }
@@ -47,12 +54,12 @@ export class ErrorCardComponent implements OnInit {
         this.store.dispatch(loadEnrolledPaths());
       }
       if (this.title === Title.BATCHES) {
-        this.store.dispatch(loadAllBatches());
+        this.store.dispatch(loadEnrolledBatches());
       }
     } else if (this.router.url.split('/')[1] === 'batchpage') {
       window.location.reload();
     } else if (this.router.url.split('/')[1] === 'pathdashboard') {
-      window.location.reload();
+      this.store.dispatch(loadPathById({ id: this.router.url.split('/')[2] }));
     } else if (this.router.url.split('/')[1] === 'course') {
       window.location.reload();
     } else {

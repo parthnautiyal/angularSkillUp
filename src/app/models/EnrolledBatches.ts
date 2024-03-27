@@ -3,7 +3,7 @@ export interface BatchDetails {
   name: string;
   stream: string;
   progress: number;
-  isAuthorised: boolean;
+  isAuthorised?: boolean;
 }
 
 export interface EnrolledBatches {

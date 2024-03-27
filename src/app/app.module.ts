@@ -6,18 +6,37 @@ import { PageNotFoundModule } from './error-page/page-not-found/page-not-found.m
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ZopsmartApiInterceptorService } from './services/zopsmart-api-interceptor.service';
 import { StoreModule } from '@ngrx/store';
-import { courseReducer } from './state/reducer/course.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CourseEffects } from './state/effects/course.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { BatchEffects } from './state/effects/batch.effects';
-import { batchReducer } from './state/reducer/batch.reducer';
+import {
+  batchDetailsReducer,
+  batchReducer,
+  enrolledBatchesReducer,
+  pathDataReducer,
+  studentReducer,
+  trainerReducer,
+} from './state/reducer/batch.reducer';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PathEffects } from './state/effects/path.effects';
-import { pathReducer } from './state/reducer/path.reducer';
+import {
+  NoOfenrolledPathsReducer,
+  PathByIdReducer,
+  enrolledPathsReducer,
+  pathReducer,
+} from './state/reducer/path.reducer';
 import { RouterModule } from '@angular/router';
+import {
+  allCoursesReducer,
+  chapterDataReducer,
+  courseAboutInfoReducer,
+  enrolledCoursesReducer,
+  favoriteCoursesReducer,
+  noOfEnrolledCoursesReducer,
+} from './state/reducer/course.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,12 +45,24 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    PageNotFoundModule,
     AppRoutingModule,
     StoreModule.forRoot({
-      courses: courseReducer,
+      allCourses: allCoursesReducer,
+      enrolledCourses: enrolledCoursesReducer,
+      courseAboutInfo: courseAboutInfoReducer,
+      chapterData: chapterDataReducer,
+      noOfEnrolledCourses: noOfEnrolledCoursesReducer,
+      favoriteCourses: favoriteCoursesReducer,
       batch: batchReducer,
-      path: pathReducer,
+      allPaths: pathReducer,
+      pathById: PathByIdReducer,
+      enrolledPaths: enrolledPathsReducer,
+      student: studentReducer,
+      trainer: trainerReducer,
+      batchDetails: batchDetailsReducer,
+      batchPathData: pathDataReducer,
+      enrolledBatches: enrolledBatchesReducer,
+      numberOfEnrolledPaths: NoOfenrolledPathsReducer,
     }),
     EffectsModule.forRoot([CourseEffects, BatchEffects, PathEffects]),
     StoreDevtoolsModule.instrument({
@@ -39,7 +70,7 @@ import { RouterModule } from '@angular/router';
       logOnly: environment.production,
       autoPause: true,
     }),
-    RouterModule
+    RouterModule,
   ],
 
   providers: [

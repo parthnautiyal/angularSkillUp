@@ -1,56 +1,123 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CourseState } from '../reducer/course.reducer';
+import {
+  AllCoursesState,
+  EnrolledCoursesState,
+  CourseAboutInfoState,
+  ChapterDataState,
+  NoOfEnrolledCoursesState,
+  FavoriteCoursesState,
+} from '../reducer/course.reducer';
 
-export const selectCourseState = createFeatureSelector<CourseState>('courses');
+// Selectors for All Courses
+export const selectAllCoursesState =
+  createFeatureSelector<AllCoursesState>('allCourses');
 
-export const selectCourses = createSelector(
-  selectCourseState,
+export const selectAllCourses = createSelector(
+  selectAllCoursesState,
   (state) => state.allCourses
 );
 
-export const selectCoursesLoading = createSelector(
-  selectCourseState,
+export const selectAllCoursesLoading = createSelector(
+  selectAllCoursesState,
   (state) => state.isLoading
 );
 
-export const selectCoursesError = createSelector(
-  selectCourseState,
+export const selectAllCoursesError = createSelector(
+  selectAllCoursesState,
   (state) => state.error
 );
-export const selectNoOfCourses = createSelector(
-  selectCourseState,
+
+// Selectors for Enrolled Courses
+export const selectEnrolledCoursesState =
+  createFeatureSelector<EnrolledCoursesState>('enrolledCourses');
+
+export const selectEnrolledCourses = createSelector(
+  selectEnrolledCoursesState,
+  (state) => state.enrolledCourses
+);
+
+export const selectEnrolledCoursesLoading = createSelector(
+  selectEnrolledCoursesState,
+  (state) => state.isLoading
+);
+
+export const selectEnrolledCoursesError = createSelector(
+  selectEnrolledCoursesState,
+  (state) => state.error
+);
+
+// Selectors for Course About Info
+export const selectCourseAboutInfoState =
+  createFeatureSelector<CourseAboutInfoState>('courseAboutInfo');
+
+export const selectCourseAboutInfo = createSelector(
+  selectCourseAboutInfoState,
+  (state) => state.courseAboutInfo
+);
+
+export const selectCourseAboutInfoLoading = createSelector(
+  selectCourseAboutInfoState,
+  (state) => state.isLoading
+);
+
+export const selectCourseAboutInfoError = createSelector(
+  selectCourseAboutInfoState,
+  (state) => state.error
+);
+
+// Selectors for Chapter Data
+export const selectChapterDataState =
+  createFeatureSelector<ChapterDataState>('chapterData');
+
+export const selectChapterData = createSelector(
+  selectChapterDataState,
+  (state) => state.chapterData
+);
+
+export const selectChapterDataLoading = createSelector(
+  selectChapterDataState,
+  (state) => state.isLoading
+);
+
+export const selectChapterDataError = createSelector(
+  selectChapterDataState,
+  (state) => state.error
+);
+
+// Selectors for Number of Enrolled Courses
+export const selectNoOfEnrolledCoursesState =
+  createFeatureSelector<NoOfEnrolledCoursesState>('noOfEnrolledCourses');
+
+export const selectNoOfEnrolledCourses = createSelector(
+  selectNoOfEnrolledCoursesState,
   (state) => state.noOfEnrolledCourses
 );
 
-export const selectEnrolledCourses = createSelector(
-  selectCourseState,
-  (state) => state.enrolledCourses
+export const selectNoOfEnrolledCoursesLoading = createSelector(
+  selectNoOfEnrolledCoursesState,
+  (state) => state.isLoading
 );
-export const selectEnrolledCoursesError = createSelector(
-  selectCourseState,
-  (state) => state.errorEnrolled
+
+export const selectNoOfEnrolledCoursesError = createSelector(
+  selectNoOfEnrolledCoursesState,
+  (state) => state.error
 );
-export const selectChapterData = createSelector(
-  selectCourseState,
-  (state) => state.chapterData
-);
-export const selectChapterDataLoading = createSelector(
-  selectCourseState,
-  (state) => state.isLoadingChapterData
-);
-export const selectCourseAboutInfo = createSelector(
-  selectCourseState,
-  (state) => state.courseAboutInfo
-);
-export const selectCourseAboutInfoLoading = createSelector(
-  selectCourseState,
-  (state) => state.isLoadingAboutInfo
-);
-export const selectFavoritecourses = createSelector(
-  selectCourseState,
+
+// Selectors for Favorite Courses
+export const selectFavoriteCoursesState =
+  createFeatureSelector<FavoriteCoursesState>('favoriteCourses');
+
+export const selectFavoriteCourses = createSelector(
+  selectFavoriteCoursesState,
   (state) => state.favoriteCourses
 );
-export const selectFavouriteCoursesLoading = createSelector(
-  selectCourseState,
-  (state) => state.isLoadingFavourite
+
+export const selectFavoriteCoursesLoading = createSelector(
+  selectFavoriteCoursesState,
+  (state) => state.isLoading
+);
+
+export const selectFavoriteCoursesError = createSelector(
+  selectFavoriteCoursesState,
+  (state) => state.error
 );

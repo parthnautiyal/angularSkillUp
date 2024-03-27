@@ -1,6 +1,6 @@
 <div class="main-section">
   <ng-container *ngIf="loading">
-    <app-page-shimmer></app-page-shimmer>
+    <app-dashboard-shimmer></app-dashboard-shimmer>
   </ng-container>
 
   <ng-container *ngIf="!loading">
@@ -8,7 +8,7 @@
       <app-error-card [error]="errors"></app-error-card>
     </div>
     <ng-container *ngIf="!error">
-      <app-courses-banner></app-courses-banner>
+      <app-courses-banner [isRed]="isRed"></app-courses-banner>
       <app-course-about-section></app-course-about-section>
 
       <app-chapter *ngIf="isAccessiblity"></app-chapter>

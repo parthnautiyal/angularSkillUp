@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 import { Error } from 'src/app/models/Error';
+import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 import {
   loadChapterData,
   loadCourseAboutInfo,
@@ -10,8 +11,8 @@ import {
 import {
   selectChapterDataLoading,
   selectCourseAboutInfo,
+  selectCourseAboutInfoError,
   selectCourseAboutInfoLoading,
-  selectCoursesError,
 } from 'src/app/state/selector/course.selector';
 
 @Component({
@@ -28,9 +29,14 @@ export class CoursePageComponent implements OnInit {
     code: 0,
     message: '',
   };
+  isRed: boolean = true;
   courseAbout$!: Observable<boolean>;
   chapterData$!: Observable<boolean>;
-  constructor(private router: ActivatedRoute, private store: Store) {
+  constructor(
+    private router: ActivatedRoute,
+    private store: Store,
+    private mis: MiscellaneousService
+  ) {
     this.id = router.snapshot.params['id'];
   }
 
@@ -44,7 +50,7 @@ export class CoursePageComponent implements OnInit {
           if (res) {
             this.isAccessiblity = res.isEnrolled || false;
             console.log(this.isAccessiblity);
-
+            this.isRed = res.isFavourite;
             if (this.isAccessiblity) {
               this.store.dispatch(loadChapterData({ courseId: this.id }));
               this.store.select(selectChapterDataLoading).subscribe((res) => {
@@ -68,6 +74,10 @@ export class CoursePageComponent implements OnInit {
       }
     });
 
+    this.mis.getRating(parseInt(this.id));
+    this.mis.getCourseReviews(parseInt(this.id));
+    // console.log('id -> ' + this.id);
+
     // this.chapterData$ = this.store.select(selectChapterDataLoading);
     // combineLatest([this.courseAbout$, this.chapterData$]).subscribe(
     //   ([courseAbt, chapterData]) => {
@@ -80,7 +90,7 @@ export class CoursePageComponent implements OnInit {
     //     }
     //   }
     // );
-    this.store.select(selectCoursesError).subscribe((res) => {
+    this.store.select(selectCourseAboutInfoError).subscribe((res) => {
       if (res != null) {
         this.error = true;
         this.errors.message = res.message.split('`').slice(1);

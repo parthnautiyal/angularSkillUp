@@ -2,19 +2,36 @@ import { createReducer, on } from '@ngrx/store';
 import * as PathActions from '../action/path.actions';
 import { Path, PathData } from '../../models/Path';
 
-export interface PathState {
+export interface AllPathsState {
   allPaths: Path[];
-  pathById: PathData;
-  enrolledPaths: Path[];
-  numberOfEnrolledPaths: number;
-  error: any | null;
-  errorEnrolled: any | null;
   isLoading: boolean;
-  isLoadingPathById: boolean,
+  error: any | null;
 }
 
-export const initialPathState: PathState = {
+export interface PathByIdState {
+  pathById: PathData;
+  isLoading: boolean;
+  error: any | null;
+}
+
+export interface EnrolledPathsState {
+  enrolledPaths: Path[];
+  isLoading: boolean;
+  error: any | null;
+}
+export interface numberOfEnrolledPathsState {
+  numberOfEnrolledPaths: number;
+  isLoading: boolean;
+  error: any | null;
+}
+
+export const initialAllPathsState: AllPathsState = {
   allPaths: [],
+  isLoading: true,
+  error: null,
+};
+
+export const initialPathByIdState: PathByIdState = {
   pathById: {
     id: 0,
     name: '',
@@ -33,16 +50,23 @@ export const initialPathState: PathState = {
     createdAt: '',
     courses: [],
   },
-  enrolledPaths: [],
-  numberOfEnrolledPaths: 0,
+  isLoading: true,
   error: null,
-  errorEnrolled: null,
-  isLoading: false,
-  isLoadingPathById: false,
+};
+
+export const initialEnrolledPathsState: EnrolledPathsState = {
+  enrolledPaths: [],
+  isLoading: true,
+  error: null,
+};
+export const initialNumberOfEnrolledPathState: numberOfEnrolledPathsState = {
+  numberOfEnrolledPaths: 0,
+  isLoading: true,
+  error: null,
 };
 
 export const pathReducer = createReducer(
-  initialPathState,
+  initialAllPathsState,
   on(PathActions.loadAllPaths, (state) => ({
     ...state,
     isLoading: true,
@@ -61,26 +85,31 @@ export const pathReducer = createReducer(
     allPaths: [],
     isLoading: false,
     error,
-  })),
-  on(PathActions.loadPathById, (state, { id }) => ({
+  }))
+);
+export const PathByIdReducer = createReducer(
+  initialPathByIdState,
+  on(PathActions.loadPathById, (state) => ({
     ...state,
-    isLoadingPathById: true,
+    isLoading: true,
     error: null,
   })),
 
   on(PathActions.loadPathByIdSuccess, (state, { pathById }) => ({
     ...state,
     pathById: pathById,
-    isLoadingPathById: false,
+    isLoading: false,
     error: null,
   })),
 
   on(PathActions.loadPathByIdFailed, (state, { error }) => ({
     ...state,
-    isLoadingPathById: false,
+    isLoading: false,
     error,
-  })),
-
+  }))
+);
+export const enrolledPathsReducer = createReducer(
+  initialEnrolledPathsState,
   on(PathActions.loadEnrolledPaths, (state) => ({
     ...state,
     isLoading: true,
@@ -89,7 +118,7 @@ export const pathReducer = createReducer(
 
   on(PathActions.loadEnrolledPathsSuccess, (state, { enrolledPaths }) => ({
     ...state,
-    enrolledPaths,
+    enrolledPaths: enrolledPaths,
     isLoading: false,
     error: null,
   })),
@@ -97,15 +126,25 @@ export const pathReducer = createReducer(
   on(PathActions.loadEnrolledPathsFailed, (state, { error }) => ({
     ...state,
     enrolledPaths: [],
-    errorEnrolled: error,
     isLoading: false,
+    error,
+  }))
+);
+
+export const NoOfenrolledPathsReducer = createReducer(
+  initialNumberOfEnrolledPathState,
+  on(PathActions.loadNumberOfEnrolledPaths, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
   })),
 
   on(
     PathActions.loadNumberOfEnrolledPathsSuccess,
     (state, { numberOfEnrolledPaths }) => ({
       ...state,
-      numberOfEnrolledPaths,
+      numberOfEnrolledPaths: numberOfEnrolledPaths,
+      isLoading: false,
       error: null,
     })
   ),
@@ -113,6 +152,7 @@ export const pathReducer = createReducer(
   on(PathActions.loadNumberOfEnrolledPathsFailed, (state, { error }) => ({
     ...state,
     numberOfEnrolledPaths: 0,
+    isLoading: false,
     error,
   }))
 );

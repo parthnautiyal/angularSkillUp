@@ -1,9 +1,19 @@
 import * as fromPath from './path.selector';
-import { PathState } from '../reducer/path.reducer';
+import {
+  AllPathsState,
+  EnrolledPathsState,
+  PathByIdState,
+  numberOfEnrolledPathsState,
+} from '../reducer/path.reducer';
 
-fdescribe('Path Selectors', () => {
-  const initialState: PathState = {
+describe('Path Selectors', () => {
+  const initialAllPathsState: AllPathsState = {
     allPaths: [],
+    isLoading: true,
+    error: null,
+  };
+
+  const initialPathByIdState: PathByIdState = {
     pathById: {
       id: 0,
       name: '',
@@ -22,51 +32,79 @@ fdescribe('Path Selectors', () => {
       createdAt: '',
       courses: [],
     },
-    enrolledPaths: [],
-    numberOfEnrolledPaths: 0,
+    isLoading: true,
     error: null,
-    errorEnrolled: null,
-    isLoading: false,
-    isLoadingPathById: false
+  };
+
+  const initialEnrolledPathsState: EnrolledPathsState = {
+    enrolledPaths: [],
+    isLoading: true,
+    error: null,
+  };
+  const initialNumberOfEnrolledPathState: numberOfEnrolledPathsState = {
+    numberOfEnrolledPaths: 0,
+    isLoading: true,
+    error: null,
   };
 
   it('should select all paths', () => {
-    const result = fromPath.selectPaths.projector(initialState);
+    const result = fromPath.selectAllPaths.projector(initialAllPathsState);
     expect(result).toEqual([]);
   });
 
-  it('should select the loading state', () => {
-    const result = fromPath.selectPathsLoading.projector(initialState);
-    expect(result).toEqual(false);
+  it('should select loading state of all paths', () => {
+    const result = fromPath.selectAllPathsLoading.projector(initialAllPathsState);
+    expect(result).toEqual(true);
   });
 
-  it('should select the error', () => {
-    const result = fromPath.selectPathsError.projector(initialState);
-    expect(result).toBeNull();
-  });
-
-  it('should select the enrolled paths', () => {
-    const result = fromPath.selectEnrolledPaths.projector(initialState);
-    expect(result).toEqual([]);
-  });
-
-  it('should select the number of enrolled paths', () => {
-    const result = fromPath.selectNoOfEnrolledPaths.projector(initialState);
-    expect(result).toEqual(0);
-  });
-
-  it('should select the error for enrolled paths', () => {
-    const result = fromPath.selectEnrolledPathsError.projector(initialState);
+  it('should select the error of all paths', () => {
+    const result = fromPath.selectAllPathsError.projector(initialAllPathsState);
     expect(result).toBeNull();
   });
 
   it('should select the path by id', () => {
-    const result = fromPath.selectPathById.projector(initialState);
-    expect(result).toBe(initialState.pathById);
+    const result = fromPath.selectPathById.projector(initialPathByIdState);
+    expect(result).toBe(initialPathByIdState.pathById);
   });
 
-  it('should select isLoadingPathById', () => {
-    const result = fromPath.selectPathByIdLoading.projector(initialState);
-    expect(result).toBe(initialState.isLoadingPathById);
+  it('should select the loading state of path by id', () => {
+    const result = fromPath.selectPathByIdLoading.projector(initialPathByIdState);
+    expect(result).toEqual(true);
+  });
+
+  it('should select the error for path by id', () => {
+    const result = fromPath.selectPathByIdError.projector(initialPathByIdState);
+    expect(result).toBeNull();
+  });
+
+  it('should select the enrolled paths', () => {
+    const result = fromPath.selectEnrolledPaths.projector(initialEnrolledPathsState);
+    expect(result).toEqual([]);
+  });
+
+  it('should select the loading state of enrolled paths', () => {
+    const result = fromPath.selectEnrolledPathsLoading.projector(initialEnrolledPathsState);
+    expect(result).toBe(true);
   })
+
+  it('should select the error of enrolled paths', () => {
+    const result = fromPath.selectEnrolledPathsError.projector(initialEnrolledPathsState);
+    expect(result).toBeNull;
+  })
+
+  it('should select the number of enrolled paths', () => {
+    const result = fromPath.selectNoOfEnrolledPaths.projector(initialNumberOfEnrolledPathState);
+    expect(result).toBe(0);
+  })
+
+  it('should select the loading state of number of enrolled paths', () => {
+    const result = fromPath.selectNoOfEnrolledPathsLoading.projector(initialNumberOfEnrolledPathState);
+    expect(result).toBe(true);
+  })
+
+  it('should select the error of number of enrolled paths', () => {
+    const result = fromPath.selectNoOfEnrolledPathsError.projector(initialNumberOfEnrolledPathState);
+    expect(result).toBeNull;
+  })
+
 });
