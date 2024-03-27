@@ -23,4 +23,5 @@ export enum API {
   LOGIN = '/login',
   REFRESH = '/refresh',
   FAVOURITES = '/favourites',
+  RATINGS = '/ratings',
 }

@@ -48,9 +48,9 @@ export class CardContainerComponent implements OnInit {
   isDashBoard = false;
   Title = Title;
   RouterLinks = RouterLinks;
-  allPaths: Path[] = [];
-  allCourses: Course[] = [];
-  allBatches: Batch[] = [];
+  allPaths?: Path[] = [];
+  allCourses?: Course[] = [];
+  allBatches?: Batch[] = [];
   enrolledBatches: EnrolledBatches = {
     averageProgress: 0,
     count: 0,
@@ -80,7 +80,7 @@ export class CardContainerComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     if (this.title == Title.COURSES) {
-      if (this.router.url=='/dashboard'){
+      if (this.router.url == '/dashboard') {
         this.height = 262;
         this.store.select(selectAllCourses).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
@@ -88,7 +88,7 @@ export class CardContainerComponent implements OnInit {
           }
         });
         this.store.select(selectAllCoursesError).subscribe((res) => {
-          console.log("inside all course loading",this.error);
+          // console.log('inside all course loading', this.error);
           if (res != null) {
             this.errorCourse.message = res.message.split('`').slice(1);
             this.errorCourse.code = res.message.split('`').slice(0, 1);
@@ -97,36 +97,28 @@ export class CardContainerComponent implements OnInit {
             this.error = false;
           }
         });
-        this.store
-          .select(selectAllCoursesLoading)
-          .subscribe((res) => {
-            this.loading = res;
-          });
-      }
-      else{
-        this.store
-        .select(selectEnrolledCourses)
-        .subscribe((res) => {
+        this.store.select(selectAllCoursesLoading).subscribe((res) => {
+          this.loading = res;
+        });
+      } else {
+        this.store.select(selectEnrolledCourses).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allCourses = res;
           }
         });
-      this.store.select(selectEnrolledCoursesError).subscribe((res) => {
-        if (res != null) {
-          this.errorCourse.message = res.message.split('`').slice(1);
-          this.errorCourse.code = res.message.split('`').slice(0, 1);
-          this.error = true;
-        } else {
-          this.error = false;
-        }
-      });
-      this.store
-        .select(selectEnrolledCoursesLoading)
-        .subscribe((res) => {
+        this.store.select(selectEnrolledCoursesError).subscribe((res) => {
+          if (res != null) {
+            this.errorCourse.message = res.message.split('`').slice(1);
+            this.errorCourse.code = res.message.split('`').slice(0, 1);
+            this.error = true;
+          } else {
+            this.error = false;
+          }
+        });
+        this.store.select(selectEnrolledCoursesLoading).subscribe((res) => {
           this.loading = res;
         });
       }
-
     }
     if (this.title == Title.BATCHES && !(this.router.url == '/user')) {
       this.height = 200;
@@ -141,7 +133,7 @@ export class CardContainerComponent implements OnInit {
           this.errorBatch.message = res.message.split('`').slice(1);
           this.errorBatch.code = res.message.split('`').slice(0, 1);
           this.error = true;
-        }else{
+        } else {
           this.error = false;
         }
       });
@@ -157,7 +149,7 @@ export class CardContainerComponent implements OnInit {
       });
 
       this.store.select(selectEnrolledBatchesError).subscribe((error) => {
-        console.log(error);
+        // console.log(error);
         if (error == null) {
           this.error = false;
         } else {
@@ -167,7 +159,7 @@ export class CardContainerComponent implements OnInit {
         }
       });
       this.store.select(selectEnrolledBatchesLoading).subscribe((res) => {
-       this.loading = res;
+        this.loading = res;
       });
     }
     if (this.title == Title.PATHS) {
@@ -221,5 +213,11 @@ export class CardContainerComponent implements OnInit {
         this.shimmerCount = 3; // adjust the value as per your requirement
       }
     });
+  }
+  ngOnDestroy(): void {
+    if (this.allPaths) {
+      this.allPaths = undefined;
+
+    }
   }
 }
