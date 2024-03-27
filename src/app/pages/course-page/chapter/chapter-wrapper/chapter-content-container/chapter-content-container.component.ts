@@ -15,12 +15,12 @@ export class ChapterContentContainerComponent implements OnInit {
   }
 
   openPopup(i: number) {
-    console.log(this.allChapters[i]);
+    // console.log(this.allChapters[i]);
     // this.allChapters[i].isVisited = true;
     this.chapterUrl = this.allChapters[i].resourceLink;
 
     this.close = true;
-    console.log(this.chapterUrl);
+    // console.log(this.chapterUrl);
   }
 
   openInNewTab() {

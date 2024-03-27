@@ -15,9 +15,9 @@ import { SearchResponse } from '../models/SearchResponse';
 export class MiscellaneousService {
   user: any = {
     token:
-      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTQzMTcxMiwiaWF0IjoxNzExNDMxNDEyLCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJhZGl0eWEuYmhhcmR3YWpAem9wc21hcnQuY29tIiwidXNlcklkIjozMzN9.kK93i3usF9QKNi7YcWxNgq1wZagBIHsNNGV7UOhxLfLljk8cFWE2LZCLI-JFCD7MsDGXYIr73-lExzeS0psdCOwF0IMxTywnqVf4KH9IJ9D2ExL79xeXrklC-sjur72i2YxPNgS7Ka5Zm0IQvjheO8iiasdBTUhmE_Offu2G8OdSiaOJiQM-_MiHI0GYvASEvwndJPz9l0cgB_gWIbZpiOWy0czDRBM86UNUTIj62O4kLMrlkySlhRAeK3hYWCCmdvf4pobZqIFQFJr_t2cU7J8zjDHAK1O8gF3_4j0Dg6h26cgQw4ywKqNhnYFoLo5UrrP23iICjxbULJB5TSBTEw',
+      'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTUxODk3NywiaWF0IjoxNzExNTE4Njc3LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.kGzFxxiTbOxtTUOPXEP0GCJWfMnzRY0vDh6qupd-mRPe4ceFPlSQFq7yrZaVMDrhX_C_H80m4GzajW0diVmbKmBJrwNL-F_a4K3pWWDebdQ8BdBEEphHauYxxyu3wmoyHZLaGOROV3Yfrm647jcajnu7WRm1SwKuuWuOvR7gQn7e68so826fBYyBtD583T_bQioLgZWhtz_ptSdNjmJE_VbQb_s3VozGJuyVMrViRpk5I3Z61RvAYSAgTtZ54xZLHH0cE1WlxtsRAEqpiDn26iwjR7qeR4oqgFUW0tJ43Tp5XuDH52g49pY1BAIJq4j9bWuakhlMNFCfbjV2_5hH9g',
     refreshToken:
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTYwMDQ5NSwiaWF0IjoxNzExNTE0MDk1LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJhZGl0eWEuYmhhcmR3YWpAem9wc21hcnQuY29tIn0.ZSwY6SyRhE6BkexlF01yCvPTO_KomaCldbetHfISp-plhLWX_mDT4JfRq_2WrNZIvbju-ed3zjS3RbxoZnYsEq16YPQyJUEI4EI_KPa0Vq__JuauR4u2LXqguhlqSDGocWSVR6rvrupIz5f3nPO5DasF34N-SjraLxvcCiSbRSA9EhwccrZCoDpngk-P22BwCTxygudrw_aDfNgVKaUaxhs7KHXdqmhVchbXqkLtSAS_RQudxoEuQVKknp5a9z36u-G64QkAhmqazQPvWUQWZ1FOxcYk0JOwruOFigbOcuLW-lHtRJ0yfHcQfgl6RXRbfDsuaWnUZpINvTwpSdJZtg',
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTUzODExMywiaWF0IjoxNzExNDUxNzEzLCJpc3MiOiJHT09HTEUiLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20ifQ.ZzyXhshNbqtPKZNgMDH1M4mMVpx9VnyYLB19qv59H1JCvfDu9HBDjeoeXOxprcwQ8-8Ohi85vKAmrXhwfIhBpOu8o-Pe7TP9855G5rOp-RuskCUuCZP1lMkDKPSbzQypBi_gbcbPMmEWZ6QcpdjIieXBZWsjjR4eIGnZcqZ4GevjL3gOkZWuVHNOLtX8AZFDfP-0-nEJLiYQ7uuaKv-4F3e7ywzRNkzT2sNPxSWR6JbtZlCg_nfxT669wRvzz-JfJpPHN17CQSN4zqNhwok-NyrF0ch83Hm68xiHf_nlu7fS50a9RZuN2AV6AdI_7Arew7c_8jtyibZ3Gkh3g_PNzA',
   };
 
   refreshHeader = new HttpHeaders({
@@ -65,34 +65,9 @@ export class MiscellaneousService {
           API.PAGE_SIZE
       )
       .subscribe((res) => {
-        console.log(res);
+        // console.log(res);
         if (res != null && res.data != null) {
           this.PathDataSubject.next(res.data);
-        }
-      });
-  }
-
-  private CourseRatingSubject = new BehaviorSubject<Ratings>({
-    averageRating: 0,
-    rating: {
-      fiveStars: 0,
-      fourStars: 0,
-      threeStars: 0,
-      twoStars: 0,
-      oneStars: 0,
-    },
-  });
-  courseRating$ = this.CourseRatingSubject.asObservable();
-
-  getRating(id: number) {
-    return this.http
-      .get<APIResponse<Ratings>>(
-        'https://api.training.zopsmart.com/students/courses/' + id + '/ratings'
-      )
-      .subscribe((res) => {
-        if (res != null) {
-          this.CourseRatingSubject.next(res.data);
-          console.log(res);
         }
       });
   }
@@ -127,7 +102,7 @@ export class MiscellaneousService {
       .subscribe((res) => {
         if (res != null && res != undefined) {
           this.CourseReviewsSubject.next(res.data);
-          console.log(res.data);
+          // console.log(res.data);
         }
       });
   }
