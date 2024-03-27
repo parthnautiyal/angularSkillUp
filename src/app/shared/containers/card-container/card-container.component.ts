@@ -1,5 +1,12 @@
 import { Router } from '@angular/router';
-import { Component, HostListener, Input, NgZone, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Course } from 'src/app/models/Course';
 import { Path } from 'src/app/models/Path';
 import { Batch } from 'src/app/models/Batch';
@@ -78,10 +85,11 @@ export class CardContainerComponent implements OnInit {
     private messageService: MessageService,
     private ngZone: NgZone
   ) {}
+
   ngOnInit(): void {
     if (this.title == Title.COURSES) {
+      this.height = 262;
       if (this.router.url == '/dashboard') {
-        this.height = 262;
         this.store.select(selectAllCourses).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allCourses = res;
@@ -142,7 +150,7 @@ export class CardContainerComponent implements OnInit {
       });
     }
     if (this.title == Title.BATCHES && this.router.url == '/user') {
-      this.height = 120;
+      this.height = 102;
       this.enrolled = true;
       this.store.select(selectEnrolledBatches).subscribe((data) => {
         this.enrolledBatches = data;
@@ -164,40 +172,43 @@ export class CardContainerComponent implements OnInit {
     }
     if (this.title == Title.PATHS) {
       this.height = 112;
-      this.store.select(selectAllPaths).subscribe((res) => {
-        if (typeof res === 'object' && Object.keys(res).length > 0) {
-          this.allPaths = res;
-        }
-      });
-      this.store.select(selectAllPathsError).subscribe((res) => {
-        if (res != null) {
-          this.errorPath.message = res.message.split('`').slice(1);
-          this.errorPath.code = res.message.split('`').slice(0, 1);
-          this.error = true;
-        } else {
-          this.error = false;
-        }
-      });
-      this.store.select(selectAllPathsLoading).subscribe((res) => {
-        this.loading = res;
-      });
-      this.store.select(selectEnrolledPaths).subscribe((res) => {
-        if (typeof res === 'object' && Object.keys(res).length > 0) {
-          this.allPaths = res;
-        }
-      });
-      this.store.select(selectEnrolledPathsError).subscribe((res) => {
-        if (res != null) {
-          this.errorPath.message = res.message.split('`').slice(1);
-          this.errorPath.code = res.message.split('`').slice(0, 1);
-          this.error = true;
-        } else {
-          this.error = false;
-        }
-      });
-      this.store.select(selectEnrolledPathsLoading).subscribe((res) => {
-        this.loading = res;
-      });
+      if (this.router.url == '/dashboard') {
+        this.store.select(selectAllPaths).subscribe((res) => {
+          if (typeof res === 'object' && Object.keys(res).length > 0) {
+            this.allPaths = res;
+          }
+        });
+        this.store.select(selectAllPathsError).subscribe((res) => {
+          if (res != null) {
+            this.errorPath.message = res.message.split('`').slice(1);
+            this.errorPath.code = res.message.split('`').slice(0, 1);
+            this.error = true;
+          } else {
+            this.error = false;
+          }
+        });
+        this.store.select(selectAllPathsLoading).subscribe((res) => {
+          this.loading = res;
+        });
+      } else {
+        this.store.select(selectEnrolledPaths).subscribe((res) => {
+          if (typeof res === 'object' && Object.keys(res).length > 0) {
+            this.allPaths = res;
+          }
+        });
+        this.store.select(selectEnrolledPathsError).subscribe((res) => {
+          if (res != null) {
+            this.errorPath.message = res.message.split('`').slice(1);
+            this.errorPath.code = res.message.split('`').slice(0, 1);
+            this.error = true;
+          } else {
+            this.error = false;
+          }
+        });
+        this.store.select(selectEnrolledPathsLoading).subscribe((res) => {
+          this.loading = res;
+        });
+      }
     }
     this.onResize();
   }
@@ -217,7 +228,6 @@ export class CardContainerComponent implements OnInit {
   ngOnDestroy(): void {
     if (this.allPaths) {
       this.allPaths = undefined;
-
     }
   }
 }
