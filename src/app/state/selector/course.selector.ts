@@ -6,6 +6,7 @@ import {
   ChapterDataState,
   NoOfEnrolledCoursesState,
   FavoriteCoursesState,
+  RatingState,
 } from '../reducer/course.reducer';
 
 // Selectors for All Courses
@@ -121,3 +122,21 @@ export const selectFavoriteCoursesError = createSelector(
   selectFavoriteCoursesState,
   (state) => state.error
 );
+export const selectCourseRating =
+  createFeatureSelector<RatingState>('courseRating');
+
+export const selectRatings = createSelector(
+  selectCourseRating,
+  (state) => state.rating
+);
+
+export const selectRatingsLoading = createSelector(
+  selectCourseRating,
+  (state) => state.isLoading
+);
+
+export const selectRatingError = createSelector(
+  selectCourseRating,
+  (state) => state.error
+);
+

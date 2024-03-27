@@ -59,9 +59,9 @@ export class SearchPageComponent implements OnInit {
           ) {
             this.noContent = true;
           }
-          console.log(this.searchResponse);
-          console.log('pathdata: ', this.allPathsData);
-          console.log('coursedata; ', this.allCoursesData);
+          // console.log(this.searchResponse);
+          // console.log('pathdata: ', this.allPathsData);
+          // console.log('coursedata; ', this.allCoursesData);
         });
     }
   }
