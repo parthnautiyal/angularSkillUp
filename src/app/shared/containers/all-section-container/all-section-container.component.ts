@@ -160,7 +160,7 @@ export class AllSectionContainerComponent implements OnInit {
   getEnrolledPaths() {
     this.store.dispatch(loadEnrolledPaths());
     this.store.select(selectEnrolledPaths).subscribe((res) => {
-      console.log('hel;llo');
+      // console.log('hel;llo');
       if (res.length > 0) {
         this.allPathsData = res;
       }
@@ -172,7 +172,7 @@ export class AllSectionContainerComponent implements OnInit {
         this.errorCard.message = res.message.split('`').slice(1);
         this.errorCard.code = res.message.split('`').slice(0, 1);
       } else {
-        console.log('hel;llo');
+        // console.log('hel;llo');
         this.error = false;
       }
     });

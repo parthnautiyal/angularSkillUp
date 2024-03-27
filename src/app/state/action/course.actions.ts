@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Course } from '../../models/Course';
 import { Chapter } from 'src/app/models/Chapter';
+import { Ratings } from 'src/app/models/Ratings';
 
 export const loadAllCourses = createAction('[Course] Load All Courses');
 
@@ -80,8 +81,15 @@ export const loadFavoriteCoursesFailed = createAction(
   '[Course] Load Favorite Courses Failed',
   props<{ error: any }>()
 );
-export const loadCourseRating = createAction('[Course] Load Courses rating');
-// export const loadCourseRatingSuccess = createAction(
-//   '[Course] Load Courses rating Success',
-//   props<{  }>()
-// );
+export const loadCourseRating = createAction(
+  '[Course] Load Courses rating',
+  props<{ id: string }>()
+);
+export const loadCourseRatingSuccess = createAction(
+  '[Course] Load Courses rating Success',
+  props<{ rating: Ratings }>()
+);
+export const loadCourseRatingFailed = createAction(
+  '[Course] Load Courses rating Failed',
+  props<{ error: any }>()
+);

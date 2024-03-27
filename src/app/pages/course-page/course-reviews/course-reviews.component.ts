@@ -3,8 +3,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Review } from 'src/app/models/Reviews';
 import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
+import { loadCourseRating } from 'src/app/state/action/course.actions';
+import { selectRatings } from 'src/app/state/selector/course.selector';
 
 @Component({
   selector: 'app-course-reviews',
@@ -12,7 +15,7 @@ import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
   styleUrls: ['./course-reviews.component.sass'],
 })
 export class CourseReviewsComponent implements OnInit {
-  @Input() id = 0;
+  @Input() id: string = '';
   ratingClicked: number = 0;
   isReviewOn: boolean = false;
   isMyReviewOn: boolean = true;
@@ -54,7 +57,8 @@ export class CourseReviewsComponent implements OnInit {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private misc: MiscellaneousService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private store: Store
   ) {
     this.id = this.router.snapshot.params['id'];
     // this.misc.getRating(this.id).subscribe((rating) => {
@@ -107,28 +111,31 @@ export class CourseReviewsComponent implements OnInit {
   }
 
   updateRating(rating: Ratings) {
+    console.log('rating', rating);
+
     this.totalRating = Object.values(this.rating.rating).reduce(
       (a, b) => a + b,
       0
     );
     console.log('Total Rating -> ' + this.totalRating);
     this.totalRating = this.totalRating == 0 ? 1 : this.totalRating;
+    const updatedRating = { ...this.rating.rating };
 
-    rating.rating.fiveStars =
+    updatedRating.fiveStars =
       (rating.rating.fiveStars / this.totalRating) * 100;
-    console.log(rating.rating);
 
-    rating.rating.fourStars =
+    updatedRating.fourStars =
       (rating.rating.fourStars / this.totalRating) * 100;
-    rating.rating.threeStars =
+    updatedRating.threeStars =
       (rating.rating.threeStars / this.totalRating) * 100;
-    rating.rating.twoStars = (rating.rating.twoStars / this.totalRating) * 100;
-    rating.rating.oneStars = (rating.rating.oneStars / this.totalRating) * 100;
-    this.ratingPercentage[0] = Math.floor(rating.rating.fiveStars);
-    this.ratingPercentage[1] = Math.floor(rating.rating.fourStars);
-    this.ratingPercentage[2] = Math.floor(rating.rating.threeStars);
-    this.ratingPercentage[3] = Math.floor(rating.rating.twoStars);
-    this.ratingPercentage[4] = Math.floor(rating.rating.oneStars);
+    updatedRating.twoStars = (rating.rating.twoStars / this.totalRating) * 100;
+    updatedRating.oneStars = (rating.rating.oneStars / this.totalRating) * 100;
+
+    this.ratingPercentage[0] = Math.floor(updatedRating.fiveStars);
+    this.ratingPercentage[1] = Math.floor(updatedRating.fourStars);
+    this.ratingPercentage[2] = Math.floor(updatedRating.threeStars);
+    this.ratingPercentage[3] = Math.floor(updatedRating.twoStars);
+    this.ratingPercentage[4] = Math.floor(updatedRating.oneStars);
     console.log(this.ratingPercentage);
   }
   createAvgRatingArray() {
@@ -141,11 +148,12 @@ export class CourseReviewsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = this.router.snapshot.params['id'];
     console.log('Rating Total -> ' + this.totalRating);
 
-    this.misc.courseRating$.subscribe((res) => {
-      console.log(res);
+    this.store.select(selectRatings).subscribe((res) => {
       if (res.averageRating != 0) this.rating = res;
+      console.log(this.rating.rating.fiveStars);
     });
     this.misc.myCourseReviews$.subscribe((res) => {
       if (res != null) {

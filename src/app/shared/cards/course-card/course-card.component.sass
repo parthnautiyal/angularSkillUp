@@ -8,8 +8,12 @@
   flex-direction: column
 
   @media screen and (max-width: 768px)
-    width: 40vw
-    height: 195px
+    width: 74vw
+    height: 250px
+    display: block
+    padding: 10px
+
+  
 
 .content-div
   width: 85%
@@ -21,6 +25,10 @@
   gap: 0.5rem
   justify-content: space-between
   color: var(--primary-font-color)
+  @media screen and (max-width: 768px)
+    width: 100%
+    padding-bottom: 0
+    justify-content: space-evenly
 
 .image
   height: 50%
@@ -28,6 +36,10 @@
   border-radius: 10px
   margin: 10px 0 15px
   cursor: pointer
+
+  @media screen and (max-width: 768px)
+    width: 100%
+    margin: 0
 
 .course-name
   font-size: 1rem
@@ -83,3 +95,8 @@
 
   ::ng-deep #progress-value
     font-size: 12px !important
+
+.course-date
+  
+   @media screen and (max-width: 768px)
+    width: 20vw

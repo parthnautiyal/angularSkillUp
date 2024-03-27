@@ -33,6 +33,7 @@ import {
   allCoursesReducer,
   chapterDataReducer,
   courseAboutInfoReducer,
+  courseRatingReducer,
   enrolledCoursesReducer,
   favoriteCoursesReducer,
   noOfEnrolledCoursesReducer,
@@ -63,6 +64,7 @@ import {
       batchPathData: pathDataReducer,
       enrolledBatches: enrolledBatchesReducer,
       numberOfEnrolledPaths: NoOfenrolledPathsReducer,
+      courseRating: courseRatingReducer,
     }),
     EffectsModule.forRoot([CourseEffects, BatchEffects, PathEffects]),
     StoreDevtoolsModule.instrument({
