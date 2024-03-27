@@ -1,21 +1,42 @@
-import { Course } from 'src/app/models/Course';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import * as fromBatch from './batch.selector';
-import { BatchState } from '../reducer/batch.reducer';
-import { TestBed } from '@angular/core/testing';
+import { BatchState,
+  StudentState,
+  TrainerState,
+  BatchDetailsState,
+  BatchPathDataState,
+  EnrolledbatchState, } from '../reducer/batch.reducer';
 
-fdescribe('Batch Selectors', () => {
-  let store: MockStore;
-  const initialState: BatchState = {
+describe('Batch Selectors', () => {
+
+  const initialBatchState: BatchState = {
     batches: [],
-    isLoadingBatches: false,
+    isLoading: true,
     error: null,
+  };
+
+  const initialEnrolledBatchState: EnrolledbatchState = {
+    enrolledBatches: {
+      averageProgress: 0,
+      count: 0,
+      enrolledBatches: [],
+    },
+    isLoading: true,
+    error: 'error',
+  };
+
+  const initialStudentState: StudentState = {
     students: [],
-    isLoadingTrainer: false,
-    isLoadingStudents: false,
-    errorStudents: null,
-    errorTrainer: null,
+    isLoading: true,
+    error: null,
+  };
+
+  const initialTrainerState: TrainerState = {
     trainers: [],
+    isLoading: true,
+    error: null,
+  };
+
+  const initialBatchDetailsState: BatchDetailsState = {
     batchDetails: {
       createdAt: '',
       createdBy: {
@@ -40,7 +61,12 @@ fdescribe('Batch Selectors', () => {
       },
       progress: 0,
     },
-    pathData: {
+    isLoading: true,
+    error: null,
+  };
+
+  const initialBatchPathDataState: BatchPathDataState = {
+    BatchPathData: {
       id: 0,
       name: '',
       courseName: '',
@@ -63,51 +89,97 @@ fdescribe('Batch Selectors', () => {
       updatedAt: '',
       level: 0,
     },
-    isLoadingPaths: false,
-    errorPaths: undefined,
-    isLoadingBatchById: false
+    isLoading: true,
+    error: null,
   };
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [provideMockStore({ initialState })]
-    });
-
-    store = TestBed.inject(MockStore);
-  });
-
   it('should select the list of batches', () => {
-    const result = fromBatch.selectBatchs.projector(initialState);
+    const result = fromBatch.selectBatches.projector(initialBatchState);
     expect(result).toEqual([]);
   });
 
-  it('should select the loading state', () => {
-    const result = fromBatch.selectBatchsLoading.projector(initialState);
-    expect(result).toEqual(false);
+  it('should select the loading state of batches', () => {
+    const result = fromBatch.selectBatchesLoading.projector(initialBatchState);
+    expect(result).toBe(true);
   });
 
-  it('should select the error', () => {
-    const result = fromBatch.selectBatchsError.projector(initialState);
+  it('should select the error of batches', () => {
+    const result = fromBatch.selectBatchesError.projector(initialBatchState);
+    expect(result).toBe(null);
+  });
+
+  it('should select the list of students', () => {
+    const result = fromBatch.selectStudents.projector(initialStudentState);
+    expect(result).toEqual([]);
+  });
+
+  it('should select the loading state of students', () => {
+    const result = fromBatch.selectStudentsLoading.projector(initialStudentState);
+    expect(result).toBe(true);
+  });
+
+  it('should select the error of students', () => {
+    const result = fromBatch.selectStudentsError.projector(initialStudentState);
+    expect(result).toBe(null);
+  });
+
+  it('should select the list of trainers', () => {
+    const result = fromBatch.selectTrainers.projector(initialTrainerState);
+    expect(result).toEqual([]);
+  });
+
+  it('should select the loading state of trainers', () => {
+    const result = fromBatch.selectTrainersLoading.projector(initialTrainerState);
+    expect(result).toBe(true);
+  });
+
+  it('should select the error of trainers', () => {
+    const result = fromBatch.selectTrainersError.projector(initialStudentState);
     expect(result).toBe(null);
   });
 
   it('should select the batch details', () => {
-    const result = fromBatch.selectBatchById.projector(initialState);
-    expect(result).toBe(initialState.batchDetails);
+    const result = fromBatch.selectBatchDetails.projector(initialBatchDetailsState);
+    expect(result).toBe(initialBatchDetailsState.batchDetails);
   });
 
-  it('should select the list of trainers', () => {
-    const result = fromBatch.selectTrainers.projector(initialState);
-    expect(result).toEqual([]);
+  it('should select the loading state of batch details', () => {
+    const result = fromBatch.selectBatchDetailsLoading.projector(initialBatchDetailsState);
+    expect(result).toBe(true);
   });
 
-  it('should select the list of students', () => {
-    const result = fromBatch.selectStudents.projector(initialState);
-    expect(result).toEqual([]);
+  it('should select the error of batch details', () => {
+    const result = fromBatch.selectBatchDetailsError.projector(initialBatchDetailsState);
+    expect(result).toBe(null);
   });
 
-  it('should select the path data', () => {
-    const result = fromBatch.selectBatchPaths.projector(initialState);
-    expect(result).toBe(initialState.pathData);
+  it('should select the batch path data', () => {
+    const result = fromBatch.selectBatchPathData.projector(initialBatchPathDataState);
+    expect(result).toBe(initialBatchPathDataState.BatchPathData);
   });
+
+  it('should select the loading state of batch path data', () => {
+    const result = fromBatch.selectBatchPathDataLoading.projector(initialBatchPathDataState);
+    expect(result).toBe(true);
+  })
+
+  it('should select the error of batch path data', () => {
+    const result = fromBatch.selectBatchPathDataError.projector(initialBatchPathDataState);
+    expect(result).toBe(null);
+  })
+
+  it('should select the enrolled batches', () => {
+    const result = fromBatch.selectEnrolledBatches.projector(initialEnrolledBatchState);
+    expect(result).toBe(initialEnrolledBatchState.enrolledBatches);
+  })
+
+  it('should select the loading state of enrolled batches', () => {
+    const result = fromBatch.selectEnrolledBatchesLoading.projector(initialEnrolledBatchState);
+    expect(result).toBe(true);
+  })
+
+  it('should select the error of enrolled batches', () => {
+    const result = fromBatch.selectEnrolledBatchesError.projector(initialEnrolledBatchState);
+    expect(result).toBe(initialEnrolledBatchState.error);
+  })
 });

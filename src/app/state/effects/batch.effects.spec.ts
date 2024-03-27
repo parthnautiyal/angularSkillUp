@@ -7,7 +7,7 @@ import { BatchEffects } from "./batch.effects"
 import * as BatchActions from '../action/batch.actions';
 import { HttpClient } from '@angular/common/http';
 
-fdescribe('BatchEffects', () => {
+describe('BatchEffects', () => {
   let actions$: Observable<any>;
   let effects: BatchEffects;
   let http: HttpClient;
@@ -73,6 +73,45 @@ fdescribe('BatchEffects', () => {
     spyOn(http, 'get').and.returnValue(throwError(error));
 
     effects.loadAllBatches$.subscribe(action => {
+      expect(action).toEqual(outcome);
+      done();
+    });
+  });
+
+  it('should load enrolled batches', (done) => {
+    const enrolledBatches = {
+      averageProgress: 50,
+      count: 4,
+      enrolledBatches:  [{
+        id: 2,
+        name: 'Java',
+        stream: 'Java',
+        progress: 50,
+      }]
+    };
+    const action = BatchActions.loadEnrolledBatches();
+    const outcome = BatchActions.loadEnrolledBatchesSuccess({ enrolledBatches });
+
+    actions$ = of(action);
+
+    spyOn(http, 'get').and.returnValue(of({data : enrolledBatches}));
+
+    effects.loadEnrolledBatches$.subscribe((action: any) => {
+      expect(action).toEqual(outcome);
+      done();
+    });
+  });
+
+  it('should fail to load all batches', (done) => {
+    const error = new Error('Error loading batches');
+    const action = BatchActions.loadEnrolledBatches();
+    const outcome = BatchActions.loadEnrolledBatchesFailed({ error });
+
+    actions$ = of(action);
+
+    spyOn(http, 'get').and.returnValue(throwError(error));
+
+    effects.loadEnrolledBatches$.subscribe(action => {
       expect(action).toEqual(outcome);
       done();
     });

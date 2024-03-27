@@ -1,18 +1,20 @@
 import { TestBed } from '@angular/core/testing';
-import { pathReducer, initialPathState } from './path.reducer';
+import { pathReducer,
+    PathByIdReducer,
+    enrolledPathsReducer,
+    NoOfenrolledPathsReducer,
+    initialAllPathsState,
+    initialPathByIdState,
+    initialEnrolledPathsState,
+    initialNumberOfEnrolledPathState,
+    } from './path.reducer';
 import * as PathActions from '../action/path.actions';
 
-fdescribe('PathReducer', () => {
-  it('should return the initial state', () => {
-    const action = {} as any;
-    const state = pathReducer(undefined, action);
-
-    expect(state).toBe(initialPathState);
-  });
+describe('PathReducer', () => {
 
   it('should handle loadAllPaths action', () => {
     const action = PathActions.loadAllPaths();
-    const state = pathReducer(initialPathState, action);
+    const state = pathReducer(initialAllPathsState, action);
 
     expect(state.isLoading).toBe(true);
     expect(state.error).toBe(null);
@@ -30,29 +32,29 @@ fdescribe('PathReducer', () => {
       completedAt: null,
     }];
     const action = PathActions.loadAllPathsSuccess({ paths });
-    const state = pathReducer(initialPathState, action);
+    const state = pathReducer(initialAllPathsState, action);
 
     expect(state.allPaths).toEqual(paths);
-    expect(state.isLoading).toBeFalse();
-    expect(state.error).toBeNull();
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(null);
   });
 
   it('should handle loadAllPathsFailed action', () => {
     const error = 'Failed to load paths';
     const action = PathActions.loadAllPathsFailed({ error });
-    const state = pathReducer(initialPathState, action);
+    const state = pathReducer(initialAllPathsState, action);
 
     expect(state.allPaths).toEqual([]);
-    expect(state.isLoading).toBeFalse();
+    expect(state.isLoading).toBe(false);
     expect(state.error).toEqual(error);
   });
 
   it('should handle loadPathById action', () => {
     const action = PathActions.loadPathById({ id: '1' });
-    const state = pathReducer(initialPathState, action);
+    const state = PathByIdReducer(initialPathByIdState, action);
 
-    expect(state.isLoadingPathById).toBeTrue();
-    expect(state.error).toBeNull();
+    expect(state.isLoading).toBe(true);
+    expect(state.error).toBe(null);
   });
 
   it('should handle loadPathByIdSuccess action', () => {
@@ -99,26 +101,28 @@ fdescribe('PathReducer', () => {
       ],
     };
     const action = PathActions.loadPathByIdSuccess({ pathById });
-    const state = pathReducer(initialPathState, action);
+    const state = PathByIdReducer(initialPathByIdState, action);
 
     expect(state.pathById).toEqual(pathById);
+    expect(state.isLoading).toBe(false);
     expect(state.error).toBeNull();
   });
 
   it('should handle loadPathByIdFailed action', () => {
     const error = 'Failed to load path by ID';
     const action = PathActions.loadPathByIdFailed({ error });
-    const state = pathReducer(initialPathState, action);
+    const state = PathByIdReducer(initialPathByIdState, action);
 
+    expect(state.isLoading).toBe(false);
     expect(state.error).toEqual(error);
   });
 
   it('should handle loadEnrolledPaths action', () => {
     const action = PathActions.loadEnrolledPaths();
-    const state = pathReducer(initialPathState, action);
+    const state = enrolledPathsReducer(initialEnrolledPathsState, action);
 
-    expect(state.isLoading).toBeTrue();
-    expect(state.error).toBeNull();
+    expect(state.isLoading).toBe(true);
+    expect(state.error).toBe(null);
   });
 
   it('should handle loadEnrolledPathsSuccess action', () => {
@@ -133,38 +137,48 @@ fdescribe('PathReducer', () => {
       completedAt: null,
     }];
     const action = PathActions.loadEnrolledPathsSuccess({ enrolledPaths });
-    const state = pathReducer(initialPathState, action);
+    const state = enrolledPathsReducer(initialEnrolledPathsState, action);
 
     expect(state.enrolledPaths).toEqual(enrolledPaths);
-    expect(state.isLoading).toBeFalse();
-    expect(state.error).toBeNull();
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(null);
   });
 
   it('should handle loadEnrolledPathsFailed action', () => {
     const error = 'Failed to load enrolled paths';
     const action = PathActions.loadEnrolledPathsFailed({ error });
-    const state = pathReducer(initialPathState, action);
+    const state = enrolledPathsReducer(initialEnrolledPathsState, action);
 
     expect(state.enrolledPaths).toEqual([]);
-    expect(state.errorEnrolled).toEqual(error);
-    expect(state.isLoading).toBeFalse();
+    expect(state.error).toEqual(error);
+    expect(state.isLoading).toBe(false);
+  });
+
+  it('should handle loadNumberOfEnrolledPaths action', () => {
+    const action = PathActions.loadNumberOfEnrolledPaths();
+    const state = NoOfenrolledPathsReducer(initialNumberOfEnrolledPathState, action);
+
+    expect(state.isLoading).toBe(true);
+    expect(state.error).toBe(null);
   });
 
   it('should handle loadNumberOfEnrolledPathsSuccess action', () => {
     const numberOfEnrolledPaths = 2;
     const action = PathActions.loadNumberOfEnrolledPathsSuccess({ numberOfEnrolledPaths });
-    const state = pathReducer(initialPathState, action);
+    const state = NoOfenrolledPathsReducer(initialNumberOfEnrolledPathState, action);
 
     expect(state.numberOfEnrolledPaths).toEqual(numberOfEnrolledPaths);
-    expect(state.error).toBeNull();
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(null);
   });
 
   it('should handle loadNumberOfEnrolledPathsFailed action', () => {
     const error = 'Failed to load number of enrolled paths';
     const action = PathActions.loadNumberOfEnrolledPathsFailed({ error });
-    const state = pathReducer(initialPathState, action);
+    const state = NoOfenrolledPathsReducer(initialNumberOfEnrolledPathState, action);
 
     expect(state.numberOfEnrolledPaths).toEqual(0);
+    expect(state.isLoading).toBe(false);
     expect(state.error).toEqual(error);
   });
 });

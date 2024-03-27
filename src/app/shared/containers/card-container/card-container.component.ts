@@ -126,7 +126,7 @@ export class CardContainerComponent implements OnInit {
           this.loading = res;
         });
       }
-      
+
     }
     if (this.title == Title.BATCHES && !(this.router.url == '/user')) {
       this.height = 200;

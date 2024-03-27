@@ -134,6 +134,7 @@ export class BatchPageComponent implements OnInit {
     this.store.select(selectBatchDetailsError).subscribe((res) => {
       if (res != null) {
         this.error = true;
+        console.log(res)
         this.errorCard.message = res.message.split('`').slice(1);
         this.errorCard.code = res.message.split('`').slice(0, 1);
       } else {

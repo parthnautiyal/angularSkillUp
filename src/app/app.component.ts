@@ -10,8 +10,8 @@ export class AppComponent {
     localStorage.setItem('refreshCount', '0');
   }
   runTest(i: number) {
-
   }
+
   title = 'Skill Up';
   loggedIn: boolean = true;
   handleEvent(event: boolean) {

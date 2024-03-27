@@ -1,26 +1,29 @@
-import { TestBed } from '@angular/core/testing';
-import { provideMockStore } from '@ngrx/store/testing';
+import { Batch } from 'src/app/models/Batch';
 import * as BatchActions from '../action/batch.actions';
-import { batchReducer, initialState } from './batch.reducer';
+import { initialBatchState,
+         initialEnrolledBatchState,
+         initialStudentState,
+         initialTrainerState,
+         initialBatchDetailsState,
+         initialBatchPathDataState,
+         batchReducer,
+         studentReducer,
+         trainerReducer,
+         batchDetailsReducer,
+         pathDataReducer,
+         enrolledBatchesReducer } from './batch.reducer';
 
-fdescribe('Batch Reducer', () => {
+describe('Batch Reducer', () => {
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [provideMockStore({ initialState })]
-    });
-  });
-
-  // Test cases for loadAllBatches
-  it('should set isLoading to true when loadAllBatches action is dispatched', () => {
+  it('should handle loadAllBatches action', () => {
     const action = BatchActions.loadAllBatches();
-    const state = batchReducer(initialState, action);
+    const state = batchReducer(initialBatchState, action);
 
-    expect(state.isLoadingBatches).toBe(true);
+    expect(state.isLoading).toBe(true);
     expect(state.error).toBe(null);
   });
 
-  it('should update state when loadAllBatchesSuccess action is dispatched', () => {
+  it('should handle loadAllBatchesSuccess', () => {
     const batches = [{
       createdAt: '2024-03-24T13:00:03Z',
       createdBy: {
@@ -45,33 +48,98 @@ fdescribe('Batch Reducer', () => {
       },
       progress: 50,
     }];
+    const action = BatchActions.loadAllBatchesSuccess({batches});
+    const state = batchReducer(initialBatchState, action);
 
-    const action = BatchActions.loadAllBatchesSuccess({ batches });
-    const state = batchReducer(initialState, action);
-
-    expect(state.batches).toEqual(batches);
-    expect(state.isLoadingBatches).toBe(false);
+    expect(state.batches).toBe(batches);
+    expect(state.isLoading).toBe(false);
     expect(state.error).toBe(null);
   });
 
-  it('should update state when loadAllBatchesFailed action is dispatched', () => {
-    const error = new Error('Error loading batches');
-    const action = BatchActions.loadAllBatchesFailed({ error });
-    const state = batchReducer(initialState, action);
+  it('should handle loadAllBatchesFailed action', () => {
+    const error = new Error('LoadAllBatches Failed');
+    const action = BatchActions.loadAllBatchesFailed({error});
+    const state = batchReducer(initialBatchState, action);
 
-    expect(state.isLoadingBatches).toBe(false);
-    expect(state.error).toEqual(error);
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(error);
   });
 
-  // Test cases for loadBatchById
-  it('should set isLoading to true when loadBatchById action is dispatched', () => {
-    const action = BatchActions.loadBatchById({id: '1'});
-    const state = batchReducer(initialState, action);
+  it('should handle loadStudentsById action', () => {
+    const action = BatchActions.loadStudentsById({id: '2'});
+    const state = studentReducer(initialStudentState, action);
 
-    expect(state.isLoadingBatchById).toBe(true);
+    expect(state.isLoading).toBe(true);
+    expect(state.error).toBe(null);
   });
 
-  it('should update state when loadBatchByIdSuccess action is dispatched', () => {
+  it('should handle loadStudentByIdSuccess action', () => {
+    const students = [{
+      email: 'john.doe@example.com',
+      id: 1,
+      imageUrl: 'https://example.com/john-doe.jpg',
+      name: 'John Doe',
+      isActive: true,
+    }];
+    const action = BatchActions.loadStudentsByIdSuccess({students});
+    const state = studentReducer(initialStudentState, action);
+
+    expect(state.students).toBe(students);
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(null);
+  });
+
+  it('should handle loadStudentsByIdFailed action', () => {
+    const error = new Error('LoadStudentsById Failed');
+    const action = BatchActions.loadStudentsByIdFailed({error});
+    const state = studentReducer(initialStudentState, action);
+
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(error);
+  });
+
+  it('should handle loadTrainersById', () => {
+    const action = BatchActions.loadTrainersById({id: '2'});
+    const state = trainerReducer(initialTrainerState, action);
+
+    expect(state.isLoading).toBe(true);
+    expect(state.error).toBe(null);
+  });
+
+  it('should handle loadTrainersByIdSuccess action', () => {
+    const trainers = [{
+      email: 'john.doe@example.com',
+      id: 1,
+      imageUrl: 'https://example.com/john-doe.jpg',
+      name: 'John Doe',
+      isActive: true,
+    }];
+    const action = BatchActions.loadTrainersByIdSuccess({trainers});
+    const state = trainerReducer(initialTrainerState, action);
+
+    expect(state.trainers).toBe(trainers);
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(null);
+  });
+
+  it('should handle loadTrainersByIdFailed action', () => {
+    const error = new Error('LoadTrainersByID Failed');
+    const action = BatchActions.loadTrainersByIdFailed({error});
+    const state = trainerReducer(initialTrainerState, action);
+
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(error);
+  });
+
+  it('should handle loadBatchById', () => {
+    const action = BatchActions.loadBatchById({id: '2'});
+    const state = batchDetailsReducer(initialBatchDetailsState, action);
+
+    expect(state.isLoading).toBe(true);
+    expect(state.error).toBe(null);
+  });
+
+  it('should handle loadBatchByIdSuccess action', () => {
     const batchDetails = {
       createdAt: '2024-03-24T13:00:03Z',
       createdBy: {
@@ -96,137 +164,106 @@ fdescribe('Batch Reducer', () => {
       },
       progress: 50,
     };
-    const action = BatchActions.loadBatchByIdSuccess({ batchDetails });
-    const state = batchReducer(initialState, action);
+    const action = BatchActions.loadBatchByIdSuccess({batchDetails});
+    const state = batchDetailsReducer(initialBatchDetailsState, action);
 
-    expect(state.batchDetails).toEqual(batchDetails);
-    expect(state.isLoadingBatches).toBe(false);
+    expect(state.batchDetails).toBe(batchDetails);
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(null);
   });
 
-  it('should update state when loadBatchByIdFailed action is dispatched', () => {
-    const error = new Error('Error loading batch details');
-    const action = BatchActions.loadBatchByIdFailed({ error });
-    const state = batchReducer(initialState, action);
+  it('should handle loadBatchByIdFailed action', () => {
+    const error = new Error('LoadBatchById Failed');
+    const action = BatchActions.loadBatchPathByIdFailed({error});
+    const state = batchDetailsReducer(initialBatchDetailsState, action);
 
-    expect(state.isLoadingBatches).toBe(false);
-    expect(state.error).toEqual(error);
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(error);
   });
 
-  // Test cases for loadStudentsById
-it('should set isLoadingStudents to true when loadStudentsById action is dispatched', () => {
-  const action = BatchActions.loadStudentsById({id: '3'});
-  const state = batchReducer(initialState, action);
+  it('should handle loadBatchPathsById', () => {
+    const action = BatchActions.loadBatchPathsById({id: '2'});
+    const state = pathDataReducer(initialBatchPathDataState, action);
 
-  expect(state.isLoadingStudents).toBe(true);
-  expect(state.errorStudents).toBe(null);
-});
+    expect(state.isLoading).toBe(true);
+    expect(state.error).toBe(null);
+  });
 
-it('should update state when loadStudentsByIdSuccess action is dispatched', () => {
-  const students = [{
-    email: 'john.doe@example.com',
-    id: 1,
-    imageUrl: 'https://example.com/john-doe.jpg',
-    name: 'John Doe',
-    isActive: true,
-  }];
-  const action = BatchActions.loadStudentsByIdSuccess({ students });
-  const state = batchReducer(initialState, action);
-
-  expect(state.students).toEqual(students);
-  expect(state.isLoadingStudents).toBe(false);
-  expect(state.errorStudents).toBe(null);
-});
-
-it('should update state when loadStudentsByIdFailed action is dispatched', () => {
-  const error = new Error('Error loading students');
-  const action = BatchActions.loadStudentsByIdFailed({ error });
-  const state = batchReducer(initialState, action);
-
-  expect(state.isLoadingStudents).toBe(false);
-  expect(state.error).toEqual(error);
-});
-
-// Test cases for loadTrainersById
-it('should set isLoadingTrainer to true when loadTrainersById action is dispatched', () => {
-  const action = BatchActions.loadTrainersById({id: '3'});
-  const state = batchReducer(initialState, action);
-
-  expect(state.isLoadingTrainer).toBe(true);
-  expect(state.errorTrainer).toBe(null);
-});
-
-it('should update state when loadTrainersByIdSuccess action is dispatched', () => {
-  const trainers = [{
-    email: 'john.doe@example.com',
-    id: 1,
-    imageUrl: 'https://example.com/john-doe.jpg',
-    name: 'John Doe',
-    isActive: true,
-  }];
-  const action = BatchActions.loadTrainersByIdSuccess({ trainers });
-  const state = batchReducer(initialState, action);
-
-  expect(state.trainers).toEqual(trainers);
-  expect(state.isLoadingTrainer).toBe(false);
-  expect(state.errorTrainer).toBe(null);
-});
-
-it('should update state when loadTrainersByIdFailed action is dispatched', () => {
-  const error = new Error('Error loading trainers');
-  const action = BatchActions.loadTrainersByIdFailed({ error });
-  const state = batchReducer(initialState, action);
-
-  expect(state.isLoadingTrainer).toBe(false);
-  expect(state.error).toEqual(error);
-});
-
-// Test cases for loadBatchPathById
-it('should set isLoadingPaths to true when loadBatchPathById action is dispatched', () => {
-  const action = BatchActions.loadBatchPathsById({id: '2'});
-  const state = batchReducer(initialState, action);
-
-  expect(state.isLoadingPaths).toBe(true);
-  expect(state.error).toBe(null);
-});
-
-it('should update state when loadBatchPathByIdSuccess action is dispatched', () => {
-  const pathById = {
-    id: 1,
-    name: 'Path 1',
-    courseName: 'Course 1',
-    imageUrl: 'https://example.com/path-1.jpg',
-    isAccessible: true,
-    description: 'Description for Path 1',
-    about: 'About Path 1',
-    createdBy: {
+  it('should handle loadBatchPathsByIdSuccess action', () => {
+    const pathById = {
       id: 1,
-      name: 'John Doe',
-      imageUrl: 'https://example.com/john-doe.jpg',
-      email: 'john.doe@example.com',
-    },
-    createdAt: '2024-03-24T13:00:03Z',
-    isFavourite: false,
-    progress: 50,
-    enrolledAt: '2024-03-24T13:00:03Z',
-    completedAt: '2024-06-24T13:00:03Z',
-    noOfChapters: 10,
-    updatedAt: '2024-06-24T13:00:03Z',
-    level: 1,
-  };
-  const action = BatchActions.loadBatchPathByIdSuccess({ pathById });
-  const state = batchReducer(initialState, action);
+      name: 'Path 1',
+      courseName: 'Course 1',
+      imageUrl: 'https://example.com/path-1.jpg',
+      isAccessible: true,
+      description: 'Description for Path 1',
+      about: 'About Path 1',
+      createdBy: {
+        id: 1,
+        name: 'John Doe',
+        imageUrl: 'https://example.com/john-doe.jpg',
+        email: 'john.doe@example.com',
+      },
+      createdAt: '2024-03-24T13:00:03Z',
+      isFavourite: false,
+      progress: 50,
+      enrolledAt: '2024-03-24T13:00:03Z',
+      completedAt: '2024-06-24T13:00:03Z',
+      noOfChapters: 10,
+      updatedAt: '2024-06-24T13:00:03Z',
+      level: 1,
+    };
+    const action = BatchActions.loadBatchPathByIdSuccess({pathById});
+    const state = pathDataReducer(initialBatchPathDataState, action);
 
-  expect(state.pathData).toEqual(pathById);
-  expect(state.isLoadingPaths).toBe(false);
-});
+    expect(state.BatchPathData).toBe(pathById);
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(null);
+  });
 
-it('should update state when loadBatchPathByIdFailed action is dispatched', () => {
-  const error = new Error('Error loading batch path');
-  const action = BatchActions.loadBatchPathByIdFailed({ error });
-  const state = batchReducer(initialState, action);
+  it('should handle loadBatchPathByIdFailed action', () => {
+    const error = new Error('LoadBatchPathById Failed');
+    const action = BatchActions.loadBatchPathByIdFailed({error});
+    const state = pathDataReducer(initialBatchPathDataState, action);
 
-  expect(state.isLoadingPaths).toBe(false);
-  expect(state.error).toEqual(error);
-});
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(error);
+  });
+
+  it('should handle loadEnrolledBatches', () => {
+    const action = BatchActions.loadEnrolledBatches();
+    const state = enrolledBatchesReducer(initialEnrolledBatchState, action);
+
+    expect(state.isLoading).toBe(true);
+    expect(state.error).toBe(null);
+  });
+
+  it('should handle loadEnrolledBatchesSuccess action', () => {
+    const enrolledBatches = {
+      averageProgress: 50,
+      count: 4,
+      enrolledBatches:  [{
+        id: 2,
+        name: 'Java',
+        stream: 'Java',
+        progress: 50,
+      }]
+    };
+    const action = BatchActions.loadEnrolledBatchesSuccess({enrolledBatches});
+    const state = enrolledBatchesReducer(initialEnrolledBatchState, action);
+
+    expect(state.enrolledBatches).toBe(enrolledBatches);
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(null);
+  });
+
+  it('should handle loadEnrolledBatchesFailed action', () => {
+    const error = new Error('LoadEnrolledBatches Failed');
+    const action = BatchActions.loadEnrolledBatchesFailed({error});
+    const state = enrolledBatchesReducer(initialEnrolledBatchState, action);
+
+    expect(state.isLoading).toBe(false);
+    expect(state.error).toBe(error);
+  });
 });
 
