@@ -33,14 +33,14 @@
           </ng-container>
         </ng-container>
       </ng-container>
-      <div [ngStyle]="{ height: '120px' }" *ngIf="enrolled">
+      <div [ngStyle]="{ height: this.height+'px'}" *ngIf="enrolled">
         <app-error-card
           [title]="Title.BATCHES"
           [error]="errorBatch"
           *ngIf="error"
         ></app-error-card>
       </div>
-      <div [ngStyle]="{ height: '200px' }" *ngIf="!enrolled">
+      <div [ngStyle]="{ height: this.height+'px' }" *ngIf="!enrolled">
         <app-error-card
           [title]="Title.BATCHES"
           [error]="errorBatch"
@@ -55,7 +55,7 @@
           <app-path-card *ngIf="!error" [singlePath]="item"></app-path-card>
         </ng-container>
       </ng-container>
-      <div [ngStyle]="{ height: '112px' }">
+      <div [ngStyle]="{ height: this.height+'px' }">
         <app-error-card
           [title]="Title.PATHS"
           [error]="errorPath"
@@ -74,7 +74,7 @@
           ></app-course-card>
         </ng-container>
       </ng-container>
-      <div [ngStyle]="{ height: '262px' }">
+      <div [ngStyle]="{ height: this.height+'px' }">
         <app-error-card
           [title]="Title.COURSES"
           [error]="errorCourse"

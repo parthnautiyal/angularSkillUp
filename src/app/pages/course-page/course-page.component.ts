@@ -7,6 +7,7 @@ import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 import {
   loadChapterData,
   loadCourseAboutInfo,
+  loadCourseRating,
 } from 'src/app/state/action/course.actions';
 import {
   selectChapterDataLoading,
@@ -49,7 +50,7 @@ export class CoursePageComponent implements OnInit {
         this.store.select(selectCourseAboutInfo).subscribe((res) => {
           if (res) {
             this.isAccessiblity = res.isEnrolled || false;
-            console.log(this.isAccessiblity);
+            // console.log(this.isAccessiblity);
             this.isRed = res.isFavourite;
             if (this.isAccessiblity) {
               this.store.dispatch(loadChapterData({ courseId: this.id }));
@@ -74,7 +75,8 @@ export class CoursePageComponent implements OnInit {
       }
     });
 
-    this.mis.getRating(parseInt(this.id));
+    // this.mis.getRating(parseInt(this.id));
+    this.store.dispatch(loadCourseRating({ id: this.id }));
     this.mis.getCourseReviews(parseInt(this.id));
     // console.log('id -> ' + this.id);
 

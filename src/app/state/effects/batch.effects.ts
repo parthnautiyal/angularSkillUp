@@ -42,7 +42,7 @@ export class BatchEffects {
           .get<APIResponse<EnrolledBatches>>(
             API.BASE_URL +
               API.STUDENT +
-              '/332' +
+              '/330' +
               API.ENROLLED_BATCHES +
               API.PAGE_SIZE
           )
@@ -53,7 +53,7 @@ export class BatchEffects {
               })
             ),
             catchError((error) => {
-              console.log(error);
+              // console.log(error);
               return of(BatchActions.loadEnrolledBatchesFailed({ error }));
             })
           )
