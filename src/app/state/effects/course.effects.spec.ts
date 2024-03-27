@@ -8,7 +8,7 @@ import { CourseEffects } from './course.effects';
 import * as CourseActions from '../action/course.actions';
 import { HttpClient } from '@angular/common/http';
 
-fdescribe('CourseEffects', () => {
+describe('CourseEffects', () => {
   let actions$: Observable<any>;
   let effects: CourseEffects;
   let http: HttpClient;
