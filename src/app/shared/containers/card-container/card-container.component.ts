@@ -81,8 +81,9 @@ export class CardContainerComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.title == Title.COURSES) {
+      this.height = 262;
       if (this.router.url == '/dashboard') {
-        this.height = 262;
+        
         this.store.select(selectAllCourses).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allCourses = res;
