@@ -1,7 +1,7 @@
 import * as fromActions from './batch.actions';
 import { Batch } from '../../models/Batch';
 
-fdescribe('Batch Actions', () => {
+describe('Batch Actions', () => {
     it('should loadAllBatches', () => {
       const action = fromActions.loadAllBatches();
 
