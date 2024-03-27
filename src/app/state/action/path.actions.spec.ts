@@ -1,7 +1,7 @@
 import * as PathActions from './path.actions';
 import { Path, PathData } from '../../models/Path';
 
-fdescribe('Path Actions', () => {
+describe('Path Actions', () => {
   it('should create the loadAllPaths action', () => {
     const action = PathActions.loadAllPaths();
     expect(action.type).toEqual('[Path] Load All Paths');

@@ -8,7 +8,7 @@ import * as PathActions from '../action/path.actions';
 import { HttpClient } from '@angular/common/http';
 import { cold, hot } from 'jasmine-marbles';
 
-fdescribe('PathEffects', () => {
+describe('PathEffects', () => {
   let actions$: Observable<any>;
   let effects: PathEffects;
   let http: HttpClient;
