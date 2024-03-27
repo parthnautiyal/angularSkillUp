@@ -42,7 +42,7 @@ export class BatchEffects {
           .get<APIResponse<EnrolledBatches>>(
             API.BASE_URL +
               API.STUDENT +
-              '/332' +
+              '/333' +
               API.ENROLLED_BATCHES +
               API.PAGE_SIZE
           )
