@@ -51,6 +51,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'testing',
+        loadChildren: () =>
+          import('../pages/dashboard-trainer/dashboard-trainer.module').then(
+            (m) => m.DashboardTrainerModule
+          ),
+      },
+      {
         path: 'paths/all',
         component: AllSectionContainerComponent,
       },
@@ -86,7 +93,6 @@ const routes: Routes = [
           ),
       },
       { path: '**', component: PageNotFoundComponent },
-      
     ],
   },
 ];
