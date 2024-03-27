@@ -17,10 +17,10 @@ export enum API {
   PATHS_FEW = '?pageSize=10&pageNo=1',
   PATHS_ALL = '?pageSize=12&pageNo=1',
   PAGE_SIZE = '?pageSize=100&pageNo=1',
-
   TRAINERS = '/trainers',
   CHAPTERS = '/chapters',
   LOGIN = '/login',
   REFRESH = '/refresh',
   FAVOURITES = '/favourites',
+  CURRENT_USER = '/332',
 }

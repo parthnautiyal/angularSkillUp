@@ -76,6 +76,7 @@ export class CoursePageComponent implements OnInit {
 
     this.mis.getRating(parseInt(this.id));
     this.mis.getCourseReviews(parseInt(this.id));
+    this.mis.getMyReviews(parseInt(this.id));
     // console.log('id -> ' + this.id);
 
     // this.chapterData$ = this.store.select(selectChapterDataLoading);
