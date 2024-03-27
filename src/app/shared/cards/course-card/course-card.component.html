@@ -2,14 +2,14 @@
 <div class="card">
   <!-- <a [routerLink]="['/', RouterLinks.COURSES, singleCourse.id]"> -->
   <img
-    *ngIf="onGoingFlag || isProfile || isDashBoard"
+    *ngIf="onGoingFlag || isProfile"
     [routerLink]="['/', RouterLinks.COURSES, singleCourse.courseId]"
     [src]="singleCourse.imageUrl"
     alt=""
     class="image"
   />
   <img
-    *ngIf="!onGoingFlag && !isProfile && !isDashBoard"
+    *ngIf="!onGoingFlag && !isProfile"
     [routerLink]="['/', RouterLinks.COURSES, singleCourse.id]"
     [src]="singleCourse.imageUrl"
     alt=""
