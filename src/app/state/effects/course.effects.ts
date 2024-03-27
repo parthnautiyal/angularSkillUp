@@ -9,6 +9,7 @@ import { APIResponse } from 'src/app/models/ApiResponse';
 import { enrolledCourses } from 'src/app/models/EnrolledCourses';
 import { Chapter } from 'src/app/models/Chapter';
 import { API } from 'src/app/constants/enums/API';
+import { Ratings } from 'src/app/models/Ratings';
 
 @Injectable()
 export class CourseEffects {
@@ -125,6 +126,27 @@ export class CourseEffects {
             ),
             catchError((error) =>
               of(CourseActions.loadFavoriteCoursesFailed({ error }))
+            )
+          )
+      )
+    )
+  );
+  loadCourseRating$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CourseActions.loadCourseRating),
+      switchMap(({ id }) =>
+        this.http
+          .get<APIResponse<Ratings>>(
+            API.BASE_URL + API.STUDENTS + API.COURSES + `/${id}` + API.RATINGS
+          )
+          .pipe(
+            map((rating) =>
+              CourseActions.loadCourseRatingSuccess({
+                rating: rating.data,
+              })
+            ),
+            catchError((error) =>
+              of(CourseActions.loadCourseRatingFailed({ error }))
             )
           )
       )

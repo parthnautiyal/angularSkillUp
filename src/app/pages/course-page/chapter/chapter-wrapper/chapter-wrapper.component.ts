@@ -26,6 +26,6 @@ export class ChapterWrapperComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.courseTitles.quizResponses);
+    // console.log(this.courseTitles.quizResponses);
   }
 }

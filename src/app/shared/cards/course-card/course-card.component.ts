@@ -62,6 +62,7 @@ export class CourseCardComponent implements OnInit {
   ngOnInit(): void {
     this.isProfile = this.router.url.includes('user') ? true : false;
     if (this.router.url == '/dashboard') {
+      // console.log('dashboard');
       this.isDashBoard = true;
     }
   }

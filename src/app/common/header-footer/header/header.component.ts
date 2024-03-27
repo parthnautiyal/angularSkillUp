@@ -76,7 +76,7 @@ export class HeaderComponent implements OnInit {
   }
 
   submitSearch() {
-    console.log(this.searchQuery); // replace this with your actual logic
+    // console.log(this.searchQuery); // replace this with your actual logic
     this.router.navigate(
       ['/search'],
       { queryParams: {q: this.searchQuery}}
