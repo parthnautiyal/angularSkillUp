@@ -2,6 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import * as CourseActions from '../action/course.actions';
 import { Course } from '../../models/Course';
 import { Chapter } from 'src/app/models/Chapter';
+import { Ratings } from 'src/app/models/Ratings';
 
 export interface AllCoursesState {
   allCourses: Course[];
@@ -11,6 +12,11 @@ export interface AllCoursesState {
 
 export interface EnrolledCoursesState {
   enrolledCourses: Course[];
+  isLoading: boolean;
+  error: any;
+}
+export interface RatingState {
+  rating: Ratings;
   isLoading: boolean;
   error: any;
 }
@@ -39,9 +45,22 @@ export interface FavoriteCoursesState {
   error: any;
 }
 
-// Define the initial state for each sub-state
 export const initialAllCoursesState: AllCoursesState = {
   allCourses: [],
+  isLoading: true,
+  error: null,
+};
+export const initialRatingState: RatingState = {
+  rating: {
+    averageRating: 0,
+    rating: {
+      fiveStars: 0,
+      fourStars: 0,
+      threeStars: 0,
+      twoStars: 0,
+      oneStars: 0,
+    },
+  },
   isLoading: true,
   error: null,
 };
@@ -212,6 +231,24 @@ export const favoriteCoursesReducer = createReducer(
     })
   ),
   on(CourseActions.loadFavoriteCoursesFailed, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
+  }))
+);
+export const courseRatingReducer = createReducer(
+  initialRatingState,
+  on(CourseActions.loadCourseRating, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+  on(CourseActions.loadCourseRatingSuccess, (state, { rating }) => ({
+    ...state,
+    rating,
+    isLoading: false,
+  })),
+  on(CourseActions.loadCourseRatingFailed, (state, { error }) => ({
     ...state,
     isLoading: false,
     error,
