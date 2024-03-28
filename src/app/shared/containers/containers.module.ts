@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { ShimmerModule } from 'src/app/shimmer/shimmer.module';
 import { ToastModule } from 'primeng/toast';
 import { ErrorPageModule } from 'src/app/error-page/error-page.module';
+import { ScrollTrackerDirective } from '../scroll-tracker.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ErrorPageModule } from 'src/app/error-page/error-page.module';
     RouterModule,
     ShimmerModule,
     ToastModule,
-    ErrorPageModule
+    ErrorPageModule,
+    ScrollTrackerDirective,
   ],
   exports: [CardContainerComponent, BatchInfoCardContainerComponent],
 })
