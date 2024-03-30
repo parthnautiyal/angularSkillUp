@@ -38,6 +38,8 @@ import {
   favoriteCoursesReducer,
   noOfEnrolledCoursesReducer,
 } from './state/reducer/course.reducer';
+import { ToastModule } from 'primeng/toast';
+import { pathCreateReducer } from './state/reducer/path-create.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,6 +49,7 @@ import {
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    ToastModule,
     StoreModule.forRoot({
       allCourses: allCoursesReducer,
       enrolledCourses: enrolledCoursesReducer,
@@ -65,6 +68,7 @@ import {
       enrolledBatches: enrolledBatchesReducer,
       numberOfEnrolledPaths: NoOfenrolledPathsReducer,
       courseRating: courseRatingReducer,
+      pathCreate: pathCreateReducer,
     }),
     EffectsModule.forRoot([CourseEffects, BatchEffects, PathEffects]),
     StoreDevtoolsModule.instrument({

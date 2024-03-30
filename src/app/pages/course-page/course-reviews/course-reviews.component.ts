@@ -21,6 +21,7 @@ export class CourseReviewsComponent implements OnInit {
   isMyReviewOn: boolean = true;
   isAllReviewOn: boolean = true;
   isReviewCommentOn: boolean = false;
+  feedback: string = '';
   rating: Ratings = {
     averageRating: 0,
     rating: {
@@ -30,6 +31,21 @@ export class CourseReviewsComponent implements OnInit {
       twoStars: 0,
       oneStars: 0,
     },
+  };
+  myReview: Review = {
+    reviewId: 0,
+    postedBy: {
+      email: '',
+      id: 0,
+      imageUrl: '',
+      name: '',
+    },
+    postedAt: '',
+    updatedAt: '',
+    deletedBy: '',
+    deletedAt: '',
+    rating: 0,
+    feedback: '',
   };
   courseReview: Review[] = [];
   ratingPercentage: number[] = [];
@@ -87,6 +103,13 @@ export class CourseReviewsComponent implements OnInit {
     this.isReviewCommentOn = false;
   }
 
+  handleReviewSubmit() {
+    console.log(
+      'Rating -> ' + this.ratingClicked,
+      'Feedback -> ' + this.feedback
+    );
+  }
+
   updateRating(rating: Ratings) {
     console.log('rating', rating);
 
@@ -132,6 +155,12 @@ export class CourseReviewsComponent implements OnInit {
       if (res.averageRating != 0) this.rating = res;
       console.log(this.rating.rating.fiveStars);
     });
+    this.misc.myCourseReviews$.subscribe((res) => {
+      if (res != null) {
+        this.myReview = res;
+      }
+      console.log(this.myReview);
+    });
 
     this.updateRating(this.rating);
     this.createAvgRatingArray();
@@ -140,4 +169,6 @@ export class CourseReviewsComponent implements OnInit {
       this.courseReview = res;
     });
   }
+
+  updateReview() {}
 }

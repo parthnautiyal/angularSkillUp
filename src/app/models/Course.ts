@@ -5,6 +5,7 @@ export interface Course {
   courseName: string;
   imageUrl: string;
   isAccessible: boolean;
+  isOwner?: boolean;
   description: string;
   about: string;
   createdBy: {
@@ -22,4 +23,5 @@ export interface Course {
   noOfChapters: number;
   updatedAt: string;
   level: number;
+  collaborators?: [];
 }
