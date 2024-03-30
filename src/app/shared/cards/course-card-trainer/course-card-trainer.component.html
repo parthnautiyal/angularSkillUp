@@ -1,20 +1,17 @@
 <div class="card-wrapper">
   <div class="card">
-    <img
-      src="https://storage.googleapis.com/zopping-uploads/5282/images/originals/20240328/ce5cc922-12b1-4011-8d58-eeb4af9dc4a6-Javascript.webp"
-      alt=""
-      class="image"
-    />
+    <img [src]="course.imageUrl" alt="" class="image" />
     <div class="content-div">
-      <div class="author">By Chandan</div>
+      <div class="author">By {{ course.createdBy.name }}</div>
     </div>
   </div>
   <div class="card-description">
-    <div class="card-title">Java Script</div>
+    <div class="card-title">{{ course.courseName }}</div>
     <div class="card-des">
-      This is bug testThis is bug testThis is bug testThis is bug testThis is
-      bug testThis is bug test.
+      {{ course.description }}
     </div>
-    <div class="card-create-date">Date Of Creation: 20 Nov 2023</div>
+    <div class="card-create-date">
+      Date Of Creation: {{ course.createdAt | date : "dd MM yyyy" }}
+    </div>
   </div>
 </div>

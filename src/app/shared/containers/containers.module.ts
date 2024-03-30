@@ -9,12 +9,18 @@ import { ShimmerModule } from 'src/app/shimmer/shimmer.module';
 import { ToastModule } from 'primeng/toast';
 import { ErrorPageModule } from 'src/app/error-page/error-page.module';
 import { ScrollTrackerDirective } from '../scroll-tracker.directive';
+import { AddCourseContainerComponent } from './add-course-container/add-course-container.component';
+import { ListboxModule } from 'primeng/listbox';
+import { FormsModule } from '@angular/forms';
+import { AddCollaboratorContainerComponent } from './add-collaborator-container/add-collaborator-container.component';
 
 @NgModule({
   declarations: [
     CardContainerComponent,
     AllSectionContainerComponent,
     BatchInfoCardContainerComponent,
+    AddCourseContainerComponent,
+    AddCollaboratorContainerComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +30,14 @@ import { ScrollTrackerDirective } from '../scroll-tracker.directive';
     ToastModule,
     ErrorPageModule,
     ScrollTrackerDirective,
+    ListboxModule,
+    FormsModule,
   ],
-  exports: [CardContainerComponent, BatchInfoCardContainerComponent],
+  exports: [
+    CardContainerComponent,
+    BatchInfoCardContainerComponent,
+    AddCourseContainerComponent,
+    AddCollaboratorContainerComponent,
+  ],
 })
 export class ContainersModule {}

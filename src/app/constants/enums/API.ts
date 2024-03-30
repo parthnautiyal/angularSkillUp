@@ -1,7 +1,9 @@
 export enum API {
-  BASE_URL = 'https://api.training.zopsmart.com',
-  // BASE_URL = 'https://staging.api.training.zopsmart.com',
+  // BASE_URL = 'https://api.training.zopsmart.com',
+  BASE_URL = 'https://staging.api.training.zopsmart.com',
+  IMAGE_UPLOAD = 'https://zopping.com/api/media-service/image-upload',
   STUDENTS = '/students',
+
   STUDENT = '/student',
   BATCHES = '/batches/',
   BATCHES_ALL = '/batches/all',
@@ -28,4 +30,6 @@ export enum API {
   SEARCH_ROLE = '&role=student&field=all',
   REVIEW_ALL = '/reviews/all',
   REVIEWS = '/reviews',
+  ADMIN = '/admin',
+  USERS = '/users',
 }
