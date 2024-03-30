@@ -1,0 +1,16 @@
+<p-listbox
+  [options]="courses"
+  [(ngModel)]="selectedCourses"
+  [metaKeySelection]="false"
+  [checkbox]="false"
+  [filter]="true"
+  [multiple]="true"
+  optionLabel="name"
+  [listStyle]="{ 'max-height': '600px' }"
+  appScrollTracker
+  (scrollPercent)="onScroll($event)"
+>
+  <ng-template let-country pTemplate="item">
+    <app-course-card-trainer [course]="country"></app-course-card-trainer>
+  </ng-template>
+</p-listbox>
