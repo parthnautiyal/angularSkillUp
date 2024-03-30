@@ -5,6 +5,7 @@ import { APIResponse } from '../models/ApiResponse';
 import { Course } from '../models/Course';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
+import { CreatePath } from '../models/CreatePath';
 
 @Injectable({
   providedIn: 'root',
@@ -89,5 +90,9 @@ export class TrainerMiscellaneousService {
     });
 
     return this.http.post(API.IMAGE_UPLOAD, formData, { headers });
+  }
+
+  createPathTrainer(data: CreatePath) {
+    return this.http.post(API.BASE_URL + API.ADMIN + API.PATHS, data);
   }
 }

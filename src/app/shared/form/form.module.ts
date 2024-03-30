@@ -7,6 +7,7 @@ import { OrderListModule } from 'primeng/orderlist';
 import { CardsModule } from '../cards/cards.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppInputValidationDirective } from '../app-input-validation.directive';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [CreatePathFormComponent],
@@ -18,6 +19,7 @@ import { AppInputValidationDirective } from '../app-input-validation.directive';
     CardsModule,
     ReactiveFormsModule,
     AppInputValidationDirective,
+    ConfirmDialogModule,
   ],
   exports: [CreatePathFormComponent],
 })

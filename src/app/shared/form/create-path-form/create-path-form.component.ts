@@ -1,6 +1,8 @@
+import { CreatePath } from './../../../models/CreatePath';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { ConfirmationService } from 'primeng/api';
 import { Course } from 'src/app/models/Course';
 import { User } from 'src/app/models/User';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
@@ -14,8 +16,10 @@ import {
   selector: 'app-create-path-form',
   templateUrl: './create-path-form.component.html',
   styleUrls: ['./create-path-form.component.sass'],
+  providers: [ConfirmationService],
 })
 export class CreatePathFormComponent implements OnInit {
+  noErrors: boolean = false;
   isAddCourse: boolean = false;
   isCollab: boolean = false;
   isImageUploaded: boolean = false;
@@ -23,6 +27,16 @@ export class CreatePathFormComponent implements OnInit {
   i: number = 0;
   currentCourses: Course[] = [];
   currentCollaborators: User[] = [];
+  createdPathData: CreatePath = {
+    about: '',
+    collaboratorEmailIds: [],
+    collaboratorIds: [],
+    courseIds: [],
+    description: '',
+    imageUrl: '',
+    isAccessible: false,
+    name: '',
+  };
 
   createPathForm = this.fb.group({
     pathTitle: [
@@ -51,7 +65,8 @@ export class CreatePathFormComponent implements OnInit {
   constructor(
     private trainer: TrainerMiscellaneousService,
     private store: Store,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -72,11 +87,48 @@ export class CreatePathFormComponent implements OnInit {
 
   handleSubmitForm() {
     //check the form is valid
-    if (this.createPathForm.invalid) {
-      console.log('Form is invalid');
-      return;
+    if (
+      this.createPathForm.invalid ||
+      !this.isImageUploaded ||
+      this.currentCourses.length === 0
+    ) {
+      this.confirmationService.confirm({
+        message: 'Please enter valid details',
+      });
+    } else {
+      this.noErrors = true;
+      this.confirmationService.confirm({
+        message: 'Are you sure you want to create this path?',
+        accept: () => {
+          this.addDataToCreatPath();
+          this.trainer
+            .createPathTrainer(this.createdPathData)
+            .subscribe((data) => {
+              console.log(data);
+            });
+          console.log(this.createdPathData);
+        },
+      });
     }
-    console.log(this.createPathForm.value);
+  }
+
+  addDataToCreatPath() {
+    this.createdPathData.about = this.createPathForm.value.pathAbout || '';
+    this.createdPathData.description =
+      this.createPathForm.value.pathDescription || '';
+    this.createdPathData.name = this.createPathForm.value.pathTitle || '';
+    this.createdPathData.imageUrl = this.imgUrl;
+    this.createdPathData.isAccessible =
+      this.createPathForm.value.pathPublish === 'public' ? true : false;
+    if (this.currentCollaborators.length > 0) {
+      this.createdPathData.courseIds = this.currentCourses.map(
+        (course) => course.courseId || 0
+      );
+    }
+
+    this.createdPathData.collaboratorIds = this.currentCollaborators.map(
+      (collab) => collab.id
+    );
   }
 
   handleRemoveCollaborator(id: number) {
