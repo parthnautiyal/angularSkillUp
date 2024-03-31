@@ -13,7 +13,9 @@
   />
 
   <div class="cardContent">
-    <div class="title">{{ singlePath.name }}{{ singlePath.pathName }}</div>
+    <div class="title">
+      {{ singlePath.name | titlecase }}{{ singlePath.pathName }}
+    </div>
     <div class="courseCount">{{ singlePath.noOfCourses }} Courses</div>
     <div *ngIf="isProfile" class="courseStateDate">Start Date:</div>
   </div>

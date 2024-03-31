@@ -1,0 +1,103 @@
+.admin-course-panel
+    .pagination-wrapper
+        max-height: 750px
+        overflow-y: scroll
+
+    .course-list-wrapper
+        min-height: -webkit-fit-content
+        min-height: -moz-fit-content
+        min-height: fit-content
+
+.admin-course-card
+    background-color: var(--page-content-background-color)
+    border-radius: 12px
+    display: flex
+    height: 200px
+    margin: 40px
+    padding: 16px
+    width: 90%
+
+.left-wrapper
+    display: flex
+    width: 70%
+
+    .left
+        color: var(--secondary-font-color)
+        display: flex
+        flex-direction: column
+        font-weight: 400
+        height: 100%
+        justify-content: space-between
+        width: 37.5%
+
+    .course-img
+        border-radius: 12px
+        height: 125px
+        width: 100%
+
+        .card-link
+            align-items: center
+            color: inherit
+            display: flex
+            text-decoration: none
+            width: 100%
+
+    .middle-wrapper
+        color: var(--secondary-font-color)
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        padding: 0 16px
+        text-align: justify
+        width: 62.5%
+
+.right
+    align-items: flex-end
+    display: flex
+    flex-direction: column
+    height: 100%
+    justify-content: space-between
+    width: 30%
+
+img
+    height: 125px
+    width: 300px
+    border: 1px solid black
+    border-radius: 10px
+
+.course-name
+    text-decoration: none
+    color: var(--primary-font-color)
+    font-size: 1.5rem
+
+.remove-button
+    padding: 12px 35px
+    margin-right: 15px
+    background-color: white
+    border: 1px solid var(--delete-button-border-color)
+    border-radius: 10px
+    color: var(--delete-button-text-color)
+
+.remove-button:hover
+    background-color: var(--delete-button-background-color)
+    color: white
+
+.update-button
+    padding: 12px 35px
+    margin-right: 15px
+    background-color: #5624D0
+    border: 2px solid transparent
+    border-radius: 10px
+    color: white
+
+.update-button:hover
+    background-color: #35D058
+    color: white
+
+:host ::ng-deep .p-button
+    margin: 10px
+
+.right-top
+    display: flex
+    justify-content: space-between
+    width: 150px

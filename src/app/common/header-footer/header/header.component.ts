@@ -77,9 +77,10 @@ export class HeaderComponent implements OnInit {
 
   submitSearch() {
     // console.log(this.searchQuery); // replace this with your actual logic
-    this.router.navigate(
-      ['/search'],
-      { queryParams: {q: this.searchQuery}}
-    )
+    if (!this.searchQuery) {
+      // If searchQuery is null or empty, return early
+      return;
+    }
+    this.router.navigate(['/search'], { queryParams: { q: this.searchQuery } });
   }
 }

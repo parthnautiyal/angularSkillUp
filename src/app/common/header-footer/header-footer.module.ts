@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ThemeToggleTextComponent } from './header/theme-toggle-text/theme-toggle-text.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CardsModule } from 'src/app/shared/cards/cards.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { FormsModule } from '@angular/forms';
     ThemeToggleComponent,
     ThemeToggleTextComponent,
   ],
-  imports: [CommonModule, RouterModule, MatIconModule,FormsModule],
+  imports: [CommonModule, RouterModule, MatIconModule,FormsModule,CardsModule],
   exports: [HeaderComponent, FooterComponent],
 })
 export class HeaderFooterModule {}
