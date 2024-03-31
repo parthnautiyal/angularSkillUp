@@ -1,0 +1,190 @@
+<div class="course-creation">
+  <div class="course-form-banner">
+    <div class="course-form-heading">
+      <div class="page-header">Course Details</div>
+    </div>
+    <div class="course-form-switch-tab">
+      <div (click)="handleBasicClick()" class="switch-swapper active">
+        Basic Details
+      </div>
+      <div
+        (click)="handleChaptersClick()"
+        class="switch-swapper"
+        [class.disable-cursor]="!isCourseCreated"
+      >
+        Chapters
+      </div>
+      <div
+        (click)="handleResourcesClick()"
+        class="switch-swapper"
+        [class.disable-cursor]="!isCourseCreated"
+      >
+        Additional Resources
+      </div>
+    </div>
+  </div>
+  <div class="form">
+    <div *ngIf="isDetailsForm" class="basic-course-details-form">
+      <form
+        [formGroup]="createBasicDetailsCourseForm"
+        (ngSubmit)="handleSubmit()"
+      >
+        <div class="form-input">
+          <div class="sub-heading">Name</div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter Name (5-150 characters)"
+            class="input-tag"
+            id="course-title"
+            formControlName="courseName"
+            [class.is-invalid]="
+              createBasicDetailsCourseForm.controls['courseName'].invalid &&
+              createBasicDetailsCourseForm.controls['courseName'].touched
+            "
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              createBasicDetailsCourseForm.controls['courseName'].invalid &&
+              createBasicDetailsCourseForm.controls['courseName'].touched
+            "
+            [ngStyle]="{
+              display:
+                createBasicDetailsCourseForm.controls['courseName'].invalid &&
+                createBasicDetailsCourseForm.controls['courseName'].touched
+                  ? 'block'
+                  : 'none'
+            }"
+            >Name should be 5-150 characters</span
+          >
+        </div>
+        <div class="form-input path-image">
+          <div class="sub-heading">Thumbnail</div>
+          <input
+            class="input-box-field"
+            id="pathImage"
+            accept=".jpeg,.jpg,.webp,.png,.tiff"
+            type="file"
+            name="Image"
+            style="display: none"
+            (change)="handleFileUpload($event)"
+          />
+          <div
+            (click)="triggerInputClick()"
+            class="image-box {{ isImageUploaded ? '' : 'image-not-uploaded' }}"
+          >
+            <div *ngIf="!isImageUploaded" class="upload-icon-space">
+              <img src="assets/upload-icon.svg" alt="" srcset="" />
+            </div>
+            <div *ngIf="isImageUploaded" class="uploaded-image-space">
+              <img [src]="imgUrl" alt="" />
+              <div class="cross-icon">
+                <img src="assets/remove-button.svg" alt="" />
+              </div>
+            </div>
+          </div>
+          <span class="error-message">*Required</span>
+        </div>
+        <div class="form-input">
+          <div class="sub-heading">About</div>
+          <textarea
+            type="text"
+            name="name"
+            placeholder="About (50-2500 characters)"
+            rows="8"
+            class="input-tag"
+            id="course-about"
+            formControlName="courseAbout"
+            [class.is-invalid]="
+              createBasicDetailsCourseForm.controls['courseAbout'].invalid &&
+              createBasicDetailsCourseForm.controls['courseAbout'].touched
+            "
+          ></textarea>
+          <span
+            class="error-message"
+            *ngIf="
+              createBasicDetailsCourseForm.controls['courseAbout'].invalid &&
+              createBasicDetailsCourseForm.controls['courseAbout'].touched
+            "
+            [ngStyle]="{
+              display:
+                createBasicDetailsCourseForm.controls['courseAbout'].invalid &&
+                createBasicDetailsCourseForm.controls['courseAbout'].touched
+                  ? 'block'
+                  : 'none'
+            }"
+            >About should be 50-2500 characters</span
+          >
+        </div>
+        <div class="form-input">
+          <div class="sub-heading">Level</div>
+          <p-selectButton
+            [options]="experiences"
+            [(ngModel)]="selectedExperience"
+            [ngModelOptions]="{ standalone: true }"
+          ></p-selectButton>
+        </div>
+        <div class="form-input collaborators">
+          <div class="sub-heading">
+            Collaborators <span class="count">(0)</span>
+          </div>
+          <ng-container *ngIf="!isCollab">
+            <div class="add-content-btn-wrapper" id="collaborators">
+              <button
+                (click)="handleCollaborator($event)"
+                class="add-content-btn"
+                id="collaborators"
+              >
+                Add Collaborators<svg
+                  width="16"
+                  height="9"
+                  viewBox="0 0 16 9"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>Expand</title>
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M6.67236 8.39522C7.40488 9.20465 8.59807 9.19853 9.32504 8.39522L15.5961 1.46561C16.3286 0.656175 16.0374 0 14.9443 0H1.05314C-0.039379 0 -0.325668 0.662303 0.401302 1.46561L6.67236 8.39522Z"
+                    fill="#222222"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isCollab">
+            <app-add-collaborator-container
+              appClickOutside
+              (clickOutside)="isCollab = false"
+            ></app-add-collaborator-container>
+          </ng-container>
+          <ng-container *ngIf="currentCollaborators.length > 0">
+            <div class="added-collaborators">
+              <ng-container *ngFor="let collaborator of currentCollaborators">
+                <div class="user-list-card">
+                  <img [src]="collaborator.imageUrl" alt="" class="user-img" />
+                  <div class="user-name">{{ collaborator.name }}</div>
+                  <div class="remove-icon">
+                    <img
+                      (click)="handleRemoveCollaborator(collaborator.id)"
+                      src="assets/remove-button.svg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </form>
+      <div class="submit-path">
+        <button class="control-button update-button">Submit</button>
+      </div>
+    </div>
+    <div *ngIf="isChaptersForm" class="course-chapters-form">
+      <app-create-resource [courseId]="courseId"></app-create-resource>
+    </div>
+  </div>
+</div>

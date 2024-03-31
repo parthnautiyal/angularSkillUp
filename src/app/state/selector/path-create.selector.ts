@@ -12,3 +12,13 @@ export const selectPathCreateCollaborators = createSelector(
   selectPathCreateState,
   (state) => state.selectedCollaborators
 );
+
+export const selectResource = createSelector(
+  selectPathCreateState,
+  (state) => state.resource
+);
+
+export const selectQuiz = createSelector(
+  selectPathCreateState,
+  (state) => state.quiz
+);
