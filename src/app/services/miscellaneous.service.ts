@@ -15,7 +15,7 @@ export class MiscellaneousService {
     token:
       'eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoic3R1ZGVudCIsImV4cCI6MTcxMTUxODk3NywiaWF0IjoxNzExNTE4Njc3LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsic3R1ZGVudCJdLCJzdWIiOiJuYW1hbi5ndXB0YUB6b3BzbWFydC5jb20iLCJ1c2VySWQiOjMyN30.kGzFxxiTbOxtTUOPXEP0GCJWfMnzRY0vDh6qupd-mRPe4ceFPlSQFq7yrZaVMDrhX_C_H80m4GzajW0diVmbKmBJrwNL-F_a4K3pWWDebdQ8BdBEEphHauYxxyu3wmoyHZLaGOROV3Yfrm647jcajnu7WRm1SwKuuWuOvR7gQn7e68so826fBYyBtD583T_bQioLgZWhtz_ptSdNjmJE_VbQb_s3VozGJuyVMrViRpk5I3Z61RvAYSAgTtZ54xZLHH0cE1WlxtsRAEqpiDn26iwjR7qeR4oqgFUW0tJ43Tp5XuDH52g49pY1BAIJq4j9bWuakhlMNFCfbjV2_5hH9g',
     refreshToken:
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTk2OTAxNywiaWF0IjoxNzExODgyNjE3LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIn0.nuwLJNm1eMx-mV8W-8b0lwGkXbrwhyqx7cV1fx-prRbL-QK6Q1E0T9ATWKZAy-e76GSKqD0TxLWS5Q0eMtIy4YhN9Wo_NWSEkbLGLN0rJcGlalMc_Ts-etQBl_T4xcuF_ThBVffy4eVZUxVBSfQ3duVbdIxTfCuns8qpejx1ZTgHPW_z_NYTbSkSZVcKnyG-63f3R4_pEJoaCkq2AMBaxtvlKhprnDyuwOfG57af__PeYdQFkGkWf0OnzclcS2ujx0bqgY2hHuebBhT0FpUUY5XzbOqSMug9uKc9MfNR2mnFoAWY8_jTYhxu00dtzmnLhveAo00FHdORVQAEIzwcrA',
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMTk3NTcwMywiaWF0IjoxNzExODg5MzAzLCJpc3MiOiJHT09HTEUiLCJzdWIiOiJwYXJ0aC5uYXV0aXlhbEB6b3BzbWFydC5jb20ifQ.VMXxW17vmt3YzfCVp4G6xs8BUN_O_WzUvTpKzdzkbaHtITFtYgVR6k4wfxHFSdCfGa_TIb25AIHHyVTzt9LHcdlFtcF-50db3uH8-MxqE0xynlEZuANjERFsuReyMd5r7xjd9QLu-YYGAgbpzs-Y46dvdWxBfReN69jhz9U5zoUCVoIAEdb8-ZJuarL7LJmLcs0qs0xKyaqPzfSb5lhGvj0f-I2eyzpjEIVHI0gdOo847suK_z36K0SRplV-6s90XwX8WCOtTSSm14o_m-vTcedV4TiejjJE9QgEqHkedvA1obhd_MhesLngT_wbn3CnYEMi27767O8jEHwzzyD3hw',
   };
 
   refreshHeader = new HttpHeaders({
@@ -58,7 +58,7 @@ export class MiscellaneousService {
       .get<APIResponse<EnrolledBatches>>(
         API.BASE_URL +
           API.STUDENT +
-          '/333' +
+          API.CURRENT_USER +
           API.ENROLLED_BATCHES +
           API.PAGE_SIZE
       )

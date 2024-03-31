@@ -10,6 +10,7 @@
         [class.active]="isDetailsForm"
       >
         Basic Details
+        <div class="active-line"></div>
       </div>
       <div
         (click)="handleChaptersClick()"
@@ -18,6 +19,7 @@
         [class.disable-cursor]="!isCourseCreated"
       >
         Chapters
+        <div class="active-line"></div>
       </div>
       <div
         (click)="handleResourcesClick()"
@@ -26,6 +28,7 @@
         [class.disable-cursor]="!isCourseCreated"
       >
         Additional Resources
+        <div class="active-line"></div>
       </div>
     </div>
   </div>
