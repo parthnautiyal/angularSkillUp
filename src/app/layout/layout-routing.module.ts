@@ -4,6 +4,7 @@ import { UserComponent } from './user/user.component';
 import { AllSectionContainerComponent } from '../shared/containers/all-section-container/all-section-container.component';
 import { PageNotFoundComponent } from '../error-page/page-not-found/page-not-found.component';
 import { SearchPageComponent } from '../pages/search-page/search-page.component';
+import { ProfilePageTrainerComponent } from '../pages/profile-page-trainer/profile-page-trainer.component';
 
 const routes: Routes = [
   {
@@ -91,6 +92,10 @@ const routes: Routes = [
           import('../pages/search-page/search-page.module').then(
             (m) => m.SearchPageModule
           ),
+      },
+      {
+        path: 'stream',
+        component: ProfilePageTrainerComponent,
       },
       { path: '**', component: PageNotFoundComponent },
     ],

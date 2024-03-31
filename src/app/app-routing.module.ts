@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './guard/auth.guard';
+import { ProfilePageTrainerComponent } from './pages/profile-page-trainer/profile-page-trainer.component';
 
 const routes: Routes = [
   {

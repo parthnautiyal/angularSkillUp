@@ -1,0 +1,46 @@
+<div class="path-title">
+  <p>Trainer Profile</p>
+</div>
+<div class="main-container">
+  <div class="profile-header-container">
+    <div class="user-details">
+      <div class="left-wrapper">
+        <img [src]="userProfile.picture" />
+      </div>
+
+      <div class="right-wrapper">
+        <p class="user-name">
+          {{ userProfile.given_name }} {{ userProfile.family_name }}
+        </p>
+        <p class="user-email">{{ userProfile.email }}</p>
+        <p class="trainer-stream">Stream:Javascript</p>
+      </div>
+    </div>
+  </div>
+  <div class="batches">
+    <div class="heading">Current Batches</div>
+    <div class="card-loop">
+      <app-batch-card-trainer
+        *ngFor="let item of [].constructor(5); index as i"
+        [index]="i"
+      ></app-batch-card-trainer>
+    </div>
+  </div>
+
+  <div class="paths">
+    <div class="heading">Paths</div>
+    <div class="card-loop">
+      <app-path-card-trainer
+        *ngFor="let item of [].constructor(5)"
+      ></app-path-card-trainer>
+    </div>
+  </div>
+  <div class="courses">
+    <div class="heading">Courses</div>
+    <div class="card-loop">
+      <app-profile-course-card-trainer
+        *ngFor="let item of [].constructor(5)"
+      ></app-profile-course-card-trainer>
+    </div>
+  </div>
+</div>
