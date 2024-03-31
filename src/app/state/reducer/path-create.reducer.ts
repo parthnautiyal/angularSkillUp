@@ -5,16 +5,21 @@ import {
   deletePathCreateCollaborator,
   setPathCreateCollaborators,
   setPathCreateCourse,
+  setPathCreateImage,
 } from '../action/path-create.action';
 
 export interface CreatePathState {
   selectedCourses: Course[];
   selectedCollaborators: User[];
+  img: string;
+  uploadLoading: boolean;
 }
 
 export const initialCreatePath: CreatePathState = {
   selectedCourses: [],
   selectedCollaborators: [],
+  img: '',
+  uploadLoading: false,
 };
 
 export const pathCreateReducer = createReducer(
@@ -33,5 +38,10 @@ export const pathCreateReducer = createReducer(
   on(deletePathCreateCollaborator, (state, { selectedCollaborators }) => ({
     ...state,
     selectedCollaborators,
+  })),
+
+  on(setPathCreateImage, (state, { img }) => ({
+    ...state,
+    img,
   }))
 );

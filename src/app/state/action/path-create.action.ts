@@ -16,3 +16,16 @@ export const deletePathCreateCollaborator = createAction(
   '[Path-Create] Delete Path Create Collaborator',
   props<{ selectedCollaborators: User[] }>()
 );
+
+export const setPathCreateImage = createAction(
+  '[Path-Create] Set Path Create Image',
+  props<{ img: string }>()
+);
+
+export const setPathCreateImageUploaded = createAction(
+  '[Path-Create] Set Path Create Image Uploaded'
+);
+
+export const setPathCreateImageFailed = createAction(
+  '[Path-Create] Set Path Create Image Failed'
+);

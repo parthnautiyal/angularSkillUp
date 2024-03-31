@@ -131,24 +131,6 @@ export class CreatePathFormComponent implements OnInit {
     );
   }
 
-  handleRemoveCollaborator(id: number) {
-    const index = this.currentCollaborators.findIndex(
-      (collab) => collab.id === id
-    );
-
-    if (index > -1) {
-      this.currentCollaborators = [
-        ...this.currentCollaborators.slice(0, index),
-        ...this.currentCollaborators.slice(index + 1),
-      ];
-    }
-    this.store.dispatch(
-      deletePathCreateCollaborator({
-        selectedCollaborators: this.currentCollaborators,
-      })
-    );
-  }
-
   triggerInputClick(): void {
     const inputElement = document.getElementById('pathImage');
     if (inputElement) {
@@ -176,5 +158,22 @@ export class CreatePathFormComponent implements OnInit {
   handleCollaborator(event: Event) {
     event.stopPropagation();
     this.isCollab = !this.isCollab;
+  }
+  handleRemoveCollaborator(id: number) {
+    const index = this.currentCollaborators.findIndex(
+      (collab) => collab.id === id
+    );
+
+    if (index > -1) {
+      this.currentCollaborators = [
+        ...this.currentCollaborators.slice(0, index),
+        ...this.currentCollaborators.slice(index + 1),
+      ];
+    }
+    this.store.dispatch(
+      deletePathCreateCollaborator({
+        selectedCollaborators: this.currentCollaborators,
+      })
+    );
   }
 }

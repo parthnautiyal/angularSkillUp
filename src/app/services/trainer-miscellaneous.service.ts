@@ -6,6 +6,7 @@ import { Course } from '../models/Course';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
 import { CreatePath } from '../models/CreatePath';
+import { CreateCourse } from '../models/CreateCourse';
 
 @Injectable({
   providedIn: 'root',
@@ -89,10 +90,31 @@ export class TrainerMiscellaneousService {
       'developer-token': this.developerToken,
     });
 
-    return this.http.post(API.IMAGE_UPLOAD, formData, { headers });
+    return this.http.post(API.MEDIA + API.IMAGE_UPLOAD, formData, { headers });
   }
 
   createPathTrainer(data: CreatePath) {
     return this.http.post(API.BASE_URL + API.ADMIN + API.PATHS, data);
+  }
+
+  createCourse(data: CreateCourse) {
+    return this.http.post(API.BASE_URL + API.ADMIN + API.COURSES, data);
+  }
+
+  getCourseChapters(courseId: number) {
+    return this.http.get(
+      API.BASE_URL + API.ADMIN + API.COURSES + courseId + API.CHAPTERS
+    );
+  }
+
+  uploadFile(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('fileUpload', file, file.name);
+
+    const headers = new HttpHeaders({
+      'developer-token': this.developerToken,
+    });
+
+    return this.http.post(API.MEDIA + API.FILE_UPLOAD, formData, { headers });
   }
 }
