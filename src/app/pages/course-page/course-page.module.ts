@@ -13,6 +13,7 @@ import { CardsModule } from 'src/app/shared/cards/cards.module';
 import { CoursePageRoutingModule } from './course-page-routing.module';
 import { ShimmerModule } from 'src/app/shimmer/shimmer.module';
 import { ErrorPageModule } from 'src/app/error-page/error-page.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ErrorPageModule } from 'src/app/error-page/error-page.module';
     CoursePageRoutingModule,
     ShimmerModule,
     ErrorPageModule,
+    FormsModule,
   ],
 })
 export class CoursePageModule {}

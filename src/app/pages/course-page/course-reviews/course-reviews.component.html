@@ -86,6 +86,7 @@
     <div class="info-heading">Comments</div>
     <div class="review-container">
       <textarea
+        [(ngModel)]="feedback"
         name="feedback"
         class="add-feedback"
         id="add-feedback"
@@ -101,7 +102,14 @@
         id="cancel"
       >
         Cancel</button
-      ><button type="submit" class="update-button" id="submit">Submit</button>
+      ><button
+        type="submit"
+        (click)="handleReviewSubmit()"
+        class="update-button"
+        id="submit"
+      >
+        Submit
+      </button>
     </div>
   </div>
 

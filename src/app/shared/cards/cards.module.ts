@@ -15,7 +15,7 @@ import { RandomColorDirective } from '../containers/card-container/random-color.
 import { RouterModule } from '@angular/router';
 import { ShimmerLoadingComponent } from '../../shimmer/card-shimmer/shimmer-loading/shimmer-loading.component';
 import { ErrorCardComponent } from './error-card/error-card.component';
-import { ToastModule } from 'primeng/toast';
+import { CourseCardTrainerComponent } from './course-card-trainer/course-card-trainer.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { ToastModule } from 'primeng/toast';
     LoadingCardComponent,
     ShimmerLoadingComponent,
     ErrorCardComponent,
+    CourseCardTrainerComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +38,6 @@ import { ToastModule } from 'primeng/toast';
     ProgressSpinnerModule,
     RandomColorDirective,
     RouterModule,
-    ToastModule,
   ],
   exports: [
     BatchCardComponent,
@@ -51,6 +51,7 @@ import { ToastModule } from 'primeng/toast';
     LoadingCardComponent,
     ShimmerLoadingComponent,
     ErrorCardComponent,
+    CourseCardTrainerComponent,
   ],
 })
 export class CardsModule {}

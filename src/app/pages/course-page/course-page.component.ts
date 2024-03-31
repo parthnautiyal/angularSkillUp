@@ -24,6 +24,7 @@ import {
 export class CoursePageComponent implements OnInit {
   id: string = '';
   loading: boolean = true;
+  isChapterLoading: boolean = true;
   error: boolean = false;
   isAccessiblity: boolean = false;
   errors: Error = {
@@ -43,10 +44,10 @@ export class CoursePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadCourseAboutInfo({ courseId: this.id }));
-    // this.store.dispatch(loadChapterData({ courseId: this.id }));
     this.courseAbout$ = this.store.select(selectCourseAboutInfoLoading);
     this.courseAbout$.subscribe((res) => {
       if (res == false) {
+        this.loading = res;
         this.store.select(selectCourseAboutInfo).subscribe((res) => {
           if (res) {
             this.isAccessiblity = res.isEnrolled || false;
@@ -55,13 +56,7 @@ export class CoursePageComponent implements OnInit {
             if (this.isAccessiblity) {
               this.store.dispatch(loadChapterData({ courseId: this.id }));
               this.store.select(selectChapterDataLoading).subscribe((res) => {
-                if (res == false) {
-                  setTimeout(() => {
-                    this.loading = res;
-                  }, 500);
-                } else {
-                  this.loading = res;
-                }
+                this.isChapterLoading = res;
               });
             }
           }
@@ -75,23 +70,10 @@ export class CoursePageComponent implements OnInit {
       }
     });
 
-    // this.mis.getRating(parseInt(this.id));
     this.store.dispatch(loadCourseRating({ id: this.id }));
     this.mis.getCourseReviews(parseInt(this.id));
-    // console.log('id -> ' + this.id);
+    this.mis.getMyReviews(parseInt(this.id));
 
-    // this.chapterData$ = this.store.select(selectChapterDataLoading);
-    // combineLatest([this.courseAbout$, this.chapterData$]).subscribe(
-    //   ([courseAbt, chapterData]) => {
-    //     if (!courseAbt && !chapterData) {
-    //       setTimeout(() => {
-    //         this.loading = false;
-    //       }, 500);
-    //     } else {
-    //       this.loading = true;
-    //     }
-    //   }
-    // );
     this.store.select(selectCourseAboutInfoError).subscribe((res) => {
       if (res != null) {
         this.error = true;

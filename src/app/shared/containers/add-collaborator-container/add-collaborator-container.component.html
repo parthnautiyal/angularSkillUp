@@ -1,0 +1,30 @@
+<div class="collaborator-container">
+  <p-listbox
+    appScrollTracker
+    (scrollPercent)="onScroll($event)"
+    [options]="collaborators"
+    optionLabel="collaborator"
+    [(ngModel)]="selectedCollaborators"
+    [multiple]="true"
+    [checkbox]="true"
+    optionLabel="name"
+    filterBy="label"
+    [listStyle]="{ 'max-height': '250px' }"
+    [style]="{ width: '500px' }"
+  >
+    <ng-template pTemplate="header"> Header Content </ng-template>
+
+    <ng-template let-collaborator pTemplate="item">
+      <div class="outer-container">
+        <img
+          [src]="
+            collaborator?.imageUrl ||
+            'https://w7.pngwing.com/pngs/686/219/png-transparent-youtube-user-computer-icons-information-youtube-hand-silhouette-avatar.png'
+          "
+          alt=""
+        />
+        <div class="name">{{ collaborator?.name || "Unknown" }}</div>
+      </div>
+    </ng-template>
+  </p-listbox>
+</div>

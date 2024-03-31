@@ -1,7 +1,9 @@
 export enum API {
-  BASE_URL = 'https://api.training.zopsmart.com',
-  // BASE_URL = 'https://staging.api.training.zopsmart.com',
+  // BASE_URL = 'https://api.training.zopsmart.com',
+  BASE_URL = 'https://staging.api.training.zopsmart.com',
+  IMAGE_UPLOAD = 'https://zopping.com/api/media-service/image-upload',
   STUDENTS = '/students',
+
   STUDENT = '/student',
   BATCHES = '/batches/',
   BATCHES_ALL = '/batches/all',
@@ -17,11 +19,17 @@ export enum API {
   PATHS_FEW = '?pageSize=10&pageNo=1',
   PATHS_ALL = '?pageSize=12&pageNo=1',
   PAGE_SIZE = '?pageSize=100&pageNo=1',
-
   TRAINERS = '/trainers',
   CHAPTERS = '/chapters',
   LOGIN = '/login',
   REFRESH = '/refresh',
   FAVOURITES = '/favourites',
+  CURRENT_USER = '/332',
   RATINGS = '/ratings',
+  SEARCH_FLAG = '/search?title=',
+  SEARCH_ROLE = '&role=student&field=all',
+  REVIEW_ALL = '/reviews/all',
+  REVIEWS = '/reviews',
+  ADMIN = '/admin',
+  USERS = '/users',
 }

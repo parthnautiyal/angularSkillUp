@@ -1,0 +1,249 @@
+<!-- <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="path-creation">
+        <div class="page-header">Path Details</div>
+        <form action="" class="Path-Form">
+          <div class="path-details">
+            <div class="form">
+              <div class="form-input">
+                <div class="sub-heading">Title</div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter title (5-150 characters)"
+                  required
+                  class="input-tag"
+                  id="path-title"
+                  pattern="^.{5,150}$"
+                />
+                <span class="error-message"
+                  >Title should be 5-150 characters</span
+                >
+              </div>
+              <div class="form-input">
+                <div class="sub-heading">Description</div>
+                <input
+                  type="text"
+                  name="description"
+                  placeholder="Enter description (20-255 characters)"
+                  required
+                  class="input-tag"
+                  id="path-description"
+                />
+                <span class="error-message"
+                  >Description should be 20-255 characters</span
+                >
+              </div>
+              <div class="form-input">
+                <div class="sub-heading">About</div>
+                <textarea
+                  type="text"
+                  name="name"
+                  placeholder="About (50-2500 characters)"
+                  rows="8"
+                  minlength="50"
+                  maxlength="2500"
+                  required
+                  class="input-tag"
+                  id="path-about"
+                ></textarea>
+                <span class="error-message"
+                  >About should be 50-2500 characters</span
+                >
+              </div>
+              <div class="form-input path-image">
+                <div class="sub-heading">Thumbnail</div>
+                <input
+                  class="input-box-field"
+                  id="pathImage"
+                  accept=".jpeg,.jpg,.webp,.png,.tiff"
+                  type="file"
+                  name="Image"
+                  required
+                  style="display: none"
+                />
+                <div class="image-box image-not-uploaded">
+                  <div class="upload-icon-space">
+                    <svg
+                      width="24px"
+                      height="24px"
+                      viewBox="0 0 24.0 24.0"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <defs>
+                        <clipPath id="i0">
+                          <path
+                            d="M1440,0 L1440,1663 L0,1663 L0,0 L1440,0 Z"
+                          ></path>
+                        </clipPath>
+                        <clipPath id="i1">
+                          <path d="M24,0 L24,24 L0,24 L0,0 L24,0 Z"></path>
+                        </clipPath>
+                        <clipPath id="i2">
+                          <path
+                            d="M15.1746013,10.6002007 C15.4082013,10.6002007 15.6042011,10.679201 15.7626011,10.837201 C15.9206011,10.995601 15.9996014,11.1916007 15.9996014,11.4252007 L15.9996014,13.9752009 C15.9996014,14.4252009 15.8330012,14.8168011 15.4998012,15.1500011 C15.1666012,15.4832011 14.7750011,15.6498013 14.325001,15.6498013 L1.67460034,15.6498013 C1.22460031,15.6498013 0.833000159,15.4832011 0.499800146,15.1500011 C0.166600132,14.8168011 0,14.4252009 0,13.9752009 L0,11.4252007 C0,11.1916007 0.0790000018,10.995601 0.237000006,10.837201 C0.395400016,10.679201 0.59140004,10.6002007 0.825000059,10.6002007 C1.07500007,10.6002007 1.27900037,10.679201 1.43700038,10.837201 C1.59540039,10.995601 1.67460034,11.1916007 1.67460034,11.4252007 L1.67460034,13.9752009 L14.325001,13.9752009 L14.325001,11.4252007 C14.325001,11.1916007 14.4082013,10.995601 14.5746013,10.837201 C14.7414013,10.679201 14.9414013,10.6002007 15.1746013,10.6002007 Z M7.99980068,0 C8.11660069,0 8.22080064,0.0166001101 8.31240065,0.0498001135 C8.40400066,0.083400117 8.49140083,0.141800015 8.57460083,0.225000016 L12.3000009,3.9498004 C12.4664009,4.11660041 12.5496011,4.31240048 12.5496011,4.5372005 C12.5496011,4.76240052 12.4664009,4.95840025 12.3000009,5.12520026 C12.1332009,5.29160027 11.9332008,5.3748005 11.7000008,5.3748005 C11.4664008,5.3748005 11.2664008,5.29160027 11.1000008,5.12520026 L8.82480074,2.8752001 L8.82480074,10.9248009 C8.82480074,11.1748009 8.74560079,11.3790009 8.58720078,11.5374009 C8.42880077,11.6958009 8.23300069,11.7750009 7.99980068,11.7750009 C7.76660067,11.7750009 7.5708006,11.6958009 7.41240059,11.5374009 C7.25400057,11.3790009 7.17480062,11.1748009 7.17480062,10.9248009 L7.17480062,2.8752001 L4.89960057,5.14980049 C4.73320057,5.3166005 4.53740049,5.39580045 4.31220047,5.38740045 C4.08740046,5.37900045 3.89160039,5.29160027 3.72480038,5.12520026 C3.55800037,4.95840025 3.47460047,4.75840023 3.47460047,4.52520022 C3.47460047,4.2916002 3.55800037,4.09160018 3.72480038,3.92520018 L7.42500053,0.225000016 C7.50820053,0.141800015 7.59980065,0.083400117 7.69980066,0.0498001135 C7.79980067,0.0166001101 7.89980067,0 7.99980068,0 Z"
+                          ></path>
+                        </clipPath>
+                      </defs>
+                      <g transform="translate(-685.0 -740.0)">
+                        <g clip-path="url(#i0)">
+                          <g transform="translate(425.0 575.0)">
+                            <g transform="translate(246.0 153.0)">
+                              <g transform="translate(14.0 12.0)">
+                                <g clip-path="url(#i1)">
+                                  <g
+                                    transform="translate(4.000213623046876 4.350097656250001)"
+                                  >
+                                    <g clip-path="url(#i2)">
+                                      <polygon
+                                        points="0,0 15.9996014,0 15.9996014,15.6498013 0,15.6498013 0,0"
+                                        stroke="none"
+                                        fill="#5523D0"
+                                      ></polygon>
+                                    </g>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+                <span class="error-message">*Required</span>
+              </div>
+              <div class="form-input">
+                <div class="sub-heading">Courses</div>
+                <div class="path-add-courses">
+                  <button type="button" class="control-button update-button">
+                    Add Courses
+                  </button>
+                </div>
+              </div>
+              <div class="form-input collaborators">
+                <div class="sub-heading">
+                  Collaborators <span class="count">(0)</span>
+                </div>
+                <div class="add-content-btn-wrapper" id="collaborators">
+                  <button class="add-content-btn" id="collaborators">
+                    Add Collaborators<svg
+                      width="16"
+                      height="9"
+                      viewBox="0 0 16 9"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <title>Expand</title>
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M6.67236 8.39522C7.40488 9.20465 8.59807 9.19853 9.32504 8.39522L15.5961 1.46561C16.3286 0.656175 16.0374 0 14.9443 0H1.05314C-0.039379 0 -0.325668 0.662303 0.401302 1.46561L6.67236 8.39522Z"
+                        fill="#222222"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="form-input">
+                <div class="sub-heading">Publish</div>
+                <div>
+                  <input
+                    type="radio"
+                    name="accessibility"
+                    id="path-accessible"
+                    class="input-box-field"
+                    required=""
+                    value="aceessible"
+                  /><label class="path-isaccessible" for="path-accessible"
+                    >Yes</label
+                  ><input
+                    type="radio"
+                    name="accessibility"
+                    id="path-inaccessible"
+                    class="input-box-field"
+                    value="inaccessible"
+                  /><label for="pathInAccessible">No</label
+                  ><span class="error-message">*Required</span>
+                </div>
+              </div>
+            </div>
+            <div class="submit-path">
+              <button class="control-button update-button">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div> -->
+<div class="page-content-wrapper">
+  <div class="course-creation">
+    <div class="heading">Course Details</div>
+    <div class="switch-wrapper">
+      <div class="basic-details">Basic Details</div>
+      <div class="chapters">Chapters</div>
+      <div class="additional">Additional Resources</div>
+    </div>
+    <form class="courses-form">
+      <div class="sub-heading">Name</div>
+      <input
+        type="text"
+        placeholder="Enter name of the course ( 1 to 100 characters )"
+        required
+        pattern="^.{1,100}$"
+      />
+      <span class="error-message">Name must be of 1 to 100 characters</span>
+      <div class="sub-heading">Thumbnail</div>
+      <div class="image-box image-not-uploaded">
+        <div class="upload-icon-space">
+          <svg
+            width="24px"
+            height="24px"
+            viewBox="0 0 24.0 24.0"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <defs>
+              <clipPath id="i0">
+                <path d="M1440,0 L1440,1663 L0,1663 L0,0 L1440,0 Z"></path>
+              </clipPath>
+              <clipPath id="i1">
+                <path d="M24,0 L24,24 L0,24 L0,0 L24,0 Z"></path>
+              </clipPath>
+              <clipPath id="i2">
+                <path
+                  d="M15.1746013,10.6002007 C15.4082013,10.6002007 15.6042011,10.679201 15.7626011,10.837201 C15.9206011,10.995601 15.9996014,11.1916007 15.9996014,11.4252007 L15.9996014,13.9752009 C15.9996014,14.4252009 15.8330012,14.8168011 15.4998012,15.1500011 C15.1666012,15.4832011 14.7750011,15.6498013 14.325001,15.6498013 L1.67460034,15.6498013 C1.22460031,15.6498013 0.833000159,15.4832011 0.499800146,15.1500011 C0.166600132,14.8168011 0,14.4252009 0,13.9752009 L0,11.4252007 C0,11.1916007 0.0790000018,10.995601 0.237000006,10.837201 C0.395400016,10.679201 0.59140004,10.6002007 0.825000059,10.6002007 C1.07500007,10.6002007 1.27900037,10.679201 1.43700038,10.837201 C1.59540039,10.995601 1.67460034,11.1916007 1.67460034,11.4252007 L1.67460034,13.9752009 L14.325001,13.9752009 L14.325001,11.4252007 C14.325001,11.1916007 14.4082013,10.995601 14.5746013,10.837201 C14.7414013,10.679201 14.9414013,10.6002007 15.1746013,10.6002007 Z M7.99980068,0 C8.11660069,0 8.22080064,0.0166001101 8.31240065,0.0498001135 C8.40400066,0.083400117 8.49140083,0.141800015 8.57460083,0.225000016 L12.3000009,3.9498004 C12.4664009,4.11660041 12.5496011,4.31240048 12.5496011,4.5372005 C12.5496011,4.76240052 12.4664009,4.95840025 12.3000009,5.12520026 C12.1332009,5.29160027 11.9332008,5.3748005 11.7000008,5.3748005 C11.4664008,5.3748005 11.2664008,5.29160027 11.1000008,5.12520026 L8.82480074,2.8752001 L8.82480074,10.9248009 C8.82480074,11.1748009 8.74560079,11.3790009 8.58720078,11.5374009 C8.42880077,11.6958009 8.23300069,11.7750009 7.99980068,11.7750009 C7.76660067,11.7750009 7.5708006,11.6958009 7.41240059,11.5374009 C7.25400057,11.3790009 7.17480062,11.1748009 7.17480062,10.9248009 L7.17480062,2.8752001 L4.89960057,5.14980049 C4.73320057,5.3166005 4.53740049,5.39580045 4.31220047,5.38740045 C4.08740046,5.37900045 3.89160039,5.29160027 3.72480038,5.12520026 C3.55800037,4.95840025 3.47460047,4.75840023 3.47460047,4.52520022 C3.47460047,4.2916002 3.55800037,4.09160018 3.72480038,3.92520018 L7.42500053,0.225000016 C7.50820053,0.141800015 7.59980065,0.083400117 7.69980066,0.0498001135 C7.79980067,0.0166001101 7.89980067,0 7.99980068,0 Z"
+                ></path>
+              </clipPath>
+            </defs>
+            <g transform="translate(-685.0 -740.0)">
+              <g clip-path="url(#i0)">
+                <g transform="translate(425.0 575.0)">
+                  <g transform="translate(246.0 153.0)">
+                    <g transform="translate(14.0 12.0)">
+                      <g clip-path="url(#i1)">
+                        <g
+                          transform="translate(4.000213623046876 4.350097656250001)"
+                        >
+                          <g clip-path="url(#i2)">
+                            <polygon
+                              points="0,0 15.9996014,0 15.9996014,15.6498013 0,15.6498013 0,0"
+                              stroke="none"
+                              fill="#5523D0"
+                            ></polygon>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <span class="error-message">*Required</span>
+    </form>
+  </div>
+</div>

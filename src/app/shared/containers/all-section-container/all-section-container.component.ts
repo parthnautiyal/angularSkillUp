@@ -278,4 +278,8 @@ export class AllSectionContainerComponent implements OnInit {
       }
     }
   }
+
+  // onScroll(percentage: number) {
+  //   console.log('Scroll percentage:', percentage);
+  // }
 }
