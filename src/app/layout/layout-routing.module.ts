@@ -8,6 +8,8 @@ import { AdminComponent } from './admin/admin.component';
 import { TrainersAllSectionContainerComponent } from '../shared/containers/all-section-container copy/trainers-all-section-container.component';
 import { ProfilePageTrainerComponent } from '../pages/profile-page-trainer/profile-page-trainer.component';
 import { DashboardCourseCardTrainerComponent } from '../shared/cards/dashboard-course-card-trainer/dashboard-course-card-trainer.component';
+import { CreateCourseFormComponent } from '../shared/form/create-course-form/create-course-form.component';
+import { CreatePathFormComponent } from '../shared/form/create-path-form/create-path-form.component';
 
 const routesCurr: Route =
   4 > 3
@@ -23,18 +25,20 @@ const routesCurr: Route =
             path: 'courses/all',
             component: TrainersAllSectionContainerComponent,
           },
-
-          {
-            path: 'dashboardcourse',
-            component: DashboardCourseCardTrainerComponent,
-          },
-
           {
             path: 'dashboard',
             loadChildren: () =>
               import(
                 '../pages/dashboard-trainer/dashboard-trainer.module'
               ).then((e) => e.DashboardTrainerModule),
+          },
+          {
+            path: 'path/new',
+            component: CreatePathFormComponent,
+          },
+          {
+            path: 'course/new',
+            component: CreateCourseFormComponent,
           },
           { path: '**', component: PageNotFoundComponent },
         ],

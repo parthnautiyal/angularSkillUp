@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DropdownModule } from 'primeng/dropdown';
 import { Option } from 'src/app/models/Options';
 
@@ -12,7 +13,7 @@ export class ComponentHeaderComponent implements OnInit {
   Options: Option[];
   placeholder: string = 'Create Content';
 
-  constructor() {
+  constructor(private router: Router) {
     this.Options = [
       { name: 'Create Path', link: '/path/new' },
       { name: 'Create Course', link: '/course/new' },
@@ -20,4 +21,7 @@ export class ComponentHeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  onOptionSelect(link: string) {
+    this.router.navigateByUrl(link);
+  }
 }

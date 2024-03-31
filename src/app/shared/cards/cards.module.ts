@@ -24,6 +24,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DashboardCourseCardTrainerComponent } from './dashboard-course-card-trainer/dashboard-course-card-trainer.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { TrainerDashboardHeaderComponent } from './trainer-dashboard-header/trainer-dashboard-header.component';
+import { StudentCardComponent } from './student-card/student-card.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { TrainerDashboardHeaderComponent } from './trainer-dashboard-header/trai
     ProfileCourseCardTrainerComponent,
     DashboardCourseCardTrainerComponent,
     TrainerDashboardHeaderComponent,
+    StudentCardComponent
   ],
   imports: [
     CommonModule,
@@ -71,8 +73,8 @@ import { TrainerDashboardHeaderComponent } from './trainer-dashboard-header/trai
     BatchCardTrainerComponent,
     PathCardTrainerComponent,
     ProfileCourseCardTrainerComponent,
-    DashboardCourseCardTrainerComponent,
-    TrainerDashboardHeaderComponent,
+    StreamCardTrainerComponent,
+    StudentCardComponent
   ],
 })
 export class CardsModule {}

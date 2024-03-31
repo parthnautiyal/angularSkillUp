@@ -3,6 +3,14 @@
 ></app-trainer-dashboard-header>
 <div class="page-content-wrapper">
   <div class="page-content">
+    <div class="student-card">
+      <app-student-card></app-student-card>
+    </div>
+    <div class="heading">Streams</div>
+    <div class="stream-card">
+      <app-stream-card-trainer></app-stream-card-trainer>
+    </div>
+
     <ng-container *ngFor="let item of headingsTitle">
       <app-trainers-card-container [title]="item"></app-trainers-card-container>
     </ng-container>
