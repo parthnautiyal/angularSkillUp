@@ -4,22 +4,31 @@
       <div class="page-header">Course Details</div>
     </div>
     <div class="course-form-switch-tab">
-      <div (click)="handleBasicClick()" class="switch-swapper active">
+      <div
+        (click)="handleBasicClick()"
+        class="switch-swapper"
+        [class.active]="isDetailsForm"
+      >
         Basic Details
+        <div class="active-line"></div>
       </div>
       <div
         (click)="handleChaptersClick()"
         class="switch-swapper"
+        [class.active]="isChaptersForm"
         [class.disable-cursor]="!isCourseCreated"
       >
         Chapters
+        <div class="active-line"></div>
       </div>
       <div
         (click)="handleResourcesClick()"
         class="switch-swapper"
+        [class.active]="isResourcesForm"
         [class.disable-cursor]="!isCourseCreated"
       >
         Additional Resources
+        <div class="active-line"></div>
       </div>
     </div>
   </div>
