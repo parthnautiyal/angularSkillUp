@@ -1,15 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 
 @Component({
-  selector: 'app-batch-card',
-  templateUrl: './batch-card.component.html',
-  styleUrls: ['./batch-card.component.sass'],
+  selector: 'app-batch-card-trainer',
+  templateUrl: './batch-card-trainer.component.html',
+  styleUrls: ['./batch-card-trainer.component.sass'],
 })
-export class BatchCardComponent implements OnInit {
-  isProfile: boolean = false;
-
+export class BatchCardTrainerComponent implements OnInit {
   @Input() index: number = 0;
   @Input() progress: number = 0;
 
@@ -38,9 +34,7 @@ export class BatchCardComponent implements OnInit {
     progress: 10,
   };
 
-  constructor(private mis: MiscellaneousService, private router: Router) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.isProfile = this.router.url.includes('user') ? true : false;
-  }
+  ngOnInit(): void {}
 }
