@@ -1,0 +1,57 @@
+<form id="chapterForm" novalidate="">
+  <div class="formInput">
+    <div class="sub-heading">Chapter Title</div>
+    <input
+      type="text"
+      placeholder="Enter chapter title"
+      class="InputTag"
+      name="Name"
+      autocomplete="off"
+      id="chapterName"
+      value=""
+    /><span class="error-message"
+      >Title of chapter should have 5 to 150 characters</span
+    >
+  </div>
+  <div class="formInput">
+    <div class="sub-heading">Content</div>
+    <button class="add-button">
+      <div class="button-text">Add Content</div>
+      <div class="button-style"><img src="assets/plus-sign.svg" /></div>
+    </button>
+    <div id="resource-wrapper">
+      <div class="uploaded-file" draggable="false">
+        <div class="ResourceItem">
+          <div class="file-icon-wrapper">
+            <img class="svg-icon" src="assets/document.svg" alt="" />
+          </div>
+          <div class="resource-name">test2</div>
+        </div>
+        <div class="resource-control-icons-layover">
+          <div class="option-holder">
+            <div class="delete-icon">
+              <img class="svg-icon" src="assets/Remove.svg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="formInput">
+    <div class="sub-heading">Assignments</div>
+    <button class="add-button">
+      <div class="button-text">Add Resource</div>
+      <div class="button-style"><img src="assets/plus-sign.svg" /></div>
+    </button>
+    <div id="quiz-wrapper"></div>
+    <input class="input-box-field" required="" style="display: none" /><span
+      class="error-message"
+      style="margin-top: 20px"
+      >Chapter should contain atleast 1 quiz or 1 content material</span
+    >
+  </div>
+  <div class="ChapterControlButtons">
+    <button type="button" class="control-button remove-button">Cancel</button
+    ><button type="submit" class="control-button update-button">Save</button>
+  </div>
+</form>
