@@ -1,8 +1,8 @@
+<app-component-header heading="Trainers Dashboard"></app-component-header>
 <div class="page-content-wrapper">
   <div class="page-content">
-    <!-- <app-create-path-form></app-create-path-form> -->
-    <app-create-course-form></app-create-course-form>
-    <!-- <app-course-card-info-trainer></app-course-card-info-trainer>
-    <app-add-course-container></app-add-course-container> -->
+    <ng-container *ngFor="let item of headingsTitle">
+      <app-trainers-card-container [title]="item"></app-trainers-card-container>
+    </ng-container>
   </div>
 </div>

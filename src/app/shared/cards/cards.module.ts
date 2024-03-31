@@ -20,6 +20,7 @@ import { StreamCardTrainerComponent } from './stream-card-trainer/stream-card-tr
 import { BatchCardTrainerComponent } from './batch-card-trainer/batch-card-trainer.component';
 import { PathCardTrainerComponent } from './path-card-trainer/path-card-trainer.component';
 import { ProfileCourseCardTrainerComponent } from './profile-course-card-trainer/profile-course-card-trainer.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ProfileCourseCardTrainerComponent } from './profile-course-card-trainer
     ProgressSpinnerModule,
     RandomColorDirective,
     RouterModule,
+    DropdownModule
   ],
   exports: [
     BatchCardComponent,

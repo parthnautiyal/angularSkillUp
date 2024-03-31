@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 
 @Component({
   selector: 'app-batch-card',
@@ -38,7 +37,7 @@ export class BatchCardComponent implements OnInit {
     progress: 10,
   };
 
-  constructor(private mis: MiscellaneousService, private router: Router) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.isProfile = this.router.url.includes('user') ? true : false;

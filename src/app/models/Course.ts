@@ -1,3 +1,5 @@
+import { User } from "./User";
+
 export interface Course {
   id: number;
   courseId?: number;
@@ -6,6 +8,7 @@ export interface Course {
   imageUrl: string;
   isAccessible: boolean;
   isOwner?: boolean;
+  isAuthorised?:boolean;
   description: string;
   about: string;
   createdBy: {
@@ -23,5 +26,5 @@ export interface Course {
   noOfChapters: number;
   updatedAt: string;
   level: number;
-  collaborators?: [];
+  collaborators?: User[];
 }
