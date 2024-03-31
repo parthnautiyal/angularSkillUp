@@ -4,12 +4,17 @@
       <div class="page-header">Course Details</div>
     </div>
     <div class="course-form-switch-tab">
-      <div (click)="handleBasicClick()" class="switch-swapper active">
+      <div
+        (click)="handleBasicClick()"
+        class="switch-swapper"
+        [class.active]="isDetailsForm"
+      >
         Basic Details
       </div>
       <div
         (click)="handleChaptersClick()"
         class="switch-swapper"
+        [class.active]="isChaptersForm"
         [class.disable-cursor]="!isCourseCreated"
       >
         Chapters
@@ -17,6 +22,7 @@
       <div
         (click)="handleResourcesClick()"
         class="switch-swapper"
+        [class.active]="isResourcesForm"
         [class.disable-cursor]="!isCourseCreated"
       >
         Additional Resources
@@ -184,7 +190,8 @@
       </div>
     </div>
     <div *ngIf="isChaptersForm" class="course-chapters-form">
-      <app-create-resource [courseId]="courseId"></app-create-resource>
+      <!-- <app-create-resource [courseId]="courseId"></app-create-resource> -->
+      <app-create-chapter></app-create-chapter>
     </div>
   </div>
 </div>
