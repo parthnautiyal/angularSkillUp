@@ -11,12 +11,14 @@ import { CreateCourseFormComponent } from './create-course-form/create-course-fo
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CreateResourceComponent } from './create-course-form/create-resource/create-resource.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { CreateChapterComponent } from './create-course-form/create-chapter/create-chapter.component';
 
 @NgModule({
   declarations: [
     CreatePathFormComponent,
     CreateCourseFormComponent,
     CreateResourceComponent,
+    CreateChapterComponent,
   ],
   imports: [
     CommonModule,
