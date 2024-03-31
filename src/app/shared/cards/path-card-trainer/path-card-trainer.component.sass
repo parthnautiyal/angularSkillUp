@@ -1,0 +1,57 @@
+.pathCard
+  display: flex
+  position: relative
+  cursor: pointer
+  width: 25vw
+  height: 112px
+  border-radius: 20px
+  background-color: var(--page-content-background-color)
+  box-sizing: border-box
+  align-items: center
+
+  @media screen and (max-width: 768px)
+    width: 65vw
+    flex-direction: column
+    padding: 10px
+    height: 200px
+
+  img
+    border-radius: 0.5rem
+    width: 35%
+    height: 80%
+    margin-left: 0.7rem
+    box-sizing: border-box
+
+    @media screen and (max-width: 768px)
+      width: 100%
+      margin-left: 0
+      height: 90px
+
+  .cardContent
+    padding: 3%
+    display: flex
+    width: 60%
+    flex-direction: column
+    font-size: 0.9rem
+    box-sizing: border-box
+    color: var(--primary-font-color)
+
+    @media screen and (max-width: 768px)
+      width: 100%
+
+  .title
+    display: -webkit-box
+    -webkit-line-clamp: 1
+    -webkit-box-orient: vertical
+    overflow: hidden
+    box-sizing: border-box
+
+    @media screen and (max-width: 768px)
+      width: 100%
+
+  .courseStartDate
+    font-size: 0.6rem
+
+.courseCount
+    padding-bottom: 10px
+

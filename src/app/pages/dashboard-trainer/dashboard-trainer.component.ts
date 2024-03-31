@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ListboxFilterOptions } from 'primeng/listbox';
+import { Store } from '@ngrx/store';
+import { PrimeNGConfig } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { ERROR, HEADINGS_TITLE } from 'src/app/constants/headingsTitle';
+import { loadTrainersCourses } from 'src/app/state/action/trainerscourse.actions';
+import { loadTrainersPaths } from 'src/app/state/action/trainerspath.actions';
 
 interface Country {
   name: string;
@@ -11,36 +16,33 @@ interface Country {
   styleUrls: ['./dashboard-trainer.component.sass'],
 })
 export class DashboardTrainerComponent implements OnInit {
-  countries: Country[];
+  constructor(
+    private messageService: MessageService,
+    private store: Store
+  ) {
+    this.showSuccess();
+  }
+  loading: boolean = true;
+  headingsTitle = HEADINGS_TITLE;
+  error = ERROR;
 
-  selectedCountries: Country[] = [];
-
-  filterValue = '';
-
-  constructor() {
-    this.countries = [
-      { name: 'Australia', code: 'AU' },
-      { name: 'Brazil', code: 'BR' },
-      { name: 'China', code: 'CN' },
-      { name: 'Egypt', code: 'EG' },
-      { name: 'France', code: 'FR' },
-      { name: 'Germany', code: 'DE' },
-      { name: 'India', code: 'IN' },
-      { name: 'Japan', code: 'JP' },
-      { name: 'Spain', code: 'ES' },
-      { name: 'United States', code: 'US' },
-    ];
+  ngOnInit(): void {
+    this.store.dispatch(loadTrainersCourses({ pageNo: 1 }));
+    this.store.dispatch(loadTrainersPaths({ pageNo: 1 }));
+  }
+  showError(data: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: data,
+    });
   }
 
-  // myResetFunction(options: MultiSelectFilterOptions) {
-  //   options.reset();
-  //   this.filterValue = '';
-  // }
-  onScroll(percentage: number) {
-    console.log('Scroll percentage:', percentage);
+  showSuccess() {
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Logged In',
+      detail: 'Loggin Successful',
+    });
   }
-  handleClick() {
-    console.log(this.selectedCountries);
-  }
-  ngOnInit(): void {}
 }

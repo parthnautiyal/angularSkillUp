@@ -40,6 +40,10 @@ import {
 } from './state/reducer/course.reducer';
 import { ToastModule } from 'primeng/toast';
 import { pathCreateReducer } from './state/reducer/path-create.reducer';
+import { TrainerpathsReducer } from './state/reducer/trainerspath.reducer';
+import { trainerCoursesReducer } from './state/reducer/trainerscourse.reducer';
+import { TrainerCoursesEffects } from './state/effects/trainerscourse.effects';
+import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -69,8 +73,16 @@ import { pathCreateReducer } from './state/reducer/path-create.reducer';
       numberOfEnrolledPaths: NoOfenrolledPathsReducer,
       courseRating: courseRatingReducer,
       pathCreate: pathCreateReducer,
+      trainerPaths: TrainerpathsReducer,
+      trainerCourses: trainerCoursesReducer,
     }),
-    EffectsModule.forRoot([CourseEffects, BatchEffects, PathEffects]),
+    EffectsModule.forRoot([
+      CourseEffects,
+      BatchEffects,
+      PathEffects,
+      TrainerCoursesEffects,
+      TrainerPathsEffects,
+    ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

@@ -15,7 +15,12 @@ import { RandomColorDirective } from '../containers/card-container/random-color.
 import { RouterModule } from '@angular/router';
 import { ShimmerLoadingComponent } from '../../shimmer/card-shimmer/shimmer-loading/shimmer-loading.component';
 import { ErrorCardComponent } from './error-card/error-card.component';
-import { CourseCardTrainerComponent } from './course-card-trainer/course-card-trainer.component';
+import { CourseCardInfoTrainerComponent } from './course-card-info-trainer/course-card-info-trainer.component';
+import { StreamCardTrainerComponent } from './stream-card-trainer/stream-card-trainer.component';
+import { BatchCardTrainerComponent } from './batch-card-trainer/batch-card-trainer.component';
+import { PathCardTrainerComponent } from './path-card-trainer/path-card-trainer.component';
+import { ProfileCourseCardTrainerComponent } from './profile-course-card-trainer/profile-course-card-trainer.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,11 @@ import { CourseCardTrainerComponent } from './course-card-trainer/course-card-tr
     LoadingCardComponent,
     ShimmerLoadingComponent,
     ErrorCardComponent,
-    CourseCardTrainerComponent,
+    CourseCardInfoTrainerComponent,
+    StreamCardTrainerComponent,
+    BatchCardTrainerComponent,
+    PathCardTrainerComponent,
+    ProfileCourseCardTrainerComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +47,7 @@ import { CourseCardTrainerComponent } from './course-card-trainer/course-card-tr
     ProgressSpinnerModule,
     RandomColorDirective,
     RouterModule,
+    DropdownModule
   ],
   exports: [
     BatchCardComponent,
@@ -51,7 +61,10 @@ import { CourseCardTrainerComponent } from './course-card-trainer/course-card-tr
     LoadingCardComponent,
     ShimmerLoadingComponent,
     ErrorCardComponent,
-    CourseCardTrainerComponent,
+    CourseCardInfoTrainerComponent,
+    BatchCardTrainerComponent,
+    PathCardTrainerComponent,
+    ProfileCourseCardTrainerComponent,
   ],
 })
 export class CardsModule {}
