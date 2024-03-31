@@ -7,6 +7,7 @@ import { SearchPageComponent } from '../pages/search-page/search-page.component'
 import { AdminComponent } from './admin/admin.component';
 import { TrainersAllSectionContainerComponent } from '../shared/containers/all-section-container copy/trainers-all-section-container.component';
 import { ProfilePageTrainerComponent } from '../pages/profile-page-trainer/profile-page-trainer.component';
+import { DashboardCourseCardTrainerComponent } from '../shared/cards/dashboard-course-card-trainer/dashboard-course-card-trainer.component';
 
 const routesCurr : Route = (4 > 3) ?  {
   path :'',
@@ -19,6 +20,12 @@ const routesCurr : Route = (4 > 3) ?  {
       path: 'courses/all',
       component: TrainersAllSectionContainerComponent
     },
+
+    {
+      path: 'dashboardcourse',
+      component: DashboardCourseCardTrainerComponent
+    },
+
     {
       path: 'dashboard',
       loadChildren: () =>
@@ -28,7 +35,8 @@ const routesCurr : Route = (4 > 3) ?  {
     },
     { path: '**', component: PageNotFoundComponent },
   ]
-}:{
+}
+:{
   path: '',
   component: UserComponent,
   children: [

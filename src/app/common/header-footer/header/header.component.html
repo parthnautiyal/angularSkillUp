@@ -31,7 +31,11 @@
         [(ngModel)]="searchQuery"
         (keyup.enter)="submitSearch()"
       />
-      <img class="search-icon" src="assets/dark/Search.svg" />
+      <img
+        class="search-icon"
+        src="assets/dark/Search.svg"
+        (click)="submitSearch()"
+      />
     </div>
     <div *ngIf="isResponsive">
       <button style="padding-left: 12px">
