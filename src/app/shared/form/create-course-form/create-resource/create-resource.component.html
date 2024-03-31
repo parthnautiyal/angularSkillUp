@@ -1,0 +1,269 @@
+<div *ngIf="isVisible" class="portal">
+  <div class="background-disabled"></div>
+  <div class="popup">
+    <div *ngIf="type == 'CONTENT'" class="add-resource-form">
+      <form
+        [formGroup]="contenForm"
+        (ngSubmit)="handleContentSubmit()"
+        action=""
+      >
+        <div class="name-of-resource form-field">
+          <div class="popup-sub-heading">Name</div>
+          <input
+            (change)="checkValidity()"
+            id="resourceName"
+            type="text"
+            placeholder="Title"
+            class="popup-InputTag"
+            formControlName="title"
+            [class.is-invalid]="
+              contenForm.controls['title'].invalid &&
+              contenForm.controls['title'].touched
+            "
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              contenForm.controls['title'].invalid &&
+              contenForm.controls['title'].touched
+            "
+            [ngStyle]="{
+              display:
+                contenForm.controls['title'].invalid &&
+                contenForm.controls['title'].touched
+                  ? 'block'
+                  : 'none'
+            }"
+            >Title should be 5-150 characters</span
+          >
+        </div>
+        <div class="form-field">
+          <div class="popup-sub-heading">Resource type</div>
+          <div class="resource-type-options">
+            <div class="type-link radio-option">
+              <input
+                (change)="isLink = true"
+                id="radio-for-link"
+                value="LINK"
+                type="radio"
+                name="type"
+                formControlName="type"
+                checked=""
+              /><label for="radio-for-link">Link</label>
+            </div>
+            <div class="type-file radio-option">
+              <input
+                (change)="isLink = false"
+                id="radio-for-file"
+                type="radio"
+                value="FILE"
+                name="type"
+                formControlName="type"
+              /><label for="radio-for-file">File</label>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isLink" class="form-field">
+          <div class="popup-sub-heading">Link</div>
+          <input
+            id="resourceLink"
+            type="text"
+            placeholder="Link"
+            class="popup-InputTag"
+            formControlName="contentLink"
+          />
+        </div>
+        <div *ngIf="!isLink" class="form-input path-image">
+          <div class="sub-heading">File</div>
+          <input
+            class="input-box-field"
+            id="pathImage"
+            accept=".pdf,.docx.,.txt,.png,.jpeg,.tiff,.jpg,.webp"
+            type="file"
+            name="Image"
+            style="display: none"
+            (change)="handleFileUpload($event)"
+          />
+
+          <div
+            *ngIf="isShowUploadBox"
+            class="image-box {{ isImageUploaded ? '' : 'image-not-uploaded' }}"
+          >
+            <div *ngIf="!isImageUploaded" class="upload-icon-space">
+              <img
+                (click)="triggerInputClick()"
+                src="assets/upload-icon.svg"
+                alt=""
+                srcset=""
+              />
+            </div>
+            <div *ngIf="isImageUploaded" class="uploaded-image-space">
+              <img [src]="imgUrl" alt="" />
+              <div (click)="removeFile()" class="img-cross-icon">
+                <img src="assets/remove-button.svg" alt="" />
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isFileUploaded" class="uploaded-file">
+            <div class="file-icon icon">
+              <img src="assets/file-icon.svg" alt="" />
+            </div>
+            <div class="file-name">WPR7.pdf</div>
+            <div (click)="removeFile()" class="cross-icon icon" style="">
+              <img src="assets/file-cross-icon.svg" alt="" />
+            </div>
+          </div>
+        </div>
+        <span *ngIf="isShowError" class="error-message-custom">*Required</span>
+        <div class="control-buttons">
+          <button
+            type="button"
+            (click)="handleCancelButton()"
+            class="popup-control-button popup-remove-button"
+          >
+            Cancel</button
+          ><button
+            type="submit"
+            class="popup-control-button popup-update-button"
+            [class.not-allowed]="!allReady"
+          >
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="type == 'QUIZ'" class="quiz-form">
+      <form
+        [formGroup]="quizForm"
+        (ngSubmit)="handleQuizSubmit()"
+        class="QuizForm"
+        id="QuizForm"
+        (change)="checkValidity()"
+      >
+        <div class="quiz-dropdown form-field">
+          <div class="popup-sub-heading">Choose Quiz type</div>
+          <input class="popup-InputTag" style="display: none" />
+          <div class="dropdown-wrapper">
+            <div class="ChooseQuizDropdown">
+              <div id="selected-quiz" class="option-select">
+                <div class="down-arrow-mark">
+                  <p-dropdown
+                    [options]="quizTypes"
+                    [(ngModel)]="selectedQuizType"
+                    [ngModelOptions]="{ standalone: true }"
+                    placeholder="Select Quiz Type"
+                    optionLabel="name"
+                    [showClear]="true"
+                  ></p-dropdown>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="error-message">*Required</span>
+        </div>
+        <div class="quiz-name form-field">
+          <input
+            type="text"
+            class="popup-InputTag quiz-name"
+            placeholder="Enter Quiz Name ( 1 to 100 characters )"
+            formControlName="quizTitle"
+            [class.is-invalid]="
+              quizForm.controls['quizTitle'].invalid &&
+              quizForm.controls['quizTitle'].touched
+            "
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              quizForm.controls['quizTitle'].invalid &&
+              quizForm.controls['quizTitle'].touched
+            "
+            [ngStyle]="{
+              display:
+                quizForm.controls['quizTitle'].invalid &&
+                quizForm.controls['quizTitle'].touched
+                  ? 'block'
+                  : 'none'
+            }"
+          >
+            Name must be of 1 to 100 characters
+          </span>
+        </div>
+        <div class="quiz-link form-field">
+          <div class="popup-sub-heading">Quiz Link</div>
+          <input
+            type="text"
+            class="popup-InputTag quiz-link"
+            placeholder="Enter Quiz Link ( 1 to 1000 characters )"
+            formControlName="quizLink"
+            [class.is-invalid]="
+              quizForm.controls['quizLink'].invalid &&
+              quizForm.controls['quizLink'].touched
+            "
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              quizForm.controls['quizLink'].invalid &&
+              quizForm.controls['quizLink'].touched
+            "
+            [ngStyle]="{
+              display:
+                quizForm.controls['quizLink'].invalid &&
+                quizForm.controls['quizLink'].touched
+                  ? 'block'
+                  : 'none'
+            }"
+          >
+            Quiz Link must be of 1 to 1000 characters and match the selected
+            quiz type pattern
+          </span>
+        </div>
+        <div class="quiz-passing-marks form-field">
+          <div class="popup-sub-heading">Passing Marks</div>
+          <input
+            type="number"
+            class="popup-InputTag quiz-passing-marks"
+            placeholder="Passing Marks ( only Integer )"
+            formControlName="quizPassingScore"
+            [class.is-invalid]="
+              quizForm.controls['quizPassingScore'].invalid &&
+              quizForm.controls['quizPassingScore'].touched
+            "
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              quizForm.controls['quizPassingScore'].invalid &&
+              quizForm.controls['quizPassingScore'].touched
+            "
+            [ngStyle]="{
+              display:
+                quizForm.controls['quizPassingScore'].invalid &&
+                quizForm.controls['quizPassingScore'].touched
+                  ? 'block'
+                  : 'none'
+            }"
+          >
+            Please Enter Valid Marks
+          </span>
+        </div>
+        <div class="quiz-form-buttons">
+          <button
+            class="popup-control-button popup-remove-button"
+            type="button"
+            (click)="handleCancelButton()"
+          >
+            Cancel</button
+          ><button
+            class="popup-control-button popup-update-button"
+            type="submit"
+            [class.not-allowed]="!allReady"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

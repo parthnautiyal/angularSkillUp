@@ -1,3 +1,22 @@
+<ng-container *ngIf="noErrors">
+  <p-confirmDialog
+    [style]="{ width: '50vw' }"
+    [baseZIndex]="10000"
+    rejectButtonStyleClass="p-button-text"
+    [closable]="false"
+  ></p-confirmDialog>
+</ng-container>
+<ng-container *ngIf="!noErrors">
+  <p-confirmDialog
+    [style]="{ width: '50vw' }"
+    [baseZIndex]="10000"
+    rejectButtonStyleClass="p-button-text"
+    [rejectVisible]="false"
+    [closable]="false"
+    [acceptButtonStyleClass]="'p-button-danger p-button-rounded'"
+    [acceptLabel]="'Ok'"
+  ></p-confirmDialog>
+</ng-container>
 <div class="path-creation">
   <div class="page-header">Path Details</div>
   <form
