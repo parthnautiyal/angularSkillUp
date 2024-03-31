@@ -29,6 +29,8 @@ export interface Quiz {
   quizType: string;
   name: string;
   quizLink: string;
+  link?: string;
+  quizCreator?: string;
   passingMarks: number;
 }
 
