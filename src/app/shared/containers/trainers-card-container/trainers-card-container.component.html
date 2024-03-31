@@ -67,10 +67,10 @@
     <ng-container *ngIf="title == Title.COURSES">
       <ng-container *ngIf="!error">
         <ng-container *ngFor="let item of allCourses">
-          <app-course-card-trainer
+          <app-course-card-info-trainer
             [course]="item"
             *ngIf="!error"
-          ></app-course-card-trainer>
+          ></app-course-card-info-trainer>
         </ng-container>
       </ng-container>
       <div [ngStyle]="{ height: this.height + 'px' }">
