@@ -65,14 +65,14 @@
     </ng-container>
 
     <ng-container *ngIf="title == Title.COURSES">
-      <ng-container *ngIf="!error">
+      <div class="course-loop" *ngIf="!error">
         <ng-container *ngFor="let item of allCourses">
           <app-dashboard-course-card-trainer
             [course]="item"
             *ngIf="!error"
           ></app-dashboard-course-card-trainer>
         </ng-container>
-      </ng-container>
+      </div>
       <div [ngStyle]="{ height: this.height + 'px' }">
         <app-error-card
           [title]="Title.COURSES"
