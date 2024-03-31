@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ScrollTrackerDirective } from 'src/app/shared/scroll-tracker.directive';
 import { FormModule } from 'src/app/shared/form/form.module';
 import { ContainersModule } from 'src/app/shared/containers/containers.module';
+import { TrainerDashboardHeaderComponent } from 'src/app/shared/cards/trainer-dashboard-header/trainer-dashboard-header.component';
 
 @NgModule({
   declarations: [DashboardTrainerComponent],
@@ -20,7 +21,6 @@ import { ContainersModule } from 'src/app/shared/containers/containers.module';
     ScrollTrackerDirective,
     FormModule,
     ContainersModule,
-    CardsModule
   ],
 })
 export class DashboardTrainerModule {}

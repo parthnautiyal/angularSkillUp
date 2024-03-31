@@ -10,9 +10,10 @@ import { ProfilePageTrainerComponent } from '../pages/profile-page-trainer/profi
 import { DashboardCourseCardTrainerComponent } from '../shared/cards/dashboard-course-card-trainer/dashboard-course-card-trainer.component';
 import { CreateCourseFormComponent } from '../shared/form/create-course-form/create-course-form.component';
 import { CreatePathFormComponent } from '../shared/form/create-path-form/create-path-form.component';
+import { SwitchRoleComponent } from '../shared/cards/switch-role/switch-role.component';
 
 const routesCurr: Route =
-  4 > 3
+  localStorage.getItem('selectedRole') === 'TRAINER'
     ? {
         path: '',
         component: AdminComponent,
@@ -21,9 +22,17 @@ const routesCurr: Route =
             path: 'paths/all',
             component: TrainersAllSectionContainerComponent,
           },
+
           {
             path: 'courses/all',
             component: TrainersAllSectionContainerComponent,
+          },
+          {
+            path: 'user',
+            loadChildren: () =>
+              import(
+                '../pages/profile-page-trainer/profile-page-trainer.module'
+              ).then((m) => m.ProfilePageTrainerModule),
           },
           {
             path: 'dashboard',

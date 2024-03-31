@@ -1,0 +1,19 @@
+<div class="switch-role">
+  <div class="switch-heading">Switch Profile</div>
+  <div class="switch-wrapper">
+    <div
+      (click)="setTrainerActive()"
+      class="role"
+      [class.active]="trainerActive"
+    >
+      TRAINER
+    </div>
+    <div
+      (click)="setStudentActive()"
+      class="role"
+      [class.active]="!trainerActive"
+    >
+      STUDENT
+    </div>
+  </div>
+</div>

@@ -45,6 +45,7 @@ import { trainerCoursesReducer } from './state/reducer/trainerscourse.reducer';
 import { TrainerCoursesEffects } from './state/effects/trainersCourse.effects';
 import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
 
+
 @NgModule({
   declarations: [AppComponent],
 

@@ -25,6 +25,8 @@ import { DashboardCourseCardTrainerComponent } from './dashboard-course-card-tra
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { TrainerDashboardHeaderComponent } from './trainer-dashboard-header/trainer-dashboard-header.component';
 import { StudentCardComponent } from './student-card/student-card.component';
+import { SwitchRoleComponent } from './switch-role/switch-role.component';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { StudentCardComponent } from './student-card/student-card.component';
     ProfileCourseCardTrainerComponent,
     DashboardCourseCardTrainerComponent,
     TrainerDashboardHeaderComponent,
-    StudentCardComponent
+    StudentCardComponent,
+    SwitchRoleComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +59,7 @@ import { StudentCardComponent } from './student-card/student-card.component';
     RouterModule,
     DropdownModule,
     InputSwitchModule,
+    SelectButtonModule,
   ],
   exports: [
     BatchCardComponent,
@@ -74,7 +78,10 @@ import { StudentCardComponent } from './student-card/student-card.component';
     PathCardTrainerComponent,
     ProfileCourseCardTrainerComponent,
     StreamCardTrainerComponent,
-    StudentCardComponent
+    StudentCardComponent,
+    TrainerDashboardHeaderComponent,
+    DashboardCourseCardTrainerComponent,
+    SwitchRoleComponent,
   ],
 })
 export class CardsModule {}
