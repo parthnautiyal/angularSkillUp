@@ -6,9 +6,16 @@ import { UserComponent } from './user/user.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { ErrorPageModule } from '../error-page/error-page.module';
 import { AdminComponent } from './admin/admin.component';
+import { ProfilePageTrainerModule } from '../pages/profile-page-trainer/profile-page-trainer.module';
 @NgModule({
   declarations: [LayoutComponent, UserComponent, AdminComponent],
-  imports: [CommonModule, LayoutRoutingModule, HeaderFooterModule,ErrorPageModule],
+  imports: [
+    CommonModule,
+    LayoutRoutingModule,
+    HeaderFooterModule,
+    ErrorPageModule,
+    ProfilePageTrainerModule,
+  ],
   exports: [LayoutComponent],
 })
 export class LayoutModule {}

@@ -1,7 +1,9 @@
 export enum API {
   // BASE_URL = 'https://api.training.zopsmart.com',
   BASE_URL = 'https://staging.api.training.zopsmart.com',
-  IMAGE_UPLOAD = 'https://zopping.com/api/media-service/image-upload',
+  MEDIA = 'https://zopping.com/api/media-service',
+  IMAGE_UPLOAD = '/image-upload',
+  FILE_UPLOAD = '/file',
   STUDENTS = '/students',
 
   STUDENT = '/student',

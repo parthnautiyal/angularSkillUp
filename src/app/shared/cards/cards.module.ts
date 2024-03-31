@@ -15,9 +15,11 @@ import { RandomColorDirective } from '../containers/card-container/random-color.
 import { RouterModule } from '@angular/router';
 import { ShimmerLoadingComponent } from '../../shimmer/card-shimmer/shimmer-loading/shimmer-loading.component';
 import { ErrorCardComponent } from './error-card/error-card.component';
-import { CourseCardTrainerComponent } from './course-card-trainer/course-card-trainer.component';
-import { StudentCardComponent } from './student-card/student-card.component';
-import { StreamCardComponent } from './stream-card/stream-card.component';
+import { CourseCardInfoTrainerComponent } from './course-card-info-trainer/course-card-info-trainer.component';
+import { StreamCardTrainerComponent } from './stream-card-trainer/stream-card-trainer.component';
+import { BatchCardTrainerComponent } from './batch-card-trainer/batch-card-trainer.component';
+import { PathCardTrainerComponent } from './path-card-trainer/path-card-trainer.component';
+import { ProfileCourseCardTrainerComponent } from './profile-course-card-trainer/profile-course-card-trainer.component';
 import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
@@ -33,9 +35,11 @@ import {DropdownModule} from 'primeng/dropdown';
     LoadingCardComponent,
     ShimmerLoadingComponent,
     ErrorCardComponent,
-    CourseCardTrainerComponent,
-    StudentCardComponent,
-    StreamCardComponent,
+    CourseCardInfoTrainerComponent,
+    StreamCardTrainerComponent,
+    BatchCardTrainerComponent,
+    PathCardTrainerComponent,
+    ProfileCourseCardTrainerComponent,
   ],
   imports: [
     CommonModule,
@@ -57,9 +61,10 @@ import {DropdownModule} from 'primeng/dropdown';
     LoadingCardComponent,
     ShimmerLoadingComponent,
     ErrorCardComponent,
-    CourseCardTrainerComponent,
-    StudentCardComponent,
-    StreamCardComponent,
+    CourseCardInfoTrainerComponent,
+    BatchCardTrainerComponent,
+    PathCardTrainerComponent,
+    ProfileCourseCardTrainerComponent,
   ],
 })
 export class CardsModule {}

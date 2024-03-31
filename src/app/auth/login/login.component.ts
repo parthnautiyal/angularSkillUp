@@ -6,6 +6,7 @@ import {
   HostListener,
 } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { ThemeService } from 'src/app/services/theme.service';
 import { environment } from 'src/environments/environment';
 
 declare let window: any;
@@ -16,8 +17,16 @@ declare let window: any;
   providers: [MessageService],
 })
 export class LoginComponent implements OnInit {
-  constructor(private messageService: MessageService) {}
+  constructor(
+    private messageService: MessageService,
+    private themeService: ThemeService
+  ) {
+    this.themeService.isDarkMode().subscribe((isDarkMode) => {
+      this.isDarkMode = isDarkMode;
+    });
+  }
   googleClientId = environment.googleClientId;
+  isDarkMode: boolean = false;
 
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {

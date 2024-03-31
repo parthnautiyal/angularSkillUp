@@ -25,7 +25,12 @@ export class ZopsmartApiInterceptorService implements HttpInterceptor {
   };
   constructor(private mis: MiscellaneousService, private store$: Store) {}
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    if (req.url === API.IMAGE_UPLOAD) {
+    console.log(req.url);
+
+    if (
+      req.url === API.MEDIA + API.IMAGE_UPLOAD ||
+      req.url === API.MEDIA + API.FILE_UPLOAD
+    ) {
       return next.handle(req);
     }
     const token = localStorage.getItem('token');

@@ -6,6 +6,7 @@ import { PageNotFoundComponent } from '../error-page/page-not-found/page-not-fou
 import { SearchPageComponent } from '../pages/search-page/search-page.component';
 import { AdminComponent } from './admin/admin.component';
 import { TrainersAllSectionContainerComponent } from '../shared/containers/all-section-container copy/trainers-all-section-container.component';
+import { ProfilePageTrainerComponent } from '../pages/profile-page-trainer/profile-page-trainer.component';
 
 const routesCurr : Route = (4 > 3) ?  {
   path :'',

@@ -1,8 +1,6 @@
 <app-component-header heading="Trainers Dashboard"></app-component-header>
 <div class="page-content-wrapper">
   <div class="page-content">
-    <app-student-card></app-student-card>
-    <app-stream-card></app-stream-card>
     <ng-container *ngFor="let item of headingsTitle">
       <app-trainers-card-container [title]="item"></app-trainers-card-container>
     </ng-container>
