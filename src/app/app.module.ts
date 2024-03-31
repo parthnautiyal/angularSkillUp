@@ -42,7 +42,7 @@ import { ToastModule } from 'primeng/toast';
 import { pathCreateReducer } from './state/reducer/path-create.reducer';
 import { TrainerpathsReducer } from './state/reducer/trainerspath.reducer';
 import { trainerCoursesReducer } from './state/reducer/trainerscourse.reducer';
-import { TrainerCoursesEffects } from './state/effects/trainerscourse.effects';
+import { TrainerCoursesEffects } from './state/effects/trainersCourse.effects';
 import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
 
 @NgModule({

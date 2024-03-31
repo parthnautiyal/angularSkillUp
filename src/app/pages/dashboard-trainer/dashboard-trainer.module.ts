@@ -20,6 +20,7 @@ import { ContainersModule } from 'src/app/shared/containers/containers.module';
     ScrollTrackerDirective,
     FormModule,
     ContainersModule,
+    CardsModule
   ],
 })
 export class DashboardTrainerModule {}

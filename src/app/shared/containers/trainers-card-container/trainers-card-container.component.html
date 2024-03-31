@@ -5,14 +5,14 @@
     >View all {{ title }}</a
   >
 </div>
-<ng-container *ngIf="loading">
+<!-- <ng-container *ngIf="loading">
   <app-dashboard-shimmer
     class="shimmer"
     [shimmerCount]="3"
     [height]="height"
   ></app-dashboard-shimmer>
-</ng-container>
-<ng-container *ngIf="!loading">
+</ng-container> -->
+<ng-container>
   <div class="card-wrapper profile-card-wrapper">
     <ng-container *ngIf="title == Title.BATCHES">
       <ng-container *ngIf="!error">
@@ -49,7 +49,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="title == Title.PATHS">
+    <ng-container *ngIf="title == Title.PATHS && !loading">
       <ng-container *ngIf="!error">
         <ng-container *ngFor="let item of allPaths">
           <app-path-card *ngIf="!error" [singlePath]="item"></app-path-card>
