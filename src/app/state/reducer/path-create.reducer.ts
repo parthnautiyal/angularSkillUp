@@ -6,13 +6,18 @@ import {
   setPathCreateCollaborators,
   setPathCreateCourse,
   setPathCreateImage,
+  setQuiz,
+  setResource,
 } from '../action/path-create.action';
+import { Quiz, Resource } from 'src/app/models/CreateCourse';
 
 export interface CreatePathState {
   selectedCourses: Course[];
   selectedCollaborators: User[];
   img: string;
   uploadLoading: boolean;
+  resource: Resource;
+  quiz: Quiz;
 }
 
 export const initialCreatePath: CreatePathState = {
@@ -20,6 +25,17 @@ export const initialCreatePath: CreatePathState = {
   selectedCollaborators: [],
   img: '',
   uploadLoading: false,
+  resource: {
+    resourceName: '',
+    resourceLink: '',
+    resourceType: '',
+  },
+  quiz: {
+    quizType: '',
+    name: '',
+    quizLink: '',
+    passingMarks: 0,
+  },
 };
 
 export const pathCreateReducer = createReducer(
@@ -43,5 +59,13 @@ export const pathCreateReducer = createReducer(
   on(setPathCreateImage, (state, { img }) => ({
     ...state,
     img,
+  })),
+  on(setResource, (state, { resource }) => ({
+    ...state,
+    resource,
+  })),
+  on(setQuiz, (state, { quiz }) => ({
+    ...state,
+    quiz,
   }))
 );

@@ -1,9 +1,10 @@
-import { select } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 import { QuizTypes } from 'src/app/models/QuizTypes';
 import { Quiz, Resource } from 'src/app/models/CreateCourse';
+import { setQuiz, setResource } from 'src/app/state/action/path-create.action';
 
 @Component({
   selector: 'app-create-resource',
@@ -13,7 +14,7 @@ import { Quiz, Resource } from 'src/app/models/CreateCourse';
 export class CreateResourceComponent implements OnInit {
   @Input() courseId = 0;
   @Input() type = 'QUIZ';
-
+  isVisible: boolean = true;
   imgUrl: string = '';
   allReady: boolean = false;
   fileUrl: string = '';
@@ -49,7 +50,8 @@ export class CreateResourceComponent implements OnInit {
   };
   constructor(
     private trainer: TrainerMiscellaneousService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store
   ) {}
 
   contenForm = this.fb.group({
@@ -77,23 +79,7 @@ export class CreateResourceComponent implements OnInit {
     quizPassingScore: [0, [Validators.required]],
   });
 
-  ngOnInit(): void {
-    this.quizForm
-      .get('quizLink')
-      ?.valueChanges.subscribe((selectedQuizType) => {
-        const quizLinkControl = this.quizForm.get('quizLink');
-        if (selectedQuizType === 'Google Form') {
-          quizLinkControl?.setValidators([
-            Validators.pattern('.*docs\\.google\\.com\\/forms\\/.*'),
-          ]);
-        } else if (selectedQuizType === 'Test Paper') {
-          quizLinkControl?.setValidators([
-            Validators.pattern('.*testpaper\\.app\\/quiz\\/.*'),
-          ]);
-        }
-        quizLinkControl?.updateValueAndValidity();
-      });
-  }
+  ngOnInit(): void {}
   checkValidity() {
     if (this.contenForm.valid || this.quizForm.valid) {
       this.allReady = true;
@@ -109,6 +95,8 @@ export class CreateResourceComponent implements OnInit {
       this.finalQuiz.quizLink = this.quizForm.value.quizLink || '';
       this.finalQuiz.passingMarks = this.quizForm.value.quizPassingScore || 0;
       console.log('Quiz:', this.finalQuiz);
+      this.store.dispatch(setQuiz({ quiz: this.finalQuiz }));
+      this.isVisible = false;
     } else {
       this.isShowError = true;
     }
@@ -133,6 +121,8 @@ export class CreateResourceComponent implements OnInit {
           this.contenForm.value.contentLink || '';
       }
       console.log('Resource:', this.finalResource);
+      this.store.dispatch(setResource({ resource: this.finalResource }));
+      this.isVisible = false;
     } else {
       console.log('Please upload a file or image');
       this.isShowError = true;
@@ -180,5 +170,40 @@ export class CreateResourceComponent implements OnInit {
     this.isFileUploaded = false;
     this.imgUrl = '';
     this.fileUrl = '';
+  }
+
+  handleCancelButton() {
+    this.isVisible = false;
+  }
+
+  ngOnDestroy() {
+    this.courseId = 0;
+    this.type = 'QUIZ';
+    this.isVisible = true;
+    this.imgUrl = '';
+    this.allReady = false;
+    this.fileUrl = '';
+    this.isShowError = false;
+    this.isShowUploadBox = true;
+    this.isImageUploaded = false;
+    this.isFileUploaded = false;
+    this.isLink = true;
+    this.finalResource = {
+      resourceName: '',
+      resourceLink: '',
+      resourceType: '',
+    };
+    this.finalQuiz = {
+      quizType: '',
+      name: '',
+      quizLink: '',
+      passingMarks: 0,
+    };
+    this.selectedQuizType = {
+      name: '',
+      value: '',
+    };
+    this.contenForm.reset();
+    this.quizForm.reset();
   }
 }

@@ -1,4 +1,4 @@
-<div class="portal">
+<div *ngIf="isVisible" class="portal">
   <div class="background-disabled"></div>
   <div class="popup">
     <div *ngIf="type == 'CONTENT'" class="add-resource-form">
@@ -118,6 +118,7 @@
         <div class="control-buttons">
           <button
             type="button"
+            (click)="handleCancelButton()"
             class="popup-control-button popup-remove-button"
           >
             Cancel</button
@@ -251,6 +252,7 @@
           <button
             class="popup-control-button popup-remove-button"
             type="button"
+            (click)="handleCancelButton()"
           >
             Cancel</button
           ><button
