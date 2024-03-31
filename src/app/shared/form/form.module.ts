@@ -12,6 +12,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { CreateResourceComponent } from './create-course-form/create-resource/create-resource.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { CreateChapterComponent } from './create-course-form/create-chapter/create-chapter.component';
+import { ShowChapterComponent } from './create-course-form/show-chapter/show-chapter.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CreateChapterComponent } from './create-course-form/create-chapter/crea
     CreateCourseFormComponent,
     CreateResourceComponent,
     CreateChapterComponent,
+    ShowChapterComponent,
   ],
   imports: [
     CommonModule,

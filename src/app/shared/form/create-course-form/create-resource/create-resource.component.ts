@@ -1,10 +1,11 @@
 import { Store, select } from '@ngrx/store';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 import { QuizTypes } from 'src/app/models/QuizTypes';
 import { Quiz, Resource } from 'src/app/models/CreateCourse';
 import { setQuiz, setResource } from 'src/app/state/action/path-create.action';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-create-resource',
@@ -14,6 +15,8 @@ import { setQuiz, setResource } from 'src/app/state/action/path-create.action';
 export class CreateResourceComponent implements OnInit {
   @Input() courseId = 0;
   @Input() type = 'QUIZ';
+  @Output() formSubmit = new EventEmitter<void>();
+
   isVisible: boolean = true;
   imgUrl: string = '';
   allReady: boolean = false;
@@ -23,12 +26,15 @@ export class CreateResourceComponent implements OnInit {
   isImageUploaded: boolean = false;
   isFileUploaded: boolean = false;
   isLink: boolean = true;
+
   finalResource: Resource = {
+    // id:'',
     resourceName: '',
     resourceLink: '',
     resourceType: '',
   };
   finalQuiz: Quiz = {
+    // id: '',
     quizType: '',
     name: '',
     quizLink: '',
@@ -90,6 +96,7 @@ export class CreateResourceComponent implements OnInit {
 
   handleQuizSubmit() {
     if (this.quizForm.valid) {
+      this.finalQuiz.id = uuidv4();
       this.finalQuiz.quizType = this.selectedQuizType.value;
       this.finalQuiz.name = this.quizForm.value.quizTitle || '';
       this.finalQuiz.quizLink = this.quizForm.value.quizLink || '';
@@ -97,6 +104,7 @@ export class CreateResourceComponent implements OnInit {
       console.log('Quiz:', this.finalQuiz);
       this.store.dispatch(setQuiz({ quiz: this.finalQuiz }));
       this.isVisible = false;
+      this.formSubmit.emit();
     } else {
       this.isShowError = true;
     }
@@ -108,6 +116,7 @@ export class CreateResourceComponent implements OnInit {
       this.isImageUploaded ||
       this.contenForm.value.contentLink
     ) {
+      this.finalResource.id = uuidv4();
       this.finalResource.resourceName = this.contenForm.value.title || '';
       if (this.isImageUploaded) {
         this.finalResource.resourceType = 'FILE';
@@ -123,6 +132,7 @@ export class CreateResourceComponent implements OnInit {
       console.log('Resource:', this.finalResource);
       this.store.dispatch(setResource({ resource: this.finalResource }));
       this.isVisible = false;
+      this.formSubmit.emit();
     } else {
       console.log('Please upload a file or image');
       this.isShowError = true;
@@ -174,6 +184,7 @@ export class CreateResourceComponent implements OnInit {
 
   handleCancelButton() {
     this.isVisible = false;
+    this.formSubmit.emit();
   }
 
   ngOnDestroy() {
