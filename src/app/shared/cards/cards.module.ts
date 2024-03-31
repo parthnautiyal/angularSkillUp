@@ -21,6 +21,7 @@ import { BatchCardTrainerComponent } from './batch-card-trainer/batch-card-train
 import { PathCardTrainerComponent } from './path-card-trainer/path-card-trainer.component';
 import { ProfileCourseCardTrainerComponent } from './profile-course-card-trainer/profile-course-card-trainer.component';
 import {DropdownModule} from 'primeng/dropdown';
+import { StudentCardComponent } from './student-card/student-card.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {DropdownModule} from 'primeng/dropdown';
     BatchCardTrainerComponent,
     PathCardTrainerComponent,
     ProfileCourseCardTrainerComponent,
+    StudentCardComponent
   ],
   imports: [
     CommonModule,
@@ -65,6 +67,8 @@ import {DropdownModule} from 'primeng/dropdown';
     BatchCardTrainerComponent,
     PathCardTrainerComponent,
     ProfileCourseCardTrainerComponent,
+    StreamCardTrainerComponent,
+    StudentCardComponent
   ],
 })
 export class CardsModule {}
