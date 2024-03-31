@@ -7,6 +7,8 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { ErrorPageModule } from '../error-page/error-page.module';
 import { AdminComponent } from './admin/admin.component';
 import { ProfilePageTrainerModule } from '../pages/profile-page-trainer/profile-page-trainer.module';
+import { FormsModule } from '@angular/forms';
+import { FormModule } from '../shared/form/form.module';
 @NgModule({
   declarations: [LayoutComponent, UserComponent, AdminComponent],
   imports: [
@@ -15,6 +17,7 @@ import { ProfilePageTrainerModule } from '../pages/profile-page-trainer/profile-
     HeaderFooterModule,
     ErrorPageModule,
     ProfilePageTrainerModule,
+    FormModule
   ],
   exports: [LayoutComponent],
 })

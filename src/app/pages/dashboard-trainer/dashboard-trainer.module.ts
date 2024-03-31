@@ -10,16 +10,16 @@ import { FormModule } from 'src/app/shared/form/form.module';
 import { ContainersModule } from 'src/app/shared/containers/containers.module';
 
 @NgModule({
-  declarations: [DashboardTrainerComponent],
-  imports: [
-    CommonModule,
-    DashboardTrainerRoutingModule,
-    CardsModule,
-    ListboxModule,
-    FormsModule,
-    ScrollTrackerDirective,
-    FormModule,
-    ContainersModule,
-  ],
+    declarations: [DashboardTrainerComponent],
+    imports: [
+        CommonModule,
+        DashboardTrainerRoutingModule,
+        CardsModule,
+        ListboxModule,
+        FormsModule,
+        ScrollTrackerDirective,
+        FormModule,
+        ContainersModule,
+    ]
 })
 export class DashboardTrainerModule {}
