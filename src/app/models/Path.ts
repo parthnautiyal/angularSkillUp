@@ -1,4 +1,5 @@
 import { Course } from './Course';
+import { User } from './User';
 
 export interface Path {
   id: number;
@@ -10,6 +11,9 @@ export interface Path {
   noOfCourses: number;
   progress: number;
   completedAt: null;
+  isOwner?: boolean;
+  isAuthorised?: boolean;
+  collaborators?: User[];
 }
 
 export interface PathData {

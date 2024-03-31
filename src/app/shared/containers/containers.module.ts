@@ -13,6 +13,8 @@ import { AddCourseContainerComponent } from './add-course-container/add-course-c
 import { ListboxModule } from 'primeng/listbox';
 import { FormsModule } from '@angular/forms';
 import { AddCollaboratorContainerComponent } from './add-collaborator-container/add-collaborator-container.component';
+import { TrainersAllSectionContainerComponent } from './all-section-container copy/trainers-all-section-container.component';
+import { TrainersCardContainerComponent } from './trainers-card-container/trainers-card-container.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { AddCollaboratorContainerComponent } from './add-collaborator-container/
     BatchInfoCardContainerComponent,
     AddCourseContainerComponent,
     AddCollaboratorContainerComponent,
+    TrainersAllSectionContainerComponent,
+    TrainersCardContainerComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +42,7 @@ import { AddCollaboratorContainerComponent } from './add-collaborator-container/
     BatchInfoCardContainerComponent,
     AddCourseContainerComponent,
     AddCollaboratorContainerComponent,
+    TrainersCardContainerComponent
   ],
 })
 export class ContainersModule {}

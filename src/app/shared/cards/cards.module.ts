@@ -16,6 +16,9 @@ import { RouterModule } from '@angular/router';
 import { ShimmerLoadingComponent } from '../../shimmer/card-shimmer/shimmer-loading/shimmer-loading.component';
 import { ErrorCardComponent } from './error-card/error-card.component';
 import { CourseCardTrainerComponent } from './course-card-trainer/course-card-trainer.component';
+import { StudentCardComponent } from './student-card/student-card.component';
+import { StreamCardComponent } from './stream-card/stream-card.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { CourseCardTrainerComponent } from './course-card-trainer/course-card-tr
     ShimmerLoadingComponent,
     ErrorCardComponent,
     CourseCardTrainerComponent,
+    StudentCardComponent,
+    StreamCardComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +43,7 @@ import { CourseCardTrainerComponent } from './course-card-trainer/course-card-tr
     ProgressSpinnerModule,
     RandomColorDirective,
     RouterModule,
+    DropdownModule
   ],
   exports: [
     BatchCardComponent,
@@ -52,6 +58,8 @@ import { CourseCardTrainerComponent } from './course-card-trainer/course-card-tr
     ShimmerLoadingComponent,
     ErrorCardComponent,
     CourseCardTrainerComponent,
+    StudentCardComponent,
+    StreamCardComponent,
   ],
 })
 export class CardsModule {}

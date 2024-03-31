@@ -1,9 +1,10 @@
 .path-title
   display: flex
-  height: 100px
+  flex-direction: column
+  min-height:160px
   width: 100vw
   background-color: #5624D0
-  align-items: center
+  // align-items: center
 
   @media screen and (max-width: 768px)
     height: 70px
@@ -13,9 +14,13 @@ p
   font-size: 32px
   font-family: "Poppins",sans-serif
   font-weight: 500
-  padding-left: 8rem
+  padding: 2rem 0 0 8rem
 
   @media screen and (max-width: 768px)
     padding-left: 25px
     font-size: 20px
     font-weight: 400
+
+.dropdown
+  padding-left: 8rem
+  width:100px

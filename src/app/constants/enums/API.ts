@@ -24,7 +24,7 @@ export enum API {
   LOGIN = '/login',
   REFRESH = '/refresh',
   FAVOURITES = '/favourites',
-  CURRENT_USER = '/332',
+  CURRENT_USER = '/327',
   RATINGS = '/ratings',
   SEARCH_FLAG = '/search?title=',
   SEARCH_ROLE = '&role=student&field=all',

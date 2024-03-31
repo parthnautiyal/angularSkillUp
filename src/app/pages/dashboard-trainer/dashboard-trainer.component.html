@@ -1,7 +1,10 @@
+<app-component-header heading="Trainers Dashboard"></app-component-header>
 <div class="page-content-wrapper">
   <div class="page-content">
-    <app-create-path-form></app-create-path-form>
-    <!-- <app-course-card-trainer></app-course-card-trainer>
-    <app-add-course-container></app-add-course-container> -->
+    <app-student-card></app-student-card>
+    <app-stream-card></app-stream-card>
+    <ng-container *ngFor="let item of headingsTitle">
+      <app-trainers-card-container [title]="item"></app-trainers-card-container>
+    </ng-container>
   </div>
 </div>

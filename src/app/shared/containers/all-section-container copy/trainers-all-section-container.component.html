@@ -1,0 +1,72 @@
+<div class="all-section-container">
+  <div class="content-container">
+    <div class="page-header">
+      {{ prefix | titlecase }} {{ heading | titlecase }}
+    </div>
+    <div *ngIf="loading" class="paths-box">
+      <app-dashboard-shimmer
+        class="shimmer"
+        [shimmerCount]="9"
+        [height]="this.height"
+      ></app-dashboard-shimmer>
+    </div>
+    <div *ngIf="!loading" class="paths-box">
+      <ng-container *ngIf="noContent">
+        <app-no-content></app-no-content>
+      </ng-container>
+      <ng-container *ngIf="!noContent">
+        <ng-container *ngIf="heading == Title.PATHS">
+          <app-error-card
+            [title]="Title.PATHS"
+            [error]="errorCard"
+            *ngIf="error"
+          >
+          </app-error-card>
+          <div *ngFor="let item of allPathsData" class="paths-card-wrapper">
+            <app-path-card
+              [onGoingFlag]="onGoingFlag"
+              [singlePath]="item"
+            ></app-path-card>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="heading == Title.COURSES">
+          <app-error-card
+            [title]="Title.COURSES"
+            [error]="errorCard"
+            *ngIf="error"
+          >
+          </app-error-card>
+          <ng-container *ngIf="!error">
+            <div *ngFor="let item of allCoursesData" class="paths-card-wrapper">
+              <app-course-card
+                [onGoingFlag]="onGoingFlag"
+                [singleCourse]="item"
+                [isRed]="item.isFavourite"
+              ></app-course-card>
+            </div>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="heading == Title.BATCHES">
+          <app-error-card
+            [title]="Title.BATCHES"
+            [error]="errorCard"
+            *ngIf="error"
+          >
+          </app-error-card>
+          <ng-container *ngIf="!error">
+            <div
+              *ngFor="let item of allBatchesData; let i = index"
+              class="paths-card-wrapper"
+            >
+              <a [routerLink]="['/', RouterLinks.BATCHES, item.id]">
+                <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
+              </a>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>
