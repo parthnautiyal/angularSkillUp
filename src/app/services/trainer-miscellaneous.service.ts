@@ -140,7 +140,7 @@ export class TrainerMiscellaneousService {
       });
   }
 
-  patchCourse(courseId: number, data: Resource[]) {
+  patchCourse(courseId: number, data: any) {
     return this.http.patch(
       API.BASE_URL + API.ADMIN + API.COURSES + '/' + courseId,
       data
