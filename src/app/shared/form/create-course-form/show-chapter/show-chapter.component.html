@@ -1,1 +1,31 @@
-<p>show-chapter works!</p>
+<div class="additionalResourceContainer">
+  <div class="top-wrapper">
+    <button type="button" class="add-button">
+      <div class="button-text">Add Content</div>
+      <div class="button-style"><img src="assets/plus-sign.svg" /></div>
+    </button>
+    <button class="control-button update-button reorder-btn">Reorder</button>
+  </div>
+
+  <div class="formInput">
+    <div
+      *ngFor="let resource of allChapters; let i = index"
+      class="uploaded-file"
+    >
+      <div class="ResourceItem">
+        <div class="file-icon-wrapper">
+          <img src="assets/file-icon.svg" alt="" />
+        </div>
+        <div class="resource-name">{{ resource.name }}</div>
+      </div>
+      <div class="resource-control-icons-layover">
+        <div class="delete-icon">
+          <img src="assets/Remove.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="save-button-wrapper">
+    <button type="submit" class="control-button update-button">Finish</button>
+  </div>
+</div>

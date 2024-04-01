@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   isDarkMode: boolean = false;
   isResponsive: boolean = false;
   searchQuery: string = '';
+  selectedUserRole: string = localStorage.getItem('selectedRole') || 'TRAINER';
 
   constructor(private themeService: ThemeService, private router: Router) {
     this.themeService.isDarkMode().subscribe((isDarkMode) => {

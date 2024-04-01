@@ -94,37 +94,56 @@
         </div>
         <div class="bottom-section">
           <app-switch-role></app-switch-role>
+
           <a
             class="dropdown-actions"
             [routerLink]="['/', 'user']"
             (click)="closeDropdown()"
             >My Profile</a
           >
-          <a
-            class="dropdown-actions"
-            [routerLink]="['/', 'batches', 'all']"
-            (click)="closeDropdown()"
+          <ng-container
+            *ngIf="selectedUserRole === 'STUDENT'; else trainerTemplate"
           >
-            My Batches</a
-          >
-          <a
-            class="dropdown-actions"
-            [routerLink]="['/', 'paths', 'ongoing']"
-            (click)="closeDropdown()"
-            >Ongoing Paths</a
-          >
-          <a
-            class="dropdown-actions"
-            [routerLink]="['/', 'courses', 'ongoing']"
-            (click)="closeDropdown()"
-            >Ongoing Courses</a
-          >
-          <a
-            class="dropdown-actions"
-            [routerLink]="['/', 'courses', 'favourites']"
-            (click)="closeDropdown()"
-            >Favorite Courses</a
-          >
+            <a
+              class="dropdown-actions"
+              [routerLink]="['/', 'batches', 'all']"
+              (click)="closeDropdown()"
+            >
+              My Batches</a
+            >
+            <a
+              class="dropdown-actions"
+              [routerLink]="['/', 'paths', 'ongoing']"
+              (click)="closeDropdown()"
+              >Ongoing Paths</a
+            >
+            <a
+              class="dropdown-actions"
+              [routerLink]="['/', 'courses', 'ongoing']"
+              (click)="closeDropdown()"
+              >Ongoing Courses</a
+            >
+            <a
+              class="dropdown-actions"
+              [routerLink]="['/', 'courses', 'favourites']"
+              (click)="closeDropdown()"
+              >Favorite Courses</a
+            >
+          </ng-container>
+          <ng-template #trainerTemplate>
+            <a
+              class="dropdown-actions"
+              [routerLink]="['/', 'paths', 'all']"
+              (click)="closeDropdown()"
+              >All Path</a
+            >
+            <a
+              class="dropdown-actions"
+              [routerLink]="['/', 'courses', 'all']"
+              (click)="closeDropdown()"
+              >All Courses</a
+            >
+          </ng-template>
           <div class="dropdown-actions theme-mode">
             <app-theme-toggle-text></app-theme-toggle-text>
           </div>

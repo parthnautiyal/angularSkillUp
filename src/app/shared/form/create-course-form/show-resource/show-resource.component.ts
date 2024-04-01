@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Resource } from 'src/app/models/CreateCourse';
+import { CreateResource, Resource } from 'src/app/models/CreateCourse';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 import { selectResource } from 'src/app/state/selector/path-create.selector';
 
@@ -14,7 +14,7 @@ export class ShowResourceComponent implements OnInit {
   copyResource: Resource[] = [];
   @Input() courseId: number = 283;
   allResources: Resource[] = [];
-  copyCurrentResource: Resource = {
+  copyCurrentResource: CreateResource = {
     resourceName: '',
     resourceLink: '',
     resourceType: '',
@@ -35,11 +35,12 @@ export class ShowResourceComponent implements OnInit {
       if (data.id != null) {
         console.log('inside state');
 
-        this.copyCurrentResource.resourceLink = data.resourceLink;
-        this.copyCurrentResource.resourceName = data.resourceName;
-        this.copyCurrentResource.resourceType = data.resourceType;
+        this.copyCurrentResource = {
+          resourceName: data.resourceName,
+          resourceLink: data.resourceLink,
+          resourceType: data.resourceType,
+        };
         console.log(this.copyCurrentResource);
-        this.copyCurrentResource.id = '';
         this.copyResource = [...this.allResources];
         this.copyResource.push(this.copyCurrentResource);
         const payLoad = {
@@ -47,6 +48,7 @@ export class ShowResourceComponent implements OnInit {
         };
         this.trainer.patchCourse(this.courseId, payLoad).subscribe((data) => {
           console.log(data);
+          this.trainer.getCourseResources(this.courseId);
         });
       }
     });
@@ -58,5 +60,15 @@ export class ShowResourceComponent implements OnInit {
 
   reset() {
     this.createResouce = false;
+  }
+  handleDeleteResource(index: number) {
+    this.allResources.splice(index, 1);
+    const payLoad = {
+      resources: this.allResources,
+    };
+    this.trainer.patchCourse(this.courseId, payLoad).subscribe((data) => {
+      console.log(data);
+      this.trainer.getCourseResources(this.courseId);
+    });
   }
 }

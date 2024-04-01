@@ -13,7 +13,11 @@
   ></app-dashboard-shimmer>
 </ng-container> -->
 <ng-container>
-  <div class="card-wrapper profile-card-wrapper">
+  <div
+    appScrollTracker
+    (scrollPercent)="onScroll($event)"
+    class="card-wrapper profile-card-wrapper"
+  >
     <ng-container *ngIf="title == Title.BATCHES">
       <ng-container *ngIf="!error">
         <ng-container *ngIf="!enrolled">
@@ -65,7 +69,12 @@
     </ng-container>
 
     <ng-container *ngIf="title == Title.COURSES">
-      <div class="course-loop" *ngIf="!error">
+      <div
+        customScrollTracker
+        (scrollPercent)="onScroll($event)"
+        class="course-loop"
+        *ngIf="!error"
+      >
         <ng-container *ngFor="let item of allCourses">
           <app-dashboard-course-card-trainer
             [course]="item"

@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
 import { CreatePath } from '../models/CreatePath';
 import { CreateChapter, CreateCourse, Resource } from '../models/CreateCourse';
+import { Chapter } from '../models/Chapter';
 
 @Injectable({
   providedIn: 'root',
@@ -101,10 +102,19 @@ export class TrainerMiscellaneousService {
     return this.http.post(API.BASE_URL + API.ADMIN + API.COURSES, data);
   }
 
+  getCoursesBehaviourSubject = new BehaviorSubject<Chapter[]>([]);
+  getCourseChapters$ = this.getCoursesBehaviourSubject.asObservable();
+
   getCourseChapters(courseId: number) {
-    return this.http.get(
-      API.BASE_URL + API.ADMIN + API.COURSES + '/' + courseId + API.CHAPTERS
-    );
+    return this.http
+      .get<APIResponse<Chapter[]>>(
+        API.BASE_URL + API.ADMIN + API.COURSES + '/' + courseId + API.CHAPTERS
+      )
+      .subscribe((data) => {
+        if (data != null && data != undefined) {
+          this.getCoursesBehaviourSubject.next(data.data);
+        }
+      });
   }
 
   uploadFile(file: File): Observable<any> {
