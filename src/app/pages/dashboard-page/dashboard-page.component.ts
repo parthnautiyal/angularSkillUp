@@ -13,12 +13,20 @@ import { loadAllPaths } from 'src/app/state/action/path.actions';
   providers: [MessageService],
 })
 export class DashboardPageComponent implements OnInit {
+  firsttime : any
   constructor(
     private primengConfig: PrimeNGConfig,
     private messageService: MessageService,
     private store: Store
   ) {
-    this.showSuccess();
+    this.firsttime = localStorage.getItem('firsttime');
+    if(localStorage.getItem('firsttime') == null || localStorage.getItem('firsttime') == undefined 
+      || localStorage.getItem('firsttime') == 'true') {
+          this.firsttime = 'false';
+          console.log('im here')
+          localStorage.setItem('firsttime', 'false');
+          this.showSuccess();
+        }
   }
   loading: boolean = true;
   headingsTitle = HEADINGS_TITLE;

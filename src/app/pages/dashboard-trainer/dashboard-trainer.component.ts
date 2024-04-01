@@ -16,11 +16,20 @@ interface Country {
   styleUrls: ['./dashboard-trainer.component.sass'],
 })
 export class DashboardTrainerComponent implements OnInit {
+  firsttime: any
+
   constructor(
     private messageService: MessageService,
     private store: Store
   ) {
-    this.showSuccess();
+    this.firsttime = localStorage.getItem('firsttime');
+    if(localStorage.getItem('firsttime') == null || localStorage.getItem('firsttime') == undefined) {
+          this.firsttime = 'true';
+          console.log('im here')
+          localStorage.setItem('firsttime', 'true');
+          this.showSuccess();
+        }
+        else localStorage.setItem('firsttime', 'false');
   }
   loading: boolean = true;
   headingsTitle = HEADINGS_TITLE;

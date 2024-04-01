@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit {
     this.isDropdownOpen = false;
   }
   handleSignout() {
+    localStorage.removeItem('firsttime');
     google.accounts.id.disableAutoSelect();
     sessionStorage.removeItem('loggedInUser');
     this.router.navigate(['/login']).then(() => {
