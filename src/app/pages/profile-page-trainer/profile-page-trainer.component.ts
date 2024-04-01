@@ -16,12 +16,11 @@ export class ProfilePageTrainerComponent implements OnInit {
   userProfile: any;
   allpaths: Path[] = [];
   allCourses: ProfileCourse[] = [];
-  constructor(private store: Store) {
-    // this.store.dispatch(loadTrainersProfilePaths());
-  }
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
+    this.store.dispatch(loadTrainersProfilePaths());
     this.store.dispatch(loadTrainersProfileCourses());
     this.store.select(selectTrainersProfilePaths).subscribe((path) => {
       this.allpaths = path;
