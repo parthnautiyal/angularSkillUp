@@ -8,7 +8,9 @@ import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellane
   styleUrls: ['./show-chapter.component.sass'],
 })
 export class ShowChapterComponent implements OnInit {
+  isReorder: boolean = false;
   allChapters: Chapter[] = [];
+  reorderArray: number[] = [];
 
   @Input() courseId: number = 305;
 
@@ -20,7 +22,25 @@ export class ShowChapterComponent implements OnInit {
     this.trainer.getCourseChapters(this.courseId);
     this.trainer.getCourseChapters$.subscribe((data) => {
       console.log(data);
-      this.allChapters = data;
+      this.allChapters = [...data];
     });
+  }
+  handleReorder() {
+    this.isReorder = true;
+  }
+
+  handleReorderSubmit() {
+    this.reorderArray = this.allChapters.map((chapter) => chapter.id);
+
+    this.trainer
+      .reorderChapters(this.courseId, this.reorderArray)
+      .subscribe((data) => {
+        console.log(data);
+        this.trainer.getCourseChapters(this.courseId);
+        this.isReorder = false;
+      });
+  }
+  handleReorderCancel() {
+    this.isReorder = false;
   }
 }

@@ -156,4 +156,47 @@ export class TrainerMiscellaneousService {
       data
     );
   }
+
+  reorderChapters(courseId: number, chapterIds: number[]) {
+    return this.http.patch(
+      API.BASE_URL +
+        API.ADMIN +
+        API.COURSES +
+        '/' +
+        courseId +
+        API.CHAPTERS +
+        API.REORDER,
+      { chapterIds }
+    );
+  }
 }
+
+fetch(
+  'https://staging.api.training.zopsmart.com/admin/courses/305/chapters/reorder',
+  {
+    headers: {
+      accept: 'application/json',
+      'accept-language': 'en-US,en;q=0.9',
+      authorization:
+        'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkhBQWRPb3NIXzhBWnBycC15dTMxTkhpTjFTYWNndjRPclFaUEZrUUczbHMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImN1cnJlbnRSb2xlIjoidHJhaW5lciIsImV4cCI6MTcxMTk4MjUxNiwiaWF0IjoxNzExOTgyMjE2LCJpc1N1cGVyQWRtaW4iOmZhbHNlLCJpc3MiOiJHT09HTEUiLCJvcmdhbml6YXRpb25JZCI6Miwicm9sZXMiOlsidHJhaW5lciIsInN0dWRlbnQiXSwic3ViIjoiY2hhbmRhbi5zYWhhQHpvcHNtYXJ0LmNvbSIsInVzZXJJZCI6MzI2fQ.QSSd5u54nLzbIww1rs6-rJLC2X6y8QzIjfvky2DcJUqY8RVPYNtKWL7K2JkYQ4rBLC5084CnXrDf6x9fyfwF2g8KrVkmgpNSI_b015NMhajl7BJMprGjxH30Snlsnxr6Z88BmTA8LM1hkhP_kNPY9l2LLOqcobOXIqq-xW77E-HkDH1MhsJN4QPl2bCToEOZnKoWbvFfvXpwUGl4x-DFtzlPpy62v6wyLct8KN8KEWsnwC6DTtzp7HMQFaN29Wcc_r6WYo9cCLrgXxYGPP5Yv0wOWUd-bn5lhg4Z29LHq-hFRtzhL8zU6Yx4pRdO4KAmD8VuwFWOp7RMQUUY830vAQ',
+      'cache-control': 'no-cache',
+      'content-type': 'application/json',
+      pragma: 'no-cache',
+      refreshtoken:
+        'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUUkFJTklORy1BTkQtVVBTS0lMTElORyIsImV4cCI6MTcxMjA2NTA3OCwiaWF0IjoxNzExOTc4Njc4LCJpc3MiOiJHT09HTEUiLCJzdWIiOiJjaGFuZGFuLnNhaGFAem9wc21hcnQuY29tIn0.armnIIRfBfzC9GNM4aAa-GhsDJ2r-9IMNcdjdRfFTotaBc7fA3SRK85FPjKVaqWxHYUskhGH5sVivyHpCMy22KTtG63Y_Tbfhx7De_Xyp_2VUvvlykcThX2HMOPYYSPu_Bto7rHSkkrhIRIp7ehoG0QjVRyuHzqPeFJDbe8vO2okWIuw5ivet8bOsfdjIIH4mDvAAfimzf22ollRTFqvFiOcjxhOCZtrqyEbzDw045QBcYghXEMGZRzNRR4yYweBYqe84x-NaYggOBy-DZgWx_ZUFaahiv_iMPJnAUUrZiXIlBXPmdMW3Z8sItW-nLRWZhwzpjuITvGFQ9bDOlYr2Q',
+      'sec-ch-ua':
+        '"Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+      'sec-ch-ua-mobile': '?0',
+      'sec-ch-ua-platform': '"macOS"',
+      'sec-fetch-dest': 'empty',
+      'sec-fetch-mode': 'cors',
+      'sec-fetch-site': 'same-site',
+    },
+    referrer: 'https://staging.training.zopsmart.com/',
+    referrerPolicy: 'strict-origin-when-cross-origin',
+    body: '{"chapterIds":[401,400]}',
+    method: 'PATCH',
+    mode: 'cors',
+    credentials: 'include',
+  }
+);
