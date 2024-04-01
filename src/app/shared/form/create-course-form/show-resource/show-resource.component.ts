@@ -14,6 +14,11 @@ export class ShowResourceComponent implements OnInit {
   copyResource: Resource[] = [];
   @Input() courseId: number = 283;
   allResources: Resource[] = [];
+  copyCurrentResource: Resource = {
+    resourceName: '',
+    resourceLink: '',
+    resourceType: '',
+  };
 
   constructor(
     private trainer: TrainerMiscellaneousService,
@@ -28,14 +33,21 @@ export class ShowResourceComponent implements OnInit {
 
     this.store.select(selectResource).subscribe((data) => {
       if (data.id != null) {
-        data.id = '';
+        console.log('inside state');
+
+        this.copyCurrentResource.resourceLink = data.resourceLink;
+        this.copyCurrentResource.resourceName = data.resourceName;
+        this.copyCurrentResource.resourceType = data.resourceType;
+        console.log(this.copyCurrentResource);
+        this.copyCurrentResource.id = '';
         this.copyResource = [...this.allResources];
-        this.copyResource.push(data);
-        this.trainer
-          .patchCourse(this.courseId, this.copyResource)
-          .subscribe((data) => {
-            console.log(data);
-          });
+        this.copyResource.push(this.copyCurrentResource);
+        const payLoad = {
+          resources: this.copyResource,
+        };
+        this.trainer.patchCourse(this.courseId, payLoad).subscribe((data) => {
+          console.log(data);
+        });
       }
     });
   }
