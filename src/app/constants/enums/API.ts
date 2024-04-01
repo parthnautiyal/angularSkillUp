@@ -34,4 +34,5 @@ export enum API {
   REVIEWS = '/reviews',
   ADMIN = '/admin',
   USERS = '/users',
+  RESOURCES = '/resources',
 }
