@@ -50,7 +50,10 @@
         <div class="right" *ngIf="course.isOwner">
           <div class="right-top">
             <div>Published :</div>
-            <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>
+            <p-inputSwitch
+              [(ngModel)]="checked"
+              (click)="toggleChecked(course.courseId)"
+            ></p-inputSwitch>
           </div>
           <div class="right-bottom">
             <button class="remove-button">Remove</button

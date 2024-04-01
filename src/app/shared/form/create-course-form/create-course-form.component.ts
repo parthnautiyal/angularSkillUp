@@ -4,7 +4,9 @@ import { Store, select } from '@ngrx/store';
 import { ConfirmationService } from 'primeng/api';
 import { User } from 'src/app/models/User';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
+import { uploadImage } from 'src/app/state/action/imageUpload.actions';
 import { deletePathCreateCollaborator } from 'src/app/state/action/path-create.action';
+import { selectImageUrl, selectUploading } from 'src/app/state/selector/ImageUpload.selector';
 import { selectPathCreateCollaborators } from 'src/app/state/selector/path-create.selector';
 
 @Component({
@@ -22,6 +24,7 @@ export class CreateCourseFormComponent implements OnInit {
   isChaptersForm: boolean = false;
   isResourcesForm: boolean = false;
   imgUrl: string = '';
+  isLoading:boolean = false;
   isImageUploaded: boolean = false;
   experiences: String[] = ['Beginner', 'Intermediate', 'Expert'];
   selectedExperience: string = '';
@@ -79,12 +82,26 @@ export class CreateCourseFormComponent implements OnInit {
   handleFileUpload(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     const selectedFile = inputElement.files?.[0];
-    this.trainer.uploadImage(selectedFile as File).subscribe((data) => {
-      this.isImageUploaded = true;
-      this.imgUrl = data.data.imageUpload.originalImgURL;
-    });
+    // this.trainer.uploadImage(selectedFile as File).subscribe((data) => {
+    //   this.isImageUploaded = true;
+    //   this.imgUrl = data.data.imageUpload.originalImgURL;
+    // });
+    // if (selectedFile) {
+    //   console.log('Selected file:', selectedFile);
+    // }
     if (selectedFile) {
-      console.log('Selected file:', selectedFile);
+      this.store.dispatch(uploadImage({ file: selectedFile }));
+      this.store.select(selectImageUrl).subscribe((data) => {
+        if (data){
+          console.log('Data:', data);
+          this.isImageUploaded = true;
+          this.imgUrl = data;
+        }
+      });
+      this.store.select(selectUploading).subscribe((data) => {
+        console.log('loading:', data);
+        this.isLoading = data;
+      });
     }
   }
 

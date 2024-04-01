@@ -40,11 +40,19 @@ import {
 } from './state/reducer/course.reducer';
 import { ToastModule } from 'primeng/toast';
 import { pathCreateReducer } from './state/reducer/path-create.reducer';
-import { TrainerpathsReducer } from './state/reducer/trainerspath.reducer';
-import { trainerCoursesReducer } from './state/reducer/trainerscourse.reducer';
+import {
+  TrainerProfilepathsReducer,
+  TrainerpathsReducer,
+} from './state/reducer/trainerspath.reducer';
+import {
+  PublishTrainerCourse,
+  TrainerprofileCoursesReducer,
+  trainerCoursesReducer,
+} from './state/reducer/trainerscourse.reducer';
 import { TrainerCoursesEffects } from './state/effects/trainersCourse.effects';
 import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
-
+import { uploadReducer } from './state/reducer/ImageUpload.reducer';
+import { UploadEffects } from './state/effects/imageUpload.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -76,6 +84,10 @@ import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
       pathCreate: pathCreateReducer,
       trainerPaths: TrainerpathsReducer,
       trainerCourses: trainerCoursesReducer,
+      trainerProfilePaths: TrainerProfilepathsReducer,
+      trainerProfileCourses: TrainerprofileCoursesReducer,
+      publishCourse: PublishTrainerCourse,
+      upload: uploadReducer,
     }),
     EffectsModule.forRoot([
       CourseEffects,
@@ -83,6 +95,7 @@ import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
       PathEffects,
       TrainerCoursesEffects,
       TrainerPathsEffects,
+      UploadEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

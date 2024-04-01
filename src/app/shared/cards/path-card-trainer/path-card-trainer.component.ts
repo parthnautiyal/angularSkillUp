@@ -13,7 +13,6 @@ export class PathCardTrainerComponent implements OnInit {
   isProfile: boolean = false;
   @Input() singlePath: Path = {
     id: 0,
-    pathId: 0,
     name: '',
     pathName: '',
     imageUrl: '',

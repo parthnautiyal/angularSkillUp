@@ -3,10 +3,9 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 import { RouterLinks } from 'src/app/constants/enums/routerLinks';
-import { Course } from 'src/app/models/Course';
+import { Course, ProfileCourse } from 'src/app/models/Course';
 import { MiscellaneousService } from 'src/app/services/miscellaneous.service';
 import { ThemeService } from 'src/app/services/theme.service';
-import { loadFavoriteCourses } from 'src/app/state/action/course.actions';
 
 @Component({
   selector: 'app-profile-course-card-trainer',
@@ -21,29 +20,12 @@ export class ProfileCourseCardTrainerComponent implements OnInit {
   isProfile: boolean = false;
   isDarkMode: boolean = false;
   @Input() isRed: boolean = true;
-  @Input() singleCourse: Course = {
+  @Input() singleCourse: ProfileCourse = {
     id: 0,
-    courseId: 0,
     name: '',
-    courseName: '',
     imageUrl: '',
-    isAccessible: false,
-    description: '',
-    about: '',
-    createdBy: {
-      id: 0,
-      name: '',
-      imageUrl: '',
-      email: '',
-    },
     createdAt: '',
-    isFavourite: false,
-    progress: 0,
-    enrolledAt: '',
-    completedAt: '',
-    noOfChapters: 0,
     updatedAt: '',
-    level: 0,
   };
 
   constructor(
@@ -65,5 +47,4 @@ export class ProfileCourseCardTrainerComponent implements OnInit {
       this.isDashBoard = true;
     }
   }
-
 }
