@@ -3,7 +3,7 @@
 
   <img
     [routerLink]="['/', RouterLinks.COURSES, singleCourse.id]"
-    src="assets/document.svg"
+    [src]="singleCourse.imageUrl"
     alt=""
     class="image"
   />
@@ -11,11 +11,15 @@
 
   <div class="content-div">
     <div class="header">
-      <div class="course-name">Angular</div>
+      <div class="course-name">{{ singleCourse.name }}</div>
     </div>
     <div class="footer">
-      <div class="course-date">Created: 2022/10/22</div>
-      <div class="course-date">Last Updated: 5 days ago</div>
+      <div class="course-date">
+        Created: {{ singleCourse.createdAt | date }}
+      </div>
+      <div class="course-date">
+        Last Updated: {{ singleCourse.updatedAt | date }}
+      </div>
     </div>
   </div>
 </div>

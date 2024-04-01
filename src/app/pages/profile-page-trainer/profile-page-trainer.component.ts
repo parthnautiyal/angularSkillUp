@@ -1,4 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ProfileCourse } from 'src/app/models/Course';
+import { Path } from 'src/app/models/Path';
+import { loadTrainersProfileCourses } from 'src/app/state/action/trainerscourse.actions';
+import { loadTrainersProfilePaths } from 'src/app/state/action/trainerspath.actions';
+import { selectTrainersProfileCourses } from 'src/app/state/selector/trainerscourse.selector';
+import { selectTrainersProfilePaths } from 'src/app/state/selector/trainerspath.selector';
 
 @Component({
   selector: 'app-profile-page-trainer',
@@ -7,10 +14,22 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ProfilePageTrainerComponent implements OnInit {
   userProfile: any;
-
-  constructor() {}
+  allpaths: Path[] = [];
+  allCourses: ProfileCourse[] = [];
+  constructor(private store: Store) {
+    // this.store.dispatch(loadTrainersProfilePaths());
+  }
 
   ngOnInit(): void {
     this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
+    this.store.dispatch(loadTrainersProfileCourses());
+    this.store.select(selectTrainersProfilePaths).subscribe((path) => {
+      this.allpaths = path;
+    });
+
+    this.store.select(selectTrainersProfileCourses).subscribe((courses) => {
+      this.allCourses = courses;
+      console.log(this.allCourses);
+    });
   }
 }

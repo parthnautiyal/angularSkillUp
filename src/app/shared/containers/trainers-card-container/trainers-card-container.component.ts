@@ -99,8 +99,6 @@ export class TrainersCardContainerComponent implements OnInit {
     private ngZone: NgZone
   ) {}
   onScroll(percentage: number) {
-    console.log(percentage);
-
     if (percentage > 80 && this.i <= 5 && !this.loading) {
       this.loading = true;
       this.i = this.i + 1;
