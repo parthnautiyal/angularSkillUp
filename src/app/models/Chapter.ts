@@ -1,4 +1,4 @@
-interface QuizResponse {
+export interface QuizResponse {
   id: number;
   name: string;
   link: string;
@@ -6,7 +6,7 @@ interface QuizResponse {
   quizType: string;
 }
 
-interface ResourceResponse {
+export interface ResourceResponse {
   id: number;
   resourceName: string;
   resourceLink: string;

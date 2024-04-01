@@ -6,7 +6,7 @@ import { Course } from '../models/Course';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
 import { CreatePath } from '../models/CreatePath';
-import { CreateCourse } from '../models/CreateCourse';
+import { CreateChapter, CreateCourse, Resource } from '../models/CreateCourse';
 
 @Injectable({
   providedIn: 'root',
@@ -103,7 +103,7 @@ export class TrainerMiscellaneousService {
 
   getCourseChapters(courseId: number) {
     return this.http.get(
-      API.BASE_URL + API.ADMIN + API.COURSES + courseId + API.CHAPTERS
+      API.BASE_URL + API.ADMIN + API.COURSES + '/' + courseId + API.CHAPTERS
     );
   }
 
@@ -116,5 +116,34 @@ export class TrainerMiscellaneousService {
     });
 
     return this.http.post(API.MEDIA + API.FILE_UPLOAD, formData, { headers });
+  }
+
+  createChapter(courseId: number, data: CreateChapter) {
+    return this.http.post(
+      API.BASE_URL + API.ADMIN + API.COURSES + '/' + courseId + API.CHAPTERS,
+      data
+    );
+  }
+
+  getCourseResourcesBehaviourSubject = new BehaviorSubject<Resource[]>([]);
+  getCourseResources$ = this.getCourseResourcesBehaviourSubject.asObservable();
+
+  getCourseResources(courseId: number) {
+    return this.http
+      .get<APIResponse<Resource[]>>(
+        API.BASE_URL + API.ADMIN + API.COURSES + '/' + courseId + API.RESOURCES
+      )
+      .subscribe((data) => {
+        if (data != null && data != undefined) {
+          this.getCourseResourcesBehaviourSubject.next(data.data);
+        }
+      });
+  }
+
+  patchCourse(courseId: number, data: Resource[]) {
+    return this.http.patch(
+      API.BASE_URL + API.ADMIN + API.COURSES + '/' + courseId,
+      data
+    );
   }
 }
