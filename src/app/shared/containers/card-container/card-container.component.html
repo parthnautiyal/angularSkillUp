@@ -18,9 +18,8 @@
       <ng-container *ngIf="!error">
         <ng-container *ngIf="noContent">
           <app-no-content
-            height="30vh"
-            width="86vw"
-            marginTop="20px"
+            [width]="200"
+            [redirectToHomepage]="false"
           ></app-no-content>
         </ng-container>
         <ng-container *ngIf="!noContent">
@@ -63,9 +62,8 @@
       <ng-container *ngIf="!error">
         <ng-container *ngIf="noContent">
           <app-no-content
-            height="30vh"
-            width="86vw"
-            marginTop="20px"
+            [width]="200"
+            [redirectToHomepage]="false"
           ></app-no-content>
         </ng-container>
         <ng-container *ngIf="!noContent">
@@ -94,9 +92,8 @@
 
           <ng-container *ngIf="allCourses && allCourses.length === 0">
             <app-no-content
-              height="30vh"
-              width="86vw"
-              marginTop="20px"
+              [width]="200"
+              [redirectToHomepage]="false"
             ></app-no-content>
           </ng-container>
         </ng-container>

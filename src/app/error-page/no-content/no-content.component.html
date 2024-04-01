@@ -1,20 +1,19 @@
 <div class="page-wrapper">
   <div
     class="page-content"
-    [ngStyle]="{
-      'width': width,
-      'height': height,
-      'margin-top': marginTop
-    }"
   >
-    <img src="../../../assets/no-content.svg" class="nodata-image" />
+    <img src="../../../assets/no-content.svg" [ngStyle]="{
+      width: width + 'px'
+    }" class="nodata-image" />
     <div class="error-message">
       <div *ngIf="chapterFlag">Sorry no content to display.</div>
       <div *ngIf="!chapterFlag">
         Can not access chapters of not enrolled courses
       </div>
       <a *ngIf="chapterFlag" href="/dashboard"
-        ><div class="home-link">Go to Home Page</div></a
+        ><div *ngIf="redirectToHomepage" class="home-link">
+          Go to Home Page
+        </div></a
       >
     </div>
   </div>
