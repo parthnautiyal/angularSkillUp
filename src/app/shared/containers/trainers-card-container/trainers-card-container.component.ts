@@ -96,7 +96,6 @@ export class TrainersCardContainerComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private messageService: MessageService,
     private ngZone: NgZone
   ) {}
   onScroll(percentage: number) {

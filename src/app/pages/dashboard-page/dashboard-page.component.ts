@@ -4,7 +4,10 @@ import { PrimeNGConfig } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { ERROR, HEADINGS_TITLE } from 'src/app/constants/headingsTitle';
 import { loadAllBatches } from 'src/app/state/action/batch.actions';
-import { loadAllCourses, loadEnrolledCourses } from 'src/app/state/action/course.actions';
+import {
+  loadAllCourses,
+  loadEnrolledCourses,
+} from 'src/app/state/action/course.actions';
 import { loadAllPaths } from 'src/app/state/action/path.actions';
 @Component({
   selector: 'app-dashboard-page',
@@ -17,9 +20,7 @@ export class DashboardPageComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     private messageService: MessageService,
     private store: Store
-  ) {
-    this.showSuccess();
-  }
+  ) {}
   loading: boolean = true;
   headingsTitle = HEADINGS_TITLE;
   error = ERROR;
@@ -38,11 +39,11 @@ export class DashboardPageComponent implements OnInit {
     });
   }
 
-  showSuccess() {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Logged In',
-      detail: 'Loggin Successful',
-    });
-  }
+  // showSuccess() {
+  //   this.messageService.add({
+  //     severity: 'info',
+  //     summary: 'Logged In',
+  //     detail: 'Loggin Successful',
+  //   });
+  // }
 }

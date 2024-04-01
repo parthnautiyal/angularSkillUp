@@ -16,12 +16,7 @@ interface Country {
   styleUrls: ['./dashboard-trainer.component.sass'],
 })
 export class DashboardTrainerComponent implements OnInit {
-  constructor(
-    private messageService: MessageService,
-    private store: Store
-  ) {
-    this.showSuccess();
-  }
+  constructor(private messageService: MessageService, private store: Store) {}
   loading: boolean = true;
   headingsTitle = HEADINGS_TITLE;
   error = ERROR;
@@ -38,11 +33,11 @@ export class DashboardTrainerComponent implements OnInit {
     });
   }
 
-  showSuccess() {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Logged In',
-      detail: 'Loggin Successful',
-    });
-  }
+  // showSuccess() {
+  //   this.messageService.add({
+  //     severity: 'info',
+  //     summary: 'Logged In',
+  //     detail: 'Loggin Successful',
+  //   });
+  // }
 }
