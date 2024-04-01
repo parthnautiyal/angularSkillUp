@@ -35,4 +35,6 @@ export enum API {
   ADMIN = '/admin',
   USERS = '/users',
   RESOURCES = '/resources',
+  REORDER = '/reorder',
+  SEARCH = '/search',
 }

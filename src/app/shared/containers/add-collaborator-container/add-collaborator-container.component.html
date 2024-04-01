@@ -12,7 +12,18 @@
     [listStyle]="{ 'max-height': '250px' }"
     [style]="{ width: '500px' }"
   >
-    <ng-template pTemplate="header"> Header Content </ng-template>
+    <ng-template pTemplate="header">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          pInputText
+          placeholder="Search"
+          [(ngModel)]="searchValue"
+          (keydown.enter)="submitSearch($event)"
+        />
+      </span>
+    </ng-template>
 
     <ng-template let-collaborator pTemplate="item">
       <div class="outer-container">

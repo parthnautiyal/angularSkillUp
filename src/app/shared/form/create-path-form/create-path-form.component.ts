@@ -10,6 +10,7 @@ import { deletePathCreateCollaborator } from 'src/app/state/action/path-create.a
 import {
   selectPathCreateCollaborators,
   selectPathCreateCourses,
+  selectSearchedCollaborators,
 } from 'src/app/state/selector/path-create.selector';
 
 @Component({

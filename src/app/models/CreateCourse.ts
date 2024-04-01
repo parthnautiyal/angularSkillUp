@@ -24,6 +24,12 @@ export interface Resource {
   resourceType: string;
 }
 
+export interface CreateResource {
+  resourceName: string;
+  resourceLink: string;
+  resourceType: string;
+}
+
 export interface Quiz {
   id?: string;
   quizType: string;
