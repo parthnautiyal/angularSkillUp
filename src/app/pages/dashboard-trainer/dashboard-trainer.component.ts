@@ -16,7 +16,31 @@ interface Country {
   styleUrls: ['./dashboard-trainer.component.sass'],
 })
 export class DashboardTrainerComponent implements OnInit {
-  constructor(private messageService: MessageService, private store: Store) {}
+  firsttime: any;
+
+  constructor(private messageService: MessageService, private store: Store) {
+    this.firsttime = localStorage.getItem('firsttime');
+    if (
+      localStorage.getItem('firsttime') == null ||
+      localStorage.getItem('firsttime') == undefined
+    ) {
+      this.firsttime = 'true';
+      console.log('im here');
+      localStorage.setItem('firsttime', 'true');
+      this.showSuccess();
+    } else localStorage.setItem('firsttime', 'false');
+
+    if (localStorage.getItem('switchedProfile') == 'true') {
+      //show toast
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Switched Profile',
+        detail: 'profile switched to trainer',
+      });
+      localStorage.setItem('switchedProfile', 'false');
+    }
+  }
+
   loading: boolean = true;
   headingsTitle = HEADINGS_TITLE;
   error = ERROR;
@@ -33,11 +57,11 @@ export class DashboardTrainerComponent implements OnInit {
     });
   }
 
-  // showSuccess() {
-  //   this.messageService.add({
-  //     severity: 'info',
-  //     summary: 'Logged In',
-  //     detail: 'Loggin Successful',
-  //   });
-  // }
+  showSuccess() {
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Logged In',
+      detail: 'Loggin Successful',
+    });
+  }
 }

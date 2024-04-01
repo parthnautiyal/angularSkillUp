@@ -16,13 +16,22 @@
   <div class="card-wrapper profile-card-wrapper">
     <ng-container *ngIf="title == Title.BATCHES">
       <ng-container *ngIf="!error">
-        <ng-container *ngIf="!enrolled">
-          <ng-container *ngFor="let item of allBatches; let i = index">
-            <a [routerLink]="['/', RouterLinks.BATCHES, item.id]">
-              <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
-            </a>
+        <ng-container *ngIf="noContent">
+          <app-no-content
+            [width]="200"
+            [redirectToHomepage]="false"
+          ></app-no-content>
+        </ng-container>
+        <ng-container *ngIf="!noContent">
+          <ng-container *ngIf="!enrolled">
+            <ng-container *ngFor="let item of allBatches; let i = index">
+              <a [routerLink]="['/', RouterLinks.BATCHES, item.id]">
+                <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
+              </a>
+            </ng-container>
           </ng-container>
         </ng-container>
+
         <ng-container *ngIf="enrolled">
           <ng-container
             *ngFor="let item of enrolledBatches.enrolledBatches; let i = index"
@@ -33,14 +42,14 @@
           </ng-container>
         </ng-container>
       </ng-container>
-      <div [ngStyle]="{ height: this.height+'px'}" *ngIf="enrolled">
+      <div [ngStyle]="{ height: this.height + 'px' }" *ngIf="enrolled">
         <app-error-card
           [title]="Title.BATCHES"
           [error]="errorBatch"
           *ngIf="error"
         ></app-error-card>
       </div>
-      <div [ngStyle]="{ height: this.height+'px' }" *ngIf="!enrolled">
+      <div [ngStyle]="{ height: this.height + 'px' }" *ngIf="!enrolled">
         <app-error-card
           [title]="Title.BATCHES"
           [error]="errorBatch"
@@ -51,11 +60,19 @@
 
     <ng-container *ngIf="title == Title.PATHS">
       <ng-container *ngIf="!error">
-        <ng-container *ngFor="let item of allPaths">
-          <app-path-card *ngIf="!error" [singlePath]="item"></app-path-card>
+        <ng-container *ngIf="noContent">
+          <app-no-content
+            [width]="200"
+            [redirectToHomepage]="false"
+          ></app-no-content>
+        </ng-container>
+        <ng-container *ngIf="!noContent">
+          <ng-container *ngFor="let item of allPaths">
+            <app-path-card *ngIf="!error" [singlePath]="item"></app-path-card>
+          </ng-container>
         </ng-container>
       </ng-container>
-      <div [ngStyle]="{ height: this.height+'px' }">
+      <div [ngStyle]="{ height: this.height + 'px' }">
         <app-error-card
           [title]="Title.PATHS"
           [error]="errorPath"
@@ -72,9 +89,16 @@
             [singleCourse]="item"
             [isRed]="item.isFavourite"
           ></app-course-card>
+
+          <ng-container *ngIf="allCourses && allCourses.length === 0">
+            <app-no-content
+              [width]="200"
+              [redirectToHomepage]="false"
+            ></app-no-content>
+          </ng-container>
         </ng-container>
       </ng-container>
-      <div [ngStyle]="{ height: this.height+'px' }">
+      <div [ngStyle]="{ height: this.height + 'px' }">
         <app-error-card
           [title]="Title.COURSES"
           [error]="errorCourse"

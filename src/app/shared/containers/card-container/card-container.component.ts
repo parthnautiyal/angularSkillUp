@@ -1,11 +1,5 @@
 import { Router } from '@angular/router';
-import {
-  Component,
-  HostListener,
-  Input,
-  NgZone,
-  OnInit,
-} from '@angular/core';
+import { Component, HostListener, Input, NgZone, OnInit } from '@angular/core';
 import { Course } from 'src/app/models/Course';
 import { Path } from 'src/app/models/Path';
 import { Batch } from 'src/app/models/Batch';
@@ -50,6 +44,7 @@ export class CardContainerComponent implements OnInit {
   loading: Boolean = true;
   error: Boolean = false;
   errorEnrolled: Boolean = false;
+  noContent: boolean = false;
   isActive = true;
   isDashBoard = false;
   Title = Title;
@@ -92,6 +87,8 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectAllCourses).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allCourses = res;
+          } else {
+            this.noContent = true;
           }
         });
         this.store.select(selectAllCoursesError).subscribe((res) => {
@@ -133,6 +130,8 @@ export class CardContainerComponent implements OnInit {
       this.store.select(selectBatches).subscribe((res) => {
         if (typeof res === 'object' && Object.keys(res).length > 0) {
           this.allBatches = res;
+        } else {
+          this.noContent = true;
         }
       });
       this.store.select(selectBatchesError).subscribe((res) => {
@@ -175,6 +174,8 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectAllPaths).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allPaths = res;
+          } else {
+            this.noContent = true;
           }
         });
         this.store.select(selectAllPathsError).subscribe((res) => {
@@ -193,6 +194,8 @@ export class CardContainerComponent implements OnInit {
         this.store.select(selectEnrolledPaths).subscribe((res) => {
           if (typeof res === 'object' && Object.keys(res).length > 0) {
             this.allPaths = res;
+          } else {
+            this.noContent = true;
           }
         });
         this.store.select(selectEnrolledPathsError).subscribe((res) => {

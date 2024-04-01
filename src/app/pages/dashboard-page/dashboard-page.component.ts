@@ -16,11 +16,34 @@ import { loadAllPaths } from 'src/app/state/action/path.actions';
   providers: [MessageService],
 })
 export class DashboardPageComponent implements OnInit {
+  firsttime: any;
   constructor(
     private primengConfig: PrimeNGConfig,
     private messageService: MessageService,
     private store: Store
-  ) {}
+  ) {
+    this.firsttime = localStorage.getItem('firsttime');
+    if (
+      localStorage.getItem('firsttime') == null ||
+      localStorage.getItem('firsttime') == undefined ||
+      localStorage.getItem('firsttime') == 'true'
+    ) {
+      this.firsttime = 'false';
+      console.log('im here');
+      localStorage.setItem('firsttime', 'false');
+      this.showSuccess();
+    }
+    if (localStorage.getItem('switchedProfile') == 'true') {
+      console.log('im am hereeeeeee aa');
+      //show toast
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Switched Profile',
+        detail: 'profile switched to student',
+      });
+      localStorage.setItem('switchedProfile', 'false');
+    }
+  }
   loading: boolean = true;
   headingsTitle = HEADINGS_TITLE;
   error = ERROR;
@@ -39,11 +62,11 @@ export class DashboardPageComponent implements OnInit {
     });
   }
 
-  // showSuccess() {
-  //   this.messageService.add({
-  //     severity: 'info',
-  //     summary: 'Logged In',
-  //     detail: 'Loggin Successful',
-  //   });
-  // }
+  showSuccess() {
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Logged In',
+      detail: 'Loggin Successful',
+    });
+  }
 }

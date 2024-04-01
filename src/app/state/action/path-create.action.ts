@@ -40,3 +40,8 @@ export const setQuiz = createAction(
   '[Path-Create] Set Quiz',
   props<{ quiz: Quiz }>()
 );
+
+export const setSearchCollaborators = createAction(
+  '[Path-Create] Set Search Collaborators',
+  props<{ searchedCollaborators: User[] }>()
+);

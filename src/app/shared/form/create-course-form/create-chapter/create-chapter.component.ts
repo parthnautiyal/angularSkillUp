@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { CreateChapter, Quiz, Resource } from 'src/app/models/CreateCourse';
@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class CreateChapterComponent implements OnInit {
   @Input() courseId = 283;
+  @Output() close = new EventEmitter<void>();
   showContent: boolean = false;
   showError: boolean = false;
   showQuiz: boolean = false;
@@ -78,6 +79,7 @@ export class CreateChapterComponent implements OnInit {
           console.log(res);
         });
       console.log(this.chapter);
+      this.close.emit();
     } else {
       console.log('error');
 

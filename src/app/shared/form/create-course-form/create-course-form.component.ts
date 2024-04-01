@@ -120,6 +120,7 @@ export class CreateCourseFormComponent implements OnInit {
     this.isDetailsForm = false;
     this.isChaptersForm = true;
     this.isResourcesForm = false;
+    console.log('Chapters Clicked', this.isChaptersForm);
   }
   handleResourcesClick() {
     this.isDetailsForm = false;
