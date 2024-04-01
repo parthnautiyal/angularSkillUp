@@ -20,8 +20,13 @@ import { StreamCardTrainerComponent } from './stream-card-trainer/stream-card-tr
 import { BatchCardTrainerComponent } from './batch-card-trainer/batch-card-trainer.component';
 import { PathCardTrainerComponent } from './path-card-trainer/path-card-trainer.component';
 import { ProfileCourseCardTrainerComponent } from './profile-course-card-trainer/profile-course-card-trainer.component';
-import {DropdownModule} from 'primeng/dropdown';
+import { DropdownModule } from 'primeng/dropdown';
+import { DashboardCourseCardTrainerComponent } from './dashboard-course-card-trainer/dashboard-course-card-trainer.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { TrainerDashboardHeaderComponent } from './trainer-dashboard-header/trainer-dashboard-header.component';
 import { StudentCardComponent } from './student-card/student-card.component';
+import { SwitchRoleComponent } from './switch-role/switch-role.component';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [
@@ -41,7 +46,10 @@ import { StudentCardComponent } from './student-card/student-card.component';
     BatchCardTrainerComponent,
     PathCardTrainerComponent,
     ProfileCourseCardTrainerComponent,
-    StudentCardComponent
+    DashboardCourseCardTrainerComponent,
+    TrainerDashboardHeaderComponent,
+    StudentCardComponent,
+    SwitchRoleComponent,
   ],
   imports: [
     CommonModule,
@@ -49,7 +57,9 @@ import { StudentCardComponent } from './student-card/student-card.component';
     ProgressSpinnerModule,
     RandomColorDirective,
     RouterModule,
-    DropdownModule
+    DropdownModule,
+    InputSwitchModule,
+    SelectButtonModule,
   ],
   exports: [
     BatchCardComponent,
@@ -68,7 +78,10 @@ import { StudentCardComponent } from './student-card/student-card.component';
     PathCardTrainerComponent,
     ProfileCourseCardTrainerComponent,
     StreamCardTrainerComponent,
-    StudentCardComponent
+    StudentCardComponent,
+    TrainerDashboardHeaderComponent,
+    DashboardCourseCardTrainerComponent,
+    SwitchRoleComponent,
   ],
 })
 export class CardsModule {}

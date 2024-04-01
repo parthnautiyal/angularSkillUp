@@ -10,18 +10,14 @@ import { Option } from 'src/app/models/Options';
 })
 export class ComponentHeaderComponent implements OnInit {
   @Input() heading: string = '';
-  Options: Option[];
-  placeholder: string = 'Create Content';
 
-  constructor(private router: Router) {
-    this.Options = [
-      { name: 'Create Path', link: '/path/new' },
-      { name: 'Create Course', link: '/course/new' },
-    ];
+  constructor() {
+   
   }
 
-  ngOnInit(): void {}
-  onOptionSelect(link: string) {
-    this.router.navigateByUrl(link);
+  ngOnInit(): void {
+      
   }
+
+
 }

@@ -43,26 +43,36 @@ export class SearchPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const searchQuery = this.route.snapshot.queryParamMap.get('q');
-    if (searchQuery != null) {
-      this.searchService
-        .searchByTitle(searchQuery)
-        .subscribe((data: APIResponse<SearchResponse>) => {
-          this.searchResponse = data.data;
-          this.allPathsData = this.searchResponse.paths;
-          this.allCoursesData = this.searchResponse.courses;
+    this.route.queryParamMap.subscribe((params) => {
+      const searchQuery = params.get('q');
+      if (searchQuery != null) {
+        this.loading = true;
+        this.searchService
+          .searchByTitle(searchQuery)
+          .subscribe((data: APIResponse<SearchResponse>) => {
+            this.searchResponse = data.data;
+            this.allPathsData = this.searchResponse.paths;
+            this.allCoursesData = this.searchResponse.courses;
 
-          this.loading = false;
-          if (
-            this.allPathsData.length == 0 &&
-            this.allCoursesData.length == 0
-          ) {
-            this.noContent = true;
-          }
-          // console.log(this.searchResponse);
-          // console.log('pathdata: ', this.allPathsData);
-          // console.log('coursedata; ', this.allCoursesData);
-        });
-    }
+            this.loading = false;
+            if (
+              this.allPathsData.length == 0 &&
+              this.allCoursesData.length == 0
+            ) {
+              this.noContent = true;
+            }
+            // console.log(this.searchResponse);
+            // console.log('pathdata: ', this.allPathsData);
+            // console.log('coursedata; ', this.allCoursesData);
+          });
+      } else {
+        // Reset data and loading state when search query is null
+        this.loading = false;
+        this.noContent = false;
+        this.searchResponse = null;
+        this.allPathsData = [];
+        this.allCoursesData = [];
+      }
+    });
   }
 }

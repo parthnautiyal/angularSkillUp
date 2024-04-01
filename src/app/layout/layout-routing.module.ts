@@ -3,15 +3,13 @@ import { Route, RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { AllSectionContainerComponent } from '../shared/containers/all-section-container/all-section-container.component';
 import { PageNotFoundComponent } from '../error-page/page-not-found/page-not-found.component';
-import { SearchPageComponent } from '../pages/search-page/search-page.component';
 import { AdminComponent } from './admin/admin.component';
 import { TrainersAllSectionContainerComponent } from '../shared/containers/all-section-container copy/trainers-all-section-container.component';
-import { ProfilePageTrainerComponent } from '../pages/profile-page-trainer/profile-page-trainer.component';
 import { CreateCourseFormComponent } from '../shared/form/create-course-form/create-course-form.component';
 import { CreatePathFormComponent } from '../shared/form/create-path-form/create-path-form.component';
 
 const routesCurr: Route =
-  4 > 3
+  localStorage.getItem('selectedRole') === 'TRAINER'
     ? {
         path: '',
         component: AdminComponent,
@@ -20,9 +18,17 @@ const routesCurr: Route =
             path: 'paths/all',
             component: TrainersAllSectionContainerComponent,
           },
+
           {
             path: 'courses/all',
             component: TrainersAllSectionContainerComponent,
+          },
+          {
+            path: 'user',
+            loadChildren: () =>
+              import(
+                '../pages/profile-page-trainer/profile-page-trainer.module'
+              ).then((e) => e.ProfilePageTrainerModule),
           },
           {
             path: 'dashboard',

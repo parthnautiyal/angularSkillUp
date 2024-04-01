@@ -1,14 +1,3 @@
 <div class="path-title">
   <p>{{ heading }}</p>
-  <div class="dropdown">
-    <p-dropdown
-      [options]="Options"
-      optionLabel="name"
-      [placeholder]="placeholder"
-      (onChange)="onOptionSelect($event.value.link)"
-    ></p-dropdown>
-    <ng-template #customOptionTemplate let-option>
-      <a [routerLink]="['/your-route', option.id]">{{ option.name }}</a>
-    </ng-template>
-  </div>
 </div>
