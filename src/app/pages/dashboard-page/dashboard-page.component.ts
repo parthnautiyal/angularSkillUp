@@ -22,11 +22,21 @@ export class DashboardPageComponent implements OnInit {
     this.firsttime = localStorage.getItem('firsttime');
     if(localStorage.getItem('firsttime') == null || localStorage.getItem('firsttime') == undefined 
       || localStorage.getItem('firsttime') == 'true') {
-          this.firsttime = 'false';
-          console.log('im here')
-          localStorage.setItem('firsttime', 'false');
-          this.showSuccess();
-        }
+      this.firsttime = 'false';
+      console.log('im here')
+      localStorage.setItem('firsttime', 'false');
+      this.showSuccess();
+    }
+    if(localStorage.getItem('switchedProfile') == 'true') {
+      console.log("im am hereeeeeee aa")
+      //show toast
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Switched Profile',
+        detail: 'profile switched to student'
+      })
+      localStorage.setItem('switchedProfile','false')
+    }
   }
   loading: boolean = true;
   headingsTitle = HEADINGS_TITLE;

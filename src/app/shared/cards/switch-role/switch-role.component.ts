@@ -18,12 +18,14 @@ export class SwitchRoleComponent implements OnInit {
     this.trainerActive = true;
     localStorage.setItem('selectedRole', 'TRAINER');
     window.location.reload();
+    localStorage.setItem('switchedProfile','true')
   }
 
   setStudentActive() {
     this.trainerActive = false;
     localStorage.setItem('selectedRole', 'STUDENT');
     window.location.reload();
+    localStorage.setItem('switchedProfile','true')
   }
 
   ngOnInit(): void {}
