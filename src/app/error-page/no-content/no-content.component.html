@@ -1,5 +1,12 @@
 <div class="page-wrapper">
-  <div class="page-content">
+  <div
+    class="page-content"
+    [ngStyle]="{
+      'width': width,
+      'height': height,
+      'margin-top': marginTop
+    }"
+  >
     <img src="../../../assets/no-content.svg" class="nodata-image" />
     <div class="error-message">
       <div *ngIf="chapterFlag">Sorry no content to display.</div>

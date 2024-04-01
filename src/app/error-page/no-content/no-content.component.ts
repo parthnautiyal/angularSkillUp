@@ -7,6 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NoContentComponent implements OnInit {
   @Input() chapterFlag: boolean = true;
+  @Input() width: string = '82vw'; // Set default value to 'auto'
+  @Input() height: string = '75vh'; // Set default value to 'auto'
+  @Input() marginTop: string = '0px';
 
   constructor() {}
 
