@@ -9,6 +9,7 @@ import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellane
 })
 export class ShowChapterComponent implements OnInit {
   isReorder: boolean = false;
+  isCreateChapter: boolean = false;
   allChapters: Chapter[] = [];
   reorderArray: number[] = [];
 
@@ -42,5 +43,12 @@ export class ShowChapterComponent implements OnInit {
   }
   handleReorderCancel() {
     this.isReorder = false;
+  }
+  handleCreateChapter() {
+    this.isCreateChapter = true;
+  }
+
+  reset() {
+    this.isCreateChapter = false;
   }
 }

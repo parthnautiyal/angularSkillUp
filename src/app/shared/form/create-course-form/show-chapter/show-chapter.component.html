@@ -1,6 +1,6 @@
-<div class="additionalResourceContainer">
+<div *ngIf="!isCreateChapter" class="additionalResourceContainer">
   <div class="top-wrapper">
-    <button type="button" class="add-button">
+    <button (click)="handleCreateChapter()" type="button" class="add-button">
       <div class="button-text">Add Content</div>
       <div class="button-style"><img src="assets/plus-sign.svg" /></div>
     </button>
@@ -79,3 +79,9 @@
     </div>
   </div>
 </div>
+
+<app-create-chapter
+  [courseId]="courseId"
+  *ngIf="isCreateChapter"
+  (close)="reset()"
+></app-create-chapter>
