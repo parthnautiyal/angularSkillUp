@@ -87,6 +87,7 @@ export class CardContainerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log("ngOnInit called");
     if (this.title == Title.COURSES) {
       this.height = 262;
       if (this.router.url == '/dashboard') {
