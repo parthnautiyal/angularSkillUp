@@ -1,7 +1,7 @@
 export interface User {
   email: string;
   id: number;
-  imageUrl: String;
+  imageUrl: string;
   name: string;
   isActive?: boolean;
 }

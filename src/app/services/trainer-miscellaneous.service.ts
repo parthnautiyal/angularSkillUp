@@ -5,7 +5,7 @@ import { APIResponse } from '../models/ApiResponse';
 import { Course } from '../models/Course';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
-import { CreatePath } from '../models/CreatePath';
+import { CreatePath, PathResponseData } from '../models/CreatePath';
 import { CreateChapter, CreateCourse, Resource } from '../models/CreateCourse';
 import { Chapter } from '../models/Chapter';
 
@@ -178,6 +178,49 @@ export class TrainerMiscellaneousService {
         '?name=' +
         name +
         '&pageSize=10&pageNo=1'
+    );
+  }
+
+  getTrainerPathBehaviourSubject = new BehaviorSubject<PathResponseData>({
+    pathId: 0,
+    pathName: '',
+    imageUrl: '',
+    isAccessible: false,
+    isOwner: false,
+    description: '',
+    about: '',
+    createdBy: {
+      id: 0,
+      name: '',
+      imageUrl: '',
+      email: '',
+    },
+    createdAt: '',
+    updatedAt: '',
+    collaborators: [],
+    courses: [],
+    courseIds: [],
+  });
+  getTrainerPath$ = this.getTrainerPathBehaviourSubject.asObservable();
+
+  getTrainerPath(id: number) {
+    return this.http
+      .get<APIResponse<PathResponseData>>(
+        API.BASE_URL + API.ADMIN + API.PATHS + '/' + id + '?projection=course'
+      )
+      .subscribe((data) => {
+        if (data != null && data != undefined) {
+          this.getTrainerPathBehaviourSubject.next(data.data);
+        }
+      });
+  }
+
+  patchTrainerpath(id: number, data: CreatePath) {
+    console.log(id);
+
+    return this.http.patch(
+      API.BASE_URL + API.ADMIN + API.PATHS + '/' + id,
+      data
     );
   }
 }

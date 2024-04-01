@@ -1,280 +1,298 @@
 <div class="wrapper">
-
-
-<ng-container *ngIf="noErrors">
-  <p-confirmDialog
-    [style]="{ width: '50vw' }"
-    [baseZIndex]="10000"
-    rejectButtonStyleClass="p-button-text"
-    [closable]="false"
-  ></p-confirmDialog>
-</ng-container>
-<ng-container *ngIf="!noErrors">
-  <p-confirmDialog
-    [style]="{ width: '50vw' }"
-    [baseZIndex]="10000"
-    rejectButtonStyleClass="p-button-text"
-    [rejectVisible]="false"
-    [closable]="false"
-    [acceptButtonStyleClass]="'p-button-danger p-button-rounded'"
-    [acceptLabel]="'Ok'"
-  ></p-confirmDialog>
-</ng-container>
-<div class="path-creation">
-  <div class="page-header">Path Details</div>
-  <form
-    [formGroup]="createPathForm"
-    (ngSubmit)="handleSubmitForm()"
-    action=""
-    class="Path-Form"
-  >
-    <div class="path-details">
-      <div class="form">
-        <div class="form-input">
-          <div class="sub-heading">Title</div>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter title (5-150 characters)"
-            class="input-tag"
-            id="path-title"
-            formControlName="pathTitle"
-            [class.is-invalid]="
-              createPathForm.controls['pathTitle'].invalid &&
-              createPathForm.controls['pathTitle'].touched
-            "
-          />
-          <span
-            class="error-message"
-            *ngIf="
-              createPathForm.controls['pathTitle'].invalid &&
-              createPathForm.controls['pathTitle'].touched
-            "
-            [ngStyle]="{
-              display:
+  <ng-container *ngIf="noErrors">
+    <p-confirmDialog
+      [style]="{ width: '50vw' }"
+      [baseZIndex]="10000"
+      rejectButtonStyleClass="p-button-text"
+      [closable]="false"
+    ></p-confirmDialog>
+  </ng-container>
+  <ng-container *ngIf="!noErrors">
+    <p-confirmDialog
+      [style]="{ width: '50vw' }"
+      [baseZIndex]="10000"
+      rejectButtonStyleClass="p-button-text"
+      [rejectVisible]="false"
+      [closable]="false"
+      [acceptButtonStyleClass]="'p-button-danger p-button-rounded'"
+      [acceptLabel]="'Ok'"
+    ></p-confirmDialog>
+  </ng-container>
+  <div class="path-creation">
+    <div class="page-header">Path Details</div>
+    <form
+      [formGroup]="createPathForm"
+      (ngSubmit)="handleSubmitForm()"
+      action=""
+      class="Path-Form"
+    >
+      <div class="path-details">
+        <div class="form">
+          <div class="form-input">
+            <div class="sub-heading">Title</div>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter title (5-150 characters)"
+              class="input-tag"
+              id="path-title"
+              formControlName="pathTitle"
+              [class.is-invalid]="
                 createPathForm.controls['pathTitle'].invalid &&
                 createPathForm.controls['pathTitle'].touched
-                  ? 'block'
-                  : 'none'
-            }"
-            >Title should be 5-150 characters</span
-          >
-        </div>
-        <div class="form-input">
-          <div class="sub-heading">Description</div>
-          <input
-            type="text"
-            name="description"
-            placeholder="Enter description (20-255 characters)"
-            class="input-tag"
-            id="path-description"
-            formControlName="pathDescription"
-            [class.is-invalid]="
-              createPathForm.controls['pathDescription'].invalid &&
-              createPathForm.controls['pathDescription'].touched
-            "
-          />
-          <span
-            class="error-message"
-            *ngIf="
-              createPathForm.controls['pathDescription'].invalid &&
-              createPathForm.controls['pathDescription'].touched
-            "
-            [ngStyle]="{
-              display:
-                createPathForm.controls['pathDescription'].invalid &&
-                createPathForm.controls['pathDescription'].touched
-                  ? 'block'
-                  : 'none'
-            }"
-            >Description should be 20-255 characters</span
-          >
-        </div>
-        <div class="form-input">
-          <div class="sub-heading">About</div>
-          <textarea
-            type="text"
-            name="name"
-            placeholder="About (50-2500 characters)"
-            rows="8"
-            class="input-tag"
-            id="path-about"
-            formControlName="pathAbout"
-            [class.is-invalid]="
-              createPathForm.controls['pathAbout'].invalid &&
-              createPathForm.controls['pathAbout'].touched
-            "
-          ></textarea>
-          <span
-            class="error-message"
-            *ngIf="
-              createPathForm.controls['pathAbout'].invalid &&
-              createPathForm.controls['pathAbout'].touched
-            "
-            [ngStyle]="{
-              display:
-                createPathForm.controls['pathAbout'].invalid &&
-                createPathForm.controls['pathAbout'].touched
-                  ? 'block'
-                  : 'none'
-            }"
-            >About should be 50-2500 characters</span
-          >
-        </div>
-        <div class="form-input path-image">
-          <div class="sub-heading">Thumbnail</div>
-          <input
-            class="input-box-field"
-            id="pathImage"
-            accept=".jpeg,.jpg,.webp,.png,.tiff"
-            type="file"
-            name="Image"
-            style="display: none"
-            (change)="handleFileUpload($event)"
-          />
-          <div
-            (click)="triggerInputClick()"
-            class="image-box {{ isImageUploaded ? '' : 'image-not-uploaded' }}"
-          >
-            <div *ngIf="!isImageUploaded" class="upload-icon-space">
-              <img src="assets/upload-icon.svg" alt="" srcset="" />
-            </div>
-            <div *ngIf="isImageUploaded" class="uploaded-image-space">
-              <img [src]="imgUrl" alt="" />
-              <div class="cross-icon">
-                <img src="assets/remove-button.svg" alt="" />
-              </div>
-            </div>
-          </div>
-          <span class="error-message">*Required</span>
-        </div>
-        <div class="form-input">
-          <div class="sub-heading">Courses</div>
-          <ng-container *ngIf="!isAddCourse">
-            <div class="path-add-courses">
-              <button
-                (click)="handleAddCourse($event)"
-                type="button"
-                class="control-button update-button"
-              >
-                Add Courses
-              </button>
-            </div>
-          </ng-container>
-          <ng-container *ngIf="isAddCourse">
-            <app-add-course-container
-              appClickOutside
-              (clickOutside)="isAddCourse = false"
-            ></app-add-course-container>
-          </ng-container>
-          <ng-container *ngIf="currentCourses.length > 0">
-            <div class="sub-heading">Courses in the Path</div>
-            <p-orderList
-              [value]="currentCourses"
-              [listStyle]="{ height: 'auto' }"
-              [dragdrop]="true"
-              controlsPosition="none"
-            >
-              <ng-template let-course pTemplate="item">
-                <app-course-card-info-trainer
-                  [course]="course"
-                ></app-course-card-info-trainer>
-              </ng-template>
-            </p-orderList>
-          </ng-container>
-        </div>
-        <div class="form-input collaborators">
-          <div class="sub-heading">
-            Collaborators <span class="count">(0)</span>
-          </div>
-          <ng-container *ngIf="!isCollab">
-            <div class="add-content-btn-wrapper" id="collaborators">
-              <button
-                (click)="handleCollaborator($event)"
-                class="add-content-btn"
-                id="collaborators"
-              >
-                Add Collaborators<svg
-                  width="16"
-                  height="9"
-                  viewBox="0 0 16 9"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Expand</title>
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M6.67236 8.39522C7.40488 9.20465 8.59807 9.19853 9.32504 8.39522L15.5961 1.46561C16.3286 0.656175 16.0374 0 14.9443 0H1.05314C-0.039379 0 -0.325668 0.662303 0.401302 1.46561L6.67236 8.39522Z"
-                    fill="#222222"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </ng-container>
-          <ng-container *ngIf="isCollab">
-            <app-add-collaborator-container
-              appClickOutside
-              (clickOutside)="isCollab = false"
-            ></app-add-collaborator-container>
-          </ng-container>
-          <ng-container *ngIf="currentCollaborators.length > 0">
-            <div class="added-collaborators">
-              <ng-container *ngFor="let collaborator of currentCollaborators">
-                <div class="user-list-card">
-                  <img [src]="collaborator.imageUrl" alt="" class="user-img" />
-                  <div class="user-name">{{ collaborator.name }}</div>
-                  <div class="remove-icon">
-                    <img
-                      (click)="handleRemoveCollaborator(collaborator.id)"
-                      src="assets/remove-button.svg"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </ng-container>
-            </div>
-          </ng-container>
-        </div>
-        <div class="form-input">
-          <div class="sub-heading">Publish</div>
-          <div>
-            <input
-              type="radio"
-              id="path-accessible"
-              class="input-box-field"
-              value="YES"
-              formControlName="pathPublish"
-            /><label class="path-isaccessible" for="path-accessible">Yes</label
-            ><input
-              type="radio"
-              id="path-inaccessible"
-              class="input-box-field"
-              value="NO"
-              formControlName="pathPublish"
-            /><label for="pathInAccessible">No</label
-            ><span
+              "
+            />
+            <span
               class="error-message"
               *ngIf="
-                createPathForm.controls['pathPublish'].invalid &&
-                createPathForm.controls['pathPublish'].touched
+                createPathForm.controls['pathTitle'].invalid &&
+                createPathForm.controls['pathTitle'].touched
               "
               [ngStyle]="{
                 display:
-                  createPathForm.controls['pathPublish'].invalid &&
-                  createPathForm.controls['pathPublish'].touched
+                  createPathForm.controls['pathTitle'].invalid &&
+                  createPathForm.controls['pathTitle'].touched
                     ? 'block'
                     : 'none'
               }"
-              >*Required</span
+              >Title should be 5-150 characters</span
             >
           </div>
+          <div class="form-input">
+            <div class="sub-heading">Description</div>
+            <input
+              type="text"
+              name="description"
+              placeholder="Enter description (20-255 characters)"
+              class="input-tag"
+              id="path-description"
+              formControlName="pathDescription"
+              [class.is-invalid]="
+                createPathForm.controls['pathDescription'].invalid &&
+                createPathForm.controls['pathDescription'].touched
+              "
+            />
+            <span
+              class="error-message"
+              *ngIf="
+                createPathForm.controls['pathDescription'].invalid &&
+                createPathForm.controls['pathDescription'].touched
+              "
+              [ngStyle]="{
+                display:
+                  createPathForm.controls['pathDescription'].invalid &&
+                  createPathForm.controls['pathDescription'].touched
+                    ? 'block'
+                    : 'none'
+              }"
+              >Description should be 20-255 characters</span
+            >
+          </div>
+          <div class="form-input">
+            <div class="sub-heading">About</div>
+            <textarea
+              type="text"
+              name="name"
+              placeholder="About (50-2500 characters)"
+              rows="8"
+              class="input-tag"
+              id="path-about"
+              formControlName="pathAbout"
+              [class.is-invalid]="
+                createPathForm.controls['pathAbout'].invalid &&
+                createPathForm.controls['pathAbout'].touched
+              "
+            ></textarea>
+            <span
+              class="error-message"
+              *ngIf="
+                createPathForm.controls['pathAbout'].invalid &&
+                createPathForm.controls['pathAbout'].touched
+              "
+              [ngStyle]="{
+                display:
+                  createPathForm.controls['pathAbout'].invalid &&
+                  createPathForm.controls['pathAbout'].touched
+                    ? 'block'
+                    : 'none'
+              }"
+              >About should be 50-2500 characters</span
+            >
+          </div>
+          <div class="form-input path-image">
+            <div class="sub-heading">Thumbnail</div>
+            <input
+              class="input-box-field"
+              id="pathImage"
+              accept=".jpeg,.jpg,.webp,.png,.tiff"
+              type="file"
+              name="Image"
+              style="display: none"
+              (change)="handleFileUpload($event)"
+            />
+            <div
+              (click)="triggerInputClick()"
+              class="image-box {{
+                isImageUploaded ? '' : 'image-not-uploaded'
+              }}"
+            >
+              <div *ngIf="!isImageUploaded" class="upload-icon-space">
+                <img src="assets/upload-icon.svg" alt="" srcset="" />
+              </div>
+              <div *ngIf="isImageUploaded" class="uploaded-image-space">
+                <img [src]="imgUrl" alt="" />
+                <div class="cross-icon">
+                  <img src="assets/remove-button.svg" alt="" />
+                </div>
+              </div>
+            </div>
+            <span class="error-message">*Required</span>
+          </div>
+          <div class="form-input">
+            <div class="sub-heading">Courses</div>
+            <ng-container *ngIf="!isAddCourse">
+              <div class="path-add-courses">
+                <button
+                  (click)="handleAddCourse($event)"
+                  type="button"
+                  class="control-button update-button"
+                >
+                  Add Courses
+                </button>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="isAddCourse">
+              <app-add-course-container
+                appClickOutside
+                (clickOutside)="isAddCourse = false"
+              ></app-add-course-container>
+            </ng-container>
+            <ng-container *ngIf="currentCourses.length > 0">
+              <div class="sub-heading">Courses in the Path</div>
+              <p-orderList
+                [value]="currentCourses"
+                [listStyle]="{ height: 'auto' }"
+                [dragdrop]="true"
+                controlsPosition="none"
+              >
+                <ng-template let-course pTemplate="item">
+                  <app-course-card-info-trainer
+                    [course]="course"
+                  ></app-course-card-info-trainer>
+                </ng-template>
+              </p-orderList>
+            </ng-container>
+          </div>
+          <div class="form-input collaborators">
+            <div class="sub-heading">
+              Collaborators <span class="count">(0)</span>
+            </div>
+            <ng-container *ngIf="!isCollab">
+              <div class="add-content-btn-wrapper" id="collaborators">
+                <button
+                  (click)="handleCollaborator($event)"
+                  class="add-content-btn"
+                  id="collaborators"
+                >
+                  Add Collaborators<svg
+                    width="16"
+                    height="9"
+                    viewBox="0 0 16 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>Expand</title>
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M6.67236 8.39522C7.40488 9.20465 8.59807 9.19853 9.32504 8.39522L15.5961 1.46561C16.3286 0.656175 16.0374 0 14.9443 0H1.05314C-0.039379 0 -0.325668 0.662303 0.401302 1.46561L6.67236 8.39522Z"
+                      fill="#222222"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="isCollab">
+              <app-add-collaborator-container
+                appClickOutside
+                (clickOutside)="isCollab = false"
+              ></app-add-collaborator-container>
+            </ng-container>
+            <ng-container *ngIf="currentCollaborators.length > 0">
+              <div class="added-collaborators">
+                <ng-container *ngFor="let collaborator of currentCollaborators">
+                  <div class="user-list-card">
+                    <img
+                      [src]="collaborator.imageUrl"
+                      alt=""
+                      class="user-img"
+                    />
+                    <div class="user-name">{{ collaborator.name }}</div>
+                    <div class="remove-icon">
+                      <img
+                        (click)="handleRemoveCollaborator(collaborator.id)"
+                        src="assets/remove-button.svg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
+          <div class="form-input">
+            <div class="sub-heading">Publish</div>
+            <div>
+              <input
+                type="radio"
+                id="path-accessible"
+                class="input-box-field"
+                value="YES"
+                formControlName="pathPublish"
+              /><label class="path-isaccessible" for="path-accessible"
+                >Yes</label
+              ><input
+                type="radio"
+                id="path-inaccessible"
+                class="input-box-field"
+                value="NO"
+                formControlName="pathPublish"
+              /><label for="pathInAccessible">No</label
+              ><span
+                class="error-message"
+                *ngIf="
+                  createPathForm.controls['pathPublish'].invalid &&
+                  createPathForm.controls['pathPublish'].touched
+                "
+                [ngStyle]="{
+                  display:
+                    createPathForm.controls['pathPublish'].invalid &&
+                    createPathForm.controls['pathPublish'].touched
+                      ? 'block'
+                      : 'none'
+                }"
+                >*Required</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="submit-path">
+          <button
+            type="submit"
+            *ngIf="!isUpdate"
+            class="control-button update-button"
+          >
+            Submit
+          </button>
+          <button
+            type="submit"
+            *ngIf="isUpdate"
+            class="control-button update-button"
+          >
+            Update
+          </button>
         </div>
       </div>
-      <div class="submit-path">
-        <button class="control-button update-button">Submit</button>
-      </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 </div>

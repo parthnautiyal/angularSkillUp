@@ -1,12 +1,17 @@
 import { CreatePath } from './../../../models/CreatePath';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ConfirmationService } from 'primeng/api';
+import { CurrentUser } from 'src/app/constants/enums/CurrentUser';
 import { Course } from 'src/app/models/Course';
 import { User } from 'src/app/models/User';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
-import { deletePathCreateCollaborator } from 'src/app/state/action/path-create.action';
+import {
+  deletePathCreateCollaborator,
+  setPathCreateCourse,
+} from 'src/app/state/action/path-create.action';
 import {
   selectPathCreateCollaborators,
   selectPathCreateCourses,
@@ -20,6 +25,8 @@ import {
   providers: [ConfirmationService],
 })
 export class CreatePathFormComponent implements OnInit {
+  pathId: number = 0;
+  isUpdate: boolean = false;
   noErrors: boolean = false;
   isAddCourse: boolean = false;
   isCollab: boolean = false;
@@ -27,6 +34,7 @@ export class CreatePathFormComponent implements OnInit {
   imgUrl: string = '';
   i: number = 0;
   currentCourses: Course[] = [];
+  updateReceivedCourses: Course[] = [];
   currentCollaborators: User[] = [];
   createdPathData: CreatePath = {
     about: '',
@@ -67,8 +75,60 @@ export class CreatePathFormComponent implements OnInit {
     private trainer: TrainerMiscellaneousService,
     private store: Store,
     private fb: FormBuilder,
-    private confirmationService: ConfirmationService
-  ) {}
+    private confirmationService: ConfirmationService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
+    if (this.router.url.includes('update')) {
+      this.isUpdate = true;
+      this.pathId = this.activatedRoute.snapshot.params['id'];
+      this.trainer.getTrainerPath(this.pathId);
+      this.trainer.getTrainerPath$.subscribe((data) => {
+        this.createPathForm.setValue({
+          pathTitle: data.pathName,
+          pathDescription: data.description,
+          pathAbout: data.about,
+          pathPublish: data.isAccessible ? 'YES' : 'NO',
+        });
+        this.imgUrl = data.imageUrl;
+        if (this.imgUrl) {
+          this.isImageUploaded = true;
+        }
+        this.updateReceivedCourses = data.courses.map((course) => ({
+          id: course.courseId,
+          courseId: course.courseId,
+          name: course.courseName,
+          courseName: course.courseName,
+          imageUrl: course.imageUrl,
+          isAccessible: course.isAccessible,
+          isOwner: false,
+          isAuthorised: course.isAuthorised,
+          description: course.about,
+          about: course.about,
+          createdBy: course.createdBy,
+          createdAt: course.createdAt,
+          isFavourite: false,
+          progress: 0,
+          isEnrolled: false,
+          enrolledAt: '',
+          completedAt: '',
+          noOfChapters: 0,
+          updatedAt: '',
+          level: 0,
+          collaborators: [],
+        }));
+        this.store.dispatch(
+          setPathCreateCourse({ selectedCourses: this.updateReceivedCourses })
+        );
+        this.currentCollaborators = data.collaborators;
+        console.log(this.currentCollaborators);
+
+        if (this.currentCollaborators.length > 0) {
+          this.isCollab = true;
+        }
+      });
+    }
+  }
 
   ngOnInit(): void {
     this.store.select(selectPathCreateCourses).subscribe((data) => {
@@ -98,18 +158,51 @@ export class CreatePathFormComponent implements OnInit {
       });
     } else {
       this.noErrors = true;
-      this.confirmationService.confirm({
-        message: 'Are you sure you want to create this path?',
-        accept: () => {
-          this.addDataToCreatPath();
-          this.trainer
-            .createPathTrainer(this.createdPathData)
-            .subscribe((data) => {
-              console.log(data);
-            });
-          console.log(this.createdPathData);
-        },
-      });
+
+      if (this.isUpdate) {
+        this.createdPathData.isOwner = true;
+        this.createdPathData.createdBy = {
+          id: 326,
+          name: 'Chandan Kumar Saha',
+          imageUrl:
+            'https://lh3.googleusercontent.com/a/ACg8ocK_hSrRouMuk2rkzqgJ4VB3tVC8H6KknBRQaMkRYyoAYg=s96-c',
+          email: 'chandan.saha@zopsmart.com',
+        };
+        this.createdPathData.courseIds = this.currentCourses.map(
+          (course) => course.courseId || 0
+        );
+
+        this.createdPathData.collaboratorIds = this.currentCollaborators.map(
+          (collab) => collab.id
+        );
+        console.log(this.pathId);
+
+        this.confirmationService.confirm({
+          message: 'Are you sure you want to update this path?',
+          accept: () => {
+            this.addDataToCreatPath();
+            this.trainer
+              .patchTrainerpath(this.pathId, this.createdPathData)
+              .subscribe((data) => {
+                console.log(data);
+              });
+            console.log(this.createdPathData);
+          },
+        });
+      } else {
+        this.confirmationService.confirm({
+          message: 'Are you sure you want to create this path?',
+          accept: () => {
+            this.addDataToCreatPath();
+            this.trainer
+              .createPathTrainer(this.createdPathData)
+              .subscribe((data) => {
+                console.log(data);
+              });
+            console.log(this.createdPathData);
+          },
+        });
+      }
     }
   }
 
