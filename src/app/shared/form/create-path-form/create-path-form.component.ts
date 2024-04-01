@@ -2,7 +2,7 @@ import { CreatePath } from './../../../models/CreatePath';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Course } from 'src/app/models/Course';
 import { User } from 'src/app/models/User';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
@@ -67,7 +67,8 @@ export class CreatePathFormComponent implements OnInit {
     private trainer: TrainerMiscellaneousService,
     private store: Store,
     private fb: FormBuilder,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -108,6 +109,11 @@ export class CreatePathFormComponent implements OnInit {
               console.log(data);
             });
           console.log(this.createdPathData);
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Path created',
+            detail: 'Created path ' + this.createdPathData.name
+          })
         },
       });
     }
