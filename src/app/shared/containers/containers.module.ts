@@ -16,7 +16,7 @@ import { AddCollaboratorContainerComponent } from './add-collaborator-container/
 import { TrainersAllSectionContainerComponent } from './all-section-container copy/trainers-all-section-container.component';
 import { TrainersCardContainerComponent } from './trainers-card-container/trainers-card-container.component';
 import { CustomScrollDirective } from '../custom-scroll.directive';
-
+import { InputTextModule } from 'primeng/inputtext';
 @NgModule({
   declarations: [
     CardContainerComponent,
@@ -37,14 +37,15 @@ import { CustomScrollDirective } from '../custom-scroll.directive';
     ScrollTrackerDirective,
     ListboxModule,
     FormsModule,
-    CustomScrollDirective
+    CustomScrollDirective,
+    InputTextModule,
   ],
   exports: [
     CardContainerComponent,
     BatchInfoCardContainerComponent,
     AddCourseContainerComponent,
     AddCollaboratorContainerComponent,
-    TrainersCardContainerComponent
+    TrainersCardContainerComponent,
   ],
 })
 export class ContainersModule {}

@@ -1,1 +1,87 @@
-<p>show-chapter works!</p>
+<div *ngIf="!isCreateChapter" class="additionalResourceContainer">
+  <div class="top-wrapper">
+    <button (click)="handleCreateChapter()" type="button" class="add-button">
+      <div class="button-text">Add Content</div>
+      <div class="button-style"><img src="assets/plus-sign.svg" /></div>
+    </button>
+    <button
+      (click)="handleReorder()"
+      class="control-button update-button reorder-btn"
+    >
+      Reorder
+    </button>
+  </div>
+
+  <div class="formInput">
+    <ng-container *ngIf="!isReorder">
+      <div
+        *ngFor="let chapter of allChapters; let i = index"
+        class="uploaded-file"
+      >
+        <div class="ResourceItem">
+          <div class="file-icon-wrapper">
+            <img src="assets/file-icon.svg" alt="" />
+          </div>
+          <div class="resource-name">{{ chapter.name }}</div>
+        </div>
+        <div class="resource-control-icons-layover">
+          <div class="delete-icon">
+            <img src="assets/Remove.svg" alt="" />
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <p-orderList
+      *ngIf="isReorder"
+      [value]="allChapters"
+      [listStyle]="{ height: 'auto' }"
+      [dragdrop]="true"
+      controlsPosition="none"
+    >
+      <ng-template let-chapter pTemplate="item">
+        <div class="ResourceItem">
+          <div class="file-icon-wrapper">
+            <img src="assets/file-icon.svg" alt="" />
+          </div>
+          <div class="resource-name">{{ chapter.name }}</div>
+        </div>
+        <div *ngIf="!isReorder" class="resource-control-icons-layover">
+          <div class="delete-icon">
+            <img src="assets/Remove.svg" alt="" />
+          </div>
+        </div>
+      </ng-template>
+    </p-orderList>
+  </div>
+  <div class="save-button-wrapper">
+    <button
+      *ngIf="!isReorder"
+      type="submit"
+      class="control-button update-button"
+    >
+      Finish
+    </button>
+    <div *ngIf="isReorder" class="reorder-buttons">
+      <button
+        (click)="handleReorderCancel()"
+        class="control-button remove-button"
+        type="button"
+      >
+        Cancel</button
+      ><button
+        (click)="handleReorderSubmit()"
+        class="control-button update-button"
+        type="submit"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-create-chapter
+  [courseId]="courseId"
+  *ngIf="isCreateChapter"
+  (close)="reset()"
+></app-create-chapter>

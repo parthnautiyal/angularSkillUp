@@ -22,3 +22,8 @@ export const selectQuiz = createSelector(
   selectPathCreateState,
   (state) => state.quiz
 );
+
+export const selectSearchedCollaborators = createSelector(
+  selectPathCreateState,
+  (state) => state.searchedCollaborators
+);

@@ -4,7 +4,10 @@
     <div class="button-style"><img src="assets/plus-sign.svg" /></div>
   </button>
   <div class="formInput">
-    <div *ngFor="let resource of allResources" class="uploaded-file">
+    <div
+      *ngFor="let resource of allResources; let i = index"
+      class="uploaded-file"
+    >
       <div class="ResourceItem">
         <div class="file-icon-wrapper">
           <img src="assets/file-icon.svg" alt="" />
@@ -12,7 +15,7 @@
         <div class="resource-name">{{ resource.resourceName }}</div>
       </div>
       <div class="resource-control-icons-layover">
-        <div class="delete-icon">
+        <div (click)="handleDeleteResource(i)" class="delete-icon">
           <img src="assets/Remove.svg" alt="" />
         </div>
       </div>
