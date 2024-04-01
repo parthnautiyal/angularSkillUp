@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { Course } from 'src/app/models/Course';
 
 @Component({
@@ -28,7 +28,15 @@ export class DashboardCourseCardTrainerComponent implements OnInit {
     updatedAt: '',
     level: 0,
     collaborators: [],
-  };
+  } ;
+
+ 
+  @Output() removed = new EventEmitter<number>();
+
+  removeCard(id: number | undefined) {
+    // console.log(id)
+    this.removed.emit(id);
+  }
 
   toggleChecked() {
     this.checked = !this.checked;

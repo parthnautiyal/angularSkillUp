@@ -105,6 +105,7 @@ export class TrainersCardContainerComponent implements OnInit {
       this.store.select(selectTrainersCourses).subscribe((res) => {
         if (typeof res === 'object' && Object.keys(res).length > 0) {
           this.allCourses = res;
+          console.log(res)
         }
       });
       this.store.select(selectTrainersCoursesError).subscribe((res) => {
@@ -201,5 +202,10 @@ export class TrainersCardContainerComponent implements OnInit {
     if (this.allPaths) {
       this.allPaths = undefined;
     }
+  }
+
+
+  onCardRemoved(courseId: any){
+     this.allCourses = this.allCourses?.filter(course => course.courseId !== courseId);
   }
 }

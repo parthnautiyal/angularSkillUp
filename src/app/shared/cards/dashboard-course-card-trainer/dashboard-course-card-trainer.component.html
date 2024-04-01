@@ -49,7 +49,7 @@
             <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>
           </div>
           <div class="right-bottom">
-            <button class="remove-button">Remove</button
+            <button class="remove-button" (click)='removeCard(course.courseId)'>Remove</button
             ><a class="update-button-wrapper" href="/course/290/update/1"
               ><button class="update-button">Update</button></a
             >
