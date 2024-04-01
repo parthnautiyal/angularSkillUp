@@ -13,7 +13,10 @@
     />
   </a>
   <div class="header-links">
-    <button routerLink="courses/favourites" *ngIf="!isResponsive">
+    <button
+      routerLink="courses/favourites"
+      *ngIf="!isResponsive && selectedRole === 'STUDENT'"
+    >
       <img
         [src]="
           isDarkMode
