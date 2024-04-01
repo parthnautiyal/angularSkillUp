@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { AddCollaboratorContainerComponent } from './add-collaborator-container/add-collaborator-container.component';
 import { TrainersAllSectionContainerComponent } from './all-section-container copy/trainers-all-section-container.component';
 import { TrainersCardContainerComponent } from './trainers-card-container/trainers-card-container.component';
+import { CustomScrollDirective } from '../custom-scroll.directive';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { TrainersCardContainerComponent } from './trainers-card-container/traine
     ScrollTrackerDirective,
     ListboxModule,
     FormsModule,
+    CustomScrollDirective
   ],
   exports: [
     CardContainerComponent,

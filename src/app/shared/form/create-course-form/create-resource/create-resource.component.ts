@@ -16,6 +16,7 @@ export class CreateResourceComponent implements OnInit {
   @Input() courseId = 0;
   @Input() type = 'QUIZ';
   @Output() formSubmit = new EventEmitter<void>();
+  @Input() noId: boolean = false;
 
   isVisible: boolean = true;
   imgUrl: string = '';
