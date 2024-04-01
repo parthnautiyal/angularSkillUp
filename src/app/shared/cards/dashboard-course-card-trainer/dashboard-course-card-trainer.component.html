@@ -56,8 +56,14 @@
             ></p-inputSwitch>
           </div>
           <div class="right-bottom">
-            <button class="remove-button">Remove</button
-            ><a class="update-button-wrapper" href="/course/290/update/1"
+            <button
+              class="remove-button"
+              (click)="RemoveCourse(course.courseId)"
+            >
+              Remove</button
+            ><a
+              class="update-button-wrapper"
+              href="/course/{{ course.courseId }}/update/1"
               ><button class="update-button">Update</button></a
             >
           </div>

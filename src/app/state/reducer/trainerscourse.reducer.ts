@@ -21,6 +21,14 @@ export const initialPublishState: publishCourseState = {
   updating: false,
   error: null,
 };
+export interface RemoveCourseState {
+  isSuccess: boolean;
+  error: any;
+}
+export const initialRemoveCourseState: RemoveCourseState = {
+  isSuccess: false,
+  error: null,
+};
 
 export const initialState: CoursesState = {
   courses: [],
@@ -75,7 +83,7 @@ export const TrainerprofileCoursesReducer = createReducer(
   }))
 );
 
-export const PublishTrainerCourse = createReducer(
+export const PublishTrainerCourseReducer = createReducer(
   initialPublishState,
   on(CoursesActions.PublishTrainersCourse, (state) => ({
     ...state,
@@ -91,6 +99,25 @@ export const PublishTrainerCourse = createReducer(
   on(CoursesActions.PublishTrainersCourseFailure, (state, { error }) => ({
     ...state,
     updating: false,
+    error,
+  }))
+);
+
+export const RemoveCourseReducer = createReducer(
+  initialRemoveCourseState,
+  on(CoursesActions.RemoveTrainersCourse, (state) => ({
+    ...state,
+    isSuccess: false,
+    error: null,
+  })),
+  on(CoursesActions.RemoveTrainersCourseSuccess, (state, { isSuccess }) => ({
+    ...state,
+    isSuccess: isSuccess,
+    error: null,
+  })),
+  on(CoursesActions.RemoveTrainersCourseFailure, (state, { error }) => ({
+    ...state,
+    isSuccess: false,
     error,
   }))
 );

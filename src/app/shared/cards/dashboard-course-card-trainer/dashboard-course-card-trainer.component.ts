@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Course } from 'src/app/models/Course';
-import { PublishTrainersCourse } from 'src/app/state/action/trainerscourse.actions';
+import {
+  PublishTrainersCourse,
+  RemoveTrainersCourse,
+} from 'src/app/state/action/trainerscourse.actions';
 
 @Component({
   selector: 'app-dashboard-course-card-trainer',
@@ -44,6 +47,9 @@ export class DashboardCourseCardTrainerComponent implements OnInit {
         body: { isAccessible: this.checked },
       })
     );
+  }
+  RemoveCourse(id: any) {
+    this.store.dispatch(RemoveTrainersCourse({ id }));
   }
 
   constructor(private store: Store) {}

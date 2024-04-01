@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   CoursesState,
+  RemoveCourseState,
   publishCourseState,
 } from '../reducer/trainerscourse.reducer';
 
@@ -56,5 +57,18 @@ export const selectPublishCourseUpdateing = createSelector(
 
 export const selectPublishCourseError = createSelector(
   selectPublishCourseState,
+  (state) => state.error
+);
+
+const selectRemoveCourseState =
+  createFeatureSelector<RemoveCourseState>('RemoveCourse');
+
+export const selectRemoveCourseStatus = createSelector(
+  selectRemoveCourseState,
+  (state) => state.isSuccess
+);
+
+export const selectRemoveCourseError = createSelector(
+  selectRemoveCourseState,
   (state) => state.error
 );

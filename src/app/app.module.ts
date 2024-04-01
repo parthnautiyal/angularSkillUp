@@ -45,7 +45,8 @@ import {
   TrainerpathsReducer,
 } from './state/reducer/trainerspath.reducer';
 import {
-  PublishTrainerCourse,
+  PublishTrainerCourseReducer,
+  RemoveCourseReducer,
   TrainerprofileCoursesReducer,
   trainerCoursesReducer,
 } from './state/reducer/trainerscourse.reducer';
@@ -84,7 +85,8 @@ import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
       trainerCourses: trainerCoursesReducer,
       trainerProfilePaths: TrainerProfilepathsReducer,
       trainerProfileCourses: TrainerprofileCoursesReducer,
-      publishCourse: PublishTrainerCourse,
+      publishCourse: PublishTrainerCourseReducer,
+      RemoveCourse: RemoveCourseReducer,
     }),
     EffectsModule.forRoot([
       CourseEffects,

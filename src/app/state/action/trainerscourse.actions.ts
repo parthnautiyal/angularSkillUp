@@ -40,3 +40,16 @@ export const PublishTrainersCourseFailure = createAction(
   '[Publish Course] Publish Trainers Course Failure',
   props<{ error: string }>()
 );
+
+export const RemoveTrainersCourse = createAction(
+  '[Remove Course] Remove Trainers Course',
+  props<{ id: number }>()
+);
+export const RemoveTrainersCourseSuccess = createAction(
+  '[Remove Course] Remove Trainers Course Success',
+  props<{ isSuccess: boolean }>()
+);
+export const RemoveTrainersCourseFailure = createAction(
+  '[Remove Course] Remove Trainers Course Failure',
+  props<{ error: string }>()
+);
