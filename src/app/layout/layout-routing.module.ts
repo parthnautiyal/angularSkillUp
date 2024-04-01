@@ -44,6 +44,14 @@ const routesCurr: Route =
               ).then((e) => e.DashboardTrainerModule),
           },
           {
+            path: 'path/update/:id',
+            component: CreatePathFormComponent,
+          },
+          {
+            path: 'course/update/:id',
+            component: CreateCourseFormComponent,
+          },
+          {
             path: 'path/new',
             component: CreatePathFormComponent,
           },
