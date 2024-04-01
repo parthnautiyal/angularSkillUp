@@ -11,16 +11,26 @@ export interface CreateCourse {
   resources: any[];
 }
 
+export interface CreateChapter {
+  name: string;
+  resources: Resource[];
+  quizzes: Quiz[];
+}
+
 export interface Resource {
+  id?: string;
   resourceName: string;
   resourceLink: string;
   resourceType: string;
 }
 
 export interface Quiz {
+  id?: string;
   quizType: string;
   name: string;
   quizLink: string;
+  link?: string;
+  quizCreator?: string;
   passingMarks: number;
 }
 

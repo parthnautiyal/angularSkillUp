@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Course } from 'src/app/models/Course';
 
 @Component({
@@ -7,7 +8,9 @@ import { Course } from 'src/app/models/Course';
   styleUrls: ['./dashboard-course-card-trainer.component.sass'],
 })
 export class DashboardCourseCardTrainerComponent implements OnInit {
-  checked = false;
+  i: number = 0;
+  loading: boolean = false;
+  checked: boolean = false;
 
   @Input() course: Course = {
     id: 0,
@@ -29,12 +32,15 @@ export class DashboardCourseCardTrainerComponent implements OnInit {
     level: 0,
     collaborators: [],
   };
+  courses: any[] = [];
 
   toggleChecked() {
     this.checked = !this.checked;
   }
 
-  constructor() {}
+  constructor(private store: Store) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.checked = this.course.isAccessible;
+  }
 }

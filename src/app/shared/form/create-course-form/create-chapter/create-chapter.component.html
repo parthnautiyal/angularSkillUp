@@ -1,57 +1,132 @@
-<form id="chapterForm" novalidate="">
+<form
+  [formGroup]="createChapter"
+  (change)="checkValidity()"
+  (ngSubmit)="handleSubmit()"
+  id="chapterForm"
+  novalidate=""
+>
   <div class="formInput">
     <div class="sub-heading">Chapter Title</div>
     <input
       type="text"
       placeholder="Enter chapter title"
       class="InputTag"
-      name="Name"
+      name="chapterName"
       autocomplete="off"
       id="chapterName"
+      formControlName="chapterName"
       value=""
-    /><span class="error-message"
+      [class.is-invalid]="
+        createChapter.controls['chapterName'].invalid &&
+        createChapter.controls['chapterName'].touched
+      "
+    /><span
+      class="error-message"
+      *ngIf="
+        createChapter.controls['chapterName'].invalid &&
+        createChapter.controls['chapterName'].touched
+      "
+      [ngStyle]="{
+        display:
+          createChapter.controls['chapterName'].invalid &&
+          createChapter.controls['chapterName'].touched
+            ? 'block'
+            : 'none'
+      }"
       >Title of chapter should have 5 to 150 characters</span
     >
   </div>
   <div class="formInput">
     <div class="sub-heading">Content</div>
-    <button class="add-button">
+    <button type="button" (click)="handleContentButton()" class="add-button">
       <div class="button-text">Add Content</div>
       <div class="button-style"><img src="assets/plus-sign.svg" /></div>
     </button>
-    <div id="resource-wrapper">
-      <div class="uploaded-file" draggable="false">
-        <div class="ResourceItem">
-          <div class="file-icon-wrapper">
-            <img class="svg-icon" src="assets/document.svg" alt="" />
+    <div
+      *ngIf="allContents.length > 0 && allContents != null"
+      id="resource-wrapper"
+    >
+      <ng-container *ngFor="let resource of allContents; let i = index">
+        <div class="uploaded-file" draggable="false">
+          <div class="ResourceItem">
+            <div class="file-icon-wrapper">
+              <img class="svg-icon" src="assets/document.svg" alt="" />
+            </div>
+            <div class="resource-name">{{ resource.resourceName }}</div>
           </div>
-          <div class="resource-name">test2</div>
-        </div>
-        <div class="resource-control-icons-layover">
-          <div class="option-holder">
-            <div class="delete-icon">
-              <img class="svg-icon" src="assets/Remove.svg" alt="" />
+          <div class="resource-control-icons-layover">
+            <div class="option-holder">
+              <div (click)="deleteContent(i)" class="delete-icon">
+                <img class="svg-icon" src="assets/Remove.svg" alt="" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
   <div class="formInput">
     <div class="sub-heading">Assignments</div>
-    <button class="add-button">
+    <button type="button" (click)="handleQuizButton()" class="add-button">
       <div class="button-text">Add Resource</div>
       <div class="button-style"><img src="assets/plus-sign.svg" /></div>
     </button>
-    <div id="quiz-wrapper"></div>
+    <div id="quiz-wrapper">
+      <ng-container *ngFor="let resource of allQuizes; let i = index">
+        <div class="uploaded-file" draggable="false">
+          <div class="ResourceItem">
+            <div class="file-icon-wrapper">
+              <img
+                *ngIf="resource.quizType == 'GOOGLE_FORM'"
+                class="svg-icon"
+                src="assets/file-filled.svg"
+                alt=""
+              />
+              <img
+                *ngIf="resource.quizType == 'TEST_PAPER'"
+                class="svg-icon"
+                src="assets/test-paper.svg"
+                alt=""
+              />
+            </div>
+            <div class="resource-name">{{ resource.name }}</div>
+          </div>
+          <div class="resource-control-icons-layover">
+            <div class="option-holder">
+              <div (click)="deleteContent(i)" class="delete-icon">
+                <img class="svg-icon" src="assets/Remove.svg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
     <input class="input-box-field" required="" style="display: none" /><span
       class="error-message"
+      *ngIf="showError"
       style="margin-top: 20px"
       >Chapter should contain atleast 1 quiz or 1 content material</span
     >
   </div>
   <div class="ChapterControlButtons">
     <button type="button" class="control-button remove-button">Cancel</button
-    ><button type="submit" class="control-button update-button">Save</button>
+    ><button
+      type="submit"
+      [class.not-allowed]="!allReady"
+      class="control-button update-button"
+    >
+      Save
+    </button>
   </div>
 </form>
+
+<app-create-resource
+  (formSubmit)="reset()"
+  *ngIf="showQuiz"
+  [type]="'QUIZ'"
+></app-create-resource>
+<app-create-resource
+  *ngIf="showContent"
+  (formSubmit)="reset()"
+  [type]="'CONTENT'"
+></app-create-resource>

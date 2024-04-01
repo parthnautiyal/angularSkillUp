@@ -27,6 +27,8 @@ import { TrainerDashboardHeaderComponent } from './trainer-dashboard-header/trai
 import { StudentCardComponent } from './student-card/student-card.component';
 import { SwitchRoleComponent } from './switch-role/switch-role.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { ScrollTrackerDirective } from '../scroll-tracker.directive';
+import { CustomScrollDirective } from '../custom-scroll.directive';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     DropdownModule,
     InputSwitchModule,
     SelectButtonModule,
+
+    CustomScrollDirective,
   ],
   exports: [
     BatchCardComponent,
