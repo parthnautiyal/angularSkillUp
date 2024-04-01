@@ -20,12 +20,14 @@ import {
   selectTrainersPathsError,
   selectTrainersPathsLoading,
 } from 'src/app/state/selector/trainerspath.selector';
+import { loadTrainersCourses } from 'src/app/state/action/trainerscourse.actions';
 @Component({
   selector: 'app-trainers-card-container',
   templateUrl: './trainers-card-container.component.html',
   styleUrls: ['./trainers-card-container.component.sass'],
 })
 export class TrainersCardContainerComponent implements OnInit {
+  i: number = 0;
   loading: Boolean = true;
   error: Boolean = false;
   errorEnrolled: Boolean = false;
@@ -34,7 +36,7 @@ export class TrainersCardContainerComponent implements OnInit {
   Title = Title;
   RouterLinks = RouterLinks;
   allPaths?: Path[] = [];
-  allCourses?: Course[] = [];
+  allCourses: Course[] = [];
   allBatches?: any[] = [
     {
       id: 4,
@@ -97,16 +99,36 @@ export class TrainersCardContainerComponent implements OnInit {
     private messageService: MessageService,
     private ngZone: NgZone
   ) {}
+  onScroll(percentage: number) {
+    console.log(percentage);
+
+    if (percentage > 80 && this.i <= 5 && !this.loading) {
+      this.loading = true;
+      this.i = this.i + 1;
+      this.store.dispatch(loadTrainersCourses({ pageNo: this.i }));
+    }
+  }
 
   ngOnInit(): void {
     if (this.title == Title.COURSES) {
       this.height = 262;
+      this.i = this.i + 1;
 
-      this.store.select(selectTrainersCourses).subscribe((res) => {
-        if (typeof res === 'object' && Object.keys(res).length > 0) {
-          this.allCourses = res;
+      this.store.select(selectTrainersCourses).subscribe((data) => {
+        console.log(data);
+        if (this.i === 1) {
+          this.allCourses = data;
+        } else {
+          this.allCourses = [...this.allCourses, ...data];
+          this.loading = false;
         }
       });
+
+      // this.store.select(selectTrainersCourses).subscribe((res) => {
+      //   if (typeof res === 'object' && Object.keys(res).length > 0) {
+      //     this.allCourses = res;
+      //   }
+      // });
       this.store.select(selectTrainersCoursesError).subscribe((res) => {
         if (res != null) {
           this.errorCourse.message = res.message.split('`').slice(1);
@@ -120,48 +142,6 @@ export class TrainersCardContainerComponent implements OnInit {
         this.loading = res;
       });
     }
-    // if (this.title == Title.BATCHES && !(this.router.url == '/user')) {
-    //   this.height = 200;
-    //   this.enrolled = false;
-    //   this.store.select(selectBatches).subscribe((res) => {
-    //     if (typeof res === 'object' && Object.keys(res).length > 0) {
-    //       this.allBatches = res;
-    //     }
-    //   });
-    //   this.store.select(selectBatchesError).subscribe((res) => {
-    //     if (res != null) {
-    //       this.errorBatch.message = res.message.split('`').slice(1);
-    //       this.errorBatch.code = res.message.split('`').slice(0, 1);
-    //       this.error = true;
-    //     } else {
-    //       this.error = false;
-    //     }
-    //   });
-    //   this.store.select(selectBatchesLoading).subscribe((res) => {
-    //     this.loading = res;
-    //   });
-    // }
-    // if (this.title == Title.BATCHES && this.router.url == '/user') {
-    //   this.height = 102;
-    //   this.enrolled = true;
-    //   this.store.select(selectEnrolledBatches).subscribe((data) => {
-    //     this.enrolledBatches = data;
-    //   });
-
-    //   this.store.select(selectEnrolledBatchesError).subscribe((error) => {
-    //     // console.log(error);
-    //     if (error == null) {
-    //       this.error = false;
-    //     } else {
-    //       this.errorBatch.message = error.message.split('`').slice(1);
-    //       this.errorBatch.code = error.message.split('`').slice(0, 1);
-    //       this.error = true;
-    //     }
-    //   });
-    //   this.store.select(selectEnrolledBatchesLoading).subscribe((res) => {
-    //     this.loading = res;
-    //   });
-    // }
     if (this.title == Title.PATHS) {
       this.height = 112;
       this.store.select(selectTrainersPaths).subscribe((res) => {
