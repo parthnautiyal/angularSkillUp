@@ -4,7 +4,6 @@ import {
   HostListener,
   Input,
   NgZone,
-  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { Course } from 'src/app/models/Course';

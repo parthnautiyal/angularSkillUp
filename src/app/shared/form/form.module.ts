@@ -5,11 +5,21 @@ import { ContainersModule } from '../containers/containers.module';
 import { ClickOutsideDirective } from '../click-outside.directive';
 import { OrderListModule } from 'primeng/orderlist';
 import { CardsModule } from '../cards/cards.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AppInputValidationDirective } from '../app-input-validation.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { CreateCourseFormComponent } from './create-course-form/create-course-form.component';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { CreateResourceComponent } from './create-course-form/create-resource/create-resource.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { CreateChapterComponent } from './create-course-form/create-chapter/create-chapter.component';
 
 @NgModule({
-  declarations: [CreatePathFormComponent],
+  declarations: [
+    CreatePathFormComponent,
+    CreateCourseFormComponent,
+    CreateResourceComponent,
+    CreateChapterComponent,
+  ],
   imports: [
     CommonModule,
     ContainersModule,
@@ -17,8 +27,11 @@ import { AppInputValidationDirective } from '../app-input-validation.directive';
     OrderListModule,
     CardsModule,
     ReactiveFormsModule,
-    AppInputValidationDirective,
+    ConfirmDialogModule,
+    SelectButtonModule,
+    FormsModule,
+    DropdownModule,
   ],
-  exports: [CreatePathFormComponent],
+  exports: [CreatePathFormComponent, CreateCourseFormComponent],
 })
 export class FormModule {}

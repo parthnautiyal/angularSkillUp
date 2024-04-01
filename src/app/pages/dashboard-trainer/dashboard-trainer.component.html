@@ -1,7 +1,18 @@
+<app-trainer-dashboard-header
+  heading="Trainers Dashboard"
+></app-trainer-dashboard-header>
 <div class="page-content-wrapper">
   <div class="page-content">
-    <app-create-path-form></app-create-path-form>
-    <!-- <app-course-card-trainer></app-course-card-trainer>
-    <app-add-course-container></app-add-course-container> -->
+    <div class="student-card">
+      <app-student-card></app-student-card>
+    </div>
+    <div class="heading">Streams</div>
+    <div class="stream-card">
+      <app-stream-card-trainer></app-stream-card-trainer>
+    </div>
+
+    <ng-container *ngFor="let item of headingsTitle">
+      <app-trainers-card-container [title]="item"></app-trainers-card-container>
+    </ng-container>
   </div>
 </div>

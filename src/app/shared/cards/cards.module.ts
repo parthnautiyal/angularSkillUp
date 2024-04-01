@@ -15,7 +15,18 @@ import { RandomColorDirective } from '../containers/card-container/random-color.
 import { RouterModule } from '@angular/router';
 import { ShimmerLoadingComponent } from '../../shimmer/card-shimmer/shimmer-loading/shimmer-loading.component';
 import { ErrorCardComponent } from './error-card/error-card.component';
-import { CourseCardTrainerComponent } from './course-card-trainer/course-card-trainer.component';
+import { CourseCardInfoTrainerComponent } from './course-card-info-trainer/course-card-info-trainer.component';
+import { StreamCardTrainerComponent } from './stream-card-trainer/stream-card-trainer.component';
+import { BatchCardTrainerComponent } from './batch-card-trainer/batch-card-trainer.component';
+import { PathCardTrainerComponent } from './path-card-trainer/path-card-trainer.component';
+import { ProfileCourseCardTrainerComponent } from './profile-course-card-trainer/profile-course-card-trainer.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { DashboardCourseCardTrainerComponent } from './dashboard-course-card-trainer/dashboard-course-card-trainer.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { TrainerDashboardHeaderComponent } from './trainer-dashboard-header/trainer-dashboard-header.component';
+import { StudentCardComponent } from './student-card/student-card.component';
+import { SwitchRoleComponent } from './switch-role/switch-role.component';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [
@@ -30,7 +41,15 @@ import { CourseCardTrainerComponent } from './course-card-trainer/course-card-tr
     LoadingCardComponent,
     ShimmerLoadingComponent,
     ErrorCardComponent,
-    CourseCardTrainerComponent,
+    CourseCardInfoTrainerComponent,
+    StreamCardTrainerComponent,
+    BatchCardTrainerComponent,
+    PathCardTrainerComponent,
+    ProfileCourseCardTrainerComponent,
+    DashboardCourseCardTrainerComponent,
+    TrainerDashboardHeaderComponent,
+    StudentCardComponent,
+    SwitchRoleComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +57,9 @@ import { CourseCardTrainerComponent } from './course-card-trainer/course-card-tr
     ProgressSpinnerModule,
     RandomColorDirective,
     RouterModule,
+    DropdownModule,
+    InputSwitchModule,
+    SelectButtonModule,
   ],
   exports: [
     BatchCardComponent,
@@ -51,7 +73,15 @@ import { CourseCardTrainerComponent } from './course-card-trainer/course-card-tr
     LoadingCardComponent,
     ShimmerLoadingComponent,
     ErrorCardComponent,
-    CourseCardTrainerComponent,
+    CourseCardInfoTrainerComponent,
+    BatchCardTrainerComponent,
+    PathCardTrainerComponent,
+    ProfileCourseCardTrainerComponent,
+    StreamCardTrainerComponent,
+    StudentCardComponent,
+    TrainerDashboardHeaderComponent,
+    DashboardCourseCardTrainerComponent,
+    SwitchRoleComponent,
   ],
 })
 export class CardsModule {}

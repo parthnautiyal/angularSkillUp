@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DropdownModule } from 'primeng/dropdown';
+import { Option } from 'src/app/models/Options';
 
 @Component({
   selector: 'app-component-header',
@@ -8,7 +11,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ComponentHeaderComponent implements OnInit {
   @Input() heading: string = '';
 
-  constructor() {}
+  constructor() {
+   
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+      
+  }
+
+
 }

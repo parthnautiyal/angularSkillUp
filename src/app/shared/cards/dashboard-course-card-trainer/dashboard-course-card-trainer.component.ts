@@ -2,11 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Course } from 'src/app/models/Course';
 
 @Component({
-  selector: 'app-course-card-trainer',
-  templateUrl: './course-card-trainer.component.html',
-  styleUrls: ['./course-card-trainer.component.sass'],
+  selector: 'app-dashboard-course-card-trainer',
+  templateUrl: './dashboard-course-card-trainer.component.html',
+  styleUrls: ['./dashboard-course-card-trainer.component.sass'],
 })
-export class CourseCardTrainerComponent implements OnInit {
+export class DashboardCourseCardTrainerComponent implements OnInit {
+  checked = false;
+
   @Input() course: Course = {
     id: 0,
     courseId: 0,
@@ -27,6 +29,10 @@ export class CourseCardTrainerComponent implements OnInit {
     level: 0,
     collaborators: [],
   };
+
+  toggleChecked() {
+    this.checked = !this.checked;
+  }
 
   constructor() {}
 
