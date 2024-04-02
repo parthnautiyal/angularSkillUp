@@ -37,9 +37,7 @@ export class ErrorCardComponent implements OnInit {
     // this.showInfo();
   }
 
-  ngOnInit(): void {
-    this.showInfo();
-  }
+  ngOnInit(): void {}
 
   handleReload() {
     if (
@@ -72,20 +70,5 @@ export class ErrorCardComponent implements OnInit {
         this.store.dispatch(loadAllBatches());
       }
     }
-  }
-
-  showInfo() {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Removed',
-      detail: 'Removed from Favorites -> ',
-    });
-  }
-  showSuccess() {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Favourite Added',
-    });
   }
 }
