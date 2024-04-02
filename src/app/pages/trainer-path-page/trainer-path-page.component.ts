@@ -51,7 +51,7 @@ export class TrainerPathPageComponent implements OnInit {
                 "email": "chandan.saha@zopsmart.com"
             },
             "createdAt": "2024-03-30T11:23:23.277+00:00",
-            "isAccessible": false,
+            "isAccessible": true,
             "isAuthorised": false
         }
     ],
