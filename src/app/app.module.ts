@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -52,6 +53,9 @@ import {
 } from './state/reducer/trainerscourse.reducer';
 import { TrainerCoursesEffects } from './state/effects/trainersCourse.effects';
 import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
+import { CardsModule } from './shared/cards/cards.module';
+import { DatePipe } from '@angular/common';
+import { ContainersModule } from './shared/containers/containers.module';
 import { StudentDataEffects } from './state/effects/studentData.effects';
 import { studentDataReducer } from './state/reducer/studentData.reducer';
 import { uploadReducer } from './state/reducer/ImageUpload.reducer';
@@ -110,6 +114,8 @@ import { MessageService } from 'primeng/api';
       autoPause: true,
     }),
     RouterModule,
+    CardsModule,
+    ContainersModule
   ],
 
   providers: [
@@ -119,6 +125,7 @@ import { MessageService } from 'primeng/api';
       useClass: ZopsmartApiInterceptorService,
       multi: true,
     },
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })

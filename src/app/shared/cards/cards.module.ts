@@ -29,6 +29,7 @@ import { SwitchRoleComponent } from './switch-role/switch-role.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ScrollTrackerDirective } from '../scroll-tracker.directive';
 import { CustomScrollDirective } from '../custom-scroll.directive';
+import { CourseInTrainerPathCardComponent } from './course-in-trainer-path-card/course-in-trainer-path-card.component';
 import { StudentInfoCardTrainerComponent } from './student-info-card-trainer/student-info-card-trainer.component';
 import { TrainerStudentHeaderComponent } from './trainer-student-header/trainer-student-header.component';
 
@@ -54,6 +55,7 @@ import { TrainerStudentHeaderComponent } from './trainer-student-header/trainer-
     TrainerDashboardHeaderComponent,
     StudentCardComponent,
     SwitchRoleComponent,
+    CourseInTrainerPathCardComponent,
     StudentInfoCardTrainerComponent,
     TrainerStudentHeaderComponent,
   ],
@@ -89,6 +91,7 @@ import { TrainerStudentHeaderComponent } from './trainer-student-header/trainer-
     TrainerDashboardHeaderComponent,
     DashboardCourseCardTrainerComponent,
     SwitchRoleComponent,
+    CourseInTrainerPathCardComponent,
     StudentInfoCardTrainerComponent,
   ],
 })
