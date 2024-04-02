@@ -1,9 +1,10 @@
 .path-title
   display: flex
   flex-direction: column
-  min-height:160px
+  min-height: 160px
+  gap: 10px
   width: 100vw
-  background-color: #5624D0
+  background-color: var(--admin-top-banner-background-color)
   // align-items: center
 
   @media screen and (max-width: 768px)
@@ -14,7 +15,7 @@ p
   font-size: 32px
   font-family: "Poppins",sans-serif
   font-weight: 500
-  padding: 2rem 0 0 8rem
+  padding: 2rem 0 0 4rem
 
   @media screen and (max-width: 768px)
     padding-left: 25px
@@ -22,5 +23,12 @@ p
     font-weight: 400
 
 .dropdown
-  padding-left: 8rem
-  width:100px
+  padding-left: 4rem
+  width: 100px
+
+:host ::ng-deep .p-dropdown
+  width: 30vw
+  background: var(--app-background-color)
+
+:host ::ng-deep .p-dropdown .p-dropdown-label.p-placeholder
+  color: var(--primary-font-color)
