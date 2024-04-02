@@ -40,8 +40,8 @@ export class TrainersCardContainerComponent implements OnInit {
   allBatches?: any[] = [
     {
       id: 4,
-      name: 'JavaScript - 2022-11-14',
-      streamName: 'JavaScript',
+      name: 'Java Batch - 2022-11-14',
+      streamName: 'Java',
       noOfStudents: 14,
       createdAt: '20 Mar 2024',
       endDate: '20 April 2024',
@@ -49,22 +49,6 @@ export class TrainersCardContainerComponent implements OnInit {
     {
       id: 13,
       name: 'Angular Batch - 2023-03-01',
-      streamName: 'JavaScript',
-      noOfStudents: 12,
-      createdAt: '20 Mar 2024',
-      endDate: '20 April 2024',
-    },
-    {
-      id: 16,
-      name: 'Angular Batch - 2023-12-12',
-      streamName: 'JavaScript',
-      noOfStudents: 8,
-      createdAt: '20 Mar 2024',
-      endDate: '20 April 2024',
-    },
-    {
-      id: 19,
-      name: 'Angular Batch - 2024-01-09',
       streamName: 'JavaScript',
       noOfStudents: 12,
       createdAt: '20 Mar 2024',

@@ -67,6 +67,7 @@ const routesCurr: Route =
             path: 'course/new',
             component: CreateCourseFormComponent,
           },
+          // {path: 'path-page', component: TrainerPathPageComponent},
           { path: '**', component: PageNotFoundComponent },
         ],
       }
@@ -157,6 +158,7 @@ const routesCurr: Route =
                 (m) => m.SearchPageModule
               ),
           },
+          // {path: 'path-page', component: TrainerPathPageComponent},
           { path: '**', component: PageNotFoundComponent },
         ],
       };
