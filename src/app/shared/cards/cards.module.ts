@@ -64,7 +64,6 @@ import { StudentInfoCardTrainerComponent } from './student-info-card-trainer/stu
     DropdownModule,
     InputSwitchModule,
     SelectButtonModule,
-
     CustomScrollDirective,
   ],
   exports: [
@@ -88,6 +87,7 @@ import { StudentInfoCardTrainerComponent } from './student-info-card-trainer/stu
     TrainerDashboardHeaderComponent,
     DashboardCourseCardTrainerComponent,
     SwitchRoleComponent,
+    StudentInfoCardTrainerComponent,
   ],
 })
 export class CardsModule {}

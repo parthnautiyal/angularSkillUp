@@ -51,6 +51,8 @@ import {
 } from './state/reducer/trainerscourse.reducer';
 import { TrainerCoursesEffects } from './state/effects/trainersCourse.effects';
 import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
+import { StudentDataEffects } from './state/effects/studentData.effects';
+import { studentDataReducer } from './state/reducer/studentData.reducer';
 import { uploadReducer } from './state/reducer/ImageUpload.reducer';
 import { UploadEffects } from './state/effects/imageUpload.effects';
 
@@ -84,6 +86,7 @@ import { UploadEffects } from './state/effects/imageUpload.effects';
       pathCreate: pathCreateReducer,
       trainerPaths: TrainerpathsReducer,
       trainerCourses: trainerCoursesReducer,
+      StudentData: studentDataReducer,
       trainerProfilePaths: TrainerProfilepathsReducer,
       trainerProfileCourses: TrainerprofileCoursesReducer,
       publishCourse: PublishTrainerCourse,
@@ -95,6 +98,7 @@ import { UploadEffects } from './state/effects/imageUpload.effects';
       PathEffects,
       TrainerCoursesEffects,
       TrainerPathsEffects,
+      StudentDataEffects,
       UploadEffects,
     ]),
     StoreDevtoolsModule.instrument({
