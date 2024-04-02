@@ -160,6 +160,7 @@
             <ng-container *ngIf="!isCollab">
               <div class="add-content-btn-wrapper" id="collaborators">
                 <button
+                  style="cursor: pointer"
                   (click)="handleCollaborator($event)"
                   class="add-content-btn"
                   id="collaborators"
@@ -198,7 +199,7 @@
                       class="user-img"
                     />
                     <div class="user-name">{{ collaborator.name }}</div>
-                    <div class="remove-icon">
+                    <div style="cursor: pointer" class="remove-icon">
                       <img
                         (click)="handleRemoveCollaborator(collaborator.id)"
                         src="assets/remove-button.svg"
