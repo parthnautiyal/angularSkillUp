@@ -86,6 +86,9 @@ export class CreateChapterComponent implements OnInit {
       this.showError = true;
     }
   }
+  handleCancelButton() {
+    this.close.emit();
+  }
 
   deleteContent(index: number) {
     this.allContents.splice(index, 1);

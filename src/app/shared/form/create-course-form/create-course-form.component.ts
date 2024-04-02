@@ -62,7 +62,7 @@ export class CreateCourseFormComponent implements OnInit {
         Validators.maxLength(2500),
       ],
     ],
-    courseLevel: ['', Validators.required],
+    courseLevel: [''],
   });
 
   constructor(
@@ -110,6 +110,13 @@ export class CreateCourseFormComponent implements OnInit {
   }
 
   handleSubmit() {
+    this.createBasicDetailsCourseForm.value.courseLevel =
+      this.selectedExperience;
+    console.log(this.createBasicDetailsCourseForm.value.courseLevel);
+    console.log(this.selectedExperience);
+
+    console.log(this.createBasicDetailsCourseForm.value);
+
     console.log(this.createBasicDetailsCourseForm.valid);
     console.log('Image uploaded', this.isImageUploaded);
     console.log(this.selectedExperience);
@@ -148,6 +155,8 @@ export class CreateCourseFormComponent implements OnInit {
   addValuesToReadyCourseData() {
     this.readyCourseData.about =
       this.createBasicDetailsCourseForm.value.courseAbout || '';
+    console.log(this.createBasicDetailsCourseForm.value.courseLevel);
+
     this.readyCourseData.level = this.selectedExperience;
     this.readyCourseData.name =
       this.createBasicDetailsCourseForm.value.courseName || '';
