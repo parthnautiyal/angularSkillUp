@@ -3,7 +3,8 @@
     class="page-content"
   >
     <img src="../../../assets/no-content.svg" [ngStyle]="{
-      width: width + 'px'
+      width: width + 'px',
+      marginTop: marginTop + 'px'
     }" class="nodata-image" />
     <div class="error-message">
       <div *ngIf="chapterFlag">Sorry no content to display.</div>
