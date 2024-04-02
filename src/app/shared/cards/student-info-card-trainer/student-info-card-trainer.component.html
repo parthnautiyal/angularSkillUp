@@ -1,0 +1,28 @@
+<div class="student-card-container">
+  <div class="student-card">
+    <div class="student-card-header">
+      <div class="student-card-header-image">
+        <img src="assets/Profile Pic.svg" alt="student image" />
+      </div>
+      <div class="student-card-header-info">
+        <div class="student-name">{{ student.name }}</div>
+        <div class="student-email">{{ student.email }}</div>
+      </div>
+    </div>
+
+    <div class="student-details-wrapper">
+      <div class="student-details">
+        Ongoing Paths : {{ student.noOfPathEnrollments }}
+      </div>
+      <div class="student-details">
+        Completed Paths : {{ student.noOfCompletedPaths }}
+      </div>
+      <div class="student-details">
+        Ongoing Courses : {{ student.noOfCourseEnrollments }}
+      </div>
+      <div class="student-details">
+        Completed Courses : {{ student.noOfCompletedCourse }}
+      </div>
+    </div>
+  </div>
+</div>

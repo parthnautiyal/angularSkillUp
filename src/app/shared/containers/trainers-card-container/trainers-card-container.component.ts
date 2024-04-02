@@ -80,12 +80,9 @@ export class TrainersCardContainerComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private messageService: MessageService,
     private ngZone: NgZone
   ) {}
   onScroll(percentage: number) {
-    console.log(percentage);
-
     if (percentage > 80 && this.i <= 5 && !this.loading) {
       this.loading = true;
       this.i = this.i + 1;

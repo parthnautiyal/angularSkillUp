@@ -8,7 +8,6 @@ import { startWith, switchMap } from 'rxjs/operators';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
-  providers: [MessageService],
 })
 export class AppComponent {
   constructor(private mis: MiscellaneousService) {

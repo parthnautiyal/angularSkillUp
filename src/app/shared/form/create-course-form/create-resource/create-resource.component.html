@@ -90,7 +90,11 @@
             class="image-box {{ isImageUploaded ? '' : 'image-not-uploaded' }}"
           >
             <div *ngIf="!isImageUploaded" class="upload-icon-space">
+              <div *ngIf="loading">
+                <app-loading-card></app-loading-card>
+              </div>
               <img
+                *ngIf="!loading"
                 (click)="triggerInputClick()"
                 src="assets/upload-icon.svg"
                 alt=""
@@ -99,7 +103,11 @@
             </div>
             <div *ngIf="isImageUploaded" class="uploaded-image-space">
               <img [src]="imgUrl" alt="" />
-              <div (click)="removeFile()" class="img-cross-icon">
+              <div
+                (click)="removeFile()"
+                style="cursor: pointer"
+                class="img-cross-icon"
+              >
                 <img src="assets/remove-button.svg" alt="" />
               </div>
             </div>

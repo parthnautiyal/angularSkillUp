@@ -5,14 +5,42 @@ import { APIResponse } from '../models/ApiResponse';
 import { Course } from '../models/Course';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
-import { CreatePath } from '../models/CreatePath';
-import { CreateChapter, CreateCourse, Resource } from '../models/CreateCourse';
+import { CreatePath, PathResponseData } from '../models/CreatePath';
+import {
+  CreateChapter,
+  CreateCourse,
+  CreateCourseResponse,
+  Resource,
+} from '../models/CreateCourse';
+import { Chapter } from '../models/Chapter';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrainerMiscellaneousService {
-  constructor(private http: HttpClient) {}
+  //ptoast success message
+
+  success(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: message,
+    });
+  }
+
+  failure(message: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: message,
+    });
+  }
+
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService
+  ) {}
 
   private courseSubject = new BehaviorSubject<Course[]>([
     {
@@ -101,10 +129,19 @@ export class TrainerMiscellaneousService {
     return this.http.post(API.BASE_URL + API.ADMIN + API.COURSES, data);
   }
 
+  getCoursesBehaviourSubject = new BehaviorSubject<Chapter[]>([]);
+  getCourseChapters$ = this.getCoursesBehaviourSubject.asObservable();
+
   getCourseChapters(courseId: number) {
-    return this.http.get(
-      API.BASE_URL + API.ADMIN + API.COURSES + '/' + courseId + API.CHAPTERS
-    );
+    return this.http
+      .get<APIResponse<Chapter[]>>(
+        API.BASE_URL + API.ADMIN + API.COURSES + '/' + courseId + API.CHAPTERS
+      )
+      .subscribe((data) => {
+        if (data != null && data != undefined) {
+          this.getCoursesBehaviourSubject.next(data.data);
+        }
+      });
   }
 
   uploadFile(file: File): Observable<any> {
@@ -143,6 +180,115 @@ export class TrainerMiscellaneousService {
   patchCourse(courseId: number, data: any) {
     return this.http.patch(
       API.BASE_URL + API.ADMIN + API.COURSES + '/' + courseId,
+      data
+    );
+  }
+
+  reorderChapters(courseId: number, chapterIds: number[]) {
+    return this.http.patch(
+      API.BASE_URL +
+        API.ADMIN +
+        API.COURSES +
+        '/' +
+        courseId +
+        API.CHAPTERS +
+        API.REORDER,
+      { chapterIds }
+    );
+  }
+
+  searchCollaborator(name: string) {
+    return this.http.get<APIResponse<User[]>>(
+      API.BASE_URL +
+        API.SEARCH +
+        API.USERS +
+        '?name=' +
+        name +
+        '&pageSize=10&pageNo=1'
+    );
+  }
+
+  getTrainerPathBehaviourSubject = new BehaviorSubject<PathResponseData>({
+    pathId: 0,
+    pathName: '',
+    imageUrl: '',
+    isAccessible: false,
+    isOwner: false,
+    description: '',
+    about: '',
+    createdBy: {
+      id: 0,
+      name: '',
+      imageUrl: '',
+      email: '',
+    },
+    createdAt: '',
+    updatedAt: '',
+    collaborators: [],
+    courses: [],
+    courseIds: [],
+  });
+  getTrainerPath$ = this.getTrainerPathBehaviourSubject.asObservable();
+
+  getTrainerPath(id: number) {
+    return this.http
+      .get<APIResponse<PathResponseData>>(
+        API.BASE_URL + API.ADMIN + API.PATHS + '/' + id + '?projection=course'
+      )
+      .subscribe((data) => {
+        if (data != null && data != undefined) {
+          this.getTrainerPathBehaviourSubject.next(data.data);
+        }
+      });
+  }
+
+  patchTrainerpath(id: number, data: CreatePath) {
+    console.log(id);
+
+    return this.http.patch(
+      API.BASE_URL + API.ADMIN + API.PATHS + '/' + id,
+      data
+    );
+  }
+
+  getTrainerCourseBehaviourSubject = new BehaviorSubject<CreateCourseResponse>({
+    courseId: 0,
+    courseName: '',
+    imageUrl: '',
+    isAccessible: false,
+    isOwner: false,
+    description: '',
+    about: '',
+    level: '',
+    prerequisites: [],
+    createdBy: {
+      id: 0,
+      name: '',
+      imageUrl: '',
+      email: '',
+    },
+    createdAt: '',
+    updatedAt: '',
+    collaborators: [],
+  });
+
+  getTrainerCourse$ = this.getTrainerCourseBehaviourSubject.asObservable();
+
+  getTrainerCourseById(id: number) {
+    return this.http
+      .get<APIResponse<CreateCourseResponse>>(
+        API.BASE_URL + API.ADMIN + API.COURSES + '/' + id
+      )
+      .subscribe((data) => {
+        if (data != null && data != undefined) {
+          this.getTrainerCourseBehaviourSubject.next(data.data);
+        }
+      });
+  }
+
+  patchTrainerCourse(id: number, data: CreateCourse) {
+    return this.http.patch(
+      API.BASE_URL + API.ADMIN + API.COURSES + '/' + id,
       data
     );
   }

@@ -6,6 +6,11 @@ import { QuizTypes } from 'src/app/models/QuizTypes';
 import { Quiz, Resource } from 'src/app/models/CreateCourse';
 import { setQuiz, setResource } from 'src/app/state/action/path-create.action';
 import { v4 as uuidv4 } from 'uuid';
+import { uploadImage } from 'src/app/state/action/imageUpload.actions';
+import {
+  selectImageUrl,
+  selectUploading,
+} from 'src/app/state/selector/ImageUpload.selector';
 
 @Component({
   selector: 'app-create-resource',
@@ -17,7 +22,7 @@ export class CreateResourceComponent implements OnInit {
   @Input() type = 'QUIZ';
   @Output() formSubmit = new EventEmitter<void>();
   @Input() noId: boolean = false;
-
+  loading: boolean = false;
   isVisible: boolean = true;
   imgUrl: string = '';
   allReady: boolean = false;
@@ -105,9 +110,11 @@ export class CreateResourceComponent implements OnInit {
       console.log('Quiz:', this.finalQuiz);
       this.store.dispatch(setQuiz({ quiz: this.finalQuiz }));
       this.isVisible = false;
+      this.trainer.success('Quiz Added Successfully');
       this.formSubmit.emit();
     } else {
       this.isShowError = true;
+      this.trainer.failure('Please fill all the fields');
     }
   }
 
@@ -133,9 +140,11 @@ export class CreateResourceComponent implements OnInit {
       console.log('Resource:', this.finalResource);
       this.store.dispatch(setResource({ resource: this.finalResource }));
       this.isVisible = false;
+      this.trainer.success('Resource Added Successfully');
       this.formSubmit.emit();
     } else {
       console.log('Please upload a file or image');
+      this.trainer.failure('Please upload a file or image');
       this.isShowError = true;
     }
   }
@@ -152,18 +161,41 @@ export class CreateResourceComponent implements OnInit {
     const selectedFile = inputElement.files?.[0];
 
     if (selectedFile?.type === 'application/pdf') {
+      // console.log('Selected file:', selectedFile.type);
+      // this.store.dispatch(uploadImage({ file: selectedFile }));
       this.trainer.uploadFile(selectedFile as File).subscribe((data) => {
         this.isFileUploaded = true;
         this.fileUrl = data.data.url;
         this.isShowUploadBox = false;
         console.log(data.data.url);
       });
+      // this.store.select(selectImageUrl).subscribe((data) => {
+      //   console.log('Data:', data);
+      //   if (data){
+      //     this.isFileUploaded = true;
+      //     this.fileUrl = data;
+      //     this.isShowUploadBox = false;
+      //   }
+      // });
+      // this.store.select(selectUploading).subscribe((data) => {
+      //   console.log('loading:', data);
+      //   this.loading = data;
+      // });
     } else {
-      this.trainer.uploadImage(selectedFile as File).subscribe((data) => {
-        this.isImageUploaded = true;
-        // this.isShowUploadBox = false;
-        this.imgUrl = data.data.imageUpload.originalImgURL;
-      });
+      if (selectedFile) {
+        this.store.dispatch(uploadImage({ file: selectedFile }));
+        this.store.select(selectImageUrl).subscribe((data) => {
+          if (data) {
+            console.log('Data:', data);
+            this.isImageUploaded = true;
+            this.imgUrl = data;
+          }
+        });
+        this.store.select(selectUploading).subscribe((data) => {
+          console.log('loading:', data);
+          this.loading = data;
+        });
+      }
     }
 
     // this.trainer.uploadImage(selectedFile as File).subscribe((data) => {
@@ -181,6 +213,7 @@ export class CreateResourceComponent implements OnInit {
     this.isFileUploaded = false;
     this.imgUrl = '';
     this.fileUrl = '';
+    this.loading = false;
   }
 
   handleCancelButton() {

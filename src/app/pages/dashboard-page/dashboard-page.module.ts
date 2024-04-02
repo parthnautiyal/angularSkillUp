@@ -22,6 +22,5 @@ import { MessageService } from 'primeng/api';
     RippleModule,
     ToastModule,
   ],
-  providers: [MessageService],
 })
 export class DashboardPageModule {}

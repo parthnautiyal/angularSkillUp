@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Course } from 'src/app/models/Course';
+import { Course, ProfileCourse } from 'src/app/models/Course';
 
 export const loadTrainersCourses = createAction(
   '[Trainer Courses] Load Trainer Courses',
@@ -11,5 +11,45 @@ export const loadTrainersCoursesSuccess = createAction(
 );
 export const loadTrainersCoursesFailure = createAction(
   '[Trainer Courses] Load Trainer Courses Failure',
+  props<{ error: string }>()
+);
+
+export const loadTrainersProfileCourses = createAction(
+  '[Trainers Profile Courses] Load Profile Courses'
+);
+
+export const loadTrainersProfileCoursesSuccess = createAction(
+  '[Trainers Profile Courses] Load Profile Courses Success',
+  props<{ courses: ProfileCourse[] }>()
+);
+
+export const loadTrainersProfileCoursesFailure = createAction(
+  '[Trainers Profile Courses] Load Profile Courses Failure',
+  props<{ error: string }>()
+);
+
+export const PublishTrainersCourse = createAction(
+  '[Publish Course] Publish Trainers Course',
+  props<{ id: number; body: any }>()
+);
+export const PublishTrainersCourseSuccess = createAction(
+  '[Publish Course] Publish Trainers Course Success',
+  props<{ courseId: number }>()
+);
+export const PublishTrainersCourseFailure = createAction(
+  '[Publish Course] Publish Trainers Course Failure',
+  props<{ error: string }>()
+);
+
+export const RemoveTrainersCourse = createAction(
+  '[Remove Course] Remove Trainers Course',
+  props<{ id: number }>()
+);
+export const RemoveTrainersCourseSuccess = createAction(
+  '[Remove Course] Remove Trainers Course Success',
+  props<{ isSuccess: boolean }>()
+);
+export const RemoveTrainersCourseFailure = createAction(
+  '[Remove Course] Remove Trainers Course Failure',
   props<{ error: string }>()
 );

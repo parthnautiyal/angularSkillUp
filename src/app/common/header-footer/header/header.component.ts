@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThemeService } from '../../../services/theme.service';
+import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 
 declare var google: any;
 @Component({
@@ -9,6 +10,7 @@ declare var google: any;
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent implements OnInit {
+  selectedRole: string='';
   userProfile: any;
   isDropdownOpen = false;
   isOrgDropdownOpen = false;
@@ -17,7 +19,11 @@ export class HeaderComponent implements OnInit {
   searchQuery: string = '';
   selectedUserRole: string = localStorage.getItem('selectedRole') || 'TRAINER';
 
-  constructor(private themeService: ThemeService, private router: Router) {
+  constructor(
+    private themeService: ThemeService,
+    private router: Router,
+    private trainer: TrainerMiscellaneousService
+  ) {
     this.themeService.isDarkMode().subscribe((isDarkMode) => {
       this.isDarkMode = isDarkMode;
     });
@@ -57,6 +63,7 @@ export class HeaderComponent implements OnInit {
   handleSignout() {
     google.accounts.id.disableAutoSelect();
     sessionStorage.removeItem('loggedInUser');
+    this.trainer.success('Logged Out successfully');
     this.router.navigate(['/login']).then(() => {
       window.location.reload();
     });
@@ -70,6 +77,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedRole = localStorage.getItem('selectedRole') || '' ;
+
     this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
     setTimeout(() => {
       this.onResize();

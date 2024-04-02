@@ -9,7 +9,17 @@ export interface TrainersPathsState {
   error: any;
 }
 
+export interface TrainersProfilePathsState {
+  paths: Path[];
+  loading: boolean;
+  error: any;
+}
 export const initialState: TrainersPathsState = {
+  paths: [],
+  loading: true,
+  error: null,
+};
+export const initialPathState: TrainersProfilePathsState = {
   paths: [],
   loading: true,
   error: null,
@@ -33,4 +43,30 @@ export const TrainerpathsReducer = createReducer(
     loading: false,
     error,
   }))
+);
+
+export const TrainerProfilepathsReducer = createReducer(
+  initialPathState,
+  on(TrainerPathActions.loadTrainersProfilePaths, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(
+    TrainerPathActions.loadTrainersProfilePathsSuccess,
+    (state, { paths }) => ({
+      ...state,
+      paths,
+      loading: false,
+      error: null,
+    })
+  ),
+  on(
+    TrainerPathActions.loadTrainersProfilePathsFailure,
+    (state, { error }) => ({
+      ...state,
+      loading: false,
+      error,
+    })
+  )
 );

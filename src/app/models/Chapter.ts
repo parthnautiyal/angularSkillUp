@@ -19,5 +19,5 @@ export interface Chapter {
   name: string;
   resourceResponses: ResourceResponse[];
   quizResponses: QuizResponse[];
-  progress: number;
+  progress?: number;
 }

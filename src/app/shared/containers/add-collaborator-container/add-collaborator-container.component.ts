@@ -2,7 +2,10 @@ import { Store, select } from '@ngrx/store';
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
-import { setPathCreateCollaborators } from 'src/app/state/action/path-create.action';
+import {
+  setPathCreateCollaborators,
+  setSearchCollaborators,
+} from 'src/app/state/action/path-create.action';
 import { selectPathCreateCollaborators } from 'src/app/state/selector/path-create.selector';
 
 @Component({
@@ -13,6 +16,7 @@ import { selectPathCreateCollaborators } from 'src/app/state/selector/path-creat
 export class AddCollaboratorContainerComponent implements OnInit {
   collaborators: User[] = [];
   selectedCollaborators: User[] = [];
+  searchValue: string = '';
 
   i: number = 0;
   loading: boolean = false;
@@ -58,5 +62,16 @@ export class AddCollaboratorContainerComponent implements OnInit {
       this.i = this.i + 1;
       this.trainer.getAllCollaborators(this.i);
     }
+  }
+
+  submitSearch(event: any) {
+    event.preventDefault();
+    this.trainer.searchCollaborator(this.searchValue).subscribe((data) => {
+      // this.store.dispatch(
+      //   setSearchCollaborators({ searchedCollaborators: data.data })
+      // );
+      this.collaborators = data.data;
+    });
+    console.log(this.searchValue);
   }
 }

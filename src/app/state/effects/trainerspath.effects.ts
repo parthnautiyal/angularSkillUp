@@ -35,6 +35,31 @@ export class TrainerPathsEffects {
       )
     )
   );
+  loadTrainerProfilePaths$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainerPathsActions.loadTrainersProfilePaths),
+      switchMap(() =>
+        this.http
+          .get<APIResponse<Path[]>>(
+            `https://staging.api.training.zopsmart.com/trainers/327/paths`
+          )
+          .pipe(
+            map((paths) =>
+              TrainerPathsActions.loadTrainersProfilePathsSuccess({
+                paths: paths.data,
+              })
+            ),
+            catchError((error) =>
+              of(
+                TrainerPathsActions.loadTrainersProfilePathsFailure({
+                  error: error.message,
+                })
+              )
+            )
+          )
+      )
+    )
+  );
 
   constructor(private actions$: Actions, private http: HttpClient) {}
 }

@@ -13,7 +13,7 @@
           {{ userProfile.given_name }} {{ userProfile.family_name }}
         </p>
         <p class="user-email">{{ userProfile.email }}</p>
-        <p class="trainer-stream">Stream:Javascript</p>
+        <p class="trainer-stream">Stream: Javascript</p>
       </div>
     </div>
   </div>
@@ -31,7 +31,8 @@
     <div class="heading">Paths</div>
     <div class="card-loop">
       <app-path-card-trainer
-        *ngFor="let item of [].constructor(5)"
+        *ngFor="let item of allpaths"
+        [singlePath]="item"
       ></app-path-card-trainer>
     </div>
   </div>
@@ -39,7 +40,8 @@
     <div class="heading">Courses</div>
     <div class="card-loop">
       <app-profile-course-card-trainer
-        *ngFor="let item of [].constructor(5)"
+        *ngFor="let item of allCourses"
+        [singleCourse]="item"
       ></app-profile-course-card-trainer>
     </div>
   </div>

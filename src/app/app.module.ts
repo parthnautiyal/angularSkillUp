@@ -41,13 +41,27 @@ import {
 } from './state/reducer/course.reducer';
 import { ToastModule } from 'primeng/toast';
 import { pathCreateReducer } from './state/reducer/path-create.reducer';
-import { TrainerpathsReducer } from './state/reducer/trainerspath.reducer';
-import { trainerCoursesReducer } from './state/reducer/trainerscourse.reducer';
+import {
+  TrainerProfilepathsReducer,
+  TrainerpathsReducer,
+} from './state/reducer/trainerspath.reducer';
+import {
+  PublishTrainerCourseReducer,
+  RemoveCourseReducer,
+  TrainerprofileCoursesReducer,
+  trainerCoursesReducer,
+} from './state/reducer/trainerscourse.reducer';
 import { TrainerCoursesEffects } from './state/effects/trainersCourse.effects';
 import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
 import { CardsModule } from './shared/cards/cards.module';
 import { DatePipe } from '@angular/common';
 import { ContainersModule } from './shared/containers/containers.module';
+import { StudentDataEffects } from './state/effects/studentData.effects';
+import { studentDataReducer } from './state/reducer/studentData.reducer';
+import { uploadReducer } from './state/reducer/ImageUpload.reducer';
+import { UploadEffects } from './state/effects/imageUpload.effects';
+import { MessageService } from 'primeng/api';
+
 @NgModule({
   declarations: [AppComponent],
 
@@ -78,6 +92,12 @@ import { ContainersModule } from './shared/containers/containers.module';
       pathCreate: pathCreateReducer,
       trainerPaths: TrainerpathsReducer,
       trainerCourses: trainerCoursesReducer,
+      StudentData: studentDataReducer,
+      trainerProfilePaths: TrainerProfilepathsReducer,
+      trainerProfileCourses: TrainerprofileCoursesReducer,
+      publishCourse: PublishTrainerCourseReducer,
+      RemoveCourse: RemoveCourseReducer,
+      upload: uploadReducer,
     }),
     EffectsModule.forRoot([
       CourseEffects,
@@ -85,6 +105,8 @@ import { ContainersModule } from './shared/containers/containers.module';
       PathEffects,
       TrainerCoursesEffects,
       TrainerPathsEffects,
+      StudentDataEffects,
+      UploadEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -97,6 +119,7 @@ import { ContainersModule } from './shared/containers/containers.module';
   ],
 
   providers: [
+    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ZopsmartApiInterceptorService,

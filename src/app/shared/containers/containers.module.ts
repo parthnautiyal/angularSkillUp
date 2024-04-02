@@ -18,6 +18,7 @@ import { TrainersCardContainerComponent } from './trainers-card-container/traine
 import { CustomScrollDirective } from '../custom-scroll.directive';
 import { CoursesInTrainerPathContainerComponent } from './courses-in-trainer-path-container/courses-in-trainer-path-container.component';
 
+import { InputTextModule } from 'primeng/inputtext';
 @NgModule({
   declarations: [
     CardContainerComponent,
@@ -40,6 +41,7 @@ import { CoursesInTrainerPathContainerComponent } from './courses-in-trainer-pat
     ListboxModule,
     FormsModule,
     CustomScrollDirective,
+    InputTextModule,
   ],
   exports: [
     CardContainerComponent,

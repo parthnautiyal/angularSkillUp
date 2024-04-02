@@ -7,7 +7,8 @@ import { AdminComponent } from './admin/admin.component';
 import { TrainersAllSectionContainerComponent } from '../shared/containers/all-section-container copy/trainers-all-section-container.component';
 import { CreateCourseFormComponent } from '../shared/form/create-course-form/create-course-form.component';
 import { CreatePathFormComponent } from '../shared/form/create-path-form/create-path-form.component';
-import { TrainerPathPageComponent } from '../pages/trainer-path-page/trainer-path-page.component';
+import { StudentInfoCardTrainerComponent } from '../shared/cards/student-info-card-trainer/student-info-card-trainer.component';
+import { StudentPageTrainerComponent } from '../pages/student-page-trainer/student-page-trainer.component';
 
 const routesCurr: Route =
   localStorage.getItem('selectedRole') === 'TRAINER'
@@ -19,11 +20,23 @@ const routesCurr: Route =
             path: 'paths/all',
             component: TrainersAllSectionContainerComponent,
           },
+          {
+            path: 'batches/all',
+            component: TrainersAllSectionContainerComponent,
+          },
 
           {
             path: 'courses/all',
             component: TrainersAllSectionContainerComponent,
           },
+          {
+            path: 'user/students/all',
+            loadChildren: () =>
+              import(
+                '../pages/student-page-trainer/student-page-trainer.module'
+              ).then((e) => e.StudentPageTrainerModule),
+          },
+
           {
             path: 'user',
             loadChildren: () =>
@@ -39,6 +52,14 @@ const routesCurr: Route =
               ).then((e) => e.DashboardTrainerModule),
           },
           {
+            path: 'path/update/:id',
+            component: CreatePathFormComponent,
+          },
+          {
+            path: 'course/:id/update',
+            component: CreateCourseFormComponent,
+          },
+          {
             path: 'path/new',
             component: CreatePathFormComponent,
           },
@@ -46,7 +67,7 @@ const routesCurr: Route =
             path: 'course/new',
             component: CreateCourseFormComponent,
           },
-          {path: 'path-page', component: TrainerPathPageComponent},
+          // {path: 'path-page', component: TrainerPathPageComponent},
           { path: '**', component: PageNotFoundComponent },
         ],
       }
@@ -137,7 +158,7 @@ const routesCurr: Route =
                 (m) => m.SearchPageModule
               ),
           },
-          {path: 'path-page', component: TrainerPathPageComponent},
+          // {path: 'path-page', component: TrainerPathPageComponent},
           { path: '**', component: PageNotFoundComponent },
         ],
       };

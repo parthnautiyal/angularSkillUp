@@ -30,6 +30,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { ScrollTrackerDirective } from '../scroll-tracker.directive';
 import { CustomScrollDirective } from '../custom-scroll.directive';
 import { CourseInTrainerPathCardComponent } from './course-in-trainer-path-card/course-in-trainer-path-card.component';
+import { StudentInfoCardTrainerComponent } from './student-info-card-trainer/student-info-card-trainer.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { CourseInTrainerPathCardComponent } from './course-in-trainer-path-card/
     StudentCardComponent,
     SwitchRoleComponent,
     CourseInTrainerPathCardComponent,
+    StudentInfoCardTrainerComponent,
   ],
   imports: [
     CommonModule,
@@ -64,7 +66,6 @@ import { CourseInTrainerPathCardComponent } from './course-in-trainer-path-card/
     DropdownModule,
     InputSwitchModule,
     SelectButtonModule,
-
     CustomScrollDirective,
   ],
   exports: [
@@ -88,7 +89,8 @@ import { CourseInTrainerPathCardComponent } from './course-in-trainer-path-card/
     TrainerDashboardHeaderComponent,
     DashboardCourseCardTrainerComponent,
     SwitchRoleComponent,
-    CourseInTrainerPathCardComponent
+    CourseInTrainerPathCardComponent,
+    StudentInfoCardTrainerComponent,
   ],
 })
 export class CardsModule {}

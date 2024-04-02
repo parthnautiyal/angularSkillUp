@@ -42,6 +42,12 @@ import {
   selectEnrolledPathsLoading,
 } from 'src/app/state/selector/path.selector';
 import { Error } from 'src/app/models/Error';
+import { loadTrainersCourses } from 'src/app/state/action/trainerscourse.actions';
+import {
+  selectTrainersCourses,
+  selectTrainersCoursesError,
+  selectTrainersCoursesLoading,
+} from 'src/app/state/selector/trainerscourse.selector';
 
 @Component({
   selector: 'app-trainers-all-section-container',
@@ -49,11 +55,46 @@ import { Error } from 'src/app/models/Error';
   styleUrls: ['./trainers-all-section-container.component.sass'],
 })
 export class TrainersAllSectionContainerComponent implements OnInit {
+  i: number = 0;
   prefix: string = '';
   heading: string = '';
   allPathsData: Path[] = [];
   allCoursesData: Course[] = [];
-  allBatchesData: Batch[] = [];
+  allBatchesData: any[] = [
+    {
+      id: 4,
+      name: 'JavaScript - 2022-11-14',
+      streamName: 'JavaScript',
+      noOfStudents: 14,
+      createdAt: '20 Mar 2024',
+      endDate: '20 April 2024',
+    },
+    {
+      id: 13,
+      name: 'Angular Batch - 2023-03-01',
+      streamName: 'JavaScript',
+      noOfStudents: 12,
+      createdAt: '20 Mar 2024',
+      endDate: '20 April 2024',
+    },
+    {
+      id: 16,
+      name: 'Angular Batch - 2023-12-12',
+      streamName: 'JavaScript',
+      noOfStudents: 8,
+      createdAt: '20 Mar 2024',
+      endDate: '20 April 2024',
+    },
+    {
+      id: 19,
+      name: 'Angular Batch - 2024-01-09',
+      streamName: 'JavaScript',
+      noOfStudents: 12,
+      createdAt: '20 Mar 2024',
+      endDate: '20 April 2024',
+    },
+  ];
+
   loading: boolean = true;
   error: boolean = false;
   errorCard: Error = {
@@ -72,6 +113,14 @@ export class TrainersAllSectionContainerComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
+  onScroll(percentage: number) {
+    console.log(percentage);
+
+    if (percentage > 80 && this.i <= 5 && !this.loading) {
+      this.i = this.i + 1;
+      this.store.dispatch(loadTrainersCourses({ pageNo: this.i }));
+    }
+  }
   getAllPaths() {
     this.store.dispatch(loadAllPaths());
     this.store.select(selectAllPaths).subscribe((res) => {
@@ -101,15 +150,26 @@ export class TrainersAllSectionContainerComponent implements OnInit {
     });
   }
   getAllCourses() {
-    this.store.dispatch(loadAllCourses());
+    this.i = this.i + 1;
+    this.store.dispatch(loadTrainersCourses({ pageNo: this.i }));
 
-    this.store.select(selectAllCourses).subscribe((res) => {
-      if (res.length > 0) {
-        this.allCoursesData = res;
+    this.store.select(selectTrainersCourses).subscribe((data) => {
+      console.log(data);
+      if (this.i === 1) {
+        this.allCoursesData = data;
+      } else {
+        this.allCoursesData = [...this.allCoursesData, ...data];
+        this.loading = false;
       }
     });
 
-    this.store.select(selectAllCoursesError).subscribe((res) => {
+    // this.store.select(selectTrainersCourses).subscribe((res) => {
+    //   if (res.length > 0) {
+    //     this.allCoursesData = res;
+    //   }
+    // });
+
+    this.store.select(selectTrainersCoursesError).subscribe((res) => {
       if (res) {
         this.error = true;
         this.errorCard.message = res.message.split('`').slice(1);
@@ -119,7 +179,7 @@ export class TrainersAllSectionContainerComponent implements OnInit {
       }
     });
 
-    this.store.select(selectAllCoursesLoading).subscribe((res) => {
+    this.store.select(selectTrainersCoursesLoading).subscribe((res) => {
       if (!res) {
         setTimeout(() => {
           this.loading = false;
