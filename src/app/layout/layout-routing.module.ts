@@ -8,6 +8,7 @@ import { TrainersAllSectionContainerComponent } from '../shared/containers/all-s
 import { CreateCourseFormComponent } from '../shared/form/create-course-form/create-course-form.component';
 import { CreatePathFormComponent } from '../shared/form/create-path-form/create-path-form.component';
 import { StudentInfoCardTrainerComponent } from '../shared/cards/student-info-card-trainer/student-info-card-trainer.component';
+import { StudentPageTrainerComponent } from '../pages/student-page-trainer/student-page-trainer.component';
 
 const routesCurr: Route =
   localStorage.getItem('selectedRole') === 'TRAINER'
@@ -19,6 +20,10 @@ const routesCurr: Route =
             path: 'paths/all',
             component: TrainersAllSectionContainerComponent,
           },
+          {
+            path: 'batches/all',
+            component: TrainersAllSectionContainerComponent,
+          },
 
           {
             path: 'courses/all',
@@ -26,7 +31,10 @@ const routesCurr: Route =
           },
           {
             path: 'user/students/all',
-            component: StudentInfoCardTrainerComponent,
+            loadChildren: () =>
+              import(
+                '../pages/student-page-trainer/student-page-trainer.module'
+              ).then((e) => e.StudentPageTrainerModule),
           },
 
           {

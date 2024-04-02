@@ -10,12 +10,12 @@
         [height]="this.height"
       ></app-dashboard-shimmer>
     </div>
-    <div *ngIf="!loading" class="paths-box">
+    <div *ngIf="!loading">
       <ng-container *ngIf="noContent">
         <app-no-content></app-no-content>
       </ng-container>
       <ng-container *ngIf="!noContent">
-        <ng-container *ngIf="heading == Title.PATHS">
+        <div *ngIf="heading == Title.PATHS" class="paths-box">
           <app-error-card
             [title]="Title.PATHS"
             [error]="errorCard"
@@ -28,9 +28,14 @@
               [singlePath]="item"
             ></app-path-card>
           </div>
-        </ng-container>
+        </div>
 
-        <ng-container *ngIf="heading == Title.COURSES">
+        <div
+          *ngIf="heading == Title.COURSES"
+          class="courses-box"
+          customScrollTracker
+          (scrollPercent)="onScroll($event)"
+        >
           <app-error-card
             [title]="Title.COURSES"
             [error]="errorCard"
@@ -39,16 +44,14 @@
           </app-error-card>
           <ng-container *ngIf="!error">
             <div *ngFor="let item of allCoursesData" class="paths-card-wrapper">
-              <app-course-card
-                [onGoingFlag]="onGoingFlag"
-                [singleCourse]="item"
-                [isRed]="item.isFavourite"
-              ></app-course-card>
+              <app-dashboard-course-card-trainer
+                [course]="item"
+              ></app-dashboard-course-card-trainer>
             </div>
           </ng-container>
-        </ng-container>
+        </div>
 
-        <ng-container *ngIf="heading == Title.BATCHES">
+        <div *ngIf="heading == Title.BATCHES" class="batches-box">
           <app-error-card
             [title]="Title.BATCHES"
             [error]="errorCard"
@@ -65,7 +68,7 @@
               </a>
             </div>
           </ng-container>
-        </ng-container>
+        </div>
       </ng-container>
     </div>
   </div>

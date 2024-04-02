@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Student } from 'src/app/models/Student';
 
 @Component({
@@ -7,14 +7,13 @@ import { Student } from 'src/app/models/Student';
   styleUrls: ['./student-info-card-trainer.component.sass'],
 })
 export class StudentInfoCardTrainerComponent implements OnInit {
-  student: Student = {
-    id: 1,
-    name: 'Rajiv Sirothia',
-    email: 'rajiv.sirothia@zopsmart.com',
-    imageUrl:
-      'https://lh3.googleusercontent.com/a/AEdFTp5RPxggOVTeAj-uvBcdDXc76wt2d37foV6x9Rz6=s96-c',
-    noOfCourseEnrollments: 25,
-    noOfPathEnrollments: 11,
+  @Input() student: Student = {
+    id: 0,
+    name: '',
+    email: '',
+    imageUrl: '',
+    noOfCourseEnrollments: 0,
+    noOfPathEnrollments: 0,
     noOfCompletedPaths: 0,
     noOfCompletedCourse: 0,
   };

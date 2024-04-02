@@ -44,7 +44,8 @@ import { TrainerpathsReducer } from './state/reducer/trainerspath.reducer';
 import { trainerCoursesReducer } from './state/reducer/trainerscourse.reducer';
 import { TrainerCoursesEffects } from './state/effects/trainersCourse.effects';
 import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
-
+import { StudentDataEffects } from './state/effects/studentData.effects';
+import { studentDataReducer } from './state/reducer/studentData.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -76,6 +77,7 @@ import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
       pathCreate: pathCreateReducer,
       trainerPaths: TrainerpathsReducer,
       trainerCourses: trainerCoursesReducer,
+      StudentData: studentDataReducer,
     }),
     EffectsModule.forRoot([
       CourseEffects,
@@ -83,6 +85,7 @@ import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
       PathEffects,
       TrainerCoursesEffects,
       TrainerPathsEffects,
+      StudentDataEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
