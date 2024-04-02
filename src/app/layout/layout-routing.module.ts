@@ -20,10 +20,6 @@ const routesCurr: Route =
             component: TrainersAllSectionContainerComponent,
           },
           {
-            path: 'studentheader',
-            component: TrainerStudentHeaderComponent,
-          },
-          {
             path: 'batches/all',
             component: TrainersAllSectionContainerComponent,
           },
@@ -38,6 +34,14 @@ const routesCurr: Route =
               import(
                 '../pages/student-page-trainer/student-page-trainer.module'
               ).then((e) => e.StudentPageTrainerModule),
+          },
+
+          {
+            path: 'course/:id',
+            loadChildren: () =>
+              import(
+                '../pages/course-page-trainer/course-page-trainer.module'
+              ).then((e) => e.CoursePageTrainerModule),
           },
 
           {

@@ -93,6 +93,7 @@ import { TrainerStudentHeaderComponent } from './trainer-student-header/trainer-
     SwitchRoleComponent,
     CourseInTrainerPathCardComponent,
     StudentInfoCardTrainerComponent,
+    TrainerStudentHeaderComponent,
   ],
 })
 export class CardsModule {}
