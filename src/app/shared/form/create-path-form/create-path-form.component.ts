@@ -52,6 +52,12 @@ export class CreatePathFormComponent implements OnInit {
     courseIds: [],
     description: '',
     imageUrl: '',
+    createdBy: {
+      id: 0,
+      name: '',
+      imageUrl: '',
+      email: '',
+    },
     isAccessible: false,
     name: '',
   };
@@ -173,11 +179,10 @@ export class CreatePathFormComponent implements OnInit {
       if (this.isUpdate) {
         this.createdPathData.isOwner = true;
         this.createdPathData.createdBy = {
-          id: 326,
-          name: 'Chandan Kumar Saha',
-          imageUrl:
-            'https://lh3.googleusercontent.com/a/ACg8ocK_hSrRouMuk2rkzqgJ4VB3tVC8H6KknBRQaMkRYyoAYg=s96-c',
-          email: 'chandan.saha@zopsmart.com',
+          id: CurrentUser.USER_ID,
+          name: CurrentUser.USER_NAME,
+          imageUrl: CurrentUser.USER_ImageUrl,
+          email: CurrentUser.USER_Email,
         };
         this.createdPathData.courseIds = this.currentCourses.map(
           (course) => course.courseId || 0
