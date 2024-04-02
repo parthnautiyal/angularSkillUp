@@ -7,7 +7,10 @@ import { Quiz, Resource } from 'src/app/models/CreateCourse';
 import { setQuiz, setResource } from 'src/app/state/action/path-create.action';
 import { v4 as uuidv4 } from 'uuid';
 import { uploadImage } from 'src/app/state/action/imageUpload.actions';
-import { selectImageUrl, selectUploading } from 'src/app/state/selector/ImageUpload.selector';
+import {
+  selectImageUrl,
+  selectUploading,
+} from 'src/app/state/selector/ImageUpload.selector';
 
 @Component({
   selector: 'app-create-resource',
@@ -107,9 +110,11 @@ export class CreateResourceComponent implements OnInit {
       console.log('Quiz:', this.finalQuiz);
       this.store.dispatch(setQuiz({ quiz: this.finalQuiz }));
       this.isVisible = false;
+      this.trainer.success('Quiz Added Successfully');
       this.formSubmit.emit();
     } else {
       this.isShowError = true;
+      this.trainer.failure('Please fill all the fields');
     }
   }
 
@@ -135,9 +140,11 @@ export class CreateResourceComponent implements OnInit {
       console.log('Resource:', this.finalResource);
       this.store.dispatch(setResource({ resource: this.finalResource }));
       this.isVisible = false;
+      this.trainer.success('Resource Added Successfully');
       this.formSubmit.emit();
     } else {
       console.log('Please upload a file or image');
+      this.trainer.failure('Please upload a file or image');
       this.isShowError = true;
     }
   }
@@ -152,7 +159,6 @@ export class CreateResourceComponent implements OnInit {
   handleFileUpload(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     const selectedFile = inputElement.files?.[0];
-
 
     if (selectedFile?.type === 'application/pdf') {
       // console.log('Selected file:', selectedFile.type);
@@ -179,7 +185,7 @@ export class CreateResourceComponent implements OnInit {
       if (selectedFile) {
         this.store.dispatch(uploadImage({ file: selectedFile }));
         this.store.select(selectImageUrl).subscribe((data) => {
-          if (data){
+          if (data) {
             console.log('Data:', data);
             this.isImageUploaded = true;
             this.imgUrl = data;
