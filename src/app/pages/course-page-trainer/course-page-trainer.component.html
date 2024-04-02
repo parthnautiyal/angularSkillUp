@@ -1,0 +1,45 @@
+<div class="main-section">
+  <ng-container *ngIf="loading">
+    <app-page-shimmer></app-page-shimmer>
+  </ng-container>
+
+  <ng-container *ngIf="!loading">
+    <!-- <div *ngIf="error" class="error-card">
+      <app-error-card [error]="errors"></app-error-card>
+    </div> -->
+    <!-- <ng-container *ngIf="!error"> -->
+    <app-trainer-path-page-info-card></app-trainer-path-page-info-card>
+    <div class="sub-heading">Owner</div>
+    <app-name-info-card [singleCardInfo]="nameData"></app-name-info-card>
+    <div class="sub-heading">Collaborators (0)</div>
+    <div class="collab-info">
+      Collaborators act as managers for your resource. They can add and edit the
+      resource content but cannot delete the resource. The resource owner is
+      responsible for adding, and removing the Collaborators.
+    </div>
+    <div class="sub-heading">About</div>
+    <div class="about-content">
+      testing creating a path testing creating a path testing creating a path
+      testing creating a path
+    </div>
+    <div class="students">
+      <div class="sub-heading">Students</div>
+      <app-trainer-student-header></app-trainer-student-header>
+    </div>
+      <div>No student found</div>
+    <!-- </ng-container> -->
+  </ng-container>
+  <!-- <ng-container *ngIf="isChapterLoading">
+    <app-dashboard-shimmer></app-dashboard-shimmer>
+  </ng-container> -->
+  <!-- <ng-container *ngIf="!isChapterLoading"> -->
+  <div class="sub-heading">Chapters</div>
+  <app-chapter *ngIf="isAccessiblity"></app-chapter>
+  <app-no-content
+    [chapterFlag]="isAccessiblity"
+    *ngIf="!isAccessiblity"
+  ></app-no-content>
+  <app-forms></app-forms>
+  <app-course-reviews></app-course-reviews>
+  <!-- </ng-container> -->
+</div>
