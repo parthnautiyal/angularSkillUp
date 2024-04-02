@@ -53,6 +53,7 @@ import { TrainerCoursesEffects } from './state/effects/trainersCourse.effects';
 import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
 import { uploadReducer } from './state/reducer/ImageUpload.reducer';
 import { UploadEffects } from './state/effects/imageUpload.effects';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [AppComponent],
@@ -106,6 +107,7 @@ import { UploadEffects } from './state/effects/imageUpload.effects';
   ],
 
   providers: [
+    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ZopsmartApiInterceptorService,

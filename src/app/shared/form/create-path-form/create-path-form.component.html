@@ -132,17 +132,29 @@
               (change)="handleFileUpload($event)"
             />
             <div
-              (click)="triggerInputClick()"
               class="image-box {{
                 isImageUploaded ? '' : 'image-not-uploaded'
               }}"
             >
               <div *ngIf="!isImageUploaded" class="upload-icon-space">
-                <img src="assets/upload-icon.svg" alt="" srcset="" />
+                <div *ngIf="loading">
+                  <app-loading-card></app-loading-card>
+                </div>
+                <img
+                  *ngIf="!loading"
+                  (click)="triggerInputClick()"
+                  src="assets/upload-icon.svg"
+                  alt=""
+                  srcset=""
+                />
               </div>
               <div *ngIf="isImageUploaded" class="uploaded-image-space">
                 <img [src]="imgUrl" alt="" />
-                <div class="cross-icon">
+                <div
+                  (click)="removeFile()"
+                  style="cursor: pointer"
+                  class="cross-icon"
+                >
                   <img src="assets/remove-button.svg" alt="" />
                 </div>
               </div>
@@ -186,11 +198,12 @@
           </div>
           <div class="form-input collaborators">
             <div class="sub-heading">
-              Collaborators <span class="count">(0)</span>
+              Collaborators <span class="count">({{ length }})</span>
             </div>
             <ng-container *ngIf="!isCollab">
               <div class="add-content-btn-wrapper" id="collaborators">
                 <button
+                  style="cursor: pointer"
                   (click)="handleCollaborator($event)"
                   class="add-content-btn"
                   id="collaborators"
@@ -229,7 +242,7 @@
                       class="user-img"
                     />
                     <div class="user-name">{{ collaborator.name }}</div>
-                    <div class="remove-icon">
+                    <div style="cursor: pointer" class="remove-icon">
                       <img
                         (click)="handleRemoveCollaborator(collaborator.id)"
                         src="assets/remove-button.svg"

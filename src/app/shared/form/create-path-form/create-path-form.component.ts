@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { CurrentUser } from 'src/app/constants/enums/CurrentUser';
 import {
   deletePathCreateCollaborator,
+  setPathCreateCollaborators,
   setPathCreateCourse,
 } from 'src/app/state/action/path-create.action';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -15,6 +16,7 @@ import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellane
 import { uploadImage } from 'src/app/state/action/imageUpload.actions';
 import {
   selectImageUrl,
+  selectUploadError,
   selectUploading,
 } from 'src/app/state/selector/ImageUpload.selector';
 import {
@@ -34,6 +36,7 @@ export class CreatePathFormComponent implements OnInit {
   isUpdate: boolean = false;
   noErrors: boolean = false;
   isAddCourse: boolean = false;
+  length: number = 0;
   isCollab: boolean = false;
   isImageUploaded: boolean = false;
   imgUrl: string = '';
@@ -145,6 +148,7 @@ export class CreatePathFormComponent implements OnInit {
     });
     this.store.select(selectPathCreateCollaborators).subscribe((data) => {
       if (data != null && data.length > 0) {
+        this.length = data.length;
         console.log(data);
 
         this.currentCollaborators = [...data];
@@ -159,6 +163,7 @@ export class CreatePathFormComponent implements OnInit {
       !this.isImageUploaded ||
       this.currentCourses.length === 0
     ) {
+      this.trainer.failure('Please enter valid details');
       this.confirmationService.confirm({
         message: 'Please enter valid details',
       });
@@ -190,6 +195,7 @@ export class CreatePathFormComponent implements OnInit {
             this.trainer
               .patchTrainerpath(this.pathId, this.createdPathData)
               .subscribe((data) => {
+                this.trainer.success('Path Updated Successfully');
                 console.log(data);
               });
             console.log(this.createdPathData);
@@ -203,6 +209,7 @@ export class CreatePathFormComponent implements OnInit {
             this.trainer
               .createPathTrainer(this.createdPathData)
               .subscribe((data) => {
+                this.trainer.success('Path Created Successfully');
                 console.log(data);
               });
             console.log(this.createdPathData);
@@ -235,19 +242,17 @@ export class CreatePathFormComponent implements OnInit {
     const inputElement = document.getElementById('pathImage');
     if (inputElement) {
       inputElement.click();
+      console.log('clicked');
     }
   }
 
   handleFileUpload(event: Event): void {
+    console.log('File Upload');
+
     const inputElement = event.target as HTMLInputElement;
     const selectedFile = inputElement.files?.[0];
-    // this.trainer.uploadImage(selectedFile as File).subscribe((data) => {
-    //   this.isImageUploaded = true;
-    //   this.imgUrl = data.data.imageUpload.originalImgURL;
-    // });
-    // if (selectedFile) {
-    //   console.log('Selected file:', selectedFile);
-    // }
+    console.log(selectedFile);
+
     if (selectedFile) {
       this.store.dispatch(uploadImage({ file: selectedFile }));
       this.store.select(selectImageUrl).subscribe((data) => {
@@ -260,6 +265,12 @@ export class CreatePathFormComponent implements OnInit {
       this.store.select(selectUploading).subscribe((data) => {
         console.log('loading:', data);
         this.loading = data;
+      });
+      this.store.select(selectUploadError).subscribe((data) => {
+        console.log('error:', data);
+        if (data != null && data.length > 0) {
+          this.trainer.failure('Image Upload Failed');
+        }
       });
     }
   }
@@ -288,6 +299,18 @@ export class CreatePathFormComponent implements OnInit {
       deletePathCreateCollaborator({
         selectedCollaborators: this.currentCollaborators,
       })
+    );
+  }
+
+  removeFile() {
+    this.isImageUploaded = false;
+    this.imgUrl = '';
+    this.loading = false;
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(
+      setPathCreateCollaborators({ selectedCollaborators: [] })
     );
   }
 }

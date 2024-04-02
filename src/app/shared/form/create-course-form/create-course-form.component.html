@@ -81,20 +81,32 @@
               (change)="handleFileUpload($event)"
             />
             <div
-              (click)="triggerInputClick()"
               class="image-box {{
                 isImageUploaded ? '' : 'image-not-uploaded'
               }}"
             >
-              <div *ngIf="!isImageUploaded" class="upload-icon-space">
+              <div
+                (click)="triggerInputClick()"
+                *ngIf="!isImageUploaded"
+                class="upload-icon-space"
+              >
                 <div *ngIf="isLoading">
-                <app-loading-card></app-loading-card>
+                  <app-loading-card></app-loading-card>
                 </div>
-                <img *ngIf="!isLoading" src="assets/upload-icon.svg" alt="" srcset="" />
+                <img
+                  *ngIf="!isLoading"
+                  src="assets/upload-icon.svg"
+                  alt=""
+                  srcset=""
+                />
               </div>
               <div *ngIf="isImageUploaded" class="uploaded-image-space">
                 <img [src]="imgUrl" alt="" />
-                <div class="cross-icon">
+                <div
+                  style="cursor: pointer"
+                  (click)="removeFile()"
+                  class="cross-icon"
+                >
                   <img src="assets/remove-button.svg" alt="" />
                 </div>
               </div>
@@ -198,10 +210,23 @@
               </div>
             </ng-container>
           </div>
+          <div class="submit-path">
+            <button
+              *ngIf="!isUpdate"
+              type="submit"
+              class="control-button update-button"
+            >
+              Submit
+            </button>
+            <button
+              *ngIf="isUpdate"
+              type="submit"
+              class="control-button update-button"
+            >
+              Update
+            </button>
+          </div>
         </form>
-        <div class="submit-path">
-          <button class="control-button update-button">Submit</button>
-        </div>
       </div>
       <div *ngIf="isChaptersForm" class="course-chapters-form">
         <!-- <app-create-resource [courseId]="courseId"></app-create-resource> -->
@@ -210,7 +235,7 @@
         <app-show-chapter></app-show-chapter>
       </div>
       <div *ngIf="isResourcesForm" class="course-resources-form">
-        <app-show-resource></app-show-resource>
+        <app-show-resource [courseId]="courseId"></app-show-resource>
       </div>
     </div>
   </div>

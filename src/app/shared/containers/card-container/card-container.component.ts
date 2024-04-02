@@ -38,7 +38,6 @@ import { EnrolledBatches } from 'src/app/models/EnrolledBatches';
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
   styleUrls: ['./card-container.component.sass'],
-  providers: [MessageService],
 })
 export class CardContainerComponent implements OnInit {
   loading: Boolean = true;

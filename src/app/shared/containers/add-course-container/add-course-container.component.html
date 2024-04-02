@@ -2,7 +2,7 @@
   [options]="courses"
   [(ngModel)]="selectedCourses"
   [metaKeySelection]="false"
-  [checkbox]="false"
+  [checkbox]="true"
   [filter]="true"
   [multiple]="true"
   optionLabel="name"
@@ -11,6 +11,8 @@
   (scrollPercent)="onScroll($event)"
 >
   <ng-template let-country pTemplate="item">
-    <app-course-card-info-trainer [course]="country"></app-course-card-info-trainer>
+    <app-course-card-info-trainer
+      [course]="country"
+    ></app-course-card-info-trainer>
   </ng-template>
 </p-listbox>

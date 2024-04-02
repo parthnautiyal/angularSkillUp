@@ -12,7 +12,6 @@ import { loadFavoriteCourses } from 'src/app/state/action/course.actions';
   selector: 'app-course-card',
   templateUrl: './course-card.component.html',
   styleUrls: ['./course-card.component.sass'],
-  providers: [MessageService],
 })
 export class CourseCardComponent implements OnInit {
   currentId: number = 0;
