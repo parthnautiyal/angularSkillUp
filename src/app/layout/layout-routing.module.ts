@@ -7,6 +7,7 @@ import { AdminComponent } from './admin/admin.component';
 import { TrainersAllSectionContainerComponent } from '../shared/containers/all-section-container copy/trainers-all-section-container.component';
 import { CreateCourseFormComponent } from '../shared/form/create-course-form/create-course-form.component';
 import { CreatePathFormComponent } from '../shared/form/create-path-form/create-path-form.component';
+import { TrainerPathPageComponent } from '../pages/trainer-path-page/trainer-path-page.component';
 
 const routesCurr: Route =
   localStorage.getItem('selectedRole') === 'TRAINER'
@@ -45,6 +46,7 @@ const routesCurr: Route =
             path: 'course/new',
             component: CreateCourseFormComponent,
           },
+          {path: 'path-page', component: TrainerPathPageComponent},
           { path: '**', component: PageNotFoundComponent },
         ],
       }
@@ -135,6 +137,7 @@ const routesCurr: Route =
                 (m) => m.SearchPageModule
               ),
           },
+          {path: 'path-page', component: TrainerPathPageComponent},
           { path: '**', component: PageNotFoundComponent },
         ],
       };

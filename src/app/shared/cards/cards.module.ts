@@ -29,6 +29,7 @@ import { SwitchRoleComponent } from './switch-role/switch-role.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ScrollTrackerDirective } from '../scroll-tracker.directive';
 import { CustomScrollDirective } from '../custom-scroll.directive';
+import { CourseInTrainerPathCardComponent } from './course-in-trainer-path-card/course-in-trainer-path-card.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CustomScrollDirective } from '../custom-scroll.directive';
     TrainerDashboardHeaderComponent,
     StudentCardComponent,
     SwitchRoleComponent,
+    CourseInTrainerPathCardComponent,
   ],
   imports: [
     CommonModule,
@@ -86,6 +88,7 @@ import { CustomScrollDirective } from '../custom-scroll.directive';
     TrainerDashboardHeaderComponent,
     DashboardCourseCardTrainerComponent,
     SwitchRoleComponent,
+    CourseInTrainerPathCardComponent
   ],
 })
 export class CardsModule {}

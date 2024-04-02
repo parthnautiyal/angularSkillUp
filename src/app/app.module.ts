@@ -45,8 +45,9 @@ import { TrainerpathsReducer } from './state/reducer/trainerspath.reducer';
 import { trainerCoursesReducer } from './state/reducer/trainerscourse.reducer';
 import { TrainerCoursesEffects } from './state/effects/trainersCourse.effects';
 import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
-
-
+import { CardsModule } from './shared/cards/cards.module';
+import { DatePipe } from '@angular/common';
+import { ContainersModule } from './shared/containers/containers.module';
 @NgModule({
   declarations: [AppComponent],
 
@@ -91,6 +92,8 @@ import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
       autoPause: true,
     }),
     RouterModule,
+    CardsModule,
+    ContainersModule
   ],
 
   providers: [
@@ -99,6 +102,7 @@ import { TrainerPathsEffects } from './state/effects/trainerspath.effects';
       useClass: ZopsmartApiInterceptorService,
       multi: true,
     },
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })

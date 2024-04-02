@@ -1,0 +1,19 @@
+<div class="course-in-path-wrapper" >
+  <div class="course-in-path-card-wrapper">
+    <div class="course-in-path-card">
+      <div class="course-in-path-card-left">
+        <img src="https://storage.googleapis.com/zopsmart-media/5282/images/originals/20240331/d194b7d3-8547-48ae-a567-a2c3f4bdf994-tnsBackground.webp" alt="" referrerpolicy="no-referrer">
+      </div>
+      <div class="course-in-path-card-middle">
+        <a class="course-name-link">{{course.courseName}}</a>
+        <div class="course-info">By {{course.createdBy.name}} | {{formattedDate}}</div>
+        <div class="course-card-description">
+          {{course.about}}
+        </div>
+      </div>
+    </div>
+    <div class="restriction-wrapper not-accessible" *ngIf="!course.isAccessible">
+      <div class="bottom-message">Not Accessible</div>
+    </div>
+  </div>
+</div>
