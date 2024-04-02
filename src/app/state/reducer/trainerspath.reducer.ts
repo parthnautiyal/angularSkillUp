@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { Path } from 'src/app/models/Path';
 
 import * as TrainerPathActions from '../action/trainerspath.actions';
+import { TrainerPathData } from 'src/app/models/TrainerPathData';
 
 export interface TrainersPathsState {
   paths: Path[];
@@ -14,6 +15,35 @@ export interface TrainersProfilePathsState {
   loading: boolean;
   error: any;
 }
+export interface TrainerPathDataState {
+  paths: TrainerPathData;
+  loading: boolean;
+  error: any;
+}
+export const initialTrainerPathDataState: TrainerPathDataState = {
+  paths: {
+    pathId: 0,
+    pathName: '',
+    imageUrl: '',
+    isAccessible: false,
+    isOwner: false,
+    description: '',
+    about: '',
+    createdBy: {
+      id: 0,
+      name: '',
+      imageUrl: '',
+      email: '',
+    },
+    createdAt: '',
+    updatedAt: '',
+    collaborators: [],
+    courses: [],
+    courseIds: [],
+  },
+  loading: true,
+  error: null,
+};
 export const initialState: TrainersPathsState = {
   paths: [],
   loading: true,
@@ -69,4 +99,24 @@ export const TrainerProfilepathsReducer = createReducer(
       error,
     })
   )
+);
+
+export const TrainerPathDataReducer = createReducer(
+  initialTrainerPathDataState,
+  on(TrainerPathActions.loadTrainerPathData, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(TrainerPathActions.loadTrainerPathDataSuccess, (state, { paths }) => ({
+    ...state,
+    paths,
+    loading: false,
+    error: null,
+  })),
+  on(TrainerPathActions.loadTrainerPathDataFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }))
 );

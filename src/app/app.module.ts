@@ -41,6 +41,7 @@ import {
 import { ToastModule } from 'primeng/toast';
 import { pathCreateReducer } from './state/reducer/path-create.reducer';
 import {
+  TrainerPathDataReducer,
   TrainerProfilepathsReducer,
   TrainerpathsReducer,
 } from './state/reducer/trainerspath.reducer';
@@ -94,6 +95,7 @@ import { MessageService } from 'primeng/api';
       publishCourse: PublishTrainerCourseReducer,
       RemoveCourse: RemoveCourseReducer,
       upload: uploadReducer,
+      trainerPathData: TrainerPathDataReducer,
     }),
     EffectsModule.forRoot([
       CourseEffects,
