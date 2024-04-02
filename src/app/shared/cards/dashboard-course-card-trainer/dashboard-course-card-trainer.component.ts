@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Course } from 'src/app/models/Course';
+import { PublishTrainersCourse } from 'src/app/state/action/trainerscourse.actions';
 
 @Component({
   selector: 'app-dashboard-course-card-trainer',
@@ -34,8 +35,15 @@ export class DashboardCourseCardTrainerComponent implements OnInit {
   };
   courses: any[] = [];
 
-  toggleChecked() {
-    this.checked = !this.checked;
+  toggleChecked(id: any) {
+    // this.checked = !this.checked;
+
+    this.store.dispatch(
+      PublishTrainersCourse({
+        id: id,
+        body: { isAccessible: this.checked },
+      })
+    );
   }
 
   constructor(private store: Store) {}

@@ -16,32 +16,31 @@ interface Country {
   styleUrls: ['./dashboard-trainer.component.sass'],
 })
 export class DashboardTrainerComponent implements OnInit {
-  firsttime: any
+  firsttime: any;
 
-  constructor(
-    private messageService: MessageService,
-    private store: Store
-  ) {
+  constructor(private messageService: MessageService, private store: Store) {
     this.firsttime = localStorage.getItem('firsttime');
-    if(localStorage.getItem('firsttime') == null || localStorage.getItem('firsttime') == undefined) {
+    if (
+      localStorage.getItem('firsttime') == null ||
+      localStorage.getItem('firsttime') == undefined
+    ) {
       this.firsttime = 'true';
-      console.log('im here')
+      console.log('im here');
       localStorage.setItem('firsttime', 'true');
       this.showSuccess();
-    }
-    else localStorage.setItem('firsttime', 'false');
+    } else localStorage.setItem('firsttime', 'false');
 
-    if(localStorage.getItem('switchedProfile') == 'true') {
+    if (localStorage.getItem('switchedProfile') == 'true') {
       //show toast
       this.messageService.add({
         severity: 'info',
         summary: 'Switched Profile',
-        detail: 'profile switched to trainer'
-      })
-      localStorage.setItem('switchedProfile','false')
+        detail: 'profile switched to trainer',
+      });
+      localStorage.setItem('switchedProfile', 'false');
     }
   }
-  
+
   loading: boolean = true;
   headingsTitle = HEADINGS_TITLE;
   error = ERROR;

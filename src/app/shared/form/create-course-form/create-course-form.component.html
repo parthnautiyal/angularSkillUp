@@ -87,7 +87,10 @@
               }}"
             >
               <div *ngIf="!isImageUploaded" class="upload-icon-space">
-                <img src="assets/upload-icon.svg" alt="" srcset="" />
+                <div *ngIf="isLoading">
+                <app-loading-card></app-loading-card>
+                </div>
+                <img *ngIf="!isLoading" src="assets/upload-icon.svg" alt="" srcset="" />
               </div>
               <div *ngIf="isImageUploaded" class="uploaded-image-space">
                 <img [src]="imgUrl" alt="" />
