@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {
     localStorage.setItem('login', 'false');
-    this.showSuccess();
   }
 
   ngOnInit(): void {

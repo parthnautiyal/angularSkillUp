@@ -4,7 +4,10 @@ import { PrimeNGConfig } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { ERROR, HEADINGS_TITLE } from 'src/app/constants/headingsTitle';
 import { loadAllBatches } from 'src/app/state/action/batch.actions';
-import { loadAllCourses, loadEnrolledCourses } from 'src/app/state/action/course.actions';
+import {
+  loadAllCourses,
+  loadEnrolledCourses,
+} from 'src/app/state/action/course.actions';
 import { loadAllPaths } from 'src/app/state/action/path.actions';
 @Component({
   selector: 'app-dashboard-page',
@@ -13,12 +16,33 @@ import { loadAllPaths } from 'src/app/state/action/path.actions';
   providers: [MessageService],
 })
 export class DashboardPageComponent implements OnInit {
+  firsttime: any;
   constructor(
     private primengConfig: PrimeNGConfig,
     private messageService: MessageService,
     private store: Store
   ) {
-    this.showSuccess();
+    this.firsttime = localStorage.getItem('firsttime');
+    if (
+      localStorage.getItem('firsttime') == null ||
+      localStorage.getItem('firsttime') == undefined ||
+      localStorage.getItem('firsttime') == 'true'
+    ) {
+      this.firsttime = 'false';
+      console.log('im here');
+      localStorage.setItem('firsttime', 'false');
+      this.showSuccess();
+    }
+    if (localStorage.getItem('switchedProfile') == 'true') {
+      console.log('im am hereeeeeee aa');
+      //show toast
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Switched Profile',
+        detail: 'profile switched to student',
+      });
+      localStorage.setItem('switchedProfile', 'false');
+    }
   }
   loading: boolean = true;
   headingsTitle = HEADINGS_TITLE;

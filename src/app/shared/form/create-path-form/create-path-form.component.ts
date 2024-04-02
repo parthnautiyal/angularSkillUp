@@ -3,15 +3,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ConfirmationService } from 'primeng/api';
 import { CurrentUser } from 'src/app/constants/enums/CurrentUser';
-import { Course } from 'src/app/models/Course';
-import { User } from 'src/app/models/User';
-import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 import {
   deletePathCreateCollaborator,
   setPathCreateCourse,
 } from 'src/app/state/action/path-create.action';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { Course } from 'src/app/models/Course';
+import { User } from 'src/app/models/User';
+import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
+import { uploadImage } from 'src/app/state/action/imageUpload.actions';
+import {
+  selectImageUrl,
+  selectUploading,
+} from 'src/app/state/selector/ImageUpload.selector';
 import {
   selectPathCreateCollaborators,
   selectPathCreateCourses,
@@ -32,6 +37,7 @@ export class CreatePathFormComponent implements OnInit {
   isCollab: boolean = false;
   isImageUploaded: boolean = false;
   imgUrl: string = '';
+  loading: boolean = false;
   i: number = 0;
   currentCourses: Course[] = [];
   updateReceivedCourses: Course[] = [];
@@ -235,12 +241,26 @@ export class CreatePathFormComponent implements OnInit {
   handleFileUpload(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     const selectedFile = inputElement.files?.[0];
-    this.trainer.uploadImage(selectedFile as File).subscribe((data) => {
-      this.isImageUploaded = true;
-      this.imgUrl = data.data.imageUpload.originalImgURL;
-    });
+    // this.trainer.uploadImage(selectedFile as File).subscribe((data) => {
+    //   this.isImageUploaded = true;
+    //   this.imgUrl = data.data.imageUpload.originalImgURL;
+    // });
+    // if (selectedFile) {
+    //   console.log('Selected file:', selectedFile);
+    // }
     if (selectedFile) {
-      console.log('Selected file:', selectedFile);
+      this.store.dispatch(uploadImage({ file: selectedFile }));
+      this.store.select(selectImageUrl).subscribe((data) => {
+        if (data) {
+          console.log('Data:', data);
+          this.isImageUploaded = true;
+          this.imgUrl = data;
+        }
+      });
+      this.store.select(selectUploading).subscribe((data) => {
+        console.log('loading:', data);
+        this.loading = data;
+      });
     }
   }
 

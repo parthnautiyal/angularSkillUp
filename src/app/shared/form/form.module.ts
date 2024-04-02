@@ -14,6 +14,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CreateChapterComponent } from './create-course-form/create-chapter/create-chapter.component';
 import { ShowChapterComponent } from './create-course-form/show-chapter/show-chapter.component';
 import { ShowResourceComponent } from './create-course-form/show-resource/show-resource.component';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ShowResourceComponent } from './create-course-form/show-resource/show-r
     SelectButtonModule,
     FormsModule,
     DropdownModule,
+    ToastModule
   ],
   exports: [CreatePathFormComponent, CreateCourseFormComponent],
 })

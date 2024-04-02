@@ -48,7 +48,7 @@ const routesCurr: Route =
             component: CreatePathFormComponent,
           },
           {
-            path: 'course/update/:id',
+            path: 'course/:id/update',
             component: CreateCourseFormComponent,
           },
           {

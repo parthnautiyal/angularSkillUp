@@ -23,14 +23,16 @@ export class UploadEffects {
           'developer-token': developerToken,
         });
 
-        return this.http.post(API.IMAGE_UPLOAD, formData, { headers }).pipe(
-          map((response: any) =>
-            UploadActions.uploadImageSuccess({ imageUrl: response.imageUrl })
-          ),
-          catchError((error) =>
-            of(UploadActions.uploadImageFailure({ error: error.message }))
-          )
-        );
+        return this.http
+          .post(API.MEDIA + API.IMAGE_UPLOAD, formData, { headers })
+          .pipe(
+            map((response: any) =>
+              UploadActions.uploadImageSuccess({ imageUrl: response.data.imageUpload.url })
+            ),
+            catchError((error) =>
+              of(UploadActions.uploadImageFailure({ error: error.message }))
+            )
+          );
       })
     )
   );

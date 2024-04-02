@@ -5,7 +5,7 @@ export interface Path {
   id: number;
   pathId?: number;
   name: string;
-  pathName: string;
+  pathName?: string;
   imageUrl: string;
   isAccessible: boolean;
   noOfCourses: number;
@@ -14,6 +14,8 @@ export interface Path {
   isOwner?: boolean;
   isAuthorised?: boolean;
   collaborators?: User[];
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface PathData {

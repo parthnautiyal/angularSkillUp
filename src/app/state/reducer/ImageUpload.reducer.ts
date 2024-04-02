@@ -4,14 +4,14 @@ export interface UploadState {
   uploading: boolean;
   uploaded: boolean;
   error: string | null;
-  imageUrl: string | null;
+  imageUrl: string;
 }
 
 export const initialState: UploadState = {
   uploading: false,
   uploaded: false,
   error: null,
-  imageUrl: null,
+  imageUrl: '',
 };
 
 export const uploadReducer = createReducer(
@@ -34,7 +34,7 @@ export const uploadReducer = createReducer(
     uploading: false,
     uploaded: false,
     error,
-    imageUrl: null,
+    imageUrl: '',
   })),
   on(UploadActions.resetUploadState, () => initialState)
 );

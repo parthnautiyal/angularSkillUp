@@ -90,7 +90,11 @@
             class="image-box {{ isImageUploaded ? '' : 'image-not-uploaded' }}"
           >
             <div *ngIf="!isImageUploaded" class="upload-icon-space">
+             <div *ngIf="loading">
+              <app-loading-card></app-loading-card>
+            </div> 
               <img
+                *ngIf="!loading"
                 (click)="triggerInputClick()"
                 src="assets/upload-icon.svg"
                 alt=""
