@@ -16,6 +16,8 @@ import { AddCollaboratorContainerComponent } from './add-collaborator-container/
 import { TrainersAllSectionContainerComponent } from './all-section-container copy/trainers-all-section-container.component';
 import { TrainersCardContainerComponent } from './trainers-card-container/trainers-card-container.component';
 import { CustomScrollDirective } from '../custom-scroll.directive';
+import { CoursesInTrainerPathContainerComponent } from './courses-in-trainer-path-container/courses-in-trainer-path-container.component';
+
 import { InputTextModule } from 'primeng/inputtext';
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { InputTextModule } from 'primeng/inputtext';
     AddCollaboratorContainerComponent,
     TrainersAllSectionContainerComponent,
     TrainersCardContainerComponent,
+    CoursesInTrainerPathContainerComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +49,7 @@ import { InputTextModule } from 'primeng/inputtext';
     AddCourseContainerComponent,
     AddCollaboratorContainerComponent,
     TrainersCardContainerComponent,
+    CoursesInTrainerPathContainerComponent
   ],
 })
 export class ContainersModule {}
