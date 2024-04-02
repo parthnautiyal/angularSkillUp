@@ -22,6 +22,7 @@ export class ProfilePageTrainerComponent implements OnInit {
     this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
     this.store.dispatch(loadTrainersProfilePaths());
     this.store.dispatch(loadTrainersProfileCourses());
+    this.store.dispatch(loadTrainersProfilePaths());
     this.store.select(selectTrainersProfilePaths).subscribe((path) => {
       this.allpaths = path;
     });

@@ -92,4 +92,27 @@ export class TrainerCoursesEffects {
       )
     )
   );
+  RemoveCourse$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CoursesActions.RemoveTrainersCourse),
+      switchMap(({ id }) =>
+        this.http
+          .delete(
+            `https://staging.api.training.zopsmart.com/admin/courses/${id}`
+          )
+          .pipe(
+            map(() =>
+              CoursesActions.RemoveTrainersCourseSuccess({ isSuccess: true })
+            ),
+            catchError((error) =>
+              of(
+                CoursesActions.PublishTrainersCourseFailure({
+                  error: error.message,
+                })
+              )
+            )
+          )
+      )
+    )
+  );
 }
