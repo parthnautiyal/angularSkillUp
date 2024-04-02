@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { PrimeNGConfig } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { ERROR, HEADINGS_TITLE } from 'src/app/constants/headingsTitle';
+import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 import { loadAllBatches } from 'src/app/state/action/batch.actions';
 import {
   loadAllCourses,
@@ -13,34 +14,20 @@ import { loadAllPaths } from 'src/app/state/action/path.actions';
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.sass'],
-  providers: [MessageService],
 })
 export class DashboardPageComponent implements OnInit {
   firsttime: any;
   constructor(
     private primengConfig: PrimeNGConfig,
-    private messageService: MessageService,
+    private trainer: TrainerMiscellaneousService,
     private store: Store
   ) {
     this.firsttime = localStorage.getItem('firsttime');
-    if (
-      localStorage.getItem('firsttime') == null ||
-      localStorage.getItem('firsttime') == undefined ||
-      localStorage.getItem('firsttime') == 'true'
-    ) {
-      this.firsttime = 'false';
-      console.log('im here');
-      localStorage.setItem('firsttime', 'false');
-      this.showSuccess();
-    }
+
     if (localStorage.getItem('switchedProfile') == 'true') {
       console.log('im am hereeeeeee aa');
       //show toast
-      this.messageService.add({
-        severity: 'info',
-        summary: 'Switched Profile',
-        detail: 'profile switched to student',
-      });
+      this.trainer.success('Switched Profile Successfully');
       localStorage.setItem('switchedProfile', 'false');
     }
   }
@@ -53,20 +40,5 @@ export class DashboardPageComponent implements OnInit {
     this.store.dispatch(loadEnrolledCourses());
     this.store.dispatch(loadAllBatches());
     this.store.dispatch(loadAllPaths());
-  }
-  showError(data: string) {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: data,
-    });
-  }
-
-  showSuccess() {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Logged In',
-      detail: 'Loggin Successful',
-    });
   }
 }

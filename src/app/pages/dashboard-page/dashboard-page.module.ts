@@ -20,8 +20,7 @@ import { MessageService } from 'primeng/api';
     CardsModule,
     ShimmerModule,
     RippleModule,
-    ToastModule
+    ToastModule,
   ],
-  providers: [MessageService],
 })
 export class DashboardPageModule {}

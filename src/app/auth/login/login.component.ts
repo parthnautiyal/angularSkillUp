@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ThemeService } from 'src/app/services/theme.service';
+import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 import { environment } from 'src/environments/environment';
 
 declare let window: any;
@@ -14,12 +15,12 @@ declare let window: any;
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass'],
-  providers: [MessageService],
 })
 export class LoginComponent implements OnInit {
   constructor(
     private messageService: MessageService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private trainer: TrainerMiscellaneousService
   ) {
     this.themeService.isDarkMode().subscribe((isDarkMode) => {
       this.isDarkMode = isDarkMode;
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
 
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {
+    this.trainer.success('Logged In successfully');
     localStorage.setItem('login', 'false');
   }
 
@@ -42,14 +44,6 @@ export class LoginComponent implements OnInit {
 
   handleButtonClick(): void {
     this.eventEmitter.emit(true);
-  }
-
-  showSuccess(): void {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'LoggedIn',
-      detail: 'Loggin  Successful',
-    });
   }
 
   decodeJWTToken(token: string): any {

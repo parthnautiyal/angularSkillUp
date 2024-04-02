@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThemeService } from '../../../services/theme.service';
+import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 
 declare var google: any;
 @Component({
@@ -18,7 +19,11 @@ export class HeaderComponent implements OnInit {
   searchQuery: string = '';
   selectedUserRole: string = localStorage.getItem('selectedRole') || 'TRAINER';
 
-  constructor(private themeService: ThemeService, private router: Router) {
+  constructor(
+    private themeService: ThemeService,
+    private router: Router,
+    private trainer: TrainerMiscellaneousService
+  ) {
     this.themeService.isDarkMode().subscribe((isDarkMode) => {
       this.isDarkMode = isDarkMode;
     });
@@ -56,9 +61,9 @@ export class HeaderComponent implements OnInit {
     this.isDropdownOpen = false;
   }
   handleSignout() {
-    localStorage.removeItem('firsttime');
     google.accounts.id.disableAutoSelect();
     sessionStorage.removeItem('loggedInUser');
+    this.trainer.success('Logged Out successfully');
     this.router.navigate(['/login']).then(() => {
       window.location.reload();
     });

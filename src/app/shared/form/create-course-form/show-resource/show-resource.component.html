@@ -4,6 +4,10 @@
     <div class="button-style"><img src="assets/plus-sign.svg" /></div>
   </button>
   <div class="formInput">
+    <div *ngIf="allResources.length == 0" class="ResourceItem">
+      Additional resources provides references and files describing optional
+      information.
+    </div>
     <div
       *ngFor="let resource of allResources; let i = index"
       class="uploaded-file"

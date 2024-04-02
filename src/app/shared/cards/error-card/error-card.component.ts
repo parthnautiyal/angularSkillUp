@@ -22,7 +22,6 @@ import {
   selector: 'app-error-card',
   templateUrl: './error-card.component.html',
   styleUrls: ['./error-card.component.sass'],
-  providers: [MessageService],
 })
 export class ErrorCardComponent implements OnInit {
   @Input() error: Error = {

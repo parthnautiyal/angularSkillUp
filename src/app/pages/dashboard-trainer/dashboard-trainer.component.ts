@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { PrimeNGConfig } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { ERROR, HEADINGS_TITLE } from 'src/app/constants/headingsTitle';
+import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 import { loadTrainersCourses } from 'src/app/state/action/trainerscourse.actions';
 import { loadTrainersPaths } from 'src/app/state/action/trainerspath.actions';
 
@@ -18,7 +19,11 @@ interface Country {
 export class DashboardTrainerComponent implements OnInit {
   firsttime: any;
 
-  constructor(private messageService: MessageService, private store: Store) {
+  constructor(
+    private messageService: MessageService,
+    private store: Store,
+    private trai: TrainerMiscellaneousService
+  ) {
     this.firsttime = localStorage.getItem('firsttime');
     if (
       localStorage.getItem('firsttime') == null ||
@@ -27,16 +32,11 @@ export class DashboardTrainerComponent implements OnInit {
       this.firsttime = 'true';
       console.log('im here');
       localStorage.setItem('firsttime', 'true');
-      this.showSuccess();
     } else localStorage.setItem('firsttime', 'false');
 
     if (localStorage.getItem('switchedProfile') == 'true') {
       //show toast
-      this.messageService.add({
-        severity: 'info',
-        summary: 'Switched Profile',
-        detail: 'profile switched to trainer',
-      });
+      this.trai.success('Switched Profile Successfully');
       localStorage.setItem('switchedProfile', 'false');
     }
   }
@@ -48,20 +48,5 @@ export class DashboardTrainerComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadTrainersCourses({ pageNo: 1 }));
     this.store.dispatch(loadTrainersPaths({ pageNo: 1 }));
-  }
-  showError(data: string) {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: data,
-    });
-  }
-
-  showSuccess() {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Logged In',
-      detail: 'Loggin Successful',
-    });
   }
 }

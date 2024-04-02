@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { ConfirmationService } from 'primeng/api';
+import { CreateCourse } from 'src/app/models/CreateCourse';
 import { User } from 'src/app/models/User';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 import { uploadImage } from 'src/app/state/action/imageUpload.actions';
 import { deletePathCreateCollaborator } from 'src/app/state/action/path-create.action';
-import { selectImageUrl, selectUploading } from 'src/app/state/selector/ImageUpload.selector';
+import {
+  selectImageUrl,
+  selectUploadError,
+  selectUploading,
+} from 'src/app/state/selector/ImageUpload.selector';
 import { selectPathCreateCollaborators } from 'src/app/state/selector/path-create.selector';
 
 @Component({
@@ -16,6 +22,8 @@ import { selectPathCreateCollaborators } from 'src/app/state/selector/path-creat
   providers: [ConfirmationService],
 })
 export class CreateCourseFormComponent implements OnInit {
+  isUpdate: boolean = false;
+  showError: boolean = false;
   currentCollaborators: User[] = [];
   courseId: number = 285;
   isCollab: boolean = false;
@@ -24,10 +32,22 @@ export class CreateCourseFormComponent implements OnInit {
   isChaptersForm: boolean = false;
   isResourcesForm: boolean = false;
   imgUrl: string = '';
-  isLoading:boolean = false;
+  isLoading: boolean = false;
   isImageUploaded: boolean = false;
   experiences: String[] = ['Beginner', 'Intermediate', 'Expert'];
   selectedExperience: string = '';
+  readyCourseData: CreateCourse = {
+    about: '',
+    collaboratorEmailIds: [],
+    collaboratorIds: [],
+    description: '',
+    imageUrl: '',
+    isAccessible: false,
+    level: '',
+    name: '',
+    prerequisites: [],
+    resources: [],
+  };
 
   createBasicDetailsCourseForm = this.fb.group({
     courseName: [
@@ -48,18 +68,91 @@ export class CreateCourseFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private trainer: TrainerMiscellaneousService,
-    private store: Store
-  ) {}
+    private store: Store,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
+    if (this.router.url.includes('update')) {
+      this.isUpdate = true;
+      this.courseId = this.activatedRoute.snapshot.params['id'];
+      this.trainer.getTrainerCourseById(this.courseId);
+      this.trainer.getTrainerCourse$.subscribe((data) => {
+        console.log(data);
+
+        if (data != null) {
+          this.createBasicDetailsCourseForm.setValue({
+            courseName: data.courseName,
+            courseAbout: data.about,
+            courseLevel: data.level,
+          });
+          this.imgUrl = data.imageUrl;
+          this.isImageUploaded = true;
+          this.selectedExperience = data.level;
+          this.readyCourseData = {
+            about: data.about,
+            collaboratorEmailIds: data.collaborators.map(
+              (collaborator) => collaborator.email
+            ),
+            collaboratorIds: data.collaborators.map(
+              (collaborator) => collaborator.id
+            ),
+            description: data.description,
+            imageUrl: data.imageUrl,
+            isAccessible: data.isAccessible,
+            level: data.level,
+            name: data.courseName,
+            prerequisites: data.prerequisites,
+            resources: [],
+          };
+        }
+      });
+    }
+  }
 
   handleSubmit() {
+    console.log(this.createBasicDetailsCourseForm.valid);
+    console.log('Image uploaded', this.isImageUploaded);
+    console.log(this.selectedExperience);
     if (
       this.createBasicDetailsCourseForm.valid &&
       this.isImageUploaded &&
-      this.selectedExperience !== ''
+      this.selectedExperience
     ) {
       console.log('Form Submitted');
+      this.addValuesToReadyCourseData();
+      console.log(this.readyCourseData);
+
+      if (this.isUpdate) {
+        this.trainer
+          .patchTrainerCourse(this.courseId, this.readyCourseData)
+          .subscribe((data) => {
+            console.log(data);
+            this.trainer.success('Course Updated Successfully');
+            this.isCourseCreated = true;
+          });
+        return;
+      } else {
+        this.trainer.createCourse(this.readyCourseData).subscribe((data) => {
+          console.log(data);
+          this.trainer.success('Course Created Successfully');
+          this.isCourseCreated = true;
+        });
+      }
     } else {
+      console.log('error');
+      this.trainer.failure('Please fill all the fields');
+      this.showError = true;
     }
+  }
+
+  addValuesToReadyCourseData() {
+    this.readyCourseData.about =
+      this.createBasicDetailsCourseForm.value.courseAbout || '';
+    this.readyCourseData.level = this.selectedExperience;
+    this.readyCourseData.name =
+      this.createBasicDetailsCourseForm.value.courseName || '';
+    this.readyCourseData.imageUrl = this.imgUrl;
+    this.readyCourseData.isAccessible = true;
   }
 
   ngOnInit(): void {
@@ -82,17 +175,10 @@ export class CreateCourseFormComponent implements OnInit {
   handleFileUpload(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     const selectedFile = inputElement.files?.[0];
-    // this.trainer.uploadImage(selectedFile as File).subscribe((data) => {
-    //   this.isImageUploaded = true;
-    //   this.imgUrl = data.data.imageUpload.originalImgURL;
-    // });
-    // if (selectedFile) {
-    //   console.log('Selected file:', selectedFile);
-    // }
     if (selectedFile) {
       this.store.dispatch(uploadImage({ file: selectedFile }));
       this.store.select(selectImageUrl).subscribe((data) => {
-        if (data){
+        if (data) {
           console.log('Data:', data);
           this.isImageUploaded = true;
           this.imgUrl = data;
@@ -101,6 +187,14 @@ export class CreateCourseFormComponent implements OnInit {
       this.store.select(selectUploading).subscribe((data) => {
         console.log('loading:', data);
         this.isLoading = data;
+      });
+      this.store.select(selectUploadError).subscribe((data) => {
+        if (data != null && data != undefined && data.length > 1) {
+          console.log('Error:', data);
+          this.isImageUploaded = false;
+          this.imgUrl = '';
+          this.trainer.failure('Image Upload Failed');
+        }
       });
     }
   }
@@ -143,5 +237,11 @@ export class CreateCourseFormComponent implements OnInit {
     this.isDetailsForm = false;
     this.isChaptersForm = false;
     this.isResourcesForm = true;
+  }
+
+  removeFile() {
+    this.isImageUploaded = false;
+
+    this.imgUrl = '';
   }
 }
