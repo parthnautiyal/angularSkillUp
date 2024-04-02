@@ -9,6 +9,7 @@ declare var google: any;
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent implements OnInit {
+  selectedRole: string='';
   userProfile: any;
   isDropdownOpen = false;
   isOrgDropdownOpen = false;
@@ -71,6 +72,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedRole = localStorage.getItem('selectedRole') || '' ;
+
     this.userProfile = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
     setTimeout(() => {
       this.onResize();
