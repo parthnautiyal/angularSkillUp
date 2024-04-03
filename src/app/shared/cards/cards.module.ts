@@ -96,6 +96,7 @@ import { FileImageUploadComponent } from './file-image-upload/file-image-upload.
     CourseInTrainerPathCardComponent,
     StudentInfoCardTrainerComponent,
     TrainerStudentHeaderComponent,
+    FileImageUploadComponent,
   ],
 })
 export class CardsModule {}

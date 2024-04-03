@@ -40,7 +40,7 @@ export class CreateCourseFormComponent implements OnInit {
     about: '',
     collaboratorEmailIds: [],
     collaboratorIds: [],
-    description: '',
+    description: 'This is a sample description of course',
     imageUrl: '',
     isAccessible: false,
     level: '',
