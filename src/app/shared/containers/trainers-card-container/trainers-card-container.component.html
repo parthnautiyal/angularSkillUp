@@ -22,18 +22,18 @@
       <ng-container *ngIf="!error">
         <ng-container *ngIf="!enrolled">
           <ng-container *ngFor="let item of allBatches; let i = index">
-            <a [routerLink]="['/', RouterLinks.BATCHES, item.id]">
+            <!-- <a [routerLink]="['/', RouterLinks.BATCHES, item.id]"> -->
               <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
-            </a>
+            <!-- </a> -->
           </ng-container>
         </ng-container>
         <ng-container *ngIf="enrolled">
           <ng-container
             *ngFor="let item of enrolledBatches.enrolledBatches; let i = index"
           >
-            <a [routerLink]="['/', RouterLinks.BATCHES, item.id]">
+            <!-- <a [routerLink]="['/', RouterLinks.BATCHES, item.id]"> -->
               <app-batch-card [batchData]="item" [index]="i"></app-batch-card>
-            </a>
+            <!-- </a> -->
           </ng-container>
         </ng-container>
       </ng-container>

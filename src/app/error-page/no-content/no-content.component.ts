@@ -10,6 +10,7 @@ export class NoContentComponent implements OnInit {
   @Input() width: number = 500; // Set default value to 'auto'
   @Input() marginTop: number = 0;
   @Input() redirectToHomepage: boolean = true;
+  @Input() message: string = '';
 
   constructor() {}
 
