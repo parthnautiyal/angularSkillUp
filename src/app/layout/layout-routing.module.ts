@@ -27,6 +27,14 @@ const routesCurr: Route =
             path: 'batches/all',
             component: TrainersAllSectionContainerComponent,
           },
+          {
+            path: 'path/new',
+            component: CreatePathFormComponent,
+          },
+          {
+            path: 'course/new',
+            component: CreateCourseFormComponent,
+          },
 
           {
             path: 'courses/all',
@@ -63,37 +71,22 @@ const routesCurr: Route =
               ).then((e) => e.DashboardTrainerModule),
           },
           {
-            path: 'path/update/:id',
-            component: CreatePathFormComponent,
-          },
-          {
             path: 'path/:id',
             loadChildren: () =>
               import(
                 '../pages/trainer-path-page/trainer-path-page.module'
               ).then((e) => e.TrainerPathPageModule),
+          },
+          {
+            path: 'path/update/:id',
+            component: CreatePathFormComponent,
           },
 
           {
             path: 'course/:id/update',
             component: CreateCourseFormComponent,
           },
-          {
-            path: 'path/new',
-            component: CreatePathFormComponent,
-          },
-          {
-            path: 'course/new',
-            component: CreateCourseFormComponent,
-          },
-          {
-            path: 'path/:id',
 
-            loadChildren: () =>
-              import(
-                '../pages/trainer-path-page/trainer-path-page.module'
-              ).then((e) => e.TrainerPathPageModule),
-          },
           { path: '**', component: PageNotFoundComponent },
         ],
       }

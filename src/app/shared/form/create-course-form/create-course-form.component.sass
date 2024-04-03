@@ -4,7 +4,7 @@
 
 .course-form-switch-tab
   align-items: center
-  background-color: #fff
+  background-color: var(--page-content-background-color)
   border-radius: 55px
   display: flex
   height: 5.2rem
@@ -37,13 +37,17 @@
       width: 30%
 
 .input-tag
-  background-color: #fff
+  background-color: var(--page-content-background-color)
   border: .5px solid #d7dae1
   border-radius: 6px
   color: #222
   font-size: 1rem
   font-weight: 400
   padding: 10px
+
+.input-tag::placeholder
+  color: var(--primary-font-color)
+  font-family: "Poppins", sans-serif
 
 .is-invalid
   border: 1px solid red
@@ -59,7 +63,7 @@
   margin-bottom: 12px
 
 .form
-  background-color: #fff
+  background-color: var(--page-content-background-color)
   border-radius: 12px
   margin-bottom: 20px
   padding: 15px
@@ -86,7 +90,7 @@
     margin-top: 5px
 
 .image-not-uploaded
-  border: 1px dashed #222
+  border: 1px dashed var(--primary-font-color)
 
 .input-box-field
   // display: none
@@ -103,7 +107,7 @@
 
   .upload-icon-space
     cursor: pointer
-    background-color: #f8f5ff
+    background-color: var(--page-content-background-color)
     border-radius: 8px
     padding: 5px
 
@@ -122,11 +126,17 @@
   position: absolute
   right: -7px
   top: -7px
-.update-button
-  background-color: #5624d0
-  border: 1px solid #5624d0
-  color: #fff
 
+:host ::ng-deep .p-selectbutton .p-button.p-highlight
+  background-color: #5624D0
+  border: #5624D0
+  color: white
+
+:host ::ng-deep .p-selectbutton .p-button
+  background-color: var(--page-content-background-color)
+  border: 1px solid #5624D0
+  color: var(--primary-font-color)
+ 
 .count
   color: #5624d0
   font-size: 1rem
@@ -145,8 +155,8 @@
 
 .add-content-btn
   align-items: center
-  background-color: #f8f5ff
-  border: 1px solid #fff
+  background-color: var(--page-content-background-color)
+  border: 1px solid var(--primary-font-color)
   border-radius: 8px
   color: inherit
   display: flex
