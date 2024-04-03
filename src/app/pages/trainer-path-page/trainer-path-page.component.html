@@ -1,12 +1,16 @@
 <app-component-header [heading]="'Path'"></app-component-header>
-<div class="banner-layout-body-wrapper">
+<div class="banner-layout-body-wrapper" *ngIf="!erroroccured; else notfound">
   <div class="banner-layout-body">
     <div class="admin-path-page">
-      <app-trainer-path-page-info-card [pathCardInfo]="pathInfo"></app-trainer-path-page-info-card>
+      <app-trainer-path-page-info-card
+        [pathCardInfo]="pathInfo"
+      ></app-trainer-path-page-info-card>
       <div class="owner-section">
         <div class="sub-heading">Owner</div>
         <div class="owner user-card">
-          <app-name-info-card [singleCardInfo]="pathInfo.createdBy"></app-name-info-card>
+          <app-name-info-card
+            [singleCardInfo]="pathInfo.createdBy"
+          ></app-name-info-card>
         </div>
       </div>
       <div class="collaborators-section">
@@ -15,21 +19,26 @@
           <span class="count">(0)</span>
         </div>
         <div class="collaborators">
-          <div *ngIf="pathInfo.collaborators.length===0">
-            Collaborators act as managers for your resource. They can add and edit the resource content but cannot delete the resource. The resource owner is responsible for adding, and removing the Collaborators.
+          <div *ngIf="pathInfo.collaborators.length === 0">
+            Collaborators act as managers for your resource. They can add and
+            edit the resource content but cannot delete the resource. The
+            resource owner is responsible for adding, and removing the
+            Collaborators.
           </div>
         </div>
       </div>
       <div class="about-path">
         <div class="sub-heading">About</div>
         <div class="about-path-line">
-          {{pathInfo.about}}
+          {{ pathInfo.about }}
         </div>
       </div>
       <div class="courses-in-the-middle">
         <div class="sub-heading">Courses</div>
         <div class="courses-in-path-container">
-          <app-courses-in-trainer-path-container [courses]="pathInfo.courses"></app-courses-in-trainer-path-container>
+          <app-courses-in-trainer-path-container
+            [courses]="pathInfo.courses"
+          ></app-courses-in-trainer-path-container>
         </div>
       </div>
       <div class="student-enrolled-bottom">
@@ -42,7 +51,13 @@
               </div>
               <div class="filter-wrapper">
                 <div class="student-search-panel">
-                  <input class="student-searchbar" type="text" name="search-students" id="search-icon-student" placeholder="Search Students...">
+                  <input
+                    class="student-searchbar"
+                    type="text"
+                    name="search-students"
+                    id="search-icon-student"
+                    placeholder="Search Students..."
+                  />
                 </div>
               </div>
             </div>
@@ -52,3 +67,6 @@
     </div>
   </div>
 </div>
+<ng-template #notfound>
+  <app-no-content></app-no-content>
+</ng-template>

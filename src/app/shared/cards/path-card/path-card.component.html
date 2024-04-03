@@ -1,13 +1,13 @@
 <div class="pathCard">
   <img
     *ngIf="onGoingFlag || isProfile"
-    [routerLink]="['/', RouterLinks.PATH_DASHBOARD, singlePath.pathId]"
+    [routerLink]="['/', RouterLinks.PATH, singlePath.pathId]"
     [src]="singlePath.imageUrl"
     [alt]="singlePath.name"
   />
   <img
     *ngIf="!onGoingFlag && !isProfile"
-    [routerLink]="['/', RouterLinks.PATH_DASHBOARD, singlePath.id]"
+    [routerLink]="['/', RouterLinks.PATH, singlePath.id]"
     [src]="singlePath.imageUrl"
     [alt]="singlePath.name"
   />

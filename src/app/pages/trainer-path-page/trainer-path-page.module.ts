@@ -6,21 +6,20 @@ import { TrainerPathPageComponent } from './trainer-path-page.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ContainersModule } from 'src/app/shared/containers/containers.module';
 import { FormsModule } from '@angular/forms';
-
+import { TrainerPathPageRoutingModule } from './trainer-path-page-routing.module';
+import { ErrorPageModule } from "../../error-page/error-page.module";
 
 @NgModule({
-  declarations: [
-    TrainerPathPageInfoCardComponent,
-    TrainerPathPageComponent,
-
-  ],
-  imports: [
-    CommonModule,
-    CardsModule,
-    InputSwitchModule,
-    ContainersModule,
-    FormsModule
-  ],
-  exports: [TrainerPathPageComponent, TrainerPathPageInfoCardComponent]
+    declarations: [TrainerPathPageInfoCardComponent, TrainerPathPageComponent],
+    exports: [TrainerPathPageComponent, TrainerPathPageInfoCardComponent],
+    imports: [
+        CommonModule,
+        CardsModule,
+        InputSwitchModule,
+        ContainersModule,
+        FormsModule,
+        TrainerPathPageRoutingModule,
+        ErrorPageModule
+    ]
 })
-export class TrainerPathPageModule { }
+export class TrainerPathPageModule {}
