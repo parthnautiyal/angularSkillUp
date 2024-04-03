@@ -15,7 +15,7 @@ export class TrainerDashboardHeaderComponent implements OnInit {
   constructor(private router: Router) {
     this.Options = [
       { name: 'Create Path', link: '/path/new' },
-      { name: 'Create Course', link: '/course/new' },
+      { name: 'Create Course', link: '/new/course' },
     ];
   }
 

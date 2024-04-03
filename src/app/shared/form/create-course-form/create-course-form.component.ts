@@ -25,7 +25,7 @@ export class CreateCourseFormComponent implements OnInit {
   isUpdate: boolean = false;
   showError: boolean = false;
   currentCollaborators: User[] = [];
-  courseId: number = 285;
+  courseId: number = 316;
   isCollab: boolean = false;
   isCourseCreated: boolean = false;
   isDetailsForm: boolean = true;
