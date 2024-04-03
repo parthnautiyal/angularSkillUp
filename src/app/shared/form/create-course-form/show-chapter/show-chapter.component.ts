@@ -14,7 +14,7 @@ export class ShowChapterComponent implements OnInit {
   allChapters: Chapter[] = [];
   reorderArray: number[] = [];
 
-  @Input() courseId: number = 305;
+  @Input() courseId: number = 316;
 
   constructor(private trainer: TrainerMiscellaneousService) {}
 

@@ -110,7 +110,12 @@
     >
   </div>
   <div class="ChapterControlButtons">
-    <button type="button" class="control-button remove-button">Cancel</button
+    <button
+      type="button"
+      (click)="handleCancelButton()"
+      class="control-button remove-button"
+    >
+      Cancel</button
     ><button
       type="submit"
       [class.not-allowed]="!allReady"

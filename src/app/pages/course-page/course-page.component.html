@@ -12,16 +12,16 @@
       <app-course-about-section></app-course-about-section>
     </ng-container>
   </ng-container>
-  <ng-container *ngIf="isChapterLoading">
+  <!-- <ng-container *ngIf="isChapterLoading">
     <app-dashboard-shimmer></app-dashboard-shimmer>
-  </ng-container>
-  <ng-container *ngIf="!isChapterLoading">
-    <app-chapter *ngIf="isAccessiblity"></app-chapter>
-    <app-no-content
-      [chapterFlag]="isAccessiblity"
-      *ngIf="!isAccessiblity"
-    ></app-no-content>
-    <app-forms></app-forms>
-    <app-course-reviews></app-course-reviews>
-  </ng-container>
+  </ng-container> -->
+  <!-- <ng-container *ngIf="!isChapterLoading"> -->
+  <app-chapter *ngIf="isAccessiblity"></app-chapter>
+  <app-no-content
+    [chapterFlag]="isAccessiblity"
+    *ngIf="!isAccessiblity"
+  ></app-no-content>
+  <app-forms></app-forms>
+  <app-course-reviews></app-course-reviews>
+  <!-- </ng-container> -->
 </div>

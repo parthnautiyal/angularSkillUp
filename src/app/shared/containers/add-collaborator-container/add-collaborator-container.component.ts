@@ -7,6 +7,8 @@ import {
   setSearchCollaborators,
 } from 'src/app/state/action/path-create.action';
 import { selectPathCreateCollaborators } from 'src/app/state/selector/path-create.selector';
+import { Subject } from 'rxjs';
+import { debounceTime, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-collaborator-container',
@@ -29,15 +31,6 @@ export class AddCollaboratorContainerComponent implements OnInit {
     this.i = this.i + 1;
     this.trainer.getAllCollaborators(this.i);
     this.trainer.collaborators$.subscribe((data) => {
-      // this.store
-      //   .select(selectPathCreateCollaborators)
-      //   .subscribe((storeCollaborators) => {
-      //     data = data.filter(
-      //       (collaborator) => !storeCollaborators.includes(collaborator)
-      //     );
-      //   });
-      // console.log(data);
-
       if (this.i === 1) {
         this.collaborators = data;
       } else {
@@ -45,6 +38,15 @@ export class AddCollaboratorContainerComponent implements OnInit {
         this.loading = false;
       }
     });
+
+    this.searchSubject
+      .pipe(
+        debounceTime(2000),
+        switchMap((searchValue) => this.trainer.searchCollaborator(searchValue))
+      )
+      .subscribe((data) => {
+        this.collaborators = data.data;
+      });
   }
 
   ngOnDestroy() {
@@ -64,14 +66,11 @@ export class AddCollaboratorContainerComponent implements OnInit {
     }
   }
 
+  searchSubject = new Subject<string>();
+
   submitSearch(event: any) {
-    event.preventDefault();
-    this.trainer.searchCollaborator(this.searchValue).subscribe((data) => {
-      // this.store.dispatch(
-      //   setSearchCollaborators({ searchedCollaborators: data.data })
-      // );
-      this.collaborators = data.data;
-    });
-    console.log(this.searchValue);
+    console.log('submitSearch');
+    // event.preventDefault();
+    this.searchSubject.next(this.searchValue);
   }
 }

@@ -32,6 +32,7 @@ import { CustomScrollDirective } from '../custom-scroll.directive';
 import { CourseInTrainerPathCardComponent } from './course-in-trainer-path-card/course-in-trainer-path-card.component';
 import { StudentInfoCardTrainerComponent } from './student-info-card-trainer/student-info-card-trainer.component';
 import { TrainerStudentHeaderComponent } from './trainer-student-header/trainer-student-header.component';
+import { FileImageUploadComponent } from './file-image-upload/file-image-upload.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { TrainerStudentHeaderComponent } from './trainer-student-header/trainer-
     CourseInTrainerPathCardComponent,
     StudentInfoCardTrainerComponent,
     TrainerStudentHeaderComponent,
+    FileImageUploadComponent,
   ],
   imports: [
     CommonModule,
@@ -94,6 +96,7 @@ import { TrainerStudentHeaderComponent } from './trainer-student-header/trainer-
     CourseInTrainerPathCardComponent,
     StudentInfoCardTrainerComponent,
     TrainerStudentHeaderComponent,
+    FileImageUploadComponent,
   ],
 })
 export class CardsModule {}

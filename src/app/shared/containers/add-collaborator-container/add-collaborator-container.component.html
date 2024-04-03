@@ -20,7 +20,7 @@
           pInputText
           placeholder="Search"
           [(ngModel)]="searchValue"
-          (keydown.enter)="submitSearch($event)"
+          (keypress)="submitSearch($event)"
         />
       </span>
     </ng-template>

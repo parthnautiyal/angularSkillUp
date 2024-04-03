@@ -32,6 +32,7 @@ export class CreateResourceComponent implements OnInit {
   isImageUploaded: boolean = false;
   isFileUploaded: boolean = false;
   isLink: boolean = true;
+  TYPE: string = '';
 
   finalResource: Resource = {
     // id:'',
@@ -119,6 +120,8 @@ export class CreateResourceComponent implements OnInit {
   }
 
   handleContentSubmit() {
+    console.log(this.contenForm.value.type);
+
     if (
       this.isFileUploaded ||
       this.isImageUploaded ||
@@ -129,10 +132,12 @@ export class CreateResourceComponent implements OnInit {
       if (this.isImageUploaded) {
         this.finalResource.resourceType = 'FILE';
         this.finalResource.resourceLink = this.imgUrl;
-      } else if (this.isFileUploaded) {
+      }
+      if (this.isFileUploaded) {
         this.finalResource.resourceType = 'FILE';
         this.finalResource.resourceLink = this.fileUrl;
-      } else {
+      }
+      if (this.isLink) {
         this.finalResource.resourceType = 'LINK';
         this.finalResource.resourceLink =
           this.contenForm.value.contentLink || '';
@@ -161,26 +166,12 @@ export class CreateResourceComponent implements OnInit {
     const selectedFile = inputElement.files?.[0];
 
     if (selectedFile?.type === 'application/pdf') {
-      // console.log('Selected file:', selectedFile.type);
-      // this.store.dispatch(uploadImage({ file: selectedFile }));
       this.trainer.uploadFile(selectedFile as File).subscribe((data) => {
         this.isFileUploaded = true;
         this.fileUrl = data.data.url;
         this.isShowUploadBox = false;
         console.log(data.data.url);
       });
-      // this.store.select(selectImageUrl).subscribe((data) => {
-      //   console.log('Data:', data);
-      //   if (data){
-      //     this.isFileUploaded = true;
-      //     this.fileUrl = data;
-      //     this.isShowUploadBox = false;
-      //   }
-      // });
-      // this.store.select(selectUploading).subscribe((data) => {
-      //   console.log('loading:', data);
-      //   this.loading = data;
-      // });
     } else {
       if (selectedFile) {
         this.store.dispatch(uploadImage({ file: selectedFile }));

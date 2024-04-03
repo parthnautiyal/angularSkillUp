@@ -26,7 +26,7 @@ export class CreateCourseFormComponent implements OnInit {
   isUpdate: boolean = false;
   showError: boolean = false;
   currentCollaborators: User[] = [];
-  courseId: number = 285;
+  courseId: number = 316;
   isCollab: boolean = false;
   isCourseCreated: boolean = false;
   isDetailsForm: boolean = true;
@@ -42,7 +42,7 @@ export class CreateCourseFormComponent implements OnInit {
     about: '',
     collaboratorEmailIds: [],
     collaboratorIds: [],
-    description: '',
+    description: 'This is a sample description of course',
     imageUrl: '',
     isAccessible: false,
     level: '',
@@ -64,7 +64,7 @@ export class CreateCourseFormComponent implements OnInit {
         Validators.maxLength(2500),
       ],
     ],
-    courseLevel: ['', Validators.required],
+    courseLevel: [''],
   });
 
   constructor(
@@ -113,6 +113,13 @@ export class CreateCourseFormComponent implements OnInit {
   }
 
   handleSubmit() {
+    this.createBasicDetailsCourseForm.value.courseLevel =
+      this.selectedExperience;
+    console.log(this.createBasicDetailsCourseForm.value.courseLevel);
+    console.log(this.selectedExperience);
+
+    console.log(this.createBasicDetailsCourseForm.value);
+
     console.log(this.createBasicDetailsCourseForm.valid);
     console.log('Image uploaded', this.isImageUploaded);
     console.log(this.selectedExperience);
@@ -151,6 +158,8 @@ export class CreateCourseFormComponent implements OnInit {
   addValuesToReadyCourseData() {
     this.readyCourseData.about =
       this.createBasicDetailsCourseForm.value.courseAbout || '';
+    console.log(this.createBasicDetailsCourseForm.value.courseLevel);
+
     this.readyCourseData.level = this.selectedExperience;
     this.readyCourseData.name =
       this.createBasicDetailsCourseForm.value.courseName || '';

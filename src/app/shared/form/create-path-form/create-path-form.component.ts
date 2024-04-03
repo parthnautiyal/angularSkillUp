@@ -1,4 +1,4 @@
-import { CreatePath } from './../../../models/CreatePath';
+import { CreatePath, PathCreateRequest } from './../../../models/CreatePath';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -63,6 +63,16 @@ export class CreatePathFormComponent implements OnInit {
     },
     isAccessible: false,
     name: '',
+  };
+  pathCreateRequest: PathCreateRequest = {
+    name: '',
+    description: '',
+    isAccessible: false,
+    imageUrl: '',
+    about: '',
+    courseIds: [],
+    collaboratorIds: [],
+    collaboratorEmailIds: [],
   };
 
   createPathForm = this.fb.group({
@@ -203,7 +213,7 @@ export class CreatePathFormComponent implements OnInit {
         this.confirmationService.confirm({
           message: 'Are you sure you want to update this path?',
           accept: () => {
-            this.addDataToCreatPath();
+            this.addDataToUpdatePath();
             this.trainer
               .patchTrainerpath(this.pathId, this.createdPathData)
               .subscribe((data) => {
@@ -219,7 +229,7 @@ export class CreatePathFormComponent implements OnInit {
           accept: () => {
             this.addDataToCreatPath();
             this.trainer
-              .createPathTrainer(this.createdPathData)
+              .createPathTrainer(this.pathCreateRequest)
               .subscribe((data) => {
                 this.trainer.success('Path Created Successfully');
                 console.log(data);
@@ -231,11 +241,11 @@ export class CreatePathFormComponent implements OnInit {
     }
   }
 
-  addDataToCreatPath() {
+  addDataToUpdatePath() {
     this.createdPathData.about = this.createPathForm.value.pathAbout || '';
+    this.createdPathData.name = this.createPathForm.value.pathTitle || '';
     this.createdPathData.description =
       this.createPathForm.value.pathDescription || '';
-    this.createdPathData.name = this.createPathForm.value.pathTitle || '';
     this.createdPathData.imageUrl = this.imgUrl;
     this.createdPathData.isAccessible =
       this.createPathForm.value.pathPublish === 'public' ? true : false;
@@ -248,6 +258,20 @@ export class CreatePathFormComponent implements OnInit {
     this.createdPathData.collaboratorIds = this.currentCollaborators.map(
       (collab) => collab.id
     );
+  }
+
+  addDataToCreatPath() {
+    this.pathCreateRequest = {
+      name: this.createPathForm.value.pathTitle || '',
+      description: this.createPathForm.value.pathDescription || '',
+      isAccessible:
+        this.createPathForm.value.pathPublish === 'public' ? true : false,
+      imageUrl: this.imgUrl,
+      about: this.createPathForm.value.pathAbout || '',
+      courseIds: this.currentCourses.map((course) => course.courseId || 0),
+      collaboratorIds: this.currentCollaborators.map((collab) => collab.id),
+      collaboratorEmailIds: [],
+    };
   }
 
   triggerInputClick(): void {
