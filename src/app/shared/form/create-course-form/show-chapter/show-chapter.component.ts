@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { catchError, of } from 'rxjs';
 import { Chapter } from 'src/app/models/Chapter';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 
@@ -21,10 +22,17 @@ export class ShowChapterComponent implements OnInit {
     console.log(this.courseId);
 
     this.trainer.getCourseChapters(this.courseId);
-    this.trainer.getCourseChapters$.subscribe((data) => {
-      console.log(data);
-      this.allChapters = [...data];
-    });
+    this.trainer.getCourseChapters$
+      .pipe(
+        catchError((error) => {
+          console.error('An error occurred:', error);
+          return of([]);
+        })
+      )
+      .subscribe((data) => {
+        console.log(data);
+        this.allChapters = [...data];
+      });
   }
   handleReorder() {
     this.isReorder = true;

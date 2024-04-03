@@ -26,6 +26,7 @@ export class TrainerMiscellaneousService {
       severity: 'success',
       summary: 'Success',
       detail: message,
+      life: 5000,
     });
   }
 
@@ -34,6 +35,7 @@ export class TrainerMiscellaneousService {
       severity: 'error',
       summary: 'Error',
       detail: message,
+      life: 5000,
     });
   }
 

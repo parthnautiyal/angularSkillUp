@@ -13,6 +13,12 @@
   </div>
 
   <div class="formInput">
+    <div
+      *ngIf="allChapters.length == 0 || allChapters == null"
+      class="no-content ResourceItem"
+    >
+      <div class="no-content-text">No content added</div>
+    </div>
     <ng-container *ngIf="!isReorder">
       <div
         *ngFor="let chapter of allChapters; let i = index"

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PrimeNGConfig } from 'primeng/api';
-import { MessageService } from 'primeng/api';
 import { ERROR, HEADINGS_TITLE } from 'src/app/constants/headingsTitle';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 import { loadAllBatches } from 'src/app/state/action/batch.actions';
@@ -18,7 +17,6 @@ import { loadAllPaths } from 'src/app/state/action/path.actions';
 export class DashboardPageComponent implements OnInit {
   firsttime: any;
   constructor(
-    private primengConfig: PrimeNGConfig,
     private trainer: TrainerMiscellaneousService,
     private store: Store
   ) {

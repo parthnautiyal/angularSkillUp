@@ -5,6 +5,7 @@ import {
   Output,
   HostListener,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ThemeService } from 'src/app/services/theme.service';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private themeService: ThemeService,
-    private trainer: TrainerMiscellaneousService
+    private trainer: TrainerMiscellaneousService,
+    private router: Router
   ) {
     this.themeService.isDarkMode().subscribe((isDarkMode) => {
       this.isDarkMode = isDarkMode;
@@ -31,7 +33,6 @@ export class LoginComponent implements OnInit {
 
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {
-    this.trainer.success('Logged In successfully');
     localStorage.setItem('login', 'false');
   }
 
@@ -53,6 +54,8 @@ export class LoginComponent implements OnInit {
   handleCredentialResponse(response: any): void {
     const responsePayload = this.decodeJWTToken(response.credential);
     sessionStorage.setItem('loggedInUser', JSON.stringify(responsePayload));
+    this.trainer.success('Logged In successfully');
+    // this.router.navigate(['/dashboard']);
     window.location.href = '/dashboard';
   }
   loadGoogleIdentityLibrary() {
