@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
+  TrainerPathDataState,
   TrainersPathsState,
   TrainersProfilePathsState,
 } from '../reducer/trainerspath.reducer';
@@ -36,5 +37,23 @@ export const selectTrainersProfilePathsLoading = createSelector(
 
 export const selectTrainersProfilePathsError = createSelector(
   selectProfilePathsState,
+  (state) => state.error
+);
+
+const SelectTrainerPathDataState =
+  createFeatureSelector<TrainerPathDataState>('trainerPathData');
+
+export const selectTrainerPathData = createSelector(
+  SelectTrainerPathDataState,
+  (state) => state.paths
+);
+
+export const selectTrainerPathDataLoading = createSelector(
+  SelectTrainerPathDataState,
+  (state) => state.loading
+);
+
+export const selectTrainerPathDataError = createSelector(
+  SelectTrainerPathDataState,
   (state) => state.error
 );

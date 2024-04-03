@@ -7,9 +7,6 @@ import { AdminComponent } from './admin/admin.component';
 import { TrainersAllSectionContainerComponent } from '../shared/containers/all-section-container copy/trainers-all-section-container.component';
 import { CreateCourseFormComponent } from '../shared/form/create-course-form/create-course-form.component';
 import { CreatePathFormComponent } from '../shared/form/create-path-form/create-path-form.component';
-import { TrainerStudentHeaderComponent } from '../shared/cards/trainer-student-header/trainer-student-header.component';
-import { TrainerPathPageComponent } from '../pages/trainer-path-page/trainer-path-page.component';
-import { LoginComponent } from '../auth/login/login.component';
 
 const routesCurr: Route =
   localStorage.getItem('selectedRole') === 'TRAINER'
@@ -69,6 +66,14 @@ const routesCurr: Route =
             path: 'path/update/:id',
             component: CreatePathFormComponent,
           },
+          {
+            path: 'path/:id',
+            loadChildren: () =>
+              import(
+                '../pages/trainer-path-page/trainer-path-page.module'
+              ).then((e) => e.TrainerPathPageModule),
+          },
+
           {
             path: 'course/:id/update',
             component: CreateCourseFormComponent,
