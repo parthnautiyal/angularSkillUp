@@ -7,9 +7,6 @@ import { AdminComponent } from './admin/admin.component';
 import { TrainersAllSectionContainerComponent } from '../shared/containers/all-section-container copy/trainers-all-section-container.component';
 import { CreateCourseFormComponent } from '../shared/form/create-course-form/create-course-form.component';
 import { CreatePathFormComponent } from '../shared/form/create-path-form/create-path-form.component';
-import { StudentInfoCardTrainerComponent } from '../shared/cards/student-info-card-trainer/student-info-card-trainer.component';
-import { StudentPageTrainerComponent } from '../pages/student-page-trainer/student-page-trainer.component';
-import { TrainerPathPageComponent } from '../pages/trainer-path-page/trainer-path-page.component';
 
 const routesCurr: Route =
   localStorage.getItem('selectedRole') === 'TRAINER'
@@ -17,6 +14,11 @@ const routesCurr: Route =
         path: '',
         component: AdminComponent,
         children: [
+          {
+            path: '',
+            redirectTo: '/login',
+            pathMatch: 'full',
+          },
           {
             path: 'paths/all',
             component: TrainersAllSectionContainerComponent,
@@ -36,6 +38,14 @@ const routesCurr: Route =
               import(
                 '../pages/student-page-trainer/student-page-trainer.module'
               ).then((e) => e.StudentPageTrainerModule),
+          },
+
+          {
+            path: 'course/:id',
+            loadChildren: () =>
+              import(
+                '../pages/course-page-trainer/course-page-trainer.module'
+              ).then((e) => e.CoursePageTrainerModule),
           },
 
           {
@@ -76,7 +86,14 @@ const routesCurr: Route =
             path: 'course/new',
             component: CreateCourseFormComponent,
           },
-          // {path: 'path-page', component: TrainerPathPageComponent},
+          {
+            path: 'path/:id',
+
+            loadChildren: () =>
+              import(
+                '../pages/trainer-path-page/trainer-path-page.module'
+              ).then((e) => e.TrainerPathPageModule),
+          },
           { path: '**', component: PageNotFoundComponent },
         ],
       }
@@ -167,7 +184,6 @@ const routesCurr: Route =
                 (m) => m.SearchPageModule
               ),
           },
-          // {path: 'path-page', component: TrainerPathPageComponent},
           { path: '**', component: PageNotFoundComponent },
         ],
       };

@@ -35,5 +35,11 @@ import { FormsModule } from '@angular/forms';
     ErrorPageModule,
     FormsModule,
   ],
+  exports: [
+    CourseReviewsComponent,
+    CoursesBannerComponent,
+    CourseAboutSectionComponent,
+    ChapterComponent,
+  ],
 })
 export class CoursePageModule {}

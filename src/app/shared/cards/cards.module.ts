@@ -31,6 +31,7 @@ import { ScrollTrackerDirective } from '../scroll-tracker.directive';
 import { CustomScrollDirective } from '../custom-scroll.directive';
 import { CourseInTrainerPathCardComponent } from './course-in-trainer-path-card/course-in-trainer-path-card.component';
 import { StudentInfoCardTrainerComponent } from './student-info-card-trainer/student-info-card-trainer.component';
+import { TrainerStudentHeaderComponent } from './trainer-student-header/trainer-student-header.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { StudentInfoCardTrainerComponent } from './student-info-card-trainer/stu
     SwitchRoleComponent,
     CourseInTrainerPathCardComponent,
     StudentInfoCardTrainerComponent,
+    TrainerStudentHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -91,6 +93,7 @@ import { StudentInfoCardTrainerComponent } from './student-info-card-trainer/stu
     SwitchRoleComponent,
     CourseInTrainerPathCardComponent,
     StudentInfoCardTrainerComponent,
+    TrainerStudentHeaderComponent,
   ],
 })
 export class CardsModule {}

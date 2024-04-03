@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit {
     const responsePayload = this.decodeJWTToken(response.credential);
     sessionStorage.setItem('loggedInUser', JSON.stringify(responsePayload));
     this.trainer.success('Logged In successfully');
-    this.router.navigate(['/dashboard']);
-    // window.location.href = '/dashboard';
+    // this.router.navigate(['/dashboard']);
+    window.location.href = '/dashboard';
   }
   loadGoogleIdentityLibrary() {
     const script = document.createElement('script');

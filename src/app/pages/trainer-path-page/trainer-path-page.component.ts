@@ -38,7 +38,6 @@ export class TrainerPathPageComponent implements OnInit {
     courses: [],
     courseIds: [],
   };
-  noData: boolean = false;
   erroroccured: boolean = false;
   constructor(private store: Store, private route: ActivatedRoute) {
     this.id = this.route.snapshot.params['id'];
