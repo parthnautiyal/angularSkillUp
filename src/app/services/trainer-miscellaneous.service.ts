@@ -5,7 +5,11 @@ import { APIResponse } from '../models/ApiResponse';
 import { Course } from '../models/Course';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
-import { CreatePath, PathResponseData } from '../models/CreatePath';
+import {
+  CreatePath,
+  PathCreateRequest,
+  PathResponseData,
+} from '../models/CreatePath';
 import {
   CreateChapter,
   CreateCourse,
@@ -123,7 +127,7 @@ export class TrainerMiscellaneousService {
     return this.http.post(API.MEDIA + API.IMAGE_UPLOAD, formData, { headers });
   }
 
-  createPathTrainer(data: CreatePath) {
+  createPathTrainer(data: PathCreateRequest) {
     return this.http.post(API.BASE_URL + API.ADMIN + API.PATHS, data);
   }
 

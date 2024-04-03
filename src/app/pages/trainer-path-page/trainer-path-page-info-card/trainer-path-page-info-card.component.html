@@ -5,17 +5,24 @@
   <div class="path-details-top">
     <div class="path-details-top-left-section">
       <div class="path-details-top-left">
-        <img [src]="pathCardInfo.imageUrl" id="redirect-link" alt="Course Pic" referrerpolicy="no-referrer">
+        <img
+          [src]="pathCardInfo.imageUrl"
+          id="redirect-link"
+          alt="Course Pic"
+          referrerpolicy="no-referrer"
+        />
       </div>
       <div class="path-details-top-middle">
-        <p class="path-title">{{pathCardInfo.pathName}}</p>
+        <p class="path-title">{{ pathCardInfo.pathName }}</p>
         <span class="path-created-at">
-          Date of Creation: {{pathCardInfo.createdAt|date}}
+          Date of Creation: {{ pathCardInfo.createdAt | date }}
         </span>
-        <span class="path-created-at">Last updated: {{pathCardInfo.updatedAt|date}}</span>
+        <span class="path-created-at"
+          >Last updated: {{ pathCardInfo.updatedAt | date }}</span
+        >
       </div>
     </div>
-    <div class="path-details-top-right-section">
+    <div class="path-details-top-right-section" *ngIf="pathCardInfo.isOwner">
       <div class="control-buttons-holder three-buttons">
         <div class="update-holder">
           <a class="control-button update-button">Update</a>
@@ -25,10 +32,17 @@
             <button class="control-button remove-button">Remove</button>
           </div>
           <div class="toggler-holder">
-            <span class="unpublished" *ngIf="pathCardInfo.isAccessible">Published</span>
-            <span class="unpublished" *ngIf="!pathCardInfo.isAccessible">Unpublished</span>
+            <span class="unpublished" *ngIf="pathCardInfo.isAccessible"
+              >Published</span
+            >
+            <span class="unpublished" *ngIf="!pathCardInfo.isAccessible"
+              >Unpublished</span
+            >
             <div class="toggle-button">
-              <p-inputSwitch [(ngModel)]="checked" (click)="publishPath()"></p-inputSwitch>
+              <p-inputSwitch
+                [(ngModel)]="checked"
+                (click)="publishPath()"
+              ></p-inputSwitch>
             </div>
           </div>
         </div>

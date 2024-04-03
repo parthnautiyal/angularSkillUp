@@ -39,3 +39,14 @@ export interface PathResponseData {
   courses: CourseResponse[];
   courseIds: number[];
 }
+
+export interface PathCreateRequest {
+  name: string;
+  description: string;
+  isAccessible: boolean;
+  imageUrl: string;
+  about: string;
+  courseIds: any[];
+  collaboratorIds: any[];
+  collaboratorEmailIds: any[];
+}

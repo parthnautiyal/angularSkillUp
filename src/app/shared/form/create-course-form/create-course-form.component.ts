@@ -5,6 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { ConfirmationService } from 'primeng/api';
 import { CreateCourse } from 'src/app/models/CreateCourse';
 import { User } from 'src/app/models/User';
+import { ThemeService } from 'src/app/services/theme.service';
 import { TrainerMiscellaneousService } from 'src/app/services/trainer-miscellaneous.service';
 import { uploadImage } from 'src/app/state/action/imageUpload.actions';
 import { deletePathCreateCollaborator } from 'src/app/state/action/path-create.action';
@@ -25,7 +26,7 @@ export class CreateCourseFormComponent implements OnInit {
   isUpdate: boolean = false;
   showError: boolean = false;
   currentCollaborators: User[] = [];
-  courseId: number = 285;
+  courseId: number = 316;
   isCollab: boolean = false;
   isCourseCreated: boolean = false;
   isDetailsForm: boolean = true;
@@ -36,11 +37,12 @@ export class CreateCourseFormComponent implements OnInit {
   isImageUploaded: boolean = false;
   experiences: String[] = ['Beginner', 'Intermediate', 'Expert'];
   selectedExperience: string = '';
+  isDarkMode: boolean = false;
   readyCourseData: CreateCourse = {
     about: '',
     collaboratorEmailIds: [],
     collaboratorIds: [],
-    description: '',
+    description: 'This is a sample description of course',
     imageUrl: '',
     isAccessible: false,
     level: '',
@@ -62,7 +64,7 @@ export class CreateCourseFormComponent implements OnInit {
         Validators.maxLength(2500),
       ],
     ],
-    courseLevel: ['', Validators.required],
+    courseLevel: [''],
   });
 
   constructor(
@@ -70,7 +72,8 @@ export class CreateCourseFormComponent implements OnInit {
     private trainer: TrainerMiscellaneousService,
     private store: Store,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private themeService: ThemeService
   ) {
     if (this.router.url.includes('update')) {
       this.isUpdate = true;
@@ -110,6 +113,13 @@ export class CreateCourseFormComponent implements OnInit {
   }
 
   handleSubmit() {
+    this.createBasicDetailsCourseForm.value.courseLevel =
+      this.selectedExperience;
+    console.log(this.createBasicDetailsCourseForm.value.courseLevel);
+    console.log(this.selectedExperience);
+
+    console.log(this.createBasicDetailsCourseForm.value);
+
     console.log(this.createBasicDetailsCourseForm.valid);
     console.log('Image uploaded', this.isImageUploaded);
     console.log(this.selectedExperience);
@@ -148,6 +158,8 @@ export class CreateCourseFormComponent implements OnInit {
   addValuesToReadyCourseData() {
     this.readyCourseData.about =
       this.createBasicDetailsCourseForm.value.courseAbout || '';
+    console.log(this.createBasicDetailsCourseForm.value.courseLevel);
+
     this.readyCourseData.level = this.selectedExperience;
     this.readyCourseData.name =
       this.createBasicDetailsCourseForm.value.courseName || '';
@@ -156,6 +168,9 @@ export class CreateCourseFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.themeService.isDarkMode().subscribe((isDarkMode) => {
+      this.isDarkMode = isDarkMode;
+    });
     this.store.select(selectPathCreateCollaborators).subscribe((data) => {
       if (data != null && data.length > 0) {
         console.log(data);

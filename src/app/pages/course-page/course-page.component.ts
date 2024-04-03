@@ -23,7 +23,7 @@ import {
 })
 export class CoursePageComponent implements OnInit {
   id: string = '';
-  loading: boolean = true;
+  loading: boolean = false;
   isChapterLoading: boolean = true;
   error: boolean = false;
   isAccessiblity: boolean = false;

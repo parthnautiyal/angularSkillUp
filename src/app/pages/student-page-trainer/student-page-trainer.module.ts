@@ -7,7 +7,12 @@ import { CustomScrollDirective } from 'src/app/shared/custom-scroll.directive';
 
 @NgModule({
   declarations: [StudentPageTrainerComponent],
-  imports: [CommonModule, CardsModule, StudentPageTrainerRoutingModule, CustomScrollDirective],
+  imports: [
+    CommonModule,
+    CardsModule,
+    StudentPageTrainerRoutingModule,
+    CustomScrollDirective,
+  ],
   exports: [StudentPageTrainerComponent],
 })
 export class StudentPageTrainerModule {}

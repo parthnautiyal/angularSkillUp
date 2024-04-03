@@ -7,6 +7,7 @@ import * as TrainerPathsActions from '../action/trainerspath.actions';
 import { HttpClient } from '@angular/common/http';
 import { Path } from 'src/app/models/Path';
 import { APIResponse } from 'src/app/models/ApiResponse';
+import { TrainerPathData } from 'src/app/models/TrainerPathData';
 
 @Injectable()
 export class TrainerPathsEffects {
@@ -52,6 +53,31 @@ export class TrainerPathsEffects {
             catchError((error) =>
               of(
                 TrainerPathsActions.loadTrainersProfilePathsFailure({
+                  error: error.message,
+                })
+              )
+            )
+          )
+      )
+    )
+  );
+  loadTrainerPathData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainerPathsActions.loadTrainerPathData),
+      switchMap(({ id }) =>
+        this.http
+          .get<APIResponse<TrainerPathData>>(
+            `https://staging.api.training.zopsmart.com/admin/paths/${id}?projection=course`
+          )
+          .pipe(
+            map((paths) =>
+              TrainerPathsActions.loadTrainerPathDataSuccess({
+                paths: paths.data,
+              })
+            ),
+            catchError((error) =>
+              of(
+                TrainerPathsActions.loadTrainerPathDataFailure({
                   error: error.message,
                 })
               )

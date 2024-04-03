@@ -7,9 +7,6 @@ import { AdminComponent } from './admin/admin.component';
 import { TrainersAllSectionContainerComponent } from '../shared/containers/all-section-container copy/trainers-all-section-container.component';
 import { CreateCourseFormComponent } from '../shared/form/create-course-form/create-course-form.component';
 import { CreatePathFormComponent } from '../shared/form/create-path-form/create-path-form.component';
-import { TrainerStudentHeaderComponent } from '../shared/cards/trainer-student-header/trainer-student-header.component';
-import { TrainerPathPageComponent } from '../pages/trainer-path-page/trainer-path-page.component';
-import { LoginComponent } from '../auth/login/login.component';
 
 const routesCurr: Route =
   localStorage.getItem('selectedRole') === 'TRAINER'
@@ -29,6 +26,14 @@ const routesCurr: Route =
           {
             path: 'batches/all',
             component: TrainersAllSectionContainerComponent,
+          },
+          {
+            path: 'path/new',
+            component: CreatePathFormComponent,
+          },
+          {
+            path: 'course/new',
+            component: CreateCourseFormComponent,
           },
 
           {
@@ -66,29 +71,22 @@ const routesCurr: Route =
               ).then((e) => e.DashboardTrainerModule),
           },
           {
-            path: 'path/update/:id',
-            component: CreatePathFormComponent,
-          },
-          {
-            path: 'course/:id/update',
-            component: CreateCourseFormComponent,
-          },
-          {
-            path: 'path/new',
-            component: CreatePathFormComponent,
-          },
-          {
-            path: 'course/new',
-            component: CreateCourseFormComponent,
-          },
-          {
             path: 'path/:id',
-
             loadChildren: () =>
               import(
                 '../pages/trainer-path-page/trainer-path-page.module'
               ).then((e) => e.TrainerPathPageModule),
           },
+          {
+            path: 'path/update/:id',
+            component: CreatePathFormComponent,
+          },
+
+          {
+            path: 'course/:id/update',
+            component: CreateCourseFormComponent,
+          },
+
           { path: '**', component: PageNotFoundComponent },
         ],
       }
