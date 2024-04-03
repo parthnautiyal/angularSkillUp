@@ -16,8 +16,6 @@ import {
 })
 export class PathPageComponent implements OnInit {
   id: string = '';
-  name :string = ""
-  
   loading: boolean = true;
   error: boolean = false;
   errorCard: Error = {
