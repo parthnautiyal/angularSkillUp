@@ -7,6 +7,8 @@ import { ErrorPageModule } from 'src/app/error-page/error-page.module';
 import { CardsModule } from 'src/app/shared/cards/cards.module';
 import { CoursePageModule } from '../course-page/course-page.module';
 import { TrainerPathPageModule } from '../trainer-path-page/trainer-path-page.module';
+import { CustomScrollDirective } from 'src/app/shared/custom-scroll.directive';
+
 
 @NgModule({
   declarations: [CoursePageTrainerComponent],
@@ -18,6 +20,7 @@ import { TrainerPathPageModule } from '../trainer-path-page/trainer-path-page.mo
     CoursePageModule,
     ErrorPageModule,
     TrainerPathPageModule,
+    CustomScrollDirective
   ],
 })
 export class CoursePageTrainerModule {}

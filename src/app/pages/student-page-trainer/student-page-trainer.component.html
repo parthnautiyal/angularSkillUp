@@ -1,7 +1,14 @@
 <div class="student-wrapper">
+  <div
+        customScrollTracker
+        (scrollPercent)="onScroll($event)"
+        class="student-loop"
+        *ngIf="!error"
+  >
   <ng-container *ngFor="let item of allStudents">
     <app-student-info-card-trainer
       [student]="item"
     ></app-student-info-card-trainer>
   </ng-container>
+  </div>
 </div>

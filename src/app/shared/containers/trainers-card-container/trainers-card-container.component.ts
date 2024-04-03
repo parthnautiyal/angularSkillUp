@@ -104,12 +104,7 @@ export class TrainersCardContainerComponent implements OnInit {
           this.loading = false;
         }
       });
-
-      // this.store.select(selectTrainersCourses).subscribe((res) => {
-      //   if (typeof res === 'object' && Object.keys(res).length > 0) {
-      //     this.allCourses = res;
-      //   }
-      // });
+      
       this.store.select(selectTrainersCoursesError).subscribe((res) => {
         if (res != null) {
           this.errorCourse.message = res.message.split('`').slice(1);

@@ -62,6 +62,8 @@ import { studentDataReducer } from './state/reducer/studentData.reducer';
 import { uploadReducer } from './state/reducer/ImageUpload.reducer';
 import { UploadEffects } from './state/effects/imageUpload.effects';
 import { MessageService } from 'primeng/api';
+import { TrainerCourseChaptersReducer, TrainerCourseDataReducer } from './state/reducer/trainer-course-data.reducer';
+import { TrainerCourseDataByIdEffects } from './state/effects/trainer-course-data.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -99,6 +101,8 @@ import { MessageService } from 'primeng/api';
       publishCourse: PublishTrainerCourseReducer,
       RemoveCourse: RemoveCourseReducer,
       upload: uploadReducer,
+      trainerCourseData: TrainerCourseDataReducer,
+      trainerCourseChapters: TrainerCourseChaptersReducer,
       trainerPathData: TrainerPathDataReducer,
     }),
     EffectsModule.forRoot([
@@ -109,6 +113,7 @@ import { MessageService } from 'primeng/api';
       TrainerPathsEffects,
       StudentDataEffects,
       UploadEffects,
+      TrainerCourseDataByIdEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
