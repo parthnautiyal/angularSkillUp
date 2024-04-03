@@ -24,6 +24,7 @@ import {
   selectPathCreateCourses,
   selectSearchedCollaborators,
 } from 'src/app/state/selector/path-create.selector';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-create-path-form',
@@ -42,6 +43,8 @@ export class CreatePathFormComponent implements OnInit {
   imgUrl: string = '';
   loading: boolean = false;
   i: number = 0;
+
+  isDarkMode: boolean = false;
   currentCourses: Course[] = [];
   updateReceivedCourses: Course[] = [];
   currentCollaborators: User[] = [];
@@ -92,7 +95,8 @@ export class CreatePathFormComponent implements OnInit {
     private fb: FormBuilder,
     private confirmationService: ConfirmationService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private themeService: ThemeService
   ) {
     if (this.router.url.includes('update')) {
       this.isUpdate = true;
@@ -146,6 +150,9 @@ export class CreatePathFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.themeService.isDarkMode().subscribe((isDarkMode) => {
+      this.isDarkMode = isDarkMode;
+    });
     this.store.select(selectPathCreateCourses).subscribe((data) => {
       if (data != null && data.length > 0) {
         console.log(data);
