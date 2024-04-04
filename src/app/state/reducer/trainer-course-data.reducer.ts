@@ -1,12 +1,12 @@
-import { loadTrainerCourseDataByIdSuccess } from './../action/trainer-course-data.actions';
-import { createReducer, on } from "@ngrx/store";
-import { Course } from "src/app/models/Course";
-import * as TrainerCourseDataAction from '../action/trainer-course-data.actions'
+import { createReducer, on } from '@ngrx/store';
+import { Course } from 'src/app/models/Course';
+import * as TrainerCourseDataAction from '../action/trainer-course-data.actions';
 import { Chapter } from 'src/app/models/Chapter';
 import { Ratings } from 'src/app/models/Ratings';
+import { ResourceData } from 'src/app/models/Resource';
 
 export interface TrainerCourseDataState {
-  courseData : Course;
+  courseData: Course;
   loading: boolean;
   error: any;
 }
@@ -23,41 +23,46 @@ export interface TrainerCourseRatingState {
   error: any;
 }
 
-export const initialTrainerCourseDataState : TrainerCourseDataState = {
+export interface TrainerCourseResourceState {
+  courseResourceData: ResourceData[];
+  loading: boolean;
+  error: any;
+}
+export const initialTrainerCourseDataState: TrainerCourseDataState = {
   courseData: {
     id: 0,
-    name: "",
-    courseName: "",
-    imageUrl: "",
+    name: '',
+    courseName: '',
+    imageUrl: '',
     isAccessible: false,
-    description: "",
-    about: "",
+    description: '',
+    about: '',
     createdBy: {
       id: 0,
-      name: "",
-      imageUrl: "",
-      email: ""
+      name: '',
+      imageUrl: '',
+      email: '',
     },
-    createdAt: "",
+    createdAt: '',
     isFavourite: false,
     progress: 0,
-    enrolledAt: "",
-    completedAt: "",
+    enrolledAt: '',
+    completedAt: '',
     noOfChapters: 0,
-    updatedAt: "",
-    level: 0
+    updatedAt: '',
+    level: 0,
   },
   loading: false,
-  error: null
-}
+  error: null,
+};
 
-export const initialTrainerCourseChaptersState : TrainerCourseChaptersState = {
+export const initialTrainerCourseChaptersState: TrainerCourseChaptersState = {
   courseChapters: [],
   loading: false,
-  error: null
-}
+  error: null,
+};
 
-export const initialTrainerCourseRatingState : TrainerCourseRatingState = {
+export const initialTrainerCourseRatingState: TrainerCourseRatingState = {
   courseRating: {
     averageRating: 0,
     rating: {
@@ -65,14 +70,18 @@ export const initialTrainerCourseRatingState : TrainerCourseRatingState = {
       fourStars: 0,
       threeStars: 0,
       twoStars: 0,
-      oneStars: 0
-    }
+      oneStars: 0,
+    },
   },
   loading: false,
-  error: null
-}
+  error: null,
+};
 
-
+export const initialTrainerCourseResourceState: TrainerCourseResourceState = {
+  courseResourceData: [],
+  loading: false,
+  error: null,
+};
 export const TrainerCourseDataReducer = createReducer(
   initialTrainerCourseDataState,
   on(TrainerCourseDataAction.loadTrainerCourseDataById, (state) => ({
@@ -80,17 +89,23 @@ export const TrainerCourseDataReducer = createReducer(
     loading: true,
     error: null,
   })),
-  on(TrainerCourseDataAction.loadTrainerCourseDataByIdSuccess, (state, { courseData }) => ({
-    ...state,
-    courseData,
-    loading: false,
-    error: null,
-  })),
-  on(TrainerCourseDataAction.loadTrainerCourseDataByIdFailed, (state, { error }) => ({
-    ...state,
-    error,
-    loading: false,
-  }))
+  on(
+    TrainerCourseDataAction.loadTrainerCourseDataByIdSuccess,
+    (state, { courseData }) => ({
+      ...state,
+      courseData,
+      loading: false,
+      error: null,
+    })
+  ),
+  on(
+    TrainerCourseDataAction.loadTrainerCourseDataByIdFailed,
+    (state, { error }) => ({
+      ...state,
+      error,
+      loading: false,
+    })
+  )
 );
 
 export const TrainerCourseChaptersReducer = createReducer(
@@ -100,17 +115,23 @@ export const TrainerCourseChaptersReducer = createReducer(
     loading: true,
     error: null,
   })),
-  on(TrainerCourseDataAction.loadTrainerCourseChaptersByIdSuccess, (state, { courseChapters }) => ({
-    ...state,
-    courseChapters,
-    loading: false,
-    error: null,
-  })),
-  on(TrainerCourseDataAction.loadTrainerCourseDataByIdFailed, (state, { error }) => ({
-    ...state,
-    error,
-    loading: false,
-  }))
+  on(
+    TrainerCourseDataAction.loadTrainerCourseChaptersByIdSuccess,
+    (state, { courseChapters }) => ({
+      ...state,
+      courseChapters,
+      loading: false,
+      error: null,
+    })
+  ),
+  on(
+    TrainerCourseDataAction.loadTrainerCourseDataByIdFailed,
+    (state, { error }) => ({
+      ...state,
+      error,
+      loading: false,
+    })
+  )
 );
 
 export const TrainerCourseRatingReducer = createReducer(
@@ -120,16 +141,48 @@ export const TrainerCourseRatingReducer = createReducer(
     loading: true,
     error: null,
   })),
-  on(TrainerCourseDataAction.loadTrainerCourseRatingByIdSuccess, (state, { courseRating }) => ({
-    ...state,
-    courseRating,
-    loading: false,
-    error: null,
-  })),
-  on(TrainerCourseDataAction.loadTrainerCourseRatingByIdFailed, (state, { error }) => ({
-    ...state,
-    error,
-    loading: false,
-  }))
+  on(
+    TrainerCourseDataAction.loadTrainerCourseRatingByIdSuccess,
+    (state, { courseRating }) => ({
+      ...state,
+      courseRating,
+      loading: false,
+      error: null,
+    })
+  ),
+  on(
+    TrainerCourseDataAction.loadTrainerCourseRatingByIdFailed,
+    (state, { error }) => ({
+      ...state,
+      error,
+      loading: false,
+    })
+  )
 );
 
+export const TrainerCourseResourceReducer = createReducer(
+  initialTrainerCourseResourceState,
+  on(TrainerCourseDataAction.loadTrainerCourseResourcesById, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+
+  on(
+    TrainerCourseDataAction.loadTrainerCourseResourcesByIdSuccess,
+    (state, { courseResourceData }) => ({
+      ...state,
+      courseResourceData,
+      loading: false,
+      error: null,
+    })
+  ),
+  on(
+    TrainerCourseDataAction.loadTrainerCourseResourcesByIdFailed,
+    (state, { error }) => ({
+      ...state,
+      error: error,
+      loading: false,
+    })
+  )
+);
