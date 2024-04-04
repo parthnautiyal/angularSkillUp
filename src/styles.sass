@@ -20,6 +20,8 @@
   --user-card-hover-shadow-color: #9e91c0
   --admin-top-banner-background-color: #5624d0
   --search-bar-font-color: #949494
+  --form-input-background-color: #f9f9f9
+  --button-text: 5624d0
 
 .dark-theme
   color: white
@@ -36,6 +38,8 @@
   --user-card-hover-shadow-color: #585858
   --admin-top-banner-background-color: #1c1d1f
   --search-bar-font-color: #949494
+  --form-input-background-color: #000
+  --button-text: #fff
 
 body
   background-color: var(--app-background-color)
@@ -55,11 +59,11 @@ a
   font-size: 16px
   letter-spacing: 0.5px
   width: fit-content
-  background-color: white
+  background-color: var(--app-background-color)
   cursor: pointer
 
 .button-text
-  color: #5624D0
+  color: var(--button-text)
   padding: 0px 15px
 
 .button-style
@@ -72,13 +76,13 @@ a
   width: 40px
 
 .formInput
-  background-color: #f9f9f9
+  background-color: var(--form-input-background-color)
   border-radius: 12px
   margin-top: 32px
   padding: 24px
 
 .uploaded-file
-  background-color: #fff
+  background-color: var(--page-content-background-color)
   margin-bottom: 16px
   position: relative
   width: 100%

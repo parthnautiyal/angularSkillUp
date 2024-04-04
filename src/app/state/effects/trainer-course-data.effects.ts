@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import * as CoursesActions from '../action/trainerscourse.actions';
-import { Course, ProfileCourse } from 'src/app/models/Course';
+import { Course } from 'src/app/models/Course';
 import { HttpClient } from '@angular/common/http';
 import { APIResponse } from 'src/app/models/ApiResponse';
 import { Chapter } from 'src/app/models/Chapter';
 import { Ratings } from 'src/app/models/Ratings';
+import { ResourceData } from 'src/app/models/Resource';
 
 @Injectable()
 export class TrainerCourseDataByIdEffects {
@@ -32,8 +32,7 @@ export class TrainerCourseDataByIdEffects {
             ),
             catchError((error) =>
               of(
-                TrainerCourseDataAction.loadTrainerCourseDataByIdFailed
-                ({
+                TrainerCourseDataAction.loadTrainerCourseDataByIdFailed({
                   error: error.message,
                 })
               )
@@ -61,8 +60,7 @@ export class TrainerCourseDataByIdEffects {
             ),
             catchError((error) =>
               of(
-                TrainerCourseDataAction.loadTrainerCourseChaptersByIdFailed
-                ({
+                TrainerCourseDataAction.loadTrainerCourseChaptersByIdFailed({
                   error: error.message,
                 })
               )
@@ -90,8 +88,36 @@ export class TrainerCourseDataByIdEffects {
             ),
             catchError((error) =>
               of(
-                TrainerCourseDataAction.loadTrainerCourseRatingByIdFailed
-                ({
+                TrainerCourseDataAction.loadTrainerCourseRatingByIdFailed({
+                  error: error.message,
+                })
+              )
+            )
+          )
+      )
+    )
+  );
+
+  loadTrainerCourseResource$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainerCourseDataAction.loadTrainerCourseResourcesById),
+      switchMap(({ id }) =>
+        this.http
+          .get<APIResponse<ResourceData[]>>(
+            `https://staging.api.training.zopsmart.com/admin/courses/${id}/resources`
+          )
+          .pipe(
+            map(
+              (resource) => (
+                console.log(resource.data),
+                TrainerCourseDataAction.loadTrainerCourseResourcesByIdSuccess({
+                  courseResourceData: resource.data,
+                })
+              )
+            ),
+            catchError((error) =>
+              of(
+                TrainerCourseDataAction.loadTrainerCourseResourcesByIdFailed({
                   error: error.message,
                 })
               )
